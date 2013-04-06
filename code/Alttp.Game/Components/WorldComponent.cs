@@ -35,6 +35,8 @@ namespace Alttp
 
         public Camera ActiveCamera { get; set; }
 
+        public AnimationsDict Anims { get; private set; }
+
         #endregion
 
         public WorldComponent(Game game, IContentManager content, ISpriteBatch batch, InputManager input, [Named("Main")]Camera mainCamera, [Named("Secondary")]Camera secondaryCamera)
@@ -67,8 +69,7 @@ namespace Alttp
             base.LoadContent();
 
             World = new LightWorld(_content.Load<TiledMap>(@"Maps/LightWorld"));
-
-            var anims = _content.Load<AnimationsDict>("GameObjects/Link/LinkAnimations");
+            Anims = _content.Load<AnimationsDict>("GameObjects/Link/LinkAnimations");
         }
 
         public override void Draw(GameTime gameTime)
@@ -78,6 +79,8 @@ namespace Alttp
             _batch.Begin(SpriteSortMode.Deferred, BlendState.AlphaBlend, SamplerState.PointClamp, null, null, null, ActiveCamera.Matrix);
 
             World.Draw(gameTime, _batch, ActiveCamera);
+
+            Anims["/Idle/Down"][0].Draw(_batch, new Vector2(2200, 2850));
 
             _batch.End();
         }

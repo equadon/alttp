@@ -17,7 +17,7 @@ namespace Alttp.Core.Graphics
 
             var spriteSheet = input.ReadExternalReference<SpriteSheet>();
 
-            var anims = new AnimationsDict();
+            var anims = new Dictionary<string, List<Frame>>();
 
             int animationCount = input.ReadInt32();
             for (int i = 0; i < animationCount; i++)
@@ -29,7 +29,7 @@ namespace Alttp.Core.Graphics
                 int frameCount = input.ReadInt32();
 
                 if (!anims.ContainsKey(animName))
-                    anims[animName] = new Frame[frameCount];
+                    anims[animName] = new List<Frame>();
 
                 for (int j = 0; j < frameCount; j++)
                 {
@@ -56,11 +56,24 @@ namespace Alttp.Core.Graphics
                         spriteRefs[k] = new SpriteRef(sprite, sprName, sprX, sprY, sprZ, sprAngle, sprFlipH, sprFlipV);
                     }
 
-                    anims[animName][j] = new Frame(frameIndex, spriteRefs);
+                    // sort sprite refs by z value
+                    var sortedSpriteRefs = (from spriteRef in spriteRefs.ToList()
+                                           orderby spriteRef.Z
+                                           select spriteRef).OrderByDescending(x => x.Z).ToArray();
+
+                    anims[animName].Add(new Frame(frameIndex, sortedSpriteRefs));
+
+                    // Add one extra frame for each delay
+                    for (int l = 0; l < frameDelay - 1; l++)
+                        anims[animName].Add(new Frame(frameIndex, sortedSpriteRefs));
                 }
             }
 
-            return anims;
+            var a = new AnimationsDict();
+            foreach (var key in anims.Keys)
+                a[key] = anims[key].ToArray();
+
+            return a;
         }
 
         #endregion

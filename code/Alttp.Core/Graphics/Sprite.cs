@@ -9,12 +9,17 @@ namespace Alttp.Core.Graphics
 {
     public class Sprite
     {
-        public Texture Texture { get; private set; }
+        public Texture2D Texture { get; private set; }
 
         public string Name { get; private set; }
         public string Path { get; private set; }
 
         public Rectangle Source { get; private set; }
+
+        public Vector2 Origin
+        {
+            get { return new Vector2(Source.Width / 2f, Source.Height / 2f); }
+        }
 
         public string FullName
         {
