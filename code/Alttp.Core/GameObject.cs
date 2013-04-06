@@ -19,7 +19,8 @@ namespace Alttp.Core
         private readonly AnimationsDict _animations;
 
         private int _frameIndex;
-        private double _frameDelay;
+
+        private double _moveStartTime;
 
         private Vector2 _position;
 
@@ -111,12 +112,9 @@ namespace Alttp.Core
         {
             if (!Paused)
             {
-                _frameDelay += gameTime.ElapsedGameTime.TotalSeconds;
-                if (_frameDelay >= FrameDelay)
-                {
-                    FrameIndex++;
-                    _frameDelay = 0;
-                }
+                int newFrame = (int) ((gameTime.TotalGameTime.TotalSeconds - _moveStartTime) / FrameDelay) % Frames.Length;
+
+                FrameIndex = newFrame;
             }
         }
 
@@ -131,6 +129,11 @@ namespace Alttp.Core
             Direction = direction;
 
             Resume();
+        }
+
+        public void BeginMove(double startTime)
+        {
+            _moveStartTime = startTime;
         }
 
         protected void Play(string animation)

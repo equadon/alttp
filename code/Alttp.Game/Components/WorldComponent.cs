@@ -95,13 +95,13 @@ namespace Alttp
             switch (ActiveCamera.CameraMode)
             {
                 case CameraMode.Free:
-                    HandleKeyboardInput();
-                    HandleMouseInput();
+                    HandleKeyboardInput(gameTime);
+                    HandleMouseInput(gameTime);
                     break;
             }
         }
 
-        private void HandleKeyboardInput()
+        private void HandleKeyboardInput(GameTime gameTime)
         {
             // Move link
             Vector2 direction = Vector2.Zero;
@@ -113,6 +113,12 @@ namespace Alttp
                 direction.Y++;
             if (_input.IsKeyDown(Keys.D))
                 direction.X++;
+
+            if (_input.IsKeyPressed(Keys.W) ||
+                _input.IsKeyPressed(Keys.A) ||
+                _input.IsKeyPressed(Keys.S) ||
+                _input.IsKeyPressed(Keys.D))
+                Link.BeginMove(gameTime.TotalGameTime.TotalSeconds);
 
             if (direction != Vector2.Zero)
                 Link.Move(direction);
@@ -171,7 +177,7 @@ namespace Alttp
                 ActiveCamera.ResetZoom();
         }
 
-        private void HandleMouseInput()
+        private void HandleMouseInput(GameTime gameTime)
         {
             Vector2 mousePos = _input.MousePos;
 
