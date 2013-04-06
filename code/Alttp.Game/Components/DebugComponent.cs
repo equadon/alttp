@@ -187,12 +187,15 @@ namespace Alttp
                 Utils.DrawBorder(_batch, BlankTexture, selectionBounds, 1, new Color(150, 0, 0, 175));
             }
 
-            var frame = _world.Link.Frame;
+            // Render border around link if he's selected
+            if (SelectedGameObject == _world.Link)
+            {
+                Vector2 linkScreenPos = _world.ActiveCamera.WorldToScreen(new Vector2(_world.Link.BoundsF.X, _world.Link.BoundsF.Y));
 
-            Vector2 screenPos = _world.ActiveCamera.WorldToScreen(new Vector2(2200 + frame.Bounds.Left, 2850 + frame.Bounds.Top));
-            var scale = new Vector2(frame.Bounds.Width * _world.ActiveCamera.InvZoom, frame.Bounds.Height * _world.ActiveCamera.InvZoom);
+                var linkScale = new Vector2(_world.Link.BoundsF.Width * _world.ActiveCamera.InvZoom, _world.Link.BoundsF.Height * _world.ActiveCamera.InvZoom);
 
-            _batch.Draw(BlankTexture, screenPos, null, new Color(80, 10, 10, 150), 0, Vector2.Zero, scale, SpriteEffects.None, 0);
+                _batch.Draw(BlankTexture, linkScreenPos, null, new Color(80, 10, 10, 150), 0, Vector2.Zero, linkScale, SpriteEffects.None, 0);
+            }
 
             _batch.End();
         }
