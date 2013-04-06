@@ -1,0 +1,672 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Nuclex.Ninject.Xna</name>
+    </assembly>
+    <members>
+        <member name="T:Nuclex.Ninject.Xna.ISpriteBatch">
+            <summary>Interface for XNA's sprite batch class</summary>
+        </member>
+        <member name="M:Nuclex.Ninject.Xna.ISpriteBatch.Begin">
+            <summary>
+              Prepares the graphics device for drawing sprites. Reference page contains
+              links to related code samples.
+            </summary>
+        </member>
+        <member name="M:Nuclex.Ninject.Xna.ISpriteBatch.Begin(Microsoft.Xna.Framework.Graphics.SpriteSortMode,Microsoft.Xna.Framework.Graphics.BlendState)">
+            <summary>
+              Begins a sprite batch operation using the specified sort and blend state
+              object and default state objects (DepthStencilState.None, SamplerState.LinearClamp,
+              RasterizerState.CullCounterClockwise). If you pass a null blend state, the
+              default is BlendState.AlphaBlend.
+            </summary>
+            <param name="sortMode">Sprite drawing order</param>
+            <param name="blendState">Blending options</param>
+        </member>
+        <member name="M:Nuclex.Ninject.Xna.ISpriteBatch.Begin(Microsoft.Xna.Framework.Graphics.SpriteSortMode,Microsoft.Xna.Framework.Graphics.BlendState,Microsoft.Xna.Framework.Graphics.SamplerState,Microsoft.Xna.Framework.Graphics.DepthStencilState,Microsoft.Xna.Framework.Graphics.RasterizerState)">
+            <summary>
+              Begins a sprite batch operation using the specified sort, blend, sampler,
+              depth stencil and rasterizer state objects. Passing null for any of the state
+              objects selects the default default state objects (BlendState.AlphaBlend,
+              SamplerState.LinearClamp, DepthStencilState.None,
+              RasterizerState.CullCounterClockwise).
+            </summary>
+            <param name="sortMode">Sprite drawing order</param>
+            <param name="blendState">Blending options</param>
+            <param name="samplerState">Texture sampling options</param>
+            <param name="depthStencilState">Depth and stencil options</param>
+            <param name="rasterizerState">Rasterization options</param>
+        </member>
+        <member name="M:Nuclex.Ninject.Xna.ISpriteBatch.Begin(Microsoft.Xna.Framework.Graphics.SpriteSortMode,Microsoft.Xna.Framework.Graphics.BlendState,Microsoft.Xna.Framework.Graphics.SamplerState,Microsoft.Xna.Framework.Graphics.DepthStencilState,Microsoft.Xna.Framework.Graphics.RasterizerState,Microsoft.Xna.Framework.Graphics.Effect)">
+            <summary>
+              Begins a sprite batch operation using the specified sort, blend, sampler,
+              depth stencil and rasterizer state objects, plus a custom effect. Passing
+              null for any of the state objects selects the default default state objects
+              (BlendState.AlphaBlend, DepthStencilState.None,
+              RasterizerState.CullCounterClockwise, SamplerState.LinearClamp). Passing
+              a null effect selects the default SpriteBatch Class shader.
+            </summary>
+            <param name="sortMode">Sprite drawing order</param>
+            <param name="blendState">Blending options</param>
+            <param name="samplerState">Texture sampling options</param>
+            <param name="depthStencilState">Depth and stencil options</param>
+            <param name="rasterizerState">Rasterization options</param>
+            <param name="effect">Effect state options</param>
+        </member>
+        <member name="M:Nuclex.Ninject.Xna.ISpriteBatch.Begin(Microsoft.Xna.Framework.Graphics.SpriteSortMode,Microsoft.Xna.Framework.Graphics.BlendState,Microsoft.Xna.Framework.Graphics.SamplerState,Microsoft.Xna.Framework.Graphics.DepthStencilState,Microsoft.Xna.Framework.Graphics.RasterizerState,Microsoft.Xna.Framework.Graphics.Effect,Microsoft.Xna.Framework.Matrix)">
+            <summary>
+              Begins a sprite batch operation using the specified sort, blend, sampler,
+              depth stencil, rasterizer state objects, plus a custom effect and a 2D
+              transformation matrix. Passing null for any of the state objects selects
+              the default default state objects (BlendState.AlphaBlend, DepthStencilState.None,
+              RasterizerState.CullCounterClockwise, SamplerState.LinearClamp). Passing
+              a null effect selects the default SpriteBatch Class shader.
+            </summary>
+            <param name="sortMode">Sprite drawing order</param>
+            <param name="blendState">Blending options</param>
+            <param name="samplerState">Texture sampling options</param>
+            <param name="depthStencilState">Depth and stencil options</param>
+            <param name="rasterizerState">Rasterization options</param>
+            <param name="effect">Effect state options</param>
+            <param name="transformMatrix">
+              Transformation matrix for scale, rotate, translate options
+            </param>
+        </member>
+        <member name="M:Nuclex.Ninject.Xna.ISpriteBatch.Draw(Microsoft.Xna.Framework.Graphics.Texture2D,Microsoft.Xna.Framework.Rectangle,Microsoft.Xna.Framework.Color)">
+            <summary>
+              Adds a sprite to the batch of sprites to be rendered, specifying the texture,
+              destination rectangle, and color tint. Reference page contains links to related
+              code samples.
+            </summary>
+            <param name="texture">The sprite texture</param>
+            <param name="destinationRectangle">
+              A rectangle specifying, in screen coordinates, where the sprite will be drawn.
+              If this rectangle is not the same size as sourcerectangle, the sprite is
+              scaled to fit.
+            </param>
+            <param name="color">
+              The color channel modulation to use. Use Color.White for full color with
+              no tinting
+            </param>
+        </member>
+        <member name="M:Nuclex.Ninject.Xna.ISpriteBatch.Draw(Microsoft.Xna.Framework.Graphics.Texture2D,Microsoft.Xna.Framework.Vector2,Microsoft.Xna.Framework.Color)">
+            <summary>
+              Adds a sprite to the batch of sprites to be rendered, specifying the texture,
+              screen position, and color tint. Reference page contains links to related
+              code samples.
+            </summary>
+            <param name="texture">The sprite texture</param>
+            <param name="position">
+              The location, in screen coordinates, where the sprite will be drawn
+            </param>
+            <param name="color">
+              The color channel modulation to use. Use Color.White for full color with
+              no tinting.
+            </param>
+        </member>
+        <member name="M:Nuclex.Ninject.Xna.ISpriteBatch.Draw(Microsoft.Xna.Framework.Graphics.Texture2D,Microsoft.Xna.Framework.Rectangle,System.Nullable{Microsoft.Xna.Framework.Rectangle},Microsoft.Xna.Framework.Color)">
+            <summary>
+              Adds a sprite to the batch of sprites to be rendered, specifying the texture,
+              destination and source rectangles, and color tint. Reference page contains
+              links to related code samples.
+            </summary>
+            <param name="texture">The sprite texture</param>
+            <param name="destinationRectangle">
+              A rectangle specifying, in screen coordinates, where the sprite will be drawn.
+              If this rectangle is not the same size as sourcerectangle the sprite will
+              be scaled to fit.
+            </param>
+            <param name="sourceRectangle">
+              A rectangle specifying, in texels, which section of the rectangle to draw.
+              Use null to draw the entire texture.
+            </param>
+            <param name="color">
+              The color channel modulation to use. Use Color.White for full color with
+              no tinting.
+            </param>
+        </member>
+        <member name="M:Nuclex.Ninject.Xna.ISpriteBatch.Draw(Microsoft.Xna.Framework.Graphics.Texture2D,Microsoft.Xna.Framework.Vector2,System.Nullable{Microsoft.Xna.Framework.Rectangle},Microsoft.Xna.Framework.Color)">
+            <summary>
+              Adds a sprite to the batch of sprites to be rendered, specifying the texture,
+              screen position, source rectangle, and color tint. Reference page contains
+              links to related code samples.
+            </summary>
+            <param name="texture">The sprite texture</param>
+            <param name="position">
+              The location, in screen coordinates, where the sprite will be drawn
+            </param>
+            <param name="sourceRectangle">
+              A rectangle specifying, in texels, which section of the rectangle to draw.
+              Use null to draw the entire texture.
+            </param>
+            <param name="color">
+              The color channel modulation to use. Use Color.White for full color with
+              no tinting.
+            </param>
+        </member>
+        <member name="M:Nuclex.Ninject.Xna.ISpriteBatch.Draw(Microsoft.Xna.Framework.Graphics.Texture2D,Microsoft.Xna.Framework.Rectangle,System.Nullable{Microsoft.Xna.Framework.Rectangle},Microsoft.Xna.Framework.Color,System.Single,Microsoft.Xna.Framework.Vector2,Microsoft.Xna.Framework.Graphics.SpriteEffects,System.Single)">
+            <summary>
+              Adds a sprite to the batch of sprites to be rendered, specifying the texture,
+              destination, and source rectangles, color tint, rotation, origin, effects,
+              and sort depth. Reference page contains links to related code samples.
+            </summary>
+            <param name="texture">The sprite texture</param>
+            <param name="destinationRectangle">
+              A rectangle specifying, in screen coordinates, where the sprite will be drawn.
+              If this rectangle is not the same size as sourceRectangle, the sprite is
+              scaled to fit.
+            </param>
+            <param name="sourceRectangle">
+              A rectangle specifying, in texels, which section of the rectangle to draw.
+              Use null to draw the entire texture.
+            </param>
+            <param name="color">
+              The color channel modulation to use. Use Color.White for full color with
+              no tinting.
+            </param>
+            <param name="rotation">
+              The angle, in radians, to rotate the sprite around the origin
+            </param>
+            <param name="origin">
+              The origin of the sprite. Specify (0,0) for the upper-left corner.
+            </param>
+            <param name="effects">Rotations to apply prior to rendering</param>
+            <param name="layerDepth">
+              The sorting depth of the sprite, between 0 (front) and 1 (back). You must
+              specify either SpriteSortMode.FrontToBack or SpriteSortMode.BackToFront for
+              this parameter to affect sprite drawing.
+            </param>
+        </member>
+        <member name="M:Nuclex.Ninject.Xna.ISpriteBatch.Draw(Microsoft.Xna.Framework.Graphics.Texture2D,Microsoft.Xna.Framework.Vector2,System.Nullable{Microsoft.Xna.Framework.Rectangle},Microsoft.Xna.Framework.Color,System.Single,Microsoft.Xna.Framework.Vector2,System.Single,Microsoft.Xna.Framework.Graphics.SpriteEffects,System.Single)">
+            <summary>
+              Adds a sprite to the batch of sprites to be rendered, specifying the texture,
+              screen position, optional source rectangle, color tint, rotation, origin,
+              scale, effects, and sort depth. Reference page contains links to related
+              code samples.
+            </summary>
+            <param name="texture">The sprite texture</param>
+            <param name="position">
+              The location, in screen coordinates, where the sprite will be drawn
+            </param>
+            <param name="sourceRectangle">
+              A rectangle specifying, in texels, which section of the rectangle to draw.
+              Use null to draw the entire texture.
+            </param>
+            <param name="color">
+              The color channel modulation to use. Use Color.White for full color with
+              no tinting.
+            </param>
+            <param name="rotation">
+              The angle, in radians, to rotate the sprite around the origin
+            </param>
+            <param name="origin">
+              The origin of the sprite. Specify (0,0) for the upper-left corner.
+            </param>
+            <param name="scale">
+              Uniform multiple by which to scale the sprite width and height
+            </param>
+            <param name="effects">Rotations to apply prior to rendering</param>
+            <param name="layerDepth">
+              The sorting depth of the sprite, between 0 (front) and 1 (back). You must
+              specify either SpriteSortMode.FrontToBack or SpriteSortMode.BackToFront for
+              this parameter to affect sprite drawing.
+            </param>
+        </member>
+        <member name="M:Nuclex.Ninject.Xna.ISpriteBatch.Draw(Microsoft.Xna.Framework.Graphics.Texture2D,Microsoft.Xna.Framework.Vector2,System.Nullable{Microsoft.Xna.Framework.Rectangle},Microsoft.Xna.Framework.Color,System.Single,Microsoft.Xna.Framework.Vector2,Microsoft.Xna.Framework.Vector2,Microsoft.Xna.Framework.Graphics.SpriteEffects,System.Single)">
+            <summary>
+              Adds a sprite to the batch of sprites to be rendered, specifying the texture,
+              screen position, source rectangle, color tint, rotation, origin, scale, effects,
+              and sort depth. Reference page contains links to related code samples.
+            </summary>
+            <param name="texture">The sprite texture</param>
+            <param name="position">
+              The location, in screen coordinates, where the sprite will be drawn
+            </param>
+            <param name="sourceRectangle">
+              A rectangle specifying, in texels, which section of the rectangle to draw.
+              Use null to draw the entire texture.
+            </param>
+            <param name="color">
+              The color channel modulation to use. Use Color.White for full color with
+              no tinting.
+            </param>
+            <param name="rotation">
+              The angle, in radians, to rotate the sprite around the origin
+            </param>
+            <param name="origin">
+              The origin of the sprite. Specify (0,0) for the upper-left corner.
+            </param>
+            <param name="scale">
+              Vector containing separate scalar multiples for the x- and y-axes of
+              the sprite.
+            </param>
+            <param name="effects">Rotations to apply before rendering</param>
+            <param name="layerDepth">
+              The sorting depth of the sprite, between 0 (front) and 1 (back). You must
+              specify either SpriteSortMode.FrontToBack or SpriteSortMode.BackToFront for
+              this parameter to affect sprite drawing.
+            </param>
+        </member>
+        <member name="M:Nuclex.Ninject.Xna.ISpriteBatch.DrawString(Microsoft.Xna.Framework.Graphics.SpriteFont,System.String,Microsoft.Xna.Framework.Vector2,Microsoft.Xna.Framework.Color)">
+            <summary>
+              Adds a sprite string to the batch of sprites to be rendered, specifying the
+              font, output text, screen position, and color tint. Reference page contains
+              links to related code samples.
+            </summary>
+            <param name="spriteFont">The sprite font</param>
+            <param name="text">The string to draw</param>
+            <param name="position">
+              The location, in screen coordinates, where the text will be drawn
+            </param>
+            <param name="color">The desired color of the text</param>
+        </member>
+        <member name="M:Nuclex.Ninject.Xna.ISpriteBatch.DrawString(Microsoft.Xna.Framework.Graphics.SpriteFont,System.Text.StringBuilder,Microsoft.Xna.Framework.Vector2,Microsoft.Xna.Framework.Color)">
+            <summary>
+              Adds a mutable sprite string to the batch of sprites to be rendered, specifying
+              the font, output text, screen position, and color tint. Reference page contains
+              links to related code samples
+            </summary>
+            <param name="spriteFont">The sprite font</param>
+            <param name="text">The mutable (read/write) string to draw</param>
+            <param name="position">
+              The location, in screen coordinates, where the text will be drawn
+            </param>
+            <param name="color">The desired color of the text</param>
+        </member>
+        <member name="M:Nuclex.Ninject.Xna.ISpriteBatch.DrawString(Microsoft.Xna.Framework.Graphics.SpriteFont,System.String,Microsoft.Xna.Framework.Vector2,Microsoft.Xna.Framework.Color,System.Single,Microsoft.Xna.Framework.Vector2,System.Single,Microsoft.Xna.Framework.Graphics.SpriteEffects,System.Single)">
+            <summary>
+              Adds a sprite string to the batch of sprites to be rendered, specifying the
+              font, output text, screen position, color tint, rotation, origin, scale,
+              and effects. Reference page contains links to related code samples.
+            </summary>
+            <param name="spriteFont">The sprite font</param>
+            <param name="text">The string to draw</param>
+            <param name="position">
+              The location, in screen coordinates, where the text will be drawn
+            </param>
+            <param name="color">The desired color of the text</param>
+            <param name="rotation">
+              The angle, in radians, to rotate the text around the origin
+            </param>
+            <param name="origin">
+              The origin of the string. Specify (0,0) for the upper-left corner.
+            </param>
+            <param name="scale">
+              Uniform multiple by which to scale the sprite width and height
+            </param>
+            <param name="effects">Rotations to apply prior to rendering</param>
+            <param name="layerDepth">
+              The sorting depth of the sprite, between 0 (front) and 1 (back)
+            </param>
+        </member>
+        <member name="M:Nuclex.Ninject.Xna.ISpriteBatch.DrawString(Microsoft.Xna.Framework.Graphics.SpriteFont,System.String,Microsoft.Xna.Framework.Vector2,Microsoft.Xna.Framework.Color,System.Single,Microsoft.Xna.Framework.Vector2,Microsoft.Xna.Framework.Vector2,Microsoft.Xna.Framework.Graphics.SpriteEffects,System.Single)">
+            <summary>
+              Adds a sprite string to the batch of sprites to be rendered, specifying the
+              font, output text, screen position, color tint, rotation, origin, scale,
+              effects, and depth. Reference page contains links to related code samples.
+            </summary>
+            <param name="spriteFont">The sprite font</param>
+            <param name="text">The string to draw</param>
+            <param name="position">
+              The location, in screen coordinates, where the text will be drawn
+            </param>
+            <param name="color">The desired color of the text</param>
+            <param name="rotation">
+              The angle, in radians, to rotate the text around the origin
+            </param>
+            <param name="origin">
+              The origin of the string. Specify (0,0) for the upper-left corner.
+            </param>
+            <param name="scale">
+              Vector containing separate scalar multiples for the x- and y-axes of
+              the sprite
+            </param>
+            <param name="effects">Rotations to apply prior to rendering</param>
+            <param name="layerDepth">
+              The sorting depth of the sprite, between 0 (front) and 1 (back)
+            </param>
+        </member>
+        <member name="M:Nuclex.Ninject.Xna.ISpriteBatch.DrawString(Microsoft.Xna.Framework.Graphics.SpriteFont,System.Text.StringBuilder,Microsoft.Xna.Framework.Vector2,Microsoft.Xna.Framework.Color,System.Single,Microsoft.Xna.Framework.Vector2,System.Single,Microsoft.Xna.Framework.Graphics.SpriteEffects,System.Single)">
+            <summary>
+              Adds a mutable sprite string to the batch of sprites to be rendered, specifying
+              the font, output text, screen position, color tint, rotation, origin, scale,
+              and effects. Reference page contains links to related code samples.
+            </summary>
+            <param name="spriteFont">The sprite font</param>
+            <param name="text">The mutable (read/write) string to draw</param>
+            <param name="position">
+              The location, in screen coordinates, where the text will be drawn
+            </param>
+            <param name="color">The desired color of the text</param>
+            <param name="rotation">
+              The angle, in radians, to rotate the text around the origin.
+            </param>
+            <param name="origin">
+              The origin of the string. Specify (0,0) for the upper-left corner.
+            </param>
+            <param name="scale">
+              Uniform multiple by which to scale the sprite width and height
+            </param>
+            <param name="effects">Rotations to apply prior to rendering</param>
+            <param name="layerDepth">
+              The sorting depth of the sprite, between 0 (front) and 1 (back)
+            </param>
+        </member>
+        <member name="M:Nuclex.Ninject.Xna.ISpriteBatch.DrawString(Microsoft.Xna.Framework.Graphics.SpriteFont,System.Text.StringBuilder,Microsoft.Xna.Framework.Vector2,Microsoft.Xna.Framework.Color,System.Single,Microsoft.Xna.Framework.Vector2,Microsoft.Xna.Framework.Vector2,Microsoft.Xna.Framework.Graphics.SpriteEffects,System.Single)">
+            <summary>
+              Adds a mutable sprite string to the batch of sprites to be rendered, specifying
+              the font, output text, screen position, color tint, rotation, origin, scale,
+              effects, and depth. Reference page contains links to related code samples.
+            </summary>
+            <param name="spriteFont">The sprite font</param>
+            <param name="text">The mutable (read/write) string to draw</param>
+            <param name="position">
+              The location, in screen coordinates, where the text will be drawn
+            </param>
+            <param name="color">The desired color of the text</param>
+            <param name="rotation">
+              The angle, in radians, to rotate the text around the origin
+            </param>
+            <param name="origin">
+              The origin of the string. Specify (0,0) for the upper-left corner.
+            </param>
+            <param name="scale">
+              Vector containing separate scalar multiples for the x- and y-axes of
+              the sprite.
+            </param>
+            <param name="effects">Rotations to apply prior to rendering</param>
+            <param name="layerDepth">
+              The sorting depth of the sprite, between 0 (front) and 1 (back)
+            </param>
+        </member>
+        <member name="M:Nuclex.Ninject.Xna.ISpriteBatch.End">
+            <summary>
+              Flushes the sprite batch and restores the device state to how it was before
+              Begin was called. Reference page contains links to related code samples.
+            </summary>
+        </member>
+        <member name="T:Nuclex.Ninject.Xna.IContentManager">
+            <summary>Allows the loading and unloading of XNA content</summary>
+        </member>
+        <member name="M:Nuclex.Ninject.Xna.IContentManager.Load``1(System.String)">
+            <summary>
+              Loads an asset that has been processed by the Content Pipeline
+            </summary>
+            <typeparam name="ContentType">Type of content that will be loaded</typeparam>
+            <param name="assetName">Name of the asset that will be loaded</param>
+            <returns>The loaded asset</returns>
+            <remarks>
+              If the requested asset was already loaded, the existing instance is
+              returned by the content manager.
+            </remarks>
+        </member>
+        <member name="M:Nuclex.Ninject.Xna.IContentManager.Unload">
+            <summary>Unloads all data that was loaded by this ContentManager</summary>
+        </member>
+        <member name="T:Nuclex.Ninject.Xna.ServiceProviderExtensions">
+            <summary>Contains extension methods for the service provider</summary>
+        </member>
+        <member name="M:Nuclex.Ninject.Xna.ServiceProviderExtensions.GetService``1(System.IServiceProvider)">
+            <summary>
+              Looks up the requested service, throwing an exception if it isn't found
+            </summary>
+            <typeparam name="ServiceType">Type of service that will be looked up</typeparam>
+            <param name="serviceProvider">
+              The service provider that will be searched for the specified service
+            </param>
+            <returns>The request service</returns>
+            <exception cref="T:System.NullReferenceException">
+              Thrown if the requested service does not exist
+            </exception>
+        </member>
+        <member name="M:Nuclex.Ninject.Xna.ServiceProviderExtensions.TryGetService``1(System.IServiceProvider,``0@)">
+            <summary>Tries to look up the specified service</summary>
+            <typeparam name="ServiceType">Type of service that will be looked up</typeparam>
+            <param name="serviceProvider">
+              The service provider that will be searched for the specified service
+            </param>
+            <param name="service">
+              Output parameter that will be receive the service if it was looked
+              up successfully
+            </param>
+            <returns>True if the requested service was found, false otherwise</returns>
+        </member>
+        <member name="T:Nuclex.Ninject.Xna.XnaModule">
+            <summary>Sets up service bindings for XNA games</summary>
+        </member>
+        <member name="M:Nuclex.Ninject.Xna.XnaModule.Load">
+            <summary>Called when the module is loaded into the kernel</summary>
+        </member>
+        <member name="M:Nuclex.Ninject.Xna.XnaModule.getNinjectGame(Ninject.Activation.IContext)">
+            <summary>Gets the XNA game from the game instance</summary>
+            <param name="context">
+              Context containing the kernel and informations about the request
+            </param>
+            <returns>The XNA game</returns>
+        </member>
+        <member name="M:Nuclex.Ninject.Xna.XnaModule.getGameContentManager(Ninject.Activation.IContext)">
+            <summary>Gets the game's content manager from the game instance</summary>
+            <param name="context">
+              Context containing the kernel and informations about the request
+            </param>
+            <returns>The game's content manager</returns>
+        </member>
+        <member name="M:Nuclex.Ninject.Xna.XnaModule.getGameComponentCollection(Ninject.Activation.IContext)">
+            <summary>Gets the game component collection from the game instance</summary>
+            <param name="context">
+              Context containing the kernel and informations about the request
+            </param>
+            <returns>The game component collection</returns>
+        </member>
+        <member name="M:Nuclex.Ninject.Xna.XnaModule.getGameServiceContainer(Ninject.Activation.IContext)">
+            <summary>Gets the game service container from the game instance</summary>
+            <param name="context">
+              Context containing the kernel and informations about the request
+            </param>
+            <returns>The game service container</returns>
+        </member>
+        <member name="M:Nuclex.Ninject.Xna.XnaModule.getGameGraphicsDeviceManager(Ninject.Activation.IContext)">
+            <summary>Gets the graphics device manager from the game instance</summary>
+            <param name="context">
+              Context containing the kernel and informations about the request
+            </param>
+            <returns>The graphics device manager</returns>
+        </member>
+        <member name="M:Nuclex.Ninject.Xna.XnaModule.getGameGraphicsDeviceService(Ninject.Activation.IContext)">
+            <summary>Gets the graphics device service from the game instance</summary>
+            <param name="context">
+              Context containing the kernel and informations about the request
+            </param>
+            <returns>The graphics device service</returns>
+        </member>
+        <member name="M:Nuclex.Ninject.Xna.XnaModule.getConcreteGameGraphicsDeviceManager(Ninject.Activation.IContext)">
+            <summary>Gets the concrete graphics device manager from the game instance</summary>
+            <param name="context">
+              Context containing the kernel and informations about the request
+            </param>
+            <returns>The concrete graphics device manager</returns>
+        </member>
+        <member name="M:Nuclex.Ninject.Xna.XnaModule.getSharedSpriteBatch(Ninject.Activation.IContext)">
+            <summary>Gets the shared sprite batch for the game instance</summary>
+            <param name="context">
+              Context containing the kernel and informations about the request
+            </param>
+            <returns>The shared sprite batch</returns>
+        </member>
+        <member name="M:Nuclex.Ninject.Xna.XnaModule.ensureNinjectGameCreated(Ninject.Activation.IContext)">
+            <summary>Enforces that an instance of the the Game is created</summary>
+            <param name="context">
+              Context containing the kernel and informations about the request
+            </param>
+            <remarks>
+              Enforces that an instance of the XNA Game class has been created and
+              that it is based on the <see cref="T:Nuclex.Ninject.Xna.NinjectGame"/> class to ensure its
+              GameServiceContainer and GameComponentCollection have been bound
+              to Ninject.
+            </remarks>
+        </member>
+        <member name="T:Nuclex.Ninject.Xna.NinjectGame">
+            <summary>Ninject-based XNA game</summary>
+        </member>
+        <member name="T:Nuclex.Ninject.Xna.IGame">
+            <summary>Common services offered by the XNA Game class</summary>
+        </member>
+        <member name="M:Nuclex.Ninject.Xna.IGame.ResetElapsedTime">
+            <summary>Resets the elapsed time counter</summary>
+        </member>
+        <member name="M:Nuclex.Ninject.Xna.IGame.Exit">
+            <summary>Exits the game</summary>
+        </member>
+        <member name="M:Nuclex.Ninject.Xna.IGame.Run">
+            <summary>
+              Call this method to initialize the game, begin running the game loop, and
+              start processing events for the game. Reference page contains code sample.
+            </summary>
+        </member>
+        <member name="M:Nuclex.Ninject.Xna.IGame.SuppressDraw">
+            <summary>
+              Suppresses calls to <see cref="M:Microsoft.Xna.Framework.Game.Draw(Microsoft.Xna.Framework.GameTime)"/> until the next
+              <see cref="M:Microsoft.Xna.Framework.Game.Update(Microsoft.Xna.Framework.GameTime)"/> ran through</summary>
+        </member>
+        <member name="M:Nuclex.Ninject.Xna.IGame.Tick">
+            <summary>
+              Updates the game's clock and calls <see cref="M:Microsoft.Xna.Framework.Game.Update(Microsoft.Xna.Framework.GameTime)"/>
+              and <see cref="M:Microsoft.Xna.Framework.Game.Draw(Microsoft.Xna.Framework.GameTime)"/>
+            </summary>
+        </member>
+        <member name="E:Nuclex.Ninject.Xna.IGame.Activated">
+            <summary>Raised when the game gains focus</summary>
+        </member>
+        <member name="E:Nuclex.Ninject.Xna.IGame.Deactivated">
+            <summary>Raised when the game loses focus</summary>
+        </member>
+        <member name="E:Nuclex.Ninject.Xna.IGame.Disposed">
+            <summary>Raised when the game is being disposed</summary>
+        </member>
+        <member name="E:Nuclex.Ninject.Xna.IGame.Exiting">
+            <summary>Raised when the game is exiting</summary>
+        </member>
+        <member name="P:Nuclex.Ninject.Xna.IGame.Window">
+            <summary>The underlying operating system window</summary>
+        </member>
+        <member name="P:Nuclex.Ninject.Xna.IGame.IsMouseVisible">
+            <summary>
+              Controls whether the mouse cursor is visible on top of the game window
+            </summary>
+        </member>
+        <member name="T:Nuclex.Ninject.Xna.IGameInitializer">
+            <summary>Allows code to be executed during the game's initialization phase</summary>
+            <remarks>
+              <para>
+                When you try to set up XNA for dependency injection in an application fully
+                driven by an IoC container, you'll eventually hit one minor roadblock: the graphics
+                device is only created when you call the Game.Run() method. Thus, any components
+                consuming a graphics device will crash and burn if they're accessed before that.
+              </para>
+              <para>
+                This is not a theoretical problem, as merely binding a SpriteBatch already
+                provokes this issue as soon as you set up a component that accesses it since
+                the SpriteBatch immediately tries to pluck the GraphicsDevice from
+                the IGraphicsDeviceService it is provided with.
+              </para>
+              <para>
+                The solution is to postpone the initialization of the relevant components until
+                after the game has started its second startup phase. This interface, implemented
+                by <see cref="T:Nuclex.Ninject.Xna.NinjectGame"/> (or by yourself if you don't use XNA's Game class)
+                provides a hooking point to do so.
+              </para>
+            </remarks>
+        </member>
+        <member name="E:Nuclex.Ninject.Xna.IGameInitializer.Initializing">
+            <summary>Called when the game is being initialized</summary>
+        </member>
+        <member name="M:Nuclex.Ninject.Xna.NinjectGame.#ctor(Ninject.IKernel)">
+            <summary>Initializes a new ninject-based XNA game</summary>
+            <param name="kernel">
+              Kernel the dependency-injected components are managed in
+            </param>
+        </member>
+        <member name="M:Nuclex.Ninject.Xna.NinjectGame.Initialize">
+            <summary>
+              Called after all components are initialized but before the first update in
+              the game loop.
+            </summary>
+        </member>
+        <member name="M:Nuclex.Ninject.Xna.NinjectGame.OnInitializing">
+            <summary>Fires the Initializing event</summary>
+        </member>
+        <member name="M:Nuclex.Ninject.Xna.NinjectGame.getGraphicsDeviceService(Ninject.Activation.IContext)">
+            <summary>
+              Looks up the graphics device service from the game's registered
+              service providers
+            </summary>
+            <param name="context">
+              Context containing the kernel and informations about the request
+            </param>
+            <returns>The graphics device service</returns>
+            <exception cref="T:System.NullReferenceException">
+              Thrown if the game has not created a graphics device manager
+            </exception>
+        </member>
+        <member name="M:Nuclex.Ninject.Xna.NinjectGame.getGraphicsDeviceManager(Ninject.Activation.IContext)">
+            <summary>
+              Looks up the graphics device manager from the game's registered
+              service providers
+            </summary>
+            <param name="context">
+              Context containing the kernel and informations about the request
+            </param>
+            <returns>The graphics device manager</returns>
+            <exception cref="T:System.NullReferenceException">
+              Thrown if the game has not created a graphics device manager
+            </exception>
+        </member>
+        <member name="M:Nuclex.Ninject.Xna.NinjectGame.getConcreteGraphicsDeviceManager(Ninject.Activation.IContext)">
+            <summary>
+              Looks up the actual graphics device manager implementation class.
+              Should not be used under normal circumstances.
+            </summary>
+            <param name="context">
+              Context containing the kernel and informations about the request
+            </param>
+            <returns>The XNA graphics device manager instance</returns>
+        </member>
+        <member name="E:Nuclex.Ninject.Xna.NinjectGame.Initializing">
+            <summary>Called when the game has begun the second stage initialization</summary>
+        </member>
+        <member name="T:Nuclex.Ninject.Xna.SharedSpriteBatch">
+            <summary>Manages a globally shared sprite batch</summary>
+        </member>
+        <member name="M:Nuclex.Ninject.Xna.SharedSpriteBatch.#ctor(Microsoft.Xna.Framework.Graphics.IGraphicsDeviceService)">
+            <summary>Initializes a new shared sprite batch</summary>
+            <param name="graphicsDeviceService">
+              Graphics device service that will be used for rendering
+            </param>
+        </member>
+        <member name="T:Nuclex.Ninject.Xna.GameContentManager">
+            <summary>Allows the loading and unloading of XNA content</summary>
+        </member>
+        <member name="M:Nuclex.Ninject.Xna.GameContentManager.#ctor(Microsoft.Xna.Framework.Game)">
+            <summary>Initializes a new game content manager adapter</summary>
+            <param name="game">Game whose content manager will be used</param>
+        </member>
+        <member name="M:Nuclex.Ninject.Xna.GameContentManager.Load``1(System.String)">
+            <summary>
+              Loads an asset that has been processed by the Content Pipeline
+            </summary>
+            <typeparam name="ContentType">Type of content that will be loaded</typeparam>
+            <param name="assetName">Name of the asset that will be loaded</param>
+            <returns>The loaded asset</returns>
+            <remarks>
+              If the requested asset was already loaded, the existing instance is
+              returned by the content manager.
+            </remarks>
+        </member>
+        <member name="M:Nuclex.Ninject.Xna.GameContentManager.Unload">
+            <summary>Unloads all data that was loaded by this ContentManager</summary>
+        </member>
+        <member name="F:Nuclex.Ninject.Xna.GameContentManager.contentManager">
+            <summary>ContentManager of the game we're providing access to</summary>
+        </member>
+    </members>
+</doc>

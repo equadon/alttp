@@ -15,6 +15,9 @@
     <RootNamespace>Alttp.Content</RootNamespace>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="FuncWorks.XNA.XTiledExtensions">
+      <HintPath>..\Libraries\XTiled\FuncWorks.XNA.XTiledExtensions.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.Xna.Framework.Content.Pipeline.EffectImporter, Version=4.0.0.0, Culture=neutral, PublicKeyToken=842cf8be1de50553, processorArchitecture=MSIL" />
     <Reference Include="Microsoft.Xna.Framework.Content.Pipeline.FBXImporter, Version=4.0.0.0, Culture=neutral, PublicKeyToken=842cf8be1de50553, processorArchitecture=MSIL" />
     <Reference Include="Microsoft.Xna.Framework.Content.Pipeline.TextureImporter, Version=4.0.0.0, Culture=neutral, PublicKeyToken=842cf8be1de50553, processorArchitecture=MSIL" />
