@@ -51,7 +51,9 @@ namespace Alttp.Core.Graphics
                         bool sprFlipH = input.ReadBoolean();
                         bool sprFlipV = input.ReadBoolean();
 
-                        spriteRefs[k] = new SpriteRef(sprName, sprX, sprY, sprZ, sprAngle, sprFlipH, sprFlipV);
+                        var sprite = spriteSheet.FindSprite(sprName);
+
+                        spriteRefs[k] = new SpriteRef(sprite, sprName, sprX, sprY, sprZ, sprAngle, sprFlipH, sprFlipV);
                     }
 
                     anims[animName][j] = new Frame(frameIndex, spriteRefs);

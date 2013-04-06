@@ -9,6 +9,8 @@ namespace Alttp.Core.Graphics
 {
     public class SpriteRef
     {
+        public Sprite Sprite { get; private set; }
+
         public string Name { get; private set; }
 
         public int X { get; private set; }
@@ -33,8 +35,9 @@ namespace Alttp.Core.Graphics
             }
         }
 
-        public SpriteRef(string name, int x, int y, int z, float angle, bool flipH, bool flipV)
+        public SpriteRef(Sprite sprite, string name, int x, int y, int z, float angle, bool flipH, bool flipV)
         {
+            Sprite = sprite;
             Name = name;
             X = x;
             Y = y;
