@@ -128,6 +128,11 @@ namespace Alttp.Core
 
         protected void Play(string animation)
         {
+            if (animation != AnimationName)
+            {
+                Resume();
+                AnimationName = animation;
+            }
         }
 
         protected void Resume()

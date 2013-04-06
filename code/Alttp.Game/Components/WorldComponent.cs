@@ -89,6 +89,8 @@ namespace Alttp
         {
             base.Update(gameTime);
 
+            Link.Update(gameTime);
+
             switch (ActiveCamera.CameraMode)
             {
                 case CameraMode.Free:
@@ -101,33 +103,33 @@ namespace Alttp
         private void HandleKeyboardInput()
         {
             // Move link
-//            Vector2 direction = Vector2.Zero;
-//            if (_input.IsKeyDown(Keys.W))
-//                direction.Y--;
-//            if (_input.IsKeyDown(Keys.A))
-//                direction.X--;
-//            if (_input.IsKeyDown(Keys.S))
-//                direction.Y++;
-//            if (_input.IsKeyDown(Keys.D))
-//                direction.X++;
-//
-//            if (direction != Vector2.Zero)
-//                Link.Move(direction);
-//
-//            if (_input.IsKeyReleased(Keys.W))
-//                Link.Stop();
-//            if (_input.IsKeyReleased(Keys.A))
-//                Link.Stop();
-//            if (_input.IsKeyReleased(Keys.S))
-//                Link.Stop();
-//            if (_input.IsKeyReleased(Keys.D))
-//                Link.Stop();
-//
-//            if (_input.IsKeyPressed(Keys.K))
-//                Link.FrameIndex++;
-//
-//            if (_input.IsKeyPressed(Keys.J))
-//                Link.FrameIndex--;
+            Vector2 direction = Vector2.Zero;
+            if (_input.IsKeyDown(Keys.W))
+                direction.Y--;
+            if (_input.IsKeyDown(Keys.A))
+                direction.X--;
+            if (_input.IsKeyDown(Keys.S))
+                direction.Y++;
+            if (_input.IsKeyDown(Keys.D))
+                direction.X++;
+
+            if (direction != Vector2.Zero)
+                Link.Move(direction);
+
+            if (_input.IsKeyReleased(Keys.W))
+                Link.Stop();
+            if (_input.IsKeyReleased(Keys.A))
+                Link.Stop();
+            if (_input.IsKeyReleased(Keys.S))
+                Link.Stop();
+            if (_input.IsKeyReleased(Keys.D))
+                Link.Stop();
+
+            if (_input.IsKeyPressed(Keys.K))
+                Link.FrameIndex++;
+
+            if (_input.IsKeyPressed(Keys.J))
+                Link.FrameIndex--;
 
             // Switch active camera
             //    1 = main camera

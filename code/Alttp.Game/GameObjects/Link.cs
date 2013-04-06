@@ -20,9 +20,9 @@ namespace Alttp.GameObjects
 
         public override void Move(Vector2 direction)
         {
-            Play("/Run/" + DirectionText);
-
             base.Move(direction);
+
+            Play("/Run/" + DirectionText);
         }
 
         public override void Stop()
