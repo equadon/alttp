@@ -134,17 +134,19 @@ namespace Alttp
             }
             else if (_input.IsMouseButtonReleased(MouseButton.Left) && !minimapBounds.Contains(mousePos))
             {
-                SelectedGameObject = GameObject.Find(SelectionBounds, _world.ActiveCamera);
-
+                SelectedGameObject = GameObject.Find(Utils.RenderableRectangle(SelectionBounds), _world.ActiveCamera);
+                
                 SelectionBounds = Rectangle.Empty;
             }
 
             if (_input.IsMouseButtonDown(MouseButton.Left) && SelectionBounds != Rectangle.Empty)
             {
-                int width = (int) mousePos.X - SelectionBounds.X,
-                    height = (int) mousePos.Y - SelectionBounds.Y;
+                var bounds = SelectionBounds;
 
-                SelectionBounds = new Rectangle(SelectionBounds.X, SelectionBounds.Y, width, height);
+                int width = (int)mousePos.X - bounds.X,
+                    height = (int)mousePos.Y - bounds.Y;
+
+                SelectionBounds = new Rectangle(bounds.X, bounds.Y, width, height);
             }
 
             // Move minimap viewport with left mouse button.
@@ -179,8 +181,10 @@ namespace Alttp
             // Draw selection rectangle
             if (SelectionBounds != Rectangle.Empty)
             {
-                _batch.Draw(BlankTexture, SelectionBounds, new Color(100, 0, 0, 75));
-                Utils.DrawBorder(_batch, BlankTexture, SelectionBounds, 1, new Color(150, 0, 0, 175));
+                var selectionBounds = Utils.RenderableRectangle(SelectionBounds);
+
+                _batch.Draw(BlankTexture, selectionBounds, new Color(100, 0, 0, 75));
+                Utils.DrawBorder(_batch, BlankTexture, selectionBounds, 1, new Color(150, 0, 0, 175));
             }
 
             var frame = _world.Link.Frame;

@@ -1,4 +1,5 @@
-﻿using Microsoft.Xna.Framework;
+﻿using System;
+using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Nuclex.Ninject.Xna;
 using Nuclex.UserInterface;
@@ -33,6 +34,30 @@ namespace Alttp.Engine.Utils
 
             // Right border
             spriteBatch.Draw(blankTexture, new Rectangle(right, top, borderWidth, height), color);
+        }
+
+        /// <summary>
+        /// Returns a rectangle that can be rendered, meaning width/height won't be negative.
+        /// </summary>
+        /// <param name="rect">Rectangle to convert</param>
+        /// <returns>A rectangle with positive width/height</returns>
+        public static Rectangle RenderableRectangle(Rectangle rect)
+        {
+            Rectangle renderable = rect;
+
+            int width = Math.Abs(rect.Width),
+                height = Math.Abs(rect.Height);
+
+            if (rect.Width < 0)
+                renderable.X = rect.X - width;
+
+            if (rect.Height < 0)
+                renderable.Y = rect.Y - height;
+
+            renderable.Width = width;
+            renderable.Height = height;
+
+            return renderable;
         }
     }
 }
