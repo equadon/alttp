@@ -4,19 +4,23 @@ using System.Linq;
 using System.Text;
 using Microsoft.Xna.Framework;
 using Nuclex.Ninject.Xna;
+using Nuclex.UserInterface;
 
 namespace Alttp.Core.Graphics
 {
     public class Frame
     {
+        public RectangleF Bounds { get; private set; }
+
         public int Index { get; private set; }
 
         public SpriteRef[] SpriteRefs { get; private set; }
 
-        public Frame(int index, SpriteRef[] spriteRefs)
+        public Frame(int index, SpriteRef[] spriteRefs, RectangleF bounds)
         {
             Index = index;
             SpriteRefs = spriteRefs;
+            Bounds = bounds;
         }
 
         /// <summary>

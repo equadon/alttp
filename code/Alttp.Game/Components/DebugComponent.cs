@@ -182,6 +182,13 @@ namespace Alttp
                 Utils.DrawBorder(_batch, BlankTexture, SelectionBounds, 1, new Color(150, 0, 0, 175));
             }
 
+            var frame = _world.Anims["/Idle/Down"][0];
+
+            Vector2 screenPos = _world.ActiveCamera.WorldToScreen(new Vector2(2200 + frame.Bounds.Left, 2850 + frame.Bounds.Top));
+            var scale = new Vector2(frame.Bounds.Width * _world.ActiveCamera.InvZoom, frame.Bounds.Height * _world.ActiveCamera.InvZoom);
+
+            _batch.Draw(BlankTexture, screenPos, null, new Color(80, 10, 10, 150), 0, Vector2.Zero, scale, SpriteEffects.None, 0);
+
             _batch.End();
         }
 

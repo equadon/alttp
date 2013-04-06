@@ -2,8 +2,10 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
+using Nuclex.UserInterface;
 
 namespace Alttp.Core.Graphics
 {
@@ -58,14 +60,16 @@ namespace Alttp.Core.Graphics
 
                     // sort sprite refs by z value
                     var sortedSpriteRefs = (from spriteRef in spriteRefs.ToList()
-                                           orderby spriteRef.Z
-                                           select spriteRef).OrderByDescending(x => x.Z).ToArray();
+                                            orderby spriteRef.Z
+                                            select spriteRef).OrderByDescending(x => x.Z).ToArray();
 
-                    anims[animName].Add(new Frame(frameIndex, sortedSpriteRefs));
+                    RectangleF frameBounds = CalculateFrameBounds(sortedSpriteRefs);
+
+                    anims[animName].Add(new Frame(frameIndex, sortedSpriteRefs, frameBounds));
 
                     // Add one extra frame for each delay
                     for (int l = 0; l < frameDelay - 1; l++)
-                        anims[animName].Add(new Frame(frameIndex, sortedSpriteRefs));
+                        anims[animName].Add(new Frame(frameIndex, sortedSpriteRefs, frameBounds));
                 }
             }
 
@@ -74,6 +78,30 @@ namespace Alttp.Core.Graphics
                 a[key] = anims[key].ToArray();
 
             return a;
+        }
+
+        private RectangleF CalculateFrameBounds(SpriteRef[] spriteRefs)
+        {
+            var firstRef = spriteRefs[0];
+
+            float left = -firstRef.Sprite.Origin.X + firstRef.X,
+                  top = -firstRef.Sprite.Origin.Y + firstRef.Y,
+                  right = left + firstRef.Sprite.Source.Width,
+                  bot = top + firstRef.Sprite.Source.Height;
+
+            foreach (var spr in spriteRefs)
+            {
+                float sprLeft = -spr.Sprite.Origin.X + spr.X,
+                      sprTop = -spr.Sprite.Origin.Y + spr.Y;
+
+                left = Math.Min(left, sprLeft);
+                top = Math.Min(top, sprTop);
+
+                right = Math.Max(right, sprLeft + spr.Sprite.Source.Width);
+                bot = Math.Max(bot, sprTop + spr.Sprite.Source.Height);
+            }
+
+            return new RectangleF(left, top, right - left, bot - top);
         }
 
         #endregion
