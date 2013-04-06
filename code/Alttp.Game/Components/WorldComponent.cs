@@ -35,7 +35,7 @@ namespace Alttp
 
         public Camera ActiveCamera { get; set; }
 
-        public AnimationsDict Anims { get; private set; }
+        public Link Link { get; private set; }
 
         #endregion
 
@@ -69,7 +69,7 @@ namespace Alttp
             base.LoadContent();
 
             World = new LightWorld(_content.Load<TiledMap>(@"Maps/LightWorld"));
-            Anims = _content.Load<AnimationsDict>("GameObjects/Link/LinkAnimations");
+            Link = new Link(new Vector2(2200, 2850), _content.Load<AnimationsDict>("GameObjects/Link/LinkAnimations"));
         }
 
         public override void Draw(GameTime gameTime)
@@ -80,7 +80,7 @@ namespace Alttp
 
             World.Draw(gameTime, _batch, ActiveCamera);
 
-            Anims["/Idle/Down"][0].Draw(_batch, new Vector2(2200, 2850));
+            Link.Draw(_batch);
 
             _batch.End();
         }

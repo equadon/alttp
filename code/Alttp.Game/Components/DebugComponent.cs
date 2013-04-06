@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Text;
+using Alttp.Core;
 using Alttp.Engine;
 using Alttp.Engine.Input;
 using Alttp.Engine.UI;
@@ -182,7 +183,7 @@ namespace Alttp
                 Utils.DrawBorder(_batch, BlankTexture, SelectionBounds, 1, new Color(150, 0, 0, 175));
             }
 
-            var frame = _world.Anims["/Idle/Down"][0];
+            var frame = _world.Link.Frame;
 
             Vector2 screenPos = _world.ActiveCamera.WorldToScreen(new Vector2(2200 + frame.Bounds.Left, 2850 + frame.Bounds.Top));
             var scale = new Vector2(frame.Bounds.Width * _world.ActiveCamera.InvZoom, frame.Bounds.Height * _world.ActiveCamera.InvZoom);

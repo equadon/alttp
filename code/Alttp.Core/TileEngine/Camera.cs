@@ -235,6 +235,18 @@ namespace Alttp.Engine
         }
 
         /// <summary>
+        /// Convert a rectangle with world to screen coordinates.
+        /// </summary>
+        /// <param name="bounds">World position bounds</param>
+        /// <returns>Screen position</returns>
+        public Rectangle WorldToScreen(Rectangle bounds)
+        {
+            var position = WorldToScreen(new Vector2(bounds.Left, bounds.Top));
+
+            return new Rectangle((int)position.X, (int)position.Y, (int)(bounds.Width * InvZoom), (int)(bounds.Height * InvZoom));
+        }
+
+        /// <summary>
         /// Convert screen to world coordinates.
         /// </summary>
         /// <param name="screenPosition">Screen position</param>

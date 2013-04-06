@@ -2,12 +2,15 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using Alttp.Core.Graphics;
+using Alttp.Engine;
+using Alttp.Engine.Utils;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Nuclex.Ninject.Xna;
 using Nuclex.UserInterface;
 
-namespace Alttp.Engine
+namespace Alttp.Core
 {
     public class GameObject
     {
@@ -15,6 +18,8 @@ namespace Alttp.Engine
 
         private int _frameIndex;
         private double _frameDelay;
+
+        private AnimationsDict _animations;
 
         #region Properties
 
@@ -43,6 +48,16 @@ namespace Alttp.Engine
             }
         }
 
+        public Frame[] Frames
+        {
+            get { return _animations[AnimationName]; }
+        }
+
+        public Frame Frame
+        {
+            get { return Frames[FrameIndex]; }
+        }
+
         private double FrameDelay
         {
             get { return 1 / Fps; }
@@ -53,23 +68,30 @@ namespace Alttp.Engine
             get { return _frameIndex; }
             set
             {
-//                if (value < 0)
-//                    value = Animation.Frames.Count - 1;
-//                else
-//                    value %= Animation.Frames.Count;
+                if (value < 0)
+                    value = Frames.Length - 1;
+                else
+                    value %= Frames.Length;
                 _frameIndex = value;
             }
         }
 
         public Rectangle Bounds
         {
-            get { return Rectangle.Empty; }
+            get { return new Rectangle((int)(Position.X + Frame.Bounds.Left), (int)(Position.Y + Frame.Bounds.Top), (int)Frame.Bounds.Width, (int)Frame.Bounds.Height); }
+        }
+
+        public RectangleF BoundsF
+        {
+            get { return new RectangleF(Position.X + Frame.Bounds.Left, Position.Y + Frame.Bounds.Top, Frame.Bounds.Width, Frame.Bounds.Height); }
         }
 
         #endregion
 
-        public GameObject(Vector2 position, string currentAnimation)
+        public GameObject(Vector2 position, AnimationsDict animations, string currentAnimation)
         {
+            _animations = animations;
+
             AnimationName = currentAnimation;
 
             Position = position;
@@ -93,6 +115,7 @@ namespace Alttp.Engine
 
         public virtual void Draw(ISpriteBatch batch)
         {
+            Frame.Draw(batch, Position);
         }
 
         public virtual void Move(Vector2 direction)
@@ -126,16 +149,16 @@ namespace Alttp.Engine
         /// <summary>
         /// Find objects inside the specified area.
         /// </summary>
-        /// <param name="bounds">Area we're looking for object</param>
+        /// <param name="region">Area we're looking for object</param>
         /// <param name="camera">Camera object we use to find world coordinates</param>
         /// <returns>The first GameObject found</returns>
-        public static GameObject Find(Rectangle bounds, Camera camera)
+        public static GameObject Find(Rectangle region, Camera camera)
         {
             foreach (var obj in GameObjects)
             {
-                var screenPos = camera.WorldToScreen(obj.Position);
+                var bounds = camera.WorldToScreen(obj.Bounds);
 
-                if (bounds.Contains((int)screenPos.X, (int)screenPos.Y))
+                if (region.Intersects(bounds))
                     return obj;
             }
 
