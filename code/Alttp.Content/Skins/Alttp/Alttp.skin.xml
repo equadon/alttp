@@ -1,0 +1,43 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+
+<skin
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="..\skin.xsd"
+  name="Alttp"
+>
+
+  <!--
+    Resources used to draw GUI elements using this skin
+  -->
+  <resources>
+    <font name="title" contentPath="TitleFont" />
+    <font name="default" contentPath="DefaultFont" />
+    <bitmap name="controls" contentPath="AlttpSkin" />
+  </resources>
+
+  <frames>
+    <!-- Normal window -->
+    <frame name="window">
+      <region source="controls" hplacement="left" vplacement="top" x="0" y="0" w="4" h="26" />
+      <region source="controls" hplacement="stretch" vplacement="top" x="4" y="0" w="32" h="26" />
+      <region source="controls" hplacement="right" vplacement="top" x="59" y="0" w="4" h="26" />
+
+      <region source="controls" hplacement="left" vplacement="stretch" x="0" y="26" w="4" h="18" id="border-w" />
+      <region source="controls" hplacement="stretch" vplacement="stretch" x="4" y="26" w="32" h="18" id="client" />
+      <region source="controls" hplacement="right" vplacement="stretch" x="59" y="26" w="4" h="18" id="border-e" />
+
+      <region source="controls" hplacement="left" vplacement="bottom" x="0" y="59" w="4" h="4" id="border-sw" />
+      <region source="controls" hplacement="stretch" vplacement="bottom" x="4" y="59" w="32" h="4" id="border-s" />
+      <region source="controls" hplacement="right" vplacement="bottom" x="59" y="59" w="4" h="4" id="border-se" />
+      
+      <text font="title" hplacement="left" vplacement="top" xoffset="5" yoffset="0" color="#3F3F3F" />
+    </frame>
+
+    <!-- Label -->
+    <frame name="label">
+      <text font="default" hplacement="left" vplacement="center" yoffset="5" color="#3F3F3F" />
+    </frame>
+    
+  </frames>
+
+</skin>
