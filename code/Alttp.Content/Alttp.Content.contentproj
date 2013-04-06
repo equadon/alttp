@@ -10,6 +10,7 @@
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <XnaFrameworkVersion>v4.0</XnaFrameworkVersion>
     <OutputPath>bin\$(Platform)\$(Configuration)</OutputPath>
+    <ContentRootDirectory>Content</ContentRootDirectory>
   </PropertyGroup>
   <PropertyGroup>
     <RootNamespace>Alttp.Content</RootNamespace>
@@ -36,14 +37,16 @@
       <Importer>FontDescriptionImporter</Importer>
       <Processor>FontDescriptionProcessor</Processor>
     </Compile>
-    <Compile Include="GameObjects\Link\LinkAnimations.anim">
+    <None Include="GameObjects\Link\LinkAnimations.anim">
       <Name>LinkAnimations</Name>
-    </Compile>
-    <Compile Include="GameObjects\Link\LinkSprites.sprites">
+    </None>
+    <None Include="GameObjects\Link\LinkSprites.sprites">
       <Name>LinkSprites</Name>
-    </Compile>
+    </None>
     <Compile Include="Maps\LightWorld.tmx">
       <Name>LightWorld</Name>
+      <Importer>TMXContentImporter</Importer>
+      <Processor>TMXContentProcessor</Processor>
     </Compile>
     <Compile Include="Skins\Alttp\DefaultFont.spritefont">
       <Name>DefaultFont</Name>
@@ -55,32 +58,33 @@
       <Importer>FontDescriptionImporter</Importer>
       <Processor>FontDescriptionProcessor</Processor>
     </Compile>
-    <Compile Include="Skins\skin.xsd">
+    <None Include="Skins\skin.xsd">
       <Name>skin</Name>
       <SubType>Designer</SubType>
-    </Compile>
+    </None>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="GameObjects\Link\LinkTileset.png">
+    <None Include="GameObjects\Link\LinkTileset.png">
       <Name>LinkTileset</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
-    </Compile>
-    <Compile Include="Maps\CollisionTileset.png">
+    </None>
+    <None Include="Maps\CollisionTileset.png">
       <Name>CollisionTileset</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
-    </Compile>
-    <Compile Include="Maps\LightWorldTileset.png">
+    </None>
+    <None Include="Maps\LightWorldTileset.png">
       <Name>LightWorldTileset</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
-    </Compile>
-    <Compile Include="Skins\Alttp\Alttp.skin.xml">
+    </None>
+    <None Include="Skins\Alttp\Alttp.skin.xml">
       <Name>Alttp.skin</Name>
       <Importer>XmlImporter</Importer>
       <Processor>PassThroughProcessor</Processor>
-    </Compile>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
     <Compile Include="Skins\Alttp\AlttpSkin.png">
       <Name>AlttpSkin</Name>
       <Importer>TextureImporter</Importer>
