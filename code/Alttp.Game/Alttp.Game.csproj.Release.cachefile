@@ -2,12 +2,16 @@ Content\Fonts\DebugFont.xnb
 Content\Fonts\DebugTitleFont.xnb
 Content\Skins\Alttp\DefaultFont.xnb
 Content\Skins\Alttp\TitleFont.xnb
+Content\GameObjects\Link\LinkAnimations.xnb
+Content\GameObjects\Link\LinkSprites.xnb
 Content\Maps\LightWorld.xnb
 Content\Skins\Alttp\AlttpSkin.xnb
 Content\Textures\Blank.xnb
 Content\Textures\Minimap.xnb
+Content\GameObjects\Link\LinkTileset.xnb
 Content\Maps\LightWorld\00.xnb
 Content\Maps\LightWorld\01.xnb
+Content\Skins\Alttp\Alttp.skin.xml
 DefaultFont.xnb
 TitleFont.xnb
 UnitTestFont.xnb

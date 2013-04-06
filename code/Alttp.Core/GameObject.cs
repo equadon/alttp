@@ -16,14 +16,21 @@ namespace Alttp.Core
     {
         public static readonly List<GameObject> GameObjects = new List<GameObject>();
 
+        private readonly AnimationsDict _animations;
+
         private int _frameIndex;
         private double _frameDelay;
 
-        private AnimationsDict _animations;
+        private Vector2 _position;
 
         #region Properties
 
-        public Vector2 Position { get; protected set; }
+        public Vector2 Position
+        {
+            get { return _position; }
+            set { _position = value; }
+        }
+
         public Vector2 Direction { get; protected set; }
 
         public bool Paused { get; private set; }
@@ -105,7 +112,7 @@ namespace Alttp.Core
             if (!Paused)
             {
                 _frameDelay += gameTime.ElapsedGameTime.TotalSeconds;
-                if (_frameDelay > FrameDelay)
+                if (_frameDelay >= FrameDelay)
                 {
                     FrameIndex++;
                     _frameDelay = 0;

@@ -31,6 +31,8 @@ namespace Alttp
                     PreferredBackBufferHeight = Config.ScreenHeight,
                     SynchronizeWithVerticalRetrace = Config.VsyncEnabled
                 };
+
+            IsFixedTimeStep = Config.VsyncEnabled;
         }
 
         protected override void Draw(GameTime gameTime)
