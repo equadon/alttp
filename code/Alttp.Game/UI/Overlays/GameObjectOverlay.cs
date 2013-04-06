@@ -28,9 +28,9 @@ namespace Alttp
         private LabelControl _lblAnimation;
         private LabelControl _lblAnimationFrame;
 
-        public string PositionText { get { return String.Format(LblPositionFormat, _debug.SelectedGameObject.Position); } }
-        public string AnimationText { get { return String.Format(LblAnimationFormat, _debug.SelectedGameObject.AnimationName); } }
-        public string AnimationFrameText { get { return String.Format(LblAnimationFrameFormat, _debug.SelectedGameObject.FrameIndex); } }
+        public string PositionText { get { return String.Format(LblPositionFormat, _debug.SelectedGameObjects[0].Position); } }
+        public string AnimationText { get { return String.Format(LblAnimationFormat, _debug.SelectedGameObjects[0].AnimationName); } }
+        public string AnimationFrameText { get { return String.Format(LblAnimationFrameFormat, _debug.SelectedGameObjects[0].FrameIndex); } }
 
         public GameObjectOverlay(DebugComponent debug, string title, int width, Camera camera)
             : base(title, width)
@@ -72,7 +72,7 @@ namespace Alttp
         {
             base.Update(gameTime);
 
-            if (_debug.SelectedGameObject == null)
+            if (_debug.SelectedGameObjects == null || _debug.SelectedGameObjects.Length == 0)
             {
                 Title = "Object: None";
                 _lblPosition.Text = "";
@@ -81,7 +81,7 @@ namespace Alttp
             }
             else
             {
-                Title = "Object: " + _debug.SelectedGameObject.GetType().Name;
+                Title = "Object: " + _debug.SelectedGameObjects[0].GetType().Name;
                 _lblPosition.Text = PositionText;
                 _lblAnimation.Text = AnimationText;
                 _lblAnimationFrame.Text = AnimationFrameText;

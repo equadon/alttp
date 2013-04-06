@@ -69,6 +69,7 @@ namespace Alttp
             base.LoadContent();
 
             World = new LightWorld(_content.Load<TiledMap>(@"Maps/LightWorld"));
+
             Link = new Link(new Vector2(2200, 2850), _content.Load<AnimationsDict>("GameObjects/Link/LinkAnimations"));
         }
 

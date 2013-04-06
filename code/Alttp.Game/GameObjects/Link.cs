@@ -14,7 +14,7 @@ namespace Alttp.GameObjects
         public Link(Vector2 position, AnimationsDict animations)
             : base(position,  animations, "/Idle/Down")
         {
-            Fps = 60f;
+            Fps = 58f;
             Pause();
         }
 

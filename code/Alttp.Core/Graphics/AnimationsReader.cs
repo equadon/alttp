@@ -13,7 +13,7 @@ namespace Alttp.Core.Graphics
     {
         #region Overrides of ContentTypeReader<SpriteSheet>
 
-        protected override AnimationsDict Read(ContentReader input, AnimationsDict data)
+        protected override AnimationsDict Read(ContentReader input, AnimationsDict existingInstance)
         {
             if (input == null) throw new ArgumentNullException("AnimationsReader input");
 
@@ -73,11 +73,16 @@ namespace Alttp.Core.Graphics
                 }
             }
 
-            var a = new AnimationsDict();
-            foreach (var key in anims.Keys)
-                a[key] = anims[key].ToArray();
+            AnimationsDict animations = existingInstance;
 
-            return a;
+            if (existingInstance == null)
+            {
+                animations = new AnimationsDict();
+                foreach (var key in anims.Keys)
+                    animations[key] = anims[key].ToArray();
+            }
+
+            return animations;
         }
 
         private RectangleF CalculateFrameBounds(SpriteRef[] spriteRefs)

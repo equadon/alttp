@@ -33,7 +33,7 @@ namespace Alttp
         public int Frame { get; private set; }
         public GameTime ElapsedTime { get; private set; }
 
-        public GameObject SelectedGameObject { get; private set; }
+        public GameObject[] SelectedGameObjects { get; private set; }
 
         public Rectangle SelectionBounds { get; private set; }
 
@@ -134,7 +134,7 @@ namespace Alttp
             }
             else if (_input.IsMouseButtonReleased(MouseButton.Left) && !minimapBounds.Contains(mousePos))
             {
-                SelectedGameObject = GameObject.Find(Utils.RenderableRectangle(SelectionBounds), _world.ActiveCamera);
+                SelectedGameObjects = GameObject.FindAll(Utils.RenderableRectangle(SelectionBounds), _world.ActiveCamera);
                 
                 SelectionBounds = Rectangle.Empty;
             }
@@ -187,14 +187,16 @@ namespace Alttp
                 Utils.DrawBorder(_batch, BlankTexture, selectionBounds, 1, new Color(150, 0, 0, 175));
             }
 
-            // Render border around link if he's selected
-            if (SelectedGameObject == _world.Link)
+            // Render border around selected game objects
+            if (SelectedGameObjects != null && SelectedGameObjects.Length > 0)
             {
-                Vector2 linkScreenPos = _world.ActiveCamera.WorldToScreen(new Vector2(_world.Link.BoundsF.X, _world.Link.BoundsF.Y));
+                foreach (var o in SelectedGameObjects)
+                {
+                    Vector2 objScreenPos = _world.ActiveCamera.WorldToScreen(new Vector2(o.BoundsF.X, o.BoundsF.Y));
+                    var objScreenSize = new Vector2(o.BoundsF.Width * _world.ActiveCamera.InvZoom, o.BoundsF.Height * _world.ActiveCamera.InvZoom);
 
-                var linkScale = new Vector2(_world.Link.BoundsF.Width * _world.ActiveCamera.InvZoom, _world.Link.BoundsF.Height * _world.ActiveCamera.InvZoom);
-
-                _batch.Draw(BlankTexture, linkScreenPos, null, new Color(80, 10, 10, 150), 0, Vector2.Zero, linkScale, SpriteEffects.None, 0);
+                    Utils.DrawBorder(_batch, BlankTexture, new Rectangle((int)objScreenPos.X, (int)objScreenPos.Y, (int)objScreenSize.X, (int)objScreenSize.Y), 2, Color.DarkRed);
+                }
             }
 
             _batch.End();

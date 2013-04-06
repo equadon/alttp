@@ -152,7 +152,7 @@ namespace Alttp.Core
         }
 
         /// <summary>
-        /// Find objects inside the specified area.
+        /// Find object inside the specified area.
         /// </summary>
         /// <param name="region">Area we're looking for object</param>
         /// <param name="camera">Camera object we use to find world coordinates</param>
@@ -170,26 +170,25 @@ namespace Alttp.Core
             return null;
         }
 
-//        public static void DrawFrame(ISpriteBatch batch, SpriteAnimationFrameDefinition frame, Vector2 position)
-//        {
-//            foreach (var sprRef in frame.SpriteReferences)
-//            {
-//                var origin = new Vector2(sprRef.Sprite.SourceRectangle.Width / 2, sprRef.Sprite.SourceRectangle.Height / 2);
-//
-//                SpriteEffects spriteEffects;
-//                if (sprRef.FlipH && sprRef.FlipV)
-//                    spriteEffects = SpriteEffects.FlipHorizontally | SpriteEffects.FlipVertically;
-//                else if (!sprRef.FlipH && !sprRef.FlipV)
-//                    spriteEffects = SpriteEffects.None;
-//                else
-//                    spriteEffects = (sprRef.FlipH) ? SpriteEffects.FlipHorizontally : SpriteEffects.FlipVertically;
-//
-//                var pos = new Vector2(
-//                    position.X + sprRef.Position.X,
-//                    position.Y + sprRef.Position.Y);
-//
-//                batch.Draw(sprRef.Sprite.SourceTexture, pos, sprRef.Sprite.SourceRectangle, Color.White, 0, origin, 1, spriteEffects, 0);
-//            }
-//        }
+        /// <summary>
+        /// Find all objects inside the specified area.
+        /// </summary>
+        /// <param name="region">Area we're looking for object</param>
+        /// <param name="camera">Camera object we use to find world coordinates</param>
+        /// <returns>The first GameObject found</returns>
+        public static GameObject[] FindAll(Rectangle region, Camera camera)
+        {
+            var objects = new List<GameObject>();
+
+            foreach (var obj in GameObjects)
+            {
+                var bounds = camera.WorldToScreen(obj.Bounds);
+
+                if (region.Intersects(bounds))
+                    objects.Add(obj);
+            }
+
+            return objects.ToArray();
+        }
     }
 }
