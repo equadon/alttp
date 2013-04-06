@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using Alttp.Core.Graphics;
 using Alttp.Engine;
 using Alttp.Engine.Input;
 using Alttp.GameObjects;

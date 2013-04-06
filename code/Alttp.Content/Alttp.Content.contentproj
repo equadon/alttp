@@ -40,9 +40,11 @@
     <None Include="GameObjects\Link\LinkAnimations.anim">
       <Name>LinkAnimations</Name>
     </None>
-    <None Include="GameObjects\Link\LinkSprites.sprites">
+    <Compile Include="GameObjects\Link\LinkSprites.sprites">
       <Name>LinkSprites</Name>
-    </None>
+      <Importer>DarkFunctionSpritesImporter</Importer>
+      <Processor>DarkFunctionSpritesProcessor</Processor>
+    </Compile>
     <Compile Include="Maps\LightWorld.tmx">
       <Name>LightWorld</Name>
       <Importer>TMXContentImporter</Importer>
@@ -100,6 +102,12 @@
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
     </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Alttp.darkFunction\Alttp.darkFunction.csproj">
+      <Project>{FAF645EA-EDD8-44E4-B694-D3762B5EBCC3}</Project>
+      <Name>Alttp.darkFunction</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Microsoft\XNA Game Studio\$(XnaFrameworkVersion)\Microsoft.Xna.GameStudio.ContentPipeline.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
