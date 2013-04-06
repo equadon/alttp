@@ -52,9 +52,16 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DarkFunctionAnimationsProcessor.cs" />
+    <Compile Include="DarkFunctionAnimationsWriter.cs" />
+    <Compile Include="DarkFunctionAnimationsImporter.cs" />
     <Compile Include="DarkFunctionSpritesImporter.cs" />
     <Compile Include="DarkFunctionSpritesProcessor.cs" />
     <Compile Include="DarkFunctionSpritesWriter.cs" />
+    <Compile Include="Data\AnimationData.cs" />
+    <Compile Include="Data\AnimationsData.cs" />
+    <Compile Include="Data\FrameData.cs" />
+    <Compile Include="Data\SpriteRefData.cs" />
     <Compile Include="Data\SpriteData.cs" />
     <Compile Include="Data\SpriteSheetData.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

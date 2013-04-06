@@ -42,7 +42,9 @@ namespace Alttp.Core.Graphics
                 }
             }
 
-            return new SpriteSheet(texture, sprites);
+            var spriteSheet = existingInstance ?? new SpriteSheet(texture, sprites);
+
+            return spriteSheet;
         }
 
         #endregion

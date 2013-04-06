@@ -67,6 +67,8 @@ namespace Alttp
             base.LoadContent();
 
             World = new LightWorld(_content.Load<TiledMap>(@"Maps/LightWorld"));
+
+            var anims = _content.Load<AnimationsDict>("GameObjects/Link/LinkAnimations");
         }
 
         public override void Draw(GameTime gameTime)

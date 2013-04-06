@@ -37,9 +37,11 @@
       <Importer>FontDescriptionImporter</Importer>
       <Processor>FontDescriptionProcessor</Processor>
     </Compile>
-    <None Include="GameObjects\Link\LinkAnimations.anim">
+    <Compile Include="GameObjects\Link\LinkAnimations.anim">
       <Name>LinkAnimations</Name>
-    </None>
+      <Importer>DarkFunctionAnimationsImporter</Importer>
+      <Processor>DarkFunctionAnimationsProcessor</Processor>
+    </Compile>
     <Compile Include="GameObjects\Link\LinkSprites.sprites">
       <Name>LinkSprites</Name>
       <Importer>DarkFunctionSpritesImporter</Importer>

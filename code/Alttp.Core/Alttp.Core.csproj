@@ -80,7 +80,11 @@
   <ItemGroup>
     <Compile Include="GameObjects\GameObject.cs" />
     <Compile Include="GameStates\GameState.cs" />
+    <Compile Include="Graphics\AnimationsDict.cs" />
+    <Compile Include="Graphics\AnimationsReader.cs" />
+    <Compile Include="Graphics\Frame.cs" />
     <Compile Include="Graphics\Sprite.cs" />
+    <Compile Include="Graphics\SpriteRef.cs" />
     <Compile Include="Graphics\SpriteSheet.cs" />
     <Compile Include="Graphics\SpriteSheetReader.cs" />
     <Compile Include="Input\InputManager.cs" />
