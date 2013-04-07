@@ -111,9 +111,16 @@ namespace Alttp.Core
         {
             if (!Paused)
             {
-                int newFrame = (int) ((gameTime.TotalGameTime.TotalSeconds - _moveStartTime) / FrameDelay) % Frames.Length;
+                _moveStartTime += gameTime.ElapsedGameTime.TotalSeconds;
 
-                FrameIndex = newFrame;
+                if (_moveStartTime >= FrameDelay)
+                {
+                    FrameIndex++;
+                    _moveStartTime = 0;
+                }
+
+                _position.X += 1.5f * Direction.X * (float) (gameTime.ElapsedGameTime.TotalSeconds * Fps);
+                _position.Y += 1.5f * Direction.Y * (float)(gameTime.ElapsedGameTime.TotalSeconds * Fps) * 0.75f;
             }
         }
 
@@ -130,16 +137,10 @@ namespace Alttp.Core
             Resume();
         }
 
-        public void BeginMove(double startTime)
-        {
-            _moveStartTime = startTime;
-        }
-
         protected void Play(string animation)
         {
             if (animation != AnimationName)
             {
-                Resume();
                 AnimationName = animation;
             }
         }

@@ -115,12 +115,6 @@ namespace Alttp
             if (_input.IsKeyDown(Keys.D))
                 direction.X++;
 
-            if (_input.IsKeyPressed(Keys.W) ||
-                _input.IsKeyPressed(Keys.A) ||
-                _input.IsKeyPressed(Keys.S) ||
-                _input.IsKeyPressed(Keys.D))
-                Link.BeginMove(gameTime.TotalGameTime.TotalSeconds);
-
             if (direction != Vector2.Zero)
                 Link.Move(direction);
 
@@ -132,12 +126,6 @@ namespace Alttp
                 Link.Stop();
             if (_input.IsKeyReleased(Keys.D))
                 Link.Stop();
-
-            if (_input.IsKeyPressed(Keys.K))
-                Link.FrameIndex++;
-
-            if (_input.IsKeyPressed(Keys.J))
-                Link.FrameIndex--;
 
             // Switch active camera
             //    1 = main camera
