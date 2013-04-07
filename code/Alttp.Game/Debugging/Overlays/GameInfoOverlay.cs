@@ -1,6 +1,6 @@
 ﻿using System;
-using Alttp.Core.TileEngine;
 using Alttp.Core.UI;
+using Alttp.Worlds;
 using Microsoft.Xna.Framework;
 using Nuclex.UserInterface;
 using Nuclex.UserInterface.Controls;

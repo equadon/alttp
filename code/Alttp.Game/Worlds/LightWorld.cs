@@ -1,5 +1,4 @@
-﻿using Alttp.Core.TileEngine;
-using FuncWorks.XNA.XTiled;
+﻿using FuncWorks.XNA.XTiled;
 using Nuclex.Ninject.Xna;
 
 namespace Alttp.Worlds

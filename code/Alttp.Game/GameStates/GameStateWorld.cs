@@ -1,6 +1,5 @@
 ﻿using Alttp.Core.GameStates;
 using Alttp.Core.Input;
-using Alttp.Debug;
 using Alttp.Debugging;
 using Alttp.Worlds;
 using Microsoft.Xna.Framework;

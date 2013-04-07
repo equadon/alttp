@@ -3,7 +3,7 @@ using FuncWorks.XNA.XTiled;
 using Microsoft.Xna.Framework;
 using Nuclex.Ninject.Xna;
 
-namespace Alttp.Core.TileEngine
+namespace Alttp.Worlds
 {
     public class World : IWorld
     {

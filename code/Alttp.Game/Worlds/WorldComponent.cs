@@ -1,6 +1,5 @@
 ﻿using Alttp.Core.Graphics;
 using Alttp.Core.Input;
-using Alttp.Core.TileEngine;
 using Alttp.GameObjects;
 using FuncWorks.XNA.XTiled;
 using Microsoft.Xna.Framework;
