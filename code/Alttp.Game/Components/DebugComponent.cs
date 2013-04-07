@@ -8,6 +8,7 @@ using Alttp.Core.UI;
 using Alttp.Core.UI.Controls;
 using Alttp.Core.Utils;
 using Alttp.GameObjects;
+using Alttp.UI.Overlays;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;

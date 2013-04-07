@@ -6,6 +6,7 @@ using Alttp.Core.Graphics;
 using Alttp.Core.Input;
 using Alttp.Core.TileEngine;
 using Alttp.GameObjects;
+using Alttp.Worlds;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;

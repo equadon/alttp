@@ -1,18 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using Alttp.Core.UI;
+﻿using Alttp.Core.UI;
 using Alttp.Core.UI.Controls;
 using Alttp.Core.Utils;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using Ninject;
 using Nuclex.UserInterface;
-using Nuclex.UserInterface.Controls;
-using Nuclex.UserInterface.Controls.Desktop;
 
-namespace Alttp
+namespace Alttp.UI.Overlays
 {
     public class MinimapOverlay : Overlay
     {

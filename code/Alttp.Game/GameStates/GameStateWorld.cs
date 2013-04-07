@@ -1,15 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using Alttp.Core.GameStates;
+﻿using Alttp.Core.GameStates;
 using Alttp.Core.Input;
 using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Input;
-using Ninject;
-using Nuclex.UserInterface;
 
-namespace Alttp
+namespace Alttp.GameStates
 {
     public class GameStateWorld : GameState
     {

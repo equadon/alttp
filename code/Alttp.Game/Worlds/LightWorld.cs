@@ -1,13 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using Alttp.Core.TileEngine;
+﻿using Alttp.Core.TileEngine;
 using FuncWorks.XNA.XTiled;
-using Microsoft.Xna.Framework.Graphics;
 using Nuclex.Ninject.Xna;
 
-namespace Alttp
+namespace Alttp.Worlds
 {
     public class LightWorld : World
     {

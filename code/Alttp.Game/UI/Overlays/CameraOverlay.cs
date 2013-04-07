@@ -1,16 +1,11 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using Alttp.Core.Input;
 using Alttp.Core.UI;
 using Microsoft.Xna.Framework;
-using Ninject;
 using Nuclex.UserInterface;
 using Nuclex.UserInterface.Controls;
-using Nuclex.UserInterface.Controls.Desktop;
 
-namespace Alttp
+namespace Alttp.UI.Overlays
 {
     public class CameraOverlay : Overlay
     {

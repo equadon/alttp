@@ -4,6 +4,8 @@ using System.Linq;
 using System.Text;
 using Alttp.Core.Input;
 using Alttp.Core.TileEngine;
+using Alttp.GameStates;
+using Alttp.Worlds;
 using Ninject;
 using Ninject.Activation;
 using Ninject.Extensions.NamedScope;
