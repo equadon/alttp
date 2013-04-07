@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using Alttp.Engine;
+using Alttp.Core.TileEngine;
 using FuncWorks.XNA.XTiled;
 using Microsoft.Xna.Framework.Graphics;
 using Nuclex.Ninject.Xna;

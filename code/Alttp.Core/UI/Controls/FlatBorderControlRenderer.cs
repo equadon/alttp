@@ -1,9 +1,8 @@
-﻿using Alttp.UI.Controls;
-using Microsoft.Xna.Framework;
+﻿using Microsoft.Xna.Framework;
 using Nuclex.UserInterface;
 using Nuclex.UserInterface.Visuals.Flat;
 
-namespace Alttp.Engine.UI.Controls
+namespace Alttp.Core.UI.Controls
 {
     public class FlatBorderControlRenderer : IFlatControlRenderer<BorderControl>
     {

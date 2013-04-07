@@ -4,7 +4,7 @@ using Microsoft.Xna.Framework.Graphics;
 using Nuclex.Ninject.Xna;
 using Nuclex.UserInterface;
 
-namespace Alttp.Engine.Utils
+namespace Alttp.Core.Utils
 {
     public static class Utils
     {

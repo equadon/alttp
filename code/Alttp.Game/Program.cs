@@ -1,5 +1,5 @@
 using System;
-using Alttp.Engine.Input;
+using Alttp.Core.Input;
 using Microsoft.Xna.Framework;
 using Ninject;
 using Nuclex.Game.States;

@@ -2,8 +2,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using Alttp.Engine;
-using Alttp.Engine.Input;
+using Alttp.Core.GameStates;
+using Alttp.Core.Input;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Input;
 using Ninject;

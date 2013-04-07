@@ -1,13 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using Alttp.Engine.Input;
 using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Input;
-using Ninject;
 using Nuclex.UserInterface;
 
-namespace Alttp.Engine
+namespace Alttp.Core.TileEngine
 {
     public enum CameraMode { Free, Follow }
 

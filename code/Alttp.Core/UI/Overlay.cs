@@ -3,7 +3,7 @@ using Microsoft.Xna.Framework;
 using Nuclex.UserInterface;
 using Nuclex.UserInterface.Controls.Desktop;
 
-namespace Alttp.Engine.UI
+namespace Alttp.Core.UI
 {
     public class Overlay : WindowControl
     {

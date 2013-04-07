@@ -2,10 +2,9 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using Alttp.Engine;
-using Alttp.Engine.UI;
-using Alttp.Engine.Utils;
-using Alttp.UI.Controls;
+using Alttp.Core.UI;
+using Alttp.Core.UI.Controls;
+using Alttp.Core.Utils;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Ninject;

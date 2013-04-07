@@ -4,7 +4,6 @@ using System.Linq;
 using System.Text;
 using Alttp.Core;
 using Alttp.Core.Graphics;
-using Alttp.Engine;
 using Microsoft.Xna.Framework;
 
 namespace Alttp.GameObjects

@@ -1,8 +1,7 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using Nuclex.UserInterface.Controls;
 
-namespace Alttp.UI.Controls
+namespace Alttp.Core.UI.Controls
 {
     /// <summary>
     /// BorderControl draws a border around the specified region.

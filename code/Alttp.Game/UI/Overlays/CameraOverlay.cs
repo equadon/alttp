@@ -2,8 +2,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using Alttp.Engine.Input;
-using Alttp.Engine.UI;
+using Alttp.Core.Input;
+using Alttp.Core.UI;
 using Microsoft.Xna.Framework;
 using Ninject;
 using Nuclex.UserInterface;

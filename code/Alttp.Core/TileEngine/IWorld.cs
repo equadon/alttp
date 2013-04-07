@@ -1,7 +1,7 @@
 using Microsoft.Xna.Framework;
 using Nuclex.Ninject.Xna;
 
-namespace Alttp.Engine
+namespace Alttp.Core.TileEngine
 {
     public interface IWorld
     {

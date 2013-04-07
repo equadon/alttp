@@ -2,7 +2,7 @@
 using Nuclex.UserInterface;
 using Nuclex.UserInterface.Visuals.Flat;
 
-namespace Alttp.UI.Controls
+namespace Alttp.Core.UI.Controls
 {
     public class FlatImageControlRenderer : IFlatControlRenderer<ImageControl>
     {

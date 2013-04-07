@@ -1,10 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using Microsoft.Xna.Framework;
+﻿using Microsoft.Xna.Framework;
 
-namespace Alttp.Engine
+namespace Alttp.Core.GameStates
 {
     /// <summary>
     /// Inherits from the Nuclex framework GameState class.

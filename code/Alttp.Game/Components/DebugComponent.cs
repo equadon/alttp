@@ -4,11 +4,10 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using Alttp.Core;
-using Alttp.Engine;
-using Alttp.Engine.UI;
-using Alttp.Engine.Utils;
+using Alttp.Core.UI;
+using Alttp.Core.UI.Controls;
+using Alttp.Core.Utils;
 using Alttp.GameObjects;
-using Alttp.UI.Controls;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
@@ -19,7 +18,7 @@ using Nuclex.UserInterface;
 using Nuclex.UserInterface.Controls;
 using Nuclex.UserInterface.Controls.Desktop;
 using Nuclex.UserInterface.Visuals.Flat;
-using InputManager = Alttp.Engine.Input.InputManager;
+using InputManager = Alttp.Core.Input.InputManager;
 
 namespace Alttp
 {

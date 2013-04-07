@@ -1,7 +1,7 @@
 ﻿using Microsoft.Xna.Framework.Graphics;
 using Nuclex.UserInterface.Controls;
 
-namespace Alttp.UI.Controls
+namespace Alttp.Core.UI.Controls
 {
     public class ImageControl : Control
     {

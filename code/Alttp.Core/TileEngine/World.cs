@@ -1,13 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using FuncWorks.XNA.XTiled;
 using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Graphics;
 using Nuclex.Ninject.Xna;
 
-namespace Alttp.Engine
+namespace Alttp.Core.TileEngine
 {
     public class World : IWorld
     {
