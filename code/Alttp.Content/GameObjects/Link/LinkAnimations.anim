@@ -5,24 +5,28 @@
     <cell index="0" delay="1">
       <spr name="/Heads/Right/0" x="0" y="1" z="0"/>
       <spr name="/Lower Body/Run Right/0" x="2" y="11" z="1"/>
+      <spr name="/Shadow" x="2" y="15" z="2"/>
     </cell>
   </anim>
   <anim name="/Idle/Left" loops="0">
     <cell index="0" delay="1">
-      <spr name="/Heads/Right/0" x="0" y="1" z="0" flipH="1"/>
-      <spr name="/Lower Body/Run Right/0" x="-2" y="11" z="1" flipH="1"/>
+      <spr name="/Heads/Right/0" x="4" y="1" z="0" flipH="1"/>
+      <spr name="/Lower Body/Run Right/0" x="2" y="11" z="1" flipH="1"/>
+      <spr name="/Shadow" x="2" y="15" z="2"/>
     </cell>
   </anim>
   <anim name="/Idle/Down" loops="0">
     <cell index="0" delay="1">
-      <spr name="/Heads/Down/0" x="0" y="2" z="0"/>
-      <spr name="/Lower Body/Run Down/1" x="0" y="10" z="2" flipH="1"/>
+      <spr name="/Heads/Down/0" x="2" y="3" z="0"/>
+      <spr name="/Lower Body/Run Down/1" x="2" y="11" z="2" flipH="1"/>
+      <spr name="/Shadow" x="2" y="15" z="3"/>
     </cell>
   </anim>
   <anim name="/Idle/Up" loops="0">
     <cell index="0" delay="1">
-      <spr name="/Heads/Up/0" x="0" y="0" z="0"/>
-      <spr name="/Lower Body/Run Up/0" x="0" y="9" z="1"/>
+      <spr name="/Heads/Up/0" x="2" y="2" z="0"/>
+      <spr name="/Lower Body/Run Up/0" x="2" y="11" z="1"/>
+      <spr name="/Shadow" x="2" y="15" z="2"/>
     </cell>
   </anim>
   <anim name="/Run/Right" loops="0">

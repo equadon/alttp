@@ -30,6 +30,9 @@ namespace Alttp.Core.Graphics
             string path = String.Join("/", parts.Take(parts.Length - 1));
             string name = parts[parts.Length - 1];
 
+            if (path == "")
+                path = "/";
+
             foreach (var sprite in Sprites[path])
                 if (sprite.Name == name)
                     return sprite;
