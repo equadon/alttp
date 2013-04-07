@@ -23,14 +23,14 @@ namespace Alttp.GameObjects
         {
             base.Move(direction);
 
-            Play("/Run/" + DirectionText);
+            Play("/Run/" + DirectionText, AnimationPlayAction.Loop);
         }
 
         public override void Stop()
         {
             base.Stop();
 
-            Play("/Idle/" + DirectionText);
+            Play("/Idle/" + DirectionText, AnimationPlayAction.Loop);
         }
     }
 }

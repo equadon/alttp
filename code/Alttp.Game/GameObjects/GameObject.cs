@@ -11,6 +11,12 @@ using Nuclex.UserInterface;
 
 namespace Alttp.GameObjects
 {
+    public enum AnimationPlayAction
+    {
+        Loop,
+        PlayOnce
+    }
+
     public class GameObject
     {
         public static readonly List<GameObject> GameObjects = new List<GameObject>();
@@ -26,6 +32,8 @@ namespace Alttp.GameObjects
         #region Properties
 
         public float Speed { get; protected set; }
+
+        public AnimationPlayAction AnimationPlayAction { get; protected set; }
 
         public Vector2 Position
         {
@@ -78,9 +86,21 @@ namespace Alttp.GameObjects
             set
             {
                 if (value < 0)
-                    value = Frames.Length - 1;
+                {
+                    value = (AnimationPlayAction == AnimationPlayAction.Loop) ? Frames.Length - 1 : 0;
+                }
                 else
-                    value %= Frames.Length;
+                {
+                    if (value >= Frames.Length - 1 &&
+                        AnimationPlayAction == AnimationPlayAction.PlayOnce)
+                    {
+                        FrameIndex = 0;
+                    }
+                    else
+                    {
+                        value %= Frames.Length;
+                    }
+                }
                 _frameIndex = value;
             }
         }
@@ -115,7 +135,8 @@ namespace Alttp.GameObjects
             {
                 _moveStartTime += gameTime.ElapsedGameTime.TotalSeconds;
 
-                if (_moveStartTime >= FrameDelay)
+                if (!(AnimationPlayAction == AnimationPlayAction.PlayOnce && FrameIndex == Frames.Length - 1) &&
+                    _moveStartTime >= FrameDelay)
                 {
                     FrameIndex++;
                     _moveStartTime = 0;
@@ -139,11 +160,12 @@ namespace Alttp.GameObjects
             Resume();
         }
 
-        protected void Play(string animation)
+        protected void Play(string animation, AnimationPlayAction action)
         {
             if (animation != AnimationName)
             {
                 AnimationName = animation;
+                AnimationPlayAction = action;
             }
         }
 
