@@ -4,6 +4,8 @@ using System.Linq;
 using System.Text;
 using Alttp.Core.Input;
 using Alttp.Core.TileEngine;
+using Alttp.Debug;
+using Alttp.Debugging;
 using Alttp.GameStates;
 using Alttp.Worlds;
 using Ninject;

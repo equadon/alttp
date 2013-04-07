@@ -119,18 +119,18 @@
   <ItemGroup>
     <Compile Include="AlttpGame.cs" />
     <Compile Include="AlttpModule.cs" />
-    <Compile Include="Components\DebugComponent.cs" />
-    <Compile Include="Components\WorldComponent.cs" />
+    <Compile Include="Debugging\DebugComponent.cs" />
+    <Compile Include="Worlds\WorldComponent.cs" />
     <Compile Include="Config.cs" />
     <Compile Include="GameController.cs" />
     <Compile Include="GameObjects\Link.cs" />
     <Compile Include="GameStates\GameStateWorld.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="UI\Overlays\CameraOverlay.cs" />
-    <Compile Include="UI\Overlays\GameInfoOverlay.cs" />
-    <Compile Include="UI\Overlays\GameObjectOverlay.cs" />
-    <Compile Include="UI\Overlays\MinimapOverlay.cs" />
+    <Compile Include="Debugging\Overlays\CameraOverlay.cs" />
+    <Compile Include="Debugging\Overlays\GameInfoOverlay.cs" />
+    <Compile Include="Debugging\Overlays\GameObjectOverlay.cs" />
+    <Compile Include="Debugging\Overlays\MinimapOverlay.cs" />
     <Compile Include="Worlds\LightWorld.cs" />
   </ItemGroup>
   <ItemGroup>

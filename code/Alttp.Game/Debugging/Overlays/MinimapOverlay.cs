@@ -1,11 +1,12 @@
 ﻿using Alttp.Core.UI;
 using Alttp.Core.UI.Controls;
 using Alttp.Core.Utils;
+using Alttp.Worlds;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Nuclex.UserInterface;
 
-namespace Alttp.UI.Overlays
+namespace Alttp.Debugging.Overlays
 {
     public class MinimapOverlay : Overlay
     {

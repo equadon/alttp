@@ -5,7 +5,7 @@ using Microsoft.Xna.Framework;
 using Nuclex.UserInterface;
 using Nuclex.UserInterface.Controls;
 
-namespace Alttp.UI.Overlays
+namespace Alttp.Debugging.Overlays
 {
     public class GameInfoOverlay : Overlay
     {

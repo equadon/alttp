@@ -1,28 +1,21 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Text;
 using Alttp.Core;
 using Alttp.Core.TileEngine;
 using Alttp.Core.UI;
 using Alttp.Core.UI.Controls;
 using Alttp.Core.Utils;
-using Alttp.GameObjects;
-using Alttp.UI.Overlays;
+using Alttp.Debugging.Overlays;
+using Alttp.Worlds;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
-using Ninject;
 using Nuclex.Input;
 using Nuclex.Ninject.Xna;
 using Nuclex.UserInterface;
-using Nuclex.UserInterface.Controls;
-using Nuclex.UserInterface.Controls.Desktop;
 using Nuclex.UserInterface.Visuals.Flat;
 using InputManager = Alttp.Core.Input.InputManager;
 
-namespace Alttp
+namespace Alttp.Debugging
 {
     public class DebugComponent : DrawableGameComponent
     {

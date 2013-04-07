@@ -1,21 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using Alttp.Core.Graphics;
+﻿using Alttp.Core.Graphics;
 using Alttp.Core.Input;
 using Alttp.Core.TileEngine;
 using Alttp.GameObjects;
-using Alttp.Worlds;
+using FuncWorks.XNA.XTiled;
 using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using Ninject;
 using Nuclex.Ninject.Xna;
-using TiledMap = FuncWorks.XNA.XTiled.Map;
 
-namespace Alttp
+namespace Alttp.Worlds
 {
     public class WorldComponent : DrawableGameComponent
     {
@@ -69,7 +63,7 @@ namespace Alttp
         {
             base.LoadContent();
 
-            World = new LightWorld(_content.Load<TiledMap>(@"Maps/LightWorld"));
+            World = new LightWorld(_content.Load<Map>(@"Maps/LightWorld"));
 
             Link = new Link(new Vector2(2200, 2850), _content.Load<AnimationsDict>("GameObjects/Link/LinkAnimations"));
         }
