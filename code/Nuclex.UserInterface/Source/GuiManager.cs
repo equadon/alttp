@@ -187,10 +187,6 @@ namespace Nuclex.UserInterface {
         // be different from the one registered in the game service container.
         var services = new GameServiceContainer();
         services.AddService(typeof(IGraphicsDeviceService), this.graphicsDeviceService);
-
-        Visualizer = Visuals.Flat.FlatGuiVisualizer.FromResource(
-          services, Resources.SuaveSkinResources.ResourceManager, "SuaveSkin"
-        );
       }
 
     }
