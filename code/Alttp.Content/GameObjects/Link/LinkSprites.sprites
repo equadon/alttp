@@ -19,6 +19,7 @@
           <spr name="2" x="81" y="19" w="16" h="11"/>
           <spr name="3" x="82" y="290" w="14" h="11"/>
           <spr name="4" x="97" y="292" w="16" h="11"/>
+          <spr name="Idle" x="49" y="20" w="16" h="11"/>
         </dir>
         <dir name="Run Up">
           <spr name="0" x="97" y="20" w="16" h="10"/>
@@ -29,6 +30,7 @@
           <spr name="5" x="81" y="305" w="16" h="12"/>
           <spr name="6" x="97" y="308" w="16" h="11"/>
           <spr name="7" x="49" y="308" w="16" h="11"/>
+          <spr name="Idle" x="17" y="36" w="16" h="11"/>
         </dir>
         <dir name="Swing Sword Right">
           <spr name="0" x="35" y="38" w="12" h="11"/>
