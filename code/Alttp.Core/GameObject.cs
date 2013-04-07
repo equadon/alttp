@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using Alttp.Core.Graphics;
-using Alttp.Core.TileEngine;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Nuclex.Ninject.Xna;
@@ -165,13 +164,14 @@ namespace Alttp.Core
         /// Find object inside the specified area.
         /// </summary>
         /// <param name="region">Area we're looking for object</param>
-        /// <param name="camera">Camera object we use to find world coordinates</param>
+        /// <param name="cameraPosition">Position of the camera</param>
+        /// <param name="zoom">Current camera zoom</param>
         /// <returns>The first GameObject found</returns>
-        public static GameObject Find(Rectangle region, Camera camera)
+        public static GameObject Find(Rectangle region, Vector2 cameraPosition, float zoom)
         {
             foreach (var obj in GameObjects)
             {
-                var bounds = camera.WorldToScreen(obj.Bounds);
+                var bounds = Utils.Utils.WorldToScreen(obj.Bounds, cameraPosition, zoom);
 
                 if (region.Intersects(bounds))
                     return obj;
@@ -186,13 +186,13 @@ namespace Alttp.Core
         /// <param name="region">Area we're looking for object</param>
         /// <param name="camera">Camera object we use to find world coordinates</param>
         /// <returns>The first GameObject found</returns>
-        public static GameObject[] FindAll(Rectangle region, Camera camera)
+        public static GameObject[] FindAll(Rectangle region, Vector2 cameraPosition, float zoom)
         {
             var objects = new List<GameObject>();
 
             foreach (var obj in GameObjects)
             {
-                var bounds = camera.WorldToScreen(obj.Bounds);
+                var bounds = Utils.Utils.WorldToScreen(obj.Bounds, cameraPosition, zoom);
 
                 if (region.Intersects(bounds))
                     objects.Add(obj);

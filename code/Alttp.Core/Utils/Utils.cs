@@ -8,6 +8,18 @@ namespace Alttp.Core.Utils
 {
     public static class Utils
     {
+        public static Vector2 WorldToScreen(Vector2 worldPosition, Vector2 cameraPosition, float zoom)
+        {
+            return (worldPosition - cameraPosition) * zoom;
+        }
+
+        public static Rectangle WorldToScreen(Rectangle bounds, Vector2 cameraPosition, float zoom)
+        {
+            var position = WorldToScreen(new Vector2(bounds.Left, bounds.Top), cameraPosition, zoom);
+
+            return new Rectangle((int)position.X, (int)position.Y, (int)(bounds.Width * zoom), (int)(bounds.Height * zoom));
+        }
+
         public static Rectangle CastRectangleF(RectangleF rect)
         {
             return new Rectangle((int)rect.X, (int)rect.Y, (int)rect.Width, (int)rect.Height);

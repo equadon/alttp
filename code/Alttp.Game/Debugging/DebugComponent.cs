@@ -1,6 +1,5 @@
 ﻿using System;
 using Alttp.Core;
-using Alttp.Core.TileEngine;
 using Alttp.Core.UI;
 using Alttp.Core.UI.Controls;
 using Alttp.Core.Utils;
@@ -129,7 +128,7 @@ namespace Alttp.Debugging
             }
             else if (_input.IsMouseButtonReleased(MouseButtons.Left) && !minimapBounds.Contains(mousePos))
             {
-                SelectedGameObjects = GameObject.FindAll(Utils.RenderableRectangle(SelectionBounds), _world.ActiveCamera);
+                SelectedGameObjects = GameObject.FindAll(Utils.RenderableRectangle(SelectionBounds), _world.ActiveCamera.Position, _world.ActiveCamera.InvZoom);
                 
                 SelectionBounds = Rectangle.Empty;
 
