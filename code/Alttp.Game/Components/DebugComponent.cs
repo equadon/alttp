@@ -4,6 +4,7 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using Alttp.Core;
+using Alttp.Core.TileEngine;
 using Alttp.Core.UI;
 using Alttp.Core.UI.Controls;
 using Alttp.Core.Utils;
@@ -138,6 +139,12 @@ namespace Alttp
                 SelectedGameObjects = GameObject.FindAll(Utils.RenderableRectangle(SelectionBounds), _world.ActiveCamera);
                 
                 SelectionBounds = Rectangle.Empty;
+
+                // Set camera mode if there are game objects selected
+                if (SelectedGameObjects.Length > 0)
+                    _world.ActiveCamera.Follow(SelectedGameObjects[0]);
+                else
+                    _world.ActiveCamera.Free();
             }
 
             if (_input.IsMouseButtonDown(MouseButtons.Left) && SelectionBounds != Rectangle.Empty)
@@ -153,6 +160,7 @@ namespace Alttp
             // Move minimap viewport with left mouse button.
             // Do not check this if the overlay is hidden.
             if (_gui.Visible &&
+                _world.ActiveCamera.CameraMode != CameraMode.Follow &&
                 _input.MouseState.LeftButton == ButtonState.Pressed &&
                 minimapBounds.Contains(mousePos))
             {

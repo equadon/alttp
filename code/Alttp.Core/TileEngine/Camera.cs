@@ -31,6 +31,9 @@ namespace Alttp.Core.TileEngine
 
         public float Speed { get; set; }
 
+        /// <summary>GameObject the camera will target if Mode is set to Follow</summary>
+        public GameObject Target { get; private set; }
+
         public float Zoom
         {
             get { return _viewportF.Width / ScreenWidth; }
@@ -266,6 +269,35 @@ namespace Alttp.Core.TileEngine
             int maxY = 1 + (int)Math.Ceiling(Viewport.Bottom / (float)_world.TileHeight);
 
             return new Rectangle(minX, minY, maxX - minX, maxY - minY);
+        }
+
+        /// <summary>
+        /// Change camera mode to follow the game object.
+        /// </summary>
+        /// <param name="gameObject">GameObject the camera will follow</param>
+        public void Follow(GameObject gameObject)
+        {
+            Target = gameObject;
+
+            CameraMode = CameraMode.Follow;
+        }
+
+        /// <summary>
+        /// Allow camera to move freely.
+        /// </summary>
+        public void Free()
+        {
+            CameraMode = CameraMode.Free;
+        }
+
+        public void Update(GameTime gameTime)
+        {
+            if (CameraMode == CameraMode.Follow && Target != null)
+            {
+                Position = new Vector2(
+                    Target.Position.X - Width / 2f,
+                    Target.Position.Y - Height / 2f);
+            }
         }
     }
 }

@@ -91,19 +91,10 @@ namespace Alttp
         {
             base.Update(gameTime);
 
+            ActiveCamera.Update(gameTime);
+
             Link.Update(gameTime);
 
-            switch (ActiveCamera.CameraMode)
-            {
-                case CameraMode.Free:
-                    HandleKeyboardInput(gameTime);
-                    HandleMouseInput(gameTime);
-                    break;
-            }
-        }
-
-        private void HandleKeyboardInput(GameTime gameTime)
-        {
             // Move link
             Vector2 direction = Vector2.Zero;
             if (_input.IsKeyDown(Keys.W))
@@ -127,6 +118,17 @@ namespace Alttp
             if (_input.IsKeyReleased(Keys.D))
                 Link.Stop();
 
+            switch (ActiveCamera.CameraMode)
+            {
+                case CameraMode.Free:
+                    HandleKeyboardInput(gameTime);
+                    HandleMouseInput(gameTime);
+                    break;
+            }
+        }
+
+        private void HandleKeyboardInput(GameTime gameTime)
+        {
             // Switch active camera
             //    1 = main camera
             //    2 = secondary camera
