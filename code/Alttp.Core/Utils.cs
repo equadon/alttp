@@ -4,7 +4,7 @@ using Microsoft.Xna.Framework.Graphics;
 using Nuclex.Ninject.Xna;
 using Nuclex.UserInterface;
 
-namespace Alttp.Core.Utils
+namespace Alttp.Core
 {
     public static class Utils
     {
@@ -18,6 +18,11 @@ namespace Alttp.Core.Utils
             var position = WorldToScreen(new Vector2(bounds.Left, bounds.Top), cameraPosition, zoom);
 
             return new Rectangle((int)position.X, (int)position.Y, (int)(bounds.Width * zoom), (int)(bounds.Height * zoom));
+        }
+
+        public static Vector2 ScreenToWorld(Vector2 screenPosition, Vector2 cameraPosition, float zoom)
+        {
+            return cameraPosition + screenPosition * zoom;
         }
 
         public static Rectangle CastRectangleF(RectangleF rect)

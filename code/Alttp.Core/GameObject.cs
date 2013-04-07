@@ -171,7 +171,7 @@ namespace Alttp.Core
         {
             foreach (var obj in GameObjects)
             {
-                var bounds = Utils.Utils.WorldToScreen(obj.Bounds, cameraPosition, zoom);
+                var bounds = Utils.WorldToScreen(obj.Bounds, cameraPosition, zoom);
 
                 if (region.Intersects(bounds))
                     return obj;
@@ -184,7 +184,8 @@ namespace Alttp.Core
         /// Find all objects inside the specified area.
         /// </summary>
         /// <param name="region">Area we're looking for object</param>
-        /// <param name="camera">Camera object we use to find world coordinates</param>
+        /// <param name="cameraPosition">Position of the camera</param>
+        /// <param name="zoom">Current camera zoom</param>
         /// <returns>The first GameObject found</returns>
         public static GameObject[] FindAll(Rectangle region, Vector2 cameraPosition, float zoom)
         {
@@ -192,7 +193,7 @@ namespace Alttp.Core
 
             foreach (var obj in GameObjects)
             {
-                var bounds = Utils.Utils.WorldToScreen(obj.Bounds, cameraPosition, zoom);
+                var bounds = Utils.WorldToScreen(obj.Bounds, cameraPosition, zoom);
 
                 if (region.Intersects(bounds))
                     objects.Add(obj);

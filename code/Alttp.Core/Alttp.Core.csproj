@@ -94,7 +94,7 @@
     <Compile Include="UI\Controls\FlatImageControlRenderer.cs" />
     <Compile Include="UI\Controls\ImageControl.cs" />
     <Compile Include="UI\Overlay.cs" />
-    <Compile Include="Utils\Utils.cs" />
+    <Compile Include="Utils.cs" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>

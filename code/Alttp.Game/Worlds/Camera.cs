@@ -1,6 +1,5 @@
 ﻿using System;
 using Alttp.Core;
-using Alttp.Core.Utils;
 using Microsoft.Xna.Framework;
 using Nuclex.UserInterface;
 
@@ -245,13 +244,13 @@ namespace Alttp.Worlds
         }
 
         /// <summary>
-        /// Convert screen to world coordinates.
+        /// Helper method to convert screen to world coordinates.
         /// </summary>
         /// <param name="screenPosition">Screen position</param>
         /// <returns>World position</returns>
         public Vector2 ScreenToWorld(Vector2 screenPosition)
         {
-            return Position + screenPosition * Zoom;
+            return Utils.ScreenToWorld(screenPosition, Position, InvZoom);
         }
 
         private void OnViewportChanged(EventArgs e)
