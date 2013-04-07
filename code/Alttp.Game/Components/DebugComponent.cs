@@ -5,7 +5,6 @@ using System.Linq;
 using System.Text;
 using Alttp.Core;
 using Alttp.Engine;
-using Alttp.Engine.Input;
 using Alttp.Engine.UI;
 using Alttp.Engine.Utils;
 using Alttp.GameObjects;
@@ -14,11 +13,13 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using Ninject;
+using Nuclex.Input;
 using Nuclex.Ninject.Xna;
 using Nuclex.UserInterface;
 using Nuclex.UserInterface.Controls;
 using Nuclex.UserInterface.Controls.Desktop;
 using Nuclex.UserInterface.Visuals.Flat;
+using InputManager = Alttp.Engine.Input.InputManager;
 
 namespace Alttp
 {
@@ -128,18 +129,18 @@ namespace Alttp
             RectangleF minimapBounds = MinimapOverlay.Minimap.GetAbsoluteBounds();
             
             // Selection region controls
-            if (_input.IsMouseButtonPressed(MouseButton.Left) && !minimapBounds.Contains(mousePos))
+            if (_input.IsMouseButtonPressed(MouseButtons.Left) && !minimapBounds.Contains(mousePos))
             {
                 SelectionBounds = new Rectangle((int) mousePos.X, (int) mousePos.Y, 0, 0);
             }
-            else if (_input.IsMouseButtonReleased(MouseButton.Left) && !minimapBounds.Contains(mousePos))
+            else if (_input.IsMouseButtonReleased(MouseButtons.Left) && !minimapBounds.Contains(mousePos))
             {
                 SelectedGameObjects = GameObject.FindAll(Utils.RenderableRectangle(SelectionBounds), _world.ActiveCamera);
                 
                 SelectionBounds = Rectangle.Empty;
             }
 
-            if (_input.IsMouseButtonDown(MouseButton.Left) && SelectionBounds != Rectangle.Empty)
+            if (_input.IsMouseButtonDown(MouseButtons.Left) && SelectionBounds != Rectangle.Empty)
             {
                 var bounds = SelectionBounds;
 

@@ -4,16 +4,10 @@ using System.Linq;
 using System.Text;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Input;
+using Nuclex.Input;
 
 namespace Alttp.Engine.Input
 {
-    public enum MouseButton
-    {
-        Left,
-        Middle,
-        Right
-    }
-
     public class InputManager : Nuclex.Input.InputManager
     {
         #region Properties
@@ -67,24 +61,24 @@ namespace Alttp.Engine.Input
 
         #region Mouse Helper Methods
 
-        public bool IsMouseButtonPressed(MouseButton button)
+        public bool IsMouseButtonPressed(MouseButtons button)
         {
             return GetButtonState(LastMouseState, button) == ButtonState.Released &&
                    GetButtonState(MouseState, button) == ButtonState.Pressed;
         }
 
-        public bool IsMouseButtonReleased(MouseButton button)
+        public bool IsMouseButtonReleased(MouseButtons button)
         {
             return GetButtonState(LastMouseState, button) == ButtonState.Pressed &&
                    GetButtonState(MouseState, button) == ButtonState.Released;
         }
 
-        public bool IsMouseButtonDown(MouseButton button)
+        public bool IsMouseButtonDown(MouseButtons button)
         {
             return GetButtonState(MouseState, button) == ButtonState.Pressed;
         }
 
-        public bool IsMouseButtonUp(MouseButton button)
+        public bool IsMouseButtonUp(MouseButtons button)
         {
             return GetButtonState(MouseState, button) == ButtonState.Released;
         }
@@ -94,15 +88,15 @@ namespace Alttp.Engine.Input
             return MouseWheelValue != LastMouseWheelValue;
         }
 
-        private ButtonState GetButtonState(MouseState state, MouseButton button)
+        private ButtonState GetButtonState(MouseState state, MouseButtons button)
         {
             switch (button)
             {
-                case MouseButton.Left:
+                case MouseButtons.Left:
                     return state.LeftButton;
-                case MouseButton.Middle:
+                case MouseButtons.Middle:
                     return state.MiddleButton;
-                case MouseButton.Right:
+                case MouseButtons.Right:
                     return state.RightButton;
                 default:
                     throw new Exception("Unknown mouse button: " + button);
