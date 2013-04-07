@@ -14,6 +14,8 @@ namespace Alttp.GameObjects
             : base(position,  animations, "/Idle/Down")
         {
             Fps = 60f;
+            Speed = 1.3f;
+
             Pause();
         }
 

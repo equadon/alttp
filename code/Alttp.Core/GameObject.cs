@@ -24,6 +24,8 @@ namespace Alttp.Core
 
         #region Properties
 
+        public float Speed { get; protected set; }
+
         public Vector2 Position
         {
             get { return _position; }
@@ -118,8 +120,8 @@ namespace Alttp.Core
                     _moveStartTime = 0;
                 }
 
-                _position.X += 1.5f * Direction.X * (float) (gameTime.ElapsedGameTime.TotalSeconds * Fps);
-                _position.Y += 1.5f * Direction.Y * (float)(gameTime.ElapsedGameTime.TotalSeconds * Fps) * 0.75f;
+                _position.X += Speed * Direction.X * (float) (gameTime.ElapsedGameTime.TotalSeconds * Fps);
+                _position.Y += Speed * Direction.Y * (float)(gameTime.ElapsedGameTime.TotalSeconds * Fps) * 0.75f;
             }
         }
 
