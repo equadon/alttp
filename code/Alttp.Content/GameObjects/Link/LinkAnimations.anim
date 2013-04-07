@@ -223,9 +223,49 @@
       <spr name="/Shadow" x="2" y="15" z="2"/>
     </cell>
     <cell index="5" delay="3">
+      <spr name="/Heads/Down/1" x="2" y="3" z="0"/>
       <spr name="/Lower Body/Swing Sword Down/4" x="2" y="13" z="1"/>
       <spr name="/Shadow" x="2" y="15" z="2"/>
-      <spr name="/Heads/Down/1" x="2" y="3" z="0"/>
+    </cell>
+  </anim>
+  <anim name="/Swing/Sword/Right" loops="0">
+    <cell index="0" delay="2">
+      <spr name="/Heads/Right/0" x="0" y="2" z="0"/>
+      <spr name="/Lower Body/Swing Sword Right/0" x="1" y="12" z="1"/>
+      <spr name="/Shadow" x="2" y="15" z="2"/>
+    </cell>
+    <cell index="1" delay="1">
+      <spr name="/Heads/Right/0" x="0" y="2" z="0"/>
+      <spr name="/Lower Body/Swing Sword Right/1" x="1" y="12" z="1"/>
+      <spr name="/Shadow" x="2" y="15" z="2"/>
+    </cell>
+    <cell index="2" delay="1">
+      <spr name="/Heads/Right/0" x="2" y="2" z="0"/>
+      <spr name="/Lower Body/Swing Sword Right/1" x="1" y="12" z="1"/>
+      <spr name="/Shadow" x="2" y="15" z="2"/>
+    </cell>
+    <cell index="3" delay="1">
+      <spr name="/Lower Body/Swing Sword Right/Extended Arm" x="7" y="10" z="-1"/>
+      <spr name="/Heads/Right/0" x="2" y="3" z="0"/>
+      <spr name="/Lower Body/Swing Sword Right/2" x="2" y="13" z="1"/>
+      <spr name="/Shadow" x="2" y="15" z="2"/>
+    </cell>
+    <cell index="4" delay="4">
+      <spr name="/Lower Body/Swing Sword Right/Extended Arm" x="11" y="10" z="-1"/>
+      <spr name="/Heads/Right/0" x="5" y="3" z="0"/>
+      <spr name="/Lower Body/Swing Sword Right/3" x="2" y="12" z="1"/>
+      <spr name="/Shadow" x="2" y="15" z="2"/>
+    </cell>
+    <cell index="5" delay="1">
+      <spr name="/Lower Body/Swing Sword Right/Extended Arm" x="7" y="10" z="-1"/>
+      <spr name="/Heads/Right/0" x="2" y="3" z="0"/>
+      <spr name="/Lower Body/Swing Sword Right/2" x="2" y="13" z="1"/>
+      <spr name="/Shadow" x="2" y="15" z="2"/>
+    </cell>
+    <cell index="6" delay="3">
+      <spr name="/Heads/Right/0" x="1" y="2" z="0"/>
+      <spr name="/Lower Body/Swing Sword Right/5" x="1" y="13" z="1"/>
+      <spr name="/Shadow" x="2" y="15" z="2"/>
     </cell>
   </anim>
 </animations>
