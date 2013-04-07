@@ -197,7 +197,7 @@
       <spr name="/Shadow" x="2" y="15" z="2"/>
     </cell>
   </anim>
-  <anim name="/Swing/Sword/Down" loops="0">
+  <anim name="/Link/Swing/Sword/Down" loops="0">
     <cell index="0" delay="2">
       <spr name="/Lower Body/Swing Sword Down/0" x="1" y="7" z="0"/>
       <spr name="/Shadow" x="2" y="15" z="2"/>
@@ -228,7 +228,7 @@
       <spr name="/Shadow" x="2" y="15" z="2"/>
     </cell>
   </anim>
-  <anim name="/Swing/Sword/Right" loops="0">
+  <anim name="/Link/Swing/Sword/Right" loops="0">
     <cell index="0" delay="2">
       <spr name="/Heads/Right/0" x="0" y="2" z="0"/>
       <spr name="/Lower Body/Swing Sword Right/0" x="1" y="12" z="1"/>
@@ -268,7 +268,7 @@
       <spr name="/Shadow" x="2" y="15" z="2"/>
     </cell>
   </anim>
-  <anim name="/Swing/Sword/Up" loops="0">
+  <anim name="/Link/Swing/Sword/Up" loops="0">
     <cell index="0" delay="2">
       <spr name="/Lower Body/Swing Sword Up/0" x="2" y="7" z="0"/>
       <spr name="/Shadow" x="2" y="15" z="2"/>
@@ -296,6 +296,60 @@
     <cell index="5" delay="3">
       <spr name="/Heads/Up/0" x="2" y="2" z="0"/>
       <spr name="/Lower Body/Swing Sword Up/4" x="2" y="11" z="1"/>
+      <spr name="/Shadow" x="2" y="15" z="2"/>
+    </cell>
+  </anim>
+  <anim name="/Swing/Sword/Up" loops="0">
+    <cell index="0" delay="1">
+      <spr name="/Lower Body/Swing Sword Up/0" x="2" y="7" z="0"/>
+      <spr name="/Swords/Default/Up/0" x="12" y="8" z="1"/>
+      <spr name="/Shadow" x="2" y="15" z="2"/>
+    </cell>
+    <cell index="1" delay="1">
+      <spr name="/Lower Body/Swing Sword Up/0" x="2" y="7" z="0"/>
+      <spr name="/Swords/Default/Up/1" x="11" y="4" z="1"/>
+      <spr name="/Shadow" x="2" y="15" z="2"/>
+    </cell>
+    <cell index="2" delay="1">
+      <spr name="/Heads/Up/0" x="2" y="1" z="0"/>
+      <spr name="/Lower Body/Swing Sword Up/1" x="2" y="12" z="1"/>
+      <spr name="/Swords/Default/Up/2" x="13" y="1" z="1"/>
+      <spr name="/Shadow" x="2" y="15" z="2"/>
+    </cell>
+    <cell index="3" delay="1">
+      <spr name="/Heads/Up/0" x="2" y="1" z="0"/>
+      <spr name="/Lower Body/Swing Sword Up/1" x="2" y="12" z="1"/>
+      <spr name="/Swords/Default/Up/3" x="10" y="-7" z="1"/>
+      <spr name="/Shadow" x="2" y="15" z="2"/>
+    </cell>
+    <cell index="4" delay="1">
+      <spr name="/Heads/Up/0" x="2" y="0" z="0"/>
+      <spr name="/Lower Body/Swing Sword Up/2" x="2" y="10" z="1"/>
+      <spr name="/Swords/Default/Up/4" x="0" y="-9" z="1"/>
+      <spr name="/Shadow" x="2" y="15" z="2"/>
+    </cell>
+    <cell index="5" delay="4">
+      <spr name="/Heads/Up/0" x="2" y="-3" z="0"/>
+      <spr name="/Lower Body/Swing Sword Up/3" x="2" y="10" z="1"/>
+      <spr name="/Swords/Default/Up/5" x="-3" y="-11" z="1"/>
+      <spr name="/Shadow" x="2" y="15" z="2"/>
+    </cell>
+    <cell index="6" delay="1">
+      <spr name="/Heads/Up/0" x="2" y="0" z="0"/>
+      <spr name="/Lower Body/Swing Sword Up/2" x="2" y="10" z="1"/>
+      <spr name="/Swords/Default/Up/6" x="-7" y="-6" z="1"/>
+      <spr name="/Shadow" x="2" y="15" z="2"/>
+    </cell>
+    <cell index="7" delay="1">
+      <spr name="/Heads/Up/0" x="2" y="2" z="0"/>
+      <spr name="/Lower Body/Swing Sword Up/4" x="2" y="11" z="1"/>
+      <spr name="/Swords/Default/Up/7" x="-8" y="-2" z="1"/>
+      <spr name="/Shadow" x="2" y="15" z="2"/>
+    </cell>
+    <cell index="8" delay="2">
+      <spr name="/Heads/Up/0" x="2" y="2" z="0"/>
+      <spr name="/Lower Body/Swing Sword Up/4" x="2" y="11" z="1"/>
+      <spr name="/Swords/Default/Up/8" x="-12" y="2" z="1"/>
       <spr name="/Shadow" x="2" y="15" z="2"/>
     </cell>
   </anim>
