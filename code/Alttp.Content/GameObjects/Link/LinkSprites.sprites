@@ -74,6 +74,13 @@
           <spr name="5" x="83" y="39" w="13" h="10"/>
           <spr name="Extended Arm Shorter" x="98" y="411" w="6" h="4"/>
         </dir>
+        <dir name="Swing Sword Up">
+          <spr name="0" x="18" y="82" w="15" h="22"/>
+          <spr name="1" x="18" y="52" w="15" h="12"/>
+          <spr name="2" x="33" y="49" w="16" h="15"/>
+          <spr name="3" x="18" y="433" w="15" h="15"/>
+          <spr name="4" x="65" y="180" w="16" h="11"/>
+        </dir>
       </dir>
       <dir name="Heads">
         <dir name="Right">
