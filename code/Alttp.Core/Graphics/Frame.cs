@@ -16,6 +16,11 @@ namespace Alttp.Core.Graphics
 
         public SpriteRef[] SpriteRefs { get; private set; }
 
+        public Vector2 Origin
+        {
+            get { return new Vector2(Bounds.Width / 2f, Bounds.Height / 2f); }
+        }
+
         public Frame(int index, SpriteRef[] spriteRefs, RectangleF bounds)
         {
             Index = index;

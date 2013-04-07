@@ -2,13 +2,14 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using Alttp.Core;
 using Alttp.Core.Graphics;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Nuclex.Ninject.Xna;
 using Nuclex.UserInterface;
 
-namespace Alttp.Core
+namespace Alttp.GameObjects
 {
     public class GameObject
     {

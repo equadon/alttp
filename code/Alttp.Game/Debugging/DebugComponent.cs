@@ -3,6 +3,7 @@ using Alttp.Core;
 using Alttp.Core.UI;
 using Alttp.Core.UI.Controls;
 using Alttp.Debugging.Overlays;
+using Alttp.GameObjects;
 using Alttp.Worlds;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;

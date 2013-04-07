@@ -78,7 +78,6 @@
     <Reference Include="System.Net" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="GameObject.cs" />
     <Compile Include="GameStates\GameState.cs" />
     <Compile Include="Graphics\AnimationsDict.cs" />
     <Compile Include="Graphics\AnimationsReader.cs" />
