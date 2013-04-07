@@ -228,13 +228,6 @@
     <None Include="Documents\Sketches\ui-concept-4.uml" />
     <None Include="Documents\Sketches\ui-concept-5.uml" />
   </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="EmbeddedContent\Nuclex.UserInterface.EmbeddedContent.contentproj">
-      <Project>{FD57D556-4449-4C04-A0F8-763AA510B705}</Project>
-      <Name>Nuclex.UserInterface.EmbeddedContent %28../../../EmbeddedContent%29</Name>
-      <XnaReferenceType>Content</XnaReferenceType>
-    </ProjectReference>
-  </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <Import Project="$(MSBuildExtensionsPath)\Microsoft\XNA Game Studio\Microsoft.Xna.GameStudio.targets" />
   <!--

@@ -127,9 +127,6 @@
   <data name="BadVerticalPositionSkin" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>UnitTest\BadVerticalPosition.skin.xml;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="UnitTestFont" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\..\..\lib\EmbeddedContent\UnitTest\UnitTestFont.xnb;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
   <data name="UnitTestSkin" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>UnitTest\UnitTest.skin.xml;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
