@@ -20,6 +20,10 @@ namespace Alttp.GameObjects
 
         public override void Move(Vector2 direction)
         {
+            // Can't move if we're attacking
+            if (IsAttacking)
+                return;
+
             base.Move(direction);
 
             ChangeAnimation("/Run/" + DirectionText, AnimationPlayAction.Loop, GameObjectState.Moving);
