@@ -124,6 +124,7 @@
     <Compile Include="Player.cs" />
     <Compile Include="Worlds\Camera.cs" />
     <Compile Include="Worlds\IWorld.cs" />
+    <Compile Include="Worlds\Region.cs" />
     <Compile Include="Worlds\World.cs" />
     <Compile Include="Worlds\WorldManager.cs" />
     <Compile Include="Config.cs" />

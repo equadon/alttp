@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using FuncWorks.XNA.XTiled;
 using Microsoft.Xna.Framework;
 using Nuclex.Ninject.Xna;
@@ -8,6 +9,8 @@ namespace Alttp.Worlds
     public class World : IWorld
     {
         private readonly Map _map;
+
+        public Region[] Regions { get; private set; }
 
         public int TileWidth { get { return _map.TileWidth; } }
         public int TileHeight { get { return _map.TileWidth; } }
@@ -26,6 +29,30 @@ namespace Alttp.Worlds
         public World(Map map)
         {
             _map = map;
+
+            // Load objects
+            ObjectLayer regions = null;
+
+            foreach (var layer in _map.ObjectLayers)
+            {
+                if (layer.Name == "Regions")
+                    regions = layer;
+            }
+
+            if (regions == null)
+                Regions = new Region[0];
+            else
+                Regions = LoadRegions(regions);
+        }
+
+        private Region[] LoadRegions(ObjectLayer layer)
+        {
+            var regions = new List<Region>();
+
+            foreach (var obj in layer.MapObjects)
+                regions.Add(Region.FromMapObject(obj));
+
+            return regions.ToArray();
         }
 
         public void Draw(GameTime gameTime, ISpriteBatch spriteBatch, Camera camera)
