@@ -25,8 +25,10 @@ namespace Alttp.Worlds
 
         #region Properties
 
+        public AnimationsDict WorldObjectAnimations { get; private set; }
+
         // Worlds
-        public LightWorld World { get; private set; }
+        public IWorld World { get; private set; }
 
         public Camera ActiveCamera { get; set; }
 
@@ -34,7 +36,7 @@ namespace Alttp.Worlds
 
         #endregion
 
-        public WorldManager(Game game, IContentManager content, ISpriteBatch batch, InputManager input, Player player, [Named("Main")]Camera mainCamera, [Named("Secondary")]Camera secondaryCamera)
+        public WorldManager(Game game, IContentManager content, IWorld world, ISpriteBatch batch, InputManager input, Player player, [Named("Main")]Camera mainCamera, [Named("Secondary")]Camera secondaryCamera)
             : base(game)
         {
             _content = content;
@@ -42,6 +44,8 @@ namespace Alttp.Worlds
             _input = input;
             _mainCamera = mainCamera;
             _secondaryCamera = secondaryCamera;
+
+            World = world;
 
             Player = player;
         }
@@ -64,8 +68,6 @@ namespace Alttp.Worlds
         protected override void LoadContent()
         {
             base.LoadContent();
-
-            World = new LightWorld(_content.Load<Map>(@"Maps/LightWorld"));
 
             Player.Object = new Link(new Vector2(2200, 2850), _content.Load<AnimationsDict>("GameObjects/Link/LinkAnimations"));
         }

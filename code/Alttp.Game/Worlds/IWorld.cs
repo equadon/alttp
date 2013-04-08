@@ -6,6 +6,8 @@ namespace Alttp.Worlds
 {
     public interface IWorld
     {
+        bool RenderCollisionTiles { get; set; }
+
         int TileWidth { get; }
         int TileHeight { get; }
         int Width { get; }

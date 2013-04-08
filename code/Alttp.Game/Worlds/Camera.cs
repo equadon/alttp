@@ -17,7 +17,6 @@ namespace Alttp.Worlds
         public event ViewportChangedEventHandler ViewportChanged;
 
         private readonly Game _game;
-        private readonly IWorld _world;
 
         private RectangleF _viewportF;
 
@@ -29,7 +28,7 @@ namespace Alttp.Worlds
 
         public CameraMode CameraMode { get; private set; }
 
-        public World World { get; set; }
+        public IWorld World { get; set; }
 
         public float Speed { get; set; }
 
@@ -121,12 +120,12 @@ namespace Alttp.Worlds
 
         public float TileWidth
         {
-            get { return _world.TileWidth * InvZoom; }
+            get { return World.TileWidth * InvZoom; }
         }
 
         public float TileHeight
         {
-            get { return _world.TileHeight * InvZoom; }
+            get { return World.TileHeight * InvZoom; }
         }
 
         public Vector2 TileOrigin
@@ -151,7 +150,7 @@ namespace Alttp.Worlds
             Name = name;
 
             _game = game;
-            _world = world;
+            World = world;
 
             CameraMode = CameraMode.Free;
 
@@ -273,11 +272,11 @@ namespace Alttp.Worlds
 
         public Rectangle GetTilesRegion()
         {
-            int minX = Viewport.Left / _world.TileWidth;
-            int maxX = (int)Math.Ceiling(Viewport.Right / (float)_world.TileWidth);
+            int minX = Viewport.Left / World.TileWidth;
+            int maxX = (int)Math.Ceiling(Viewport.Right / (float)World.TileWidth);
 
-            int minY = Viewport.Top / _world.TileHeight;
-            int maxY = 1 + (int)Math.Ceiling(Viewport.Bottom / (float)_world.TileHeight);
+            int minY = Viewport.Top / World.TileHeight;
+            int maxY = 1 + (int)Math.Ceiling(Viewport.Bottom / (float)World.TileHeight);
 
             return new Rectangle(minX, minY, maxX - minX, maxY - minY);
         }
