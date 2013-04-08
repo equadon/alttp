@@ -120,7 +120,11 @@
     <Compile Include="AlttpGame.cs" />
     <Compile Include="AlttpModule.cs" />
     <Compile Include="Debugging\DebugManager.cs" />
+    <Compile Include="GameObjects\Bush.cs" />
     <Compile Include="GameObjects\GameObject.cs" />
+    <Compile Include="GameObjects\Interfaces\IGameObject.cs" />
+    <Compile Include="GameObjects\Interfaces\ILiftable.cs" />
+    <Compile Include="GameObjects\Interfaces\ILootable.cs" />
     <Compile Include="Player.cs" />
     <Compile Include="Worlds\Camera.cs" />
     <Compile Include="Worlds\IWorld.cs" />
@@ -184,6 +188,7 @@
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <Import Project="$(MSBuildExtensionsPath)\Microsoft\XNA Game Studio\Microsoft.Xna.GameStudio.targets" />
   <!--

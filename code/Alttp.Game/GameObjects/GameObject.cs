@@ -19,7 +19,7 @@ namespace Alttp.GameObjects
         Attacking
     }
 
-    public class GameObject
+    public class GameObject : IGameObject
     {
         public static readonly List<GameObject> GameObjects = new List<GameObject>();
 
