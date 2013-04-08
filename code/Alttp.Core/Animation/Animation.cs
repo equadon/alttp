@@ -45,7 +45,7 @@ namespace Alttp.Core.Animation
 
         public string Name { get; private set; }
         public float Fps { get; set; }
-        public AnimationPlayAction Action { get; private set; }
+        public AnimationPlayAction Action { get; set; }
 
         public Frame[] Frames { get; private set; }
 

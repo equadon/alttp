@@ -12,6 +12,13 @@ using Nuclex.UserInterface;
 
 namespace Alttp.GameObjects
 {
+    public enum GameObjectState
+    {
+        Idle,
+        Moving,
+        Attacking
+    }
+
     public class GameObject
     {
         public static readonly List<GameObject> GameObjects = new List<GameObject>();
@@ -22,10 +29,14 @@ namespace Alttp.GameObjects
 
         #region Properties
 
+        public GameObjectState State { get; private set; }
+
         public float MaxSpeed { get; protected set; }
         public float Speed { get; protected set; }
 
-        public AnimationPlayAction AnimationPlayAction { get; protected set; }
+        public Vector2 Direction { get; protected set; }
+
+        public string AnimationName { get; private set; }
 
         public Vector2 Position
         {
@@ -33,9 +44,9 @@ namespace Alttp.GameObjects
             set { _position = value; }
         }
 
-        public Vector2 Direction { get; protected set; }
-
-        public string AnimationName { get; private set; }
+        public bool IsIdle { get { return State == GameObjectState.Idle; } }
+        public bool IsMoving { get { return State == GameObjectState.Moving; } }
+        public bool IsAttacking { get { return State == GameObjectState.Attacking; } }
 
         public Animation Animation
         {
@@ -88,7 +99,7 @@ namespace Alttp.GameObjects
 
         public virtual void Update(GameTime gameTime)
         {
-            if (Speed > 0)
+            if (IsMoving)
             {
                 _position.X += Speed * Direction.X * (float)(gameTime.ElapsedGameTime.TotalSeconds * Animation.Fps);
 
@@ -104,6 +115,8 @@ namespace Alttp.GameObjects
 
         public virtual void Move(Vector2 direction)
         {
+            State = GameObjectState.Moving;
+
             direction.Normalize();
             Direction = direction;
 
@@ -115,6 +128,7 @@ namespace Alttp.GameObjects
         /// </summary>
         public virtual void Attack()
         {
+            State = GameObjectState.Attacking;
         }
 
 //        protected void Play(string animation, AnimationPlayAction action, string nextAnimation = null)
@@ -149,9 +163,27 @@ namespace Alttp.GameObjects
 //            Paused = true;
 //        }
 //
-        public virtual void Stop()
+        /// <summary>
+        /// Force game object into an idle state.
+        /// </summary>
+        public virtual void Idle()
         {
             Speed = 0;
+            State = GameObjectState.Idle;
+        }
+
+        /// <summary>
+        /// Change animation. Do not change if object is moving.
+        /// </summary>
+        protected void ChangeAnimation(string newAnimation, AnimationPlayAction action)
+        {
+            if (State == GameObjectState.Moving)
+                return;
+
+            AnimationName = newAnimation;
+            
+            if (Animation != null)
+                Animation.Action = action;
         }
 
         /// <summary>

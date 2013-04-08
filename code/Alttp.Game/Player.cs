@@ -61,13 +61,13 @@ namespace Alttp
                 Object.Move(direction);
 
             if (_input.IsKeyReleased(Keys.W))
-                Object.Stop();
+                Object.Idle();
             if (_input.IsKeyReleased(Keys.A))
-                Object.Stop();
+                Object.Idle();
             if (_input.IsKeyReleased(Keys.S))
-                Object.Stop();
+                Object.Idle();
             if (_input.IsKeyReleased(Keys.D))
-                Object.Stop();
+                Object.Idle();
 
             // Attack
             if (_input.IsKeyPressed(Keys.Space))
