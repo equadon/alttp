@@ -37,6 +37,9 @@ namespace Alttp.Debugging
         /// <summary>Render tile grid.</summary>
         public bool RenderGrid { get; private set; }
 
+        /// <summary>Render region borders.</summary>
+        public bool RenderRegionBorders { get; private set; }
+
         /// <summary>Render debug overlay.</summary>
         public bool RenderOverlay
         {
@@ -117,6 +120,10 @@ namespace Alttp.Debugging
             // Enable/disable grid lines with the O key
             if (_input.IsKeyPressed(Keys.O))
                 RenderOverlay = !RenderOverlay;
+
+            // Enable/disable region borders with the R key
+            if (_input.IsKeyPressed(Keys.R))
+                RenderRegionBorders = !RenderRegionBorders;
 
             Vector2 mousePos = _input.MousePos;
             RectangleF minimapBounds = MinimapOverlay.Minimap.GetAbsoluteBounds();
@@ -208,6 +215,13 @@ namespace Alttp.Debugging
 
                     Utils.DrawBorder(_batch, BlankTexture, new Rectangle((int)objScreenPos.X, (int)objScreenPos.Y, (int)objScreenSize.X, (int)objScreenSize.Y), 2, Color.DarkRed);
                 }
+            }
+
+            // Render region borders
+            if (RenderRegionBorders)
+            {
+                foreach (var region in _world.ActiveCamera.World.Regions)
+                    region.DrawBorders(_batch, BlankTexture, _world.ActiveCamera);
             }
 
             _batch.End();

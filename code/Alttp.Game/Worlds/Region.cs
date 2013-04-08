@@ -2,8 +2,11 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using Alttp.Core;
 using FuncWorks.XNA.XTiled;
 using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
+using Nuclex.Ninject.Xna;
 
 namespace Alttp.Worlds
 {
@@ -32,6 +35,21 @@ namespace Alttp.Worlds
         {
             return (Polygon == null) ? Bounds.Contains((int)position.X, (int)position.Y)
                                      : Polygon.Contains(position);
+        }
+
+        public void DrawBorders(ISpriteBatch batch, Texture2D texture, Camera camera)
+        {
+            if (Polygon == null)
+                return;
+
+            for (int i = 0; i < Polygon.Lines.Length; i++)
+                DrawLine(batch, texture, Polygon.Lines[i], camera);
+        }
+
+        private void DrawLine(ISpriteBatch batch, Texture2D texture, Line line, Camera camera)
+        {
+            Vector2 position = camera.WorldToScreen(line.Start); //Map.Translate(line.Start, region);
+            batch.Draw(texture, position, new Rectangle?(), Color.White, line.Angle, Vector2.Zero, new Vector2(line.Length * camera.InvZoom, 2 * camera.InvZoom), SpriteEffects.None, 0);
         }
     }
 }
