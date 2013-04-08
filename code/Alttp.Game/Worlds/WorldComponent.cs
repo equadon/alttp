@@ -111,6 +111,10 @@ namespace Alttp.Worlds
             if (_input.IsKeyReleased(Keys.D))
                 Link.Stop();
 
+            // Attack
+            if (_input.IsKeyPressed(Keys.Space))
+                Link.Attack();
+
             switch (ActiveCamera.CameraMode)
             {
                 case CameraMode.Free:

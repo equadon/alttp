@@ -35,13 +35,14 @@ namespace Alttp.GameObjects
         private int _frameIndex;
         private double _frameDuration;
 
-        /// <summary>If true advances the animation by 1, otherwise -1.</summary>
+        /// <summary>Advances the animation in a forward direction if true, otherwise backwards.</summary>
         private bool _advanceAnimationForward = true;
 
         private Vector2 _position;
 
         #region Properties
 
+        public float MaxSpeed { get; protected set; }
         public float Speed { get; protected set; }
 
         public AnimationPlayAction AnimationPlayAction { get; protected set; }
@@ -57,6 +58,7 @@ namespace Alttp.GameObjects
         public bool Paused { get; private set; }
 
         public string AnimationName { get; private set; }
+        public string NextAnimationName { get; private set; }
 
         /// <summary>GameObject's animation FPS.</summary>
         public float Fps { get; protected set; }
@@ -95,26 +97,6 @@ namespace Alttp.GameObjects
         {
             get { return _frameIndex; }
             protected set { _frameIndex = value; }
-//            protected set
-//            {
-//                if (value < 0)
-//                {
-//                    value = (AnimationPlayAction == AnimationPlayAction.Loop) ? Frames.Length - 1 : 0;
-//                }
-//                else
-//                {
-//                    if (value >= Frames.Length - 1 &&
-//                        AnimationPlayAction == AnimationPlayAction.PlayOnce)
-//                    {
-//                        FrameIndex = 0;
-//                    }
-//                    else
-//                    {
-//                        value %= Frames.Length;
-//                    }
-//                }
-//                _frameIndex = value;
-//            }
         }
 
         public Rectangle Bounds
@@ -170,10 +152,20 @@ namespace Alttp.GameObjects
             direction.Normalize();
             Direction = direction;
 
+            Speed = MaxSpeed;
+
             Resume();
         }
 
-        protected void Play(string animation, AnimationPlayAction action)
+        /// <summary>
+        /// Attack with the currently selected IWeapon.
+        /// </summary>
+        public virtual void Attack()
+        {
+            Resume();
+        }
+
+        protected void Play(string animation, AnimationPlayAction action, string nextAnimation = null)
         {
             if (animation != AnimationName)
             {
@@ -185,6 +177,13 @@ namespace Alttp.GameObjects
                     action == AnimationPlayAction.ReverseLoopBackForth ||
                     action == AnimationPlayAction.ReversePlayOnceBackForth)
                     FrameIndex = Frames.Length - 1;
+
+                if (nextAnimation != null &&
+                    (action == AnimationPlayAction.PlayOnce ||
+                     action == AnimationPlayAction.ReversePlayOnce ||
+                     action == AnimationPlayAction.PlayOnceBackForth ||
+                     action == AnimationPlayAction.ReversePlayOnceBackForth))
+                    NextAnimationName = nextAnimation;
             }
         }
 
@@ -200,6 +199,7 @@ namespace Alttp.GameObjects
 
         public virtual void Stop()
         {
+            Speed = 0;
             Pause();
             FrameIndex = 0;
         }
@@ -224,7 +224,18 @@ namespace Alttp.GameObjects
 
                 case AnimationPlayAction.PlayOnce:
                     if (FrameIndex < Frames.Length - 1)
+                    {
                         FrameIndex++;
+                    }
+                    else
+                    {
+                        if (NextAnimationName != null)
+                        {
+                            FrameIndex = 0;
+                            AnimationName = NextAnimationName;
+                            NextAnimationName = null;
+                        }
+                    }
                     break;
 
                 case AnimationPlayAction.ReversePlayOnce:

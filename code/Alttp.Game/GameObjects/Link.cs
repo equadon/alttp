@@ -14,7 +14,7 @@ namespace Alttp.GameObjects
             : base(position,  animations, "/Idle/Down")
         {
             Fps = 60f;
-            Speed = 1.3f;
+            MaxSpeed = 1.3f;
 
             Pause();
         }
@@ -24,6 +24,16 @@ namespace Alttp.GameObjects
             base.Move(direction);
 
             Play("/Run/" + DirectionText, AnimationPlayAction.Loop);
+        }
+
+        /// <summary>
+        /// Attack with the currently selected IWeapon.
+        /// </summary>
+        public override void Attack()
+        {
+            base.Attack();
+
+            Play("/Swing/Sword/" + DirectionText, AnimationPlayAction.PlayOnce, "/Idle/" + DirectionText);
         }
 
         public override void Stop()
