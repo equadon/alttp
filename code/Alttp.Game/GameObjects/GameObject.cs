@@ -99,6 +99,8 @@ namespace Alttp.GameObjects
 
         public virtual void Update(GameTime gameTime)
         {
+            Animation.Update(gameTime);
+
             if (IsMoving)
             {
                 _position.X += Speed * Direction.X * (float)(gameTime.ElapsedGameTime.TotalSeconds * Animation.Fps);
@@ -115,8 +117,6 @@ namespace Alttp.GameObjects
 
         public virtual void Move(Vector2 direction)
         {
-            State = GameObjectState.Moving;
-
             direction.Normalize();
             Direction = direction;
 
@@ -128,7 +128,6 @@ namespace Alttp.GameObjects
         /// </summary>
         public virtual void Attack()
         {
-            State = GameObjectState.Attacking;
         }
 
 //        protected void Play(string animation, AnimationPlayAction action, string nextAnimation = null)
@@ -169,107 +168,28 @@ namespace Alttp.GameObjects
         public virtual void Idle()
         {
             Speed = 0;
-            State = GameObjectState.Idle;
         }
 
         /// <summary>
-        /// Change animation. Do not change if object is moving.
+        /// Change animation. Do not change if object is trying to move to a new direction.
         /// </summary>
-        protected void ChangeAnimation(string newAnimation, AnimationPlayAction action)
+        protected void ChangeAnimation(string newAnimation, AnimationPlayAction action, GameObjectState newState)
         {
-            if (State == GameObjectState.Moving)
+            if (State == GameObjectState.Moving && newState == GameObjectState.Moving)
                 return;
 
-            AnimationName = newAnimation;
-            
-            if (Animation != null)
-                Animation.Action = action;
-        }
+            State = newState;
 
-        /// <summary>
-        /// Advance to the next frame.
-        /// </summary>
-//        public void AdvanceFrame()
-//        {
-//            switch (AnimationPlayAction)
-//            {
-//                case AnimationPlayAction.Loop:
-//                    FrameIndex++;
-//                    FrameIndex %= Frames.Length;
-//                    break;
-//
-//                case AnimationPlayAction.ReverseLoop:
-//                    FrameIndex--;
-//                    if (FrameIndex < 0)
-//                        FrameIndex = Frames.Length - 1;
-//                    break;
-//
-//                case AnimationPlayAction.PlayOnce:
-//                    if (FrameIndex < Frames.Length - 1)
-//                    {
-//                        FrameIndex++;
-//                    }
-//                    else
-//                    {
-//                        if (NextAnimationName != null)
-//                        {
-//                            FrameIndex = 0;
-//                            AnimationName = NextAnimationName;
-//                            NextAnimationName = null;
-//                        }
-//                    }
-//                    break;
-//
-//                case AnimationPlayAction.ReversePlayOnce:
-//                    if (FrameIndex > 0)
-//                        FrameIndex--;
-//                    break;
-//
-//                case AnimationPlayAction.LoopBackForth:
-//                case AnimationPlayAction.PlayOnceBackForth:
-//                    // We played the animation once, stop here unless we want to loop
-//                    if (!(AnimationPlayAction == AnimationPlayAction.PlayOnceBackForth &&
-//                        !_advanceAnimationForward &&
-//                        FrameIndex == 0))
-//                    {
-//                        if (_advanceAnimationForward)
-//                        {
-//                            FrameIndex++;
-//                            if (FrameIndex >= Frames.Length - 1)
-//                                _advanceAnimationForward = false;
-//                        }
-//                        else
-//                        {
-//                            FrameIndex--;
-//                            if (FrameIndex <= 0)
-//                                _advanceAnimationForward = AnimationPlayAction == AnimationPlayAction.LoopBackForth;
-//                        }
-//                    }
-//                    break;
-//
-//                case AnimationPlayAction.ReverseLoopBackForth:
-//                case AnimationPlayAction.ReversePlayOnceBackForth:
-//                    // We played the animation once, stop here unless we want to loop
-//                    if (!(AnimationPlayAction == AnimationPlayAction.ReversePlayOnceBackForth &&
-//                        !_advanceAnimationForward &&
-//                        FrameIndex == Frames.Length - 1))
-//                    {
-//                        if (_advanceAnimationForward)
-//                        {
-//                            FrameIndex--;
-//                            if (FrameIndex <= 0)
-//                                _advanceAnimationForward = false;
-//                        }
-//                        else
-//                        {
-//                            FrameIndex++;
-//                            if (FrameIndex >= Frames.Length - 1)
-//                                _advanceAnimationForward = AnimationPlayAction == AnimationPlayAction.ReverseLoopBackForth;
-//                        }
-//                    }
-//                    break;
-//            }
-//        }
+            // Stop current animation if it's playing
+            if (!Animation.IsStopped)
+                Animation.Stop();
+
+            AnimationName = newAnimation;
+            Animation.Action = action;
+
+            // Play new animation
+            Animation.Play();
+        }
 
         /// <summary>
         /// Find object inside the specified area.

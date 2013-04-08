@@ -29,7 +29,7 @@ namespace Alttp.Core.Animation
     public class Animation
     {
         // Events
-        public event AnimationEventHandler AnimationStateChanged;
+        public event AnimationEventHandler Finished;
         public event AnimationEventHandler FrameIndexChanged;
 
         #region Fields
@@ -66,14 +66,14 @@ namespace Alttp.Core.Animation
             }
         }
 
-        /// <summary>Current animation state. The AnimationStateChanged event will be triggered when the value changes.</summary>
+        /// <summary>Current animation state.</summary>
         public AnimationState State
         {
             get { return _state; }
             set
             {
-                if (_state != value)
-                    OnAnimationStateChange(new AnimationStateEventArgs(_state, value));
+                if (_state != value && value == AnimationState.Finished)
+                    OnFinished(new AnimationStateEventArgs(_state, value));
                 _state = value;
             }
         }
@@ -107,13 +107,16 @@ namespace Alttp.Core.Animation
             if (IsPlaying)
             {
                 _frameDuration += gameTime.ElapsedGameTime.TotalSeconds;
+
+                if (_frameDuration >= FrameTime)
+                {
+                    AdvanceFrame();
+                }
             }
         }
 
         /// <summary>
         /// Play the animation.
-        /// 
-        /// TODO: What should happen when Play() is called while another animation is playing?
         /// </summary>
         public void Play()
         {
@@ -148,13 +151,97 @@ namespace Alttp.Core.Animation
         }
 
         /// <summary>
+        /// Advance the current frame to the next.
+        /// </summary>
+        private void AdvanceFrame()
+        {
+            switch (Action)
+            {
+                case AnimationPlayAction.Loop:
+                    FrameIndex++;
+                    FrameIndex %= Frames.Length;
+                    break;
+            
+                case AnimationPlayAction.ReverseLoop:
+                    FrameIndex--;
+                    if (FrameIndex < 0)
+                        FrameIndex = Frames.Length - 1;
+                    break;
+            
+                case AnimationPlayAction.PlayOnce:
+                    if (!IsFinished)
+                    {
+                        if (FrameIndex < Frames.Length - 1)
+                        {
+                            FrameIndex++;
+                        }
+                        else
+                        {
+                            FrameIndex = 0;
+                            State = AnimationState.Finished;
+                        }
+                    }
+                    break;
+            
+                case AnimationPlayAction.ReversePlayOnce:
+                    if (FrameIndex > 0)
+                        FrameIndex--;
+                    break;
+            
+//                case AnimationPlayAction.LoopBackForth:
+//                case AnimationPlayAction.PlayOnceBackForth:
+//                    // We played the animation once, stop here unless we want to loop
+//                    if (!(AnimationPlayAction == AnimationPlayAction.PlayOnceBackForth &&
+//                        !_advanceAnimationForward &&
+//                        FrameIndex == 0))
+//                    {
+//                        if (_advanceAnimationForward)
+//                        {
+//                            FrameIndex++;
+//                            if (FrameIndex >= Frames.Length - 1)
+//                                _advanceAnimationForward = false;
+//                        }
+//                        else
+//                        {
+//                            FrameIndex--;
+//                            if (FrameIndex <= 0)
+//                                _advanceAnimationForward = AnimationPlayAction == AnimationPlayAction.LoopBackForth;
+//                        }
+//                    }
+//                    break;
+//            
+//                case AnimationPlayAction.ReverseLoopBackForth:
+//                case AnimationPlayAction.ReversePlayOnceBackForth:
+//                    // We played the animation once, stop here unless we want to loop
+//                    if (!(AnimationPlayAction == AnimationPlayAction.ReversePlayOnceBackForth &&
+//                        !_advanceAnimationForward &&
+//                        FrameIndex == Frames.Length - 1))
+//                    {
+//                        if (_advanceAnimationForward)
+//                        {
+//                            FrameIndex--;
+//                            if (FrameIndex <= 0)
+//                                _advanceAnimationForward = false;
+//                        }
+//                        else
+//                        {
+//                            FrameIndex++;
+//                            if (FrameIndex >= Frames.Length - 1)
+//                                _advanceAnimationForward = AnimationPlayAction == AnimationPlayAction.ReverseLoopBackForth;
+//                        }
+//                    }
+//                    break;
+            }
+        }
+
+        /// <summary>
         /// Invoke the AnimationStateChanged event.
         /// </summary>
         /// <param name="e"></param>
-        private void OnAnimationStateChange(AnimationStateEventArgs e)
+        private void OnFinished(AnimationStateEventArgs e)
         {
-            if (AnimationStateChanged != null)
-                AnimationStateChanged(this, e);
+            if (Finished != null)
+                Finished(this, e);
         }
 
         /// <summary>

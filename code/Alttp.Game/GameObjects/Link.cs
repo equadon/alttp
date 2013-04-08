@@ -20,8 +20,9 @@ namespace Alttp.GameObjects
 
         public override void Move(Vector2 direction)
         {
-            ChangeAnimation("/Run/" + DirectionText, AnimationPlayAction.Loop);
             base.Move(direction);
+
+            ChangeAnimation("/Run/" + DirectionText, AnimationPlayAction.Loop, GameObjectState.Moving);
         }
 
         public override void Attack()
@@ -31,8 +32,9 @@ namespace Alttp.GameObjects
 
         public override void Idle()
         {
-            ChangeAnimation("/Idle/" + DirectionText, AnimationPlayAction.Loop);
             base.Idle();
+
+            ChangeAnimation("/Idle/" + DirectionText, AnimationPlayAction.Loop, GameObjectState.Idle);
         }
     }
 }
