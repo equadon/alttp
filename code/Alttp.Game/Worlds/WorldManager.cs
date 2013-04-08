@@ -29,11 +29,11 @@ namespace Alttp.Worlds
 
         public Camera ActiveCamera { get; set; }
 
-        public Link Link { get; private set; }
+        public Player Player { get; private set; }
 
         #endregion
 
-        public WorldManager(Game game, IContentManager content, ISpriteBatch batch, InputManager input, [Named("Main")]Camera mainCamera, [Named("Secondary")]Camera secondaryCamera)
+        public WorldManager(Game game, IContentManager content, ISpriteBatch batch, InputManager input, Player player, [Named("Main")]Camera mainCamera, [Named("Secondary")]Camera secondaryCamera)
             : base(game)
         {
             _content = content;
@@ -41,6 +41,8 @@ namespace Alttp.Worlds
             _input = input;
             _mainCamera = mainCamera;
             _secondaryCamera = secondaryCamera;
+
+            Player = player;
         }
 
         public override void Initialize()
@@ -64,7 +66,7 @@ namespace Alttp.Worlds
 
             World = new LightWorld(_content.Load<Map>(@"Maps/LightWorld"));
 
-            Link = new Link(new Vector2(2200, 2850), _content.Load<AnimationsDict>("GameObjects/Link/LinkAnimations"));
+            Player.Object = new Link(new Vector2(2200, 2850), _content.Load<AnimationsDict>("GameObjects/Link/LinkAnimations"));
         }
 
         public override void Draw(GameTime gameTime)
@@ -75,7 +77,7 @@ namespace Alttp.Worlds
 
             World.Draw(gameTime, _batch, ActiveCamera);
 
-            Link.Draw(_batch);
+            Player.Draw(_batch);
 
             _batch.End();
         }
@@ -86,34 +88,8 @@ namespace Alttp.Worlds
 
             ActiveCamera.Update(gameTime);
 
-            Link.Update(gameTime);
-
-            // Move link
-            Vector2 direction = Vector2.Zero;
-            if (_input.IsKeyDown(Keys.W))
-                direction.Y--;
-            if (_input.IsKeyDown(Keys.A))
-                direction.X--;
-            if (_input.IsKeyDown(Keys.S))
-                direction.Y++;
-            if (_input.IsKeyDown(Keys.D))
-                direction.X++;
-
-            if (direction != Vector2.Zero)
-                Link.Move(direction);
-
-            if (_input.IsKeyReleased(Keys.W))
-                Link.Stop();
-            if (_input.IsKeyReleased(Keys.A))
-                Link.Stop();
-            if (_input.IsKeyReleased(Keys.S))
-                Link.Stop();
-            if (_input.IsKeyReleased(Keys.D))
-                Link.Stop();
-
-            // Attack
-            if (_input.IsKeyPressed(Keys.Space))
-                Link.Attack();
+            // Handle user input in Player class
+            Player.Update(gameTime);
 
             switch (ActiveCamera.CameraMode)
             {

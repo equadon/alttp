@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using Alttp.Core.Input;
 using Alttp.Debugging;
+using Alttp.GameObjects;
 using Alttp.GameStates;
 using Alttp.Worlds;
 using Ninject;
@@ -44,6 +45,9 @@ namespace Alttp
             // Cameras
             Kernel.Bind<Camera>().ToSelf().InNamedScope(GameStateScope).Named("Main").WithConstructorArgument("name", "Main");
             Kernel.Bind<Camera>().ToSelf().InNamedScope(GameStateScope).Named("Secondary").WithConstructorArgument("name", "Secondary");
+
+            // Player
+            Kernel.Bind<Player>().ToSelf().InNamedScope(GameStateScope);
         }
 
         private static InputManager GetInputManager(IContext context)

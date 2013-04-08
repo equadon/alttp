@@ -11,13 +11,15 @@ namespace Alttp.GameStates
         private readonly InputManager _input;
         private WorldManager _world;
         private DebugManager _debug;
+        private Player _player;
 
-        public GameStateWorld(GameComponentCollection mainCollection, InputManager input, WorldManager world, DebugManager debug)
+        public GameStateWorld(GameComponentCollection mainCollection, InputManager input, WorldManager world, DebugManager debug, Player player)
             : base(mainCollection, world, debug)
         {
             _input = input;
             _world = world;
             _debug = debug;
+            _player = player;
 
             RegisterComponents();
         }

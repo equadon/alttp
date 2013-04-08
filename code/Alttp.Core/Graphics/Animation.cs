@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using Microsoft.Xna.Framework;
 
 namespace Alttp.Core.Graphics
 {
@@ -49,6 +50,11 @@ namespace Alttp.Core.Graphics
             Fps = 60;
 
             Action = AnimationPlayAction.Loop;
+        }
+
+        public void Update(GameTime gameTime)
+        {
+            
         }
 
         public void Play()
