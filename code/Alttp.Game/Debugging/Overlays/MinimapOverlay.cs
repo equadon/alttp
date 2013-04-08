@@ -10,7 +10,7 @@ namespace Alttp.Debugging.Overlays
 {
     public class MinimapOverlay : Overlay
     {
-        private readonly WorldComponent _world;
+        private readonly WorldManager _world;
 
         public Texture2D MinimapTexture { get; private set; }
         public Texture2D BlankTexture { get; private set; }
@@ -34,7 +34,7 @@ namespace Alttp.Debugging.Overlays
             }
         }
 
-        public MinimapOverlay(Texture2D blankTexture, string title, int width, int height, Texture2D minimapTexture, WorldComponent world)
+        public MinimapOverlay(Texture2D blankTexture, string title, int width, int height, Texture2D minimapTexture, WorldManager world)
             : base(title, width, height)
         {
             _world = world;

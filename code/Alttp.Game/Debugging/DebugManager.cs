@@ -16,13 +16,13 @@ using InputManager = Alttp.Core.Input.InputManager;
 
 namespace Alttp.Debugging
 {
-    public class DebugComponent : DrawableGameComponent
+    public class DebugManager : DrawableGameComponent
     {
         private readonly GuiManager _gui;
         private readonly IContentManager _content;
         private readonly ISpriteBatch _batch;
         private readonly InputManager _input;
-        private readonly WorldComponent _world;
+        private readonly WorldManager _world;
 
         public int Frame { get; private set; }
         public GameTime ElapsedTime { get; private set; }
@@ -50,7 +50,7 @@ namespace Alttp.Debugging
         public GameObjectOverlay GameObjectOverlay { get; private set; }
         public MinimapOverlay MinimapOverlay { get; private set; }
 
-        public DebugComponent(Game game, GuiManager gui, IContentManager content, ISpriteBatch batch, InputManager input, WorldComponent world)
+        public DebugManager(Game game, GuiManager gui, IContentManager content, ISpriteBatch batch, InputManager input, WorldManager world)
             : base(game)
         {
             _gui = gui;

@@ -10,7 +10,7 @@ using Nuclex.Ninject.Xna;
 
 namespace Alttp.Worlds
 {
-    public class WorldComponent : DrawableGameComponent
+    public class WorldManager : DrawableGameComponent
     {
         private readonly InputManager _input;
         private readonly IContentManager _content;
@@ -33,7 +33,7 @@ namespace Alttp.Worlds
 
         #endregion
 
-        public WorldComponent(Game game, IContentManager content, ISpriteBatch batch, InputManager input, [Named("Main")]Camera mainCamera, [Named("Secondary")]Camera secondaryCamera)
+        public WorldManager(Game game, IContentManager content, ISpriteBatch batch, InputManager input, [Named("Main")]Camera mainCamera, [Named("Secondary")]Camera secondaryCamera)
             : base(game)
         {
             _content = content;

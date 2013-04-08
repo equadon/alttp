@@ -9,7 +9,7 @@ namespace Alttp.Debugging.Overlays
 {
     public class GameInfoOverlay : Overlay
     {
-        private readonly DebugComponent _debug;
+        private readonly DebugManager _debug;
         private readonly Camera _camera;
 
         // String formats
@@ -47,7 +47,7 @@ namespace Alttp.Debugging.Overlays
         public string FrameText { get { return String.Format(LblFrameFormat, _debug.Frame); } }
         public string TimeText { get { return String.Format(LblTimeFormat, _debug.ElapsedTime.TotalGameTime); } }
 
-        public GameInfoOverlay(DebugComponent debug, string title, int width, Camera camera)
+        public GameInfoOverlay(DebugManager debug, string title, int width, Camera camera)
             : base(title, width)
         {
             _debug = debug;

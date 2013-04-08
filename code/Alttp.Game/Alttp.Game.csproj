@@ -119,12 +119,13 @@
   <ItemGroup>
     <Compile Include="AlttpGame.cs" />
     <Compile Include="AlttpModule.cs" />
-    <Compile Include="Debugging\DebugComponent.cs" />
+    <Compile Include="Debugging\DebugManager.cs" />
     <Compile Include="GameObjects\GameObject.cs" />
+    <Compile Include="Player.cs" />
     <Compile Include="Worlds\Camera.cs" />
     <Compile Include="Worlds\IWorld.cs" />
     <Compile Include="Worlds\World.cs" />
-    <Compile Include="Worlds\WorldComponent.cs" />
+    <Compile Include="Worlds\WorldManager.cs" />
     <Compile Include="Config.cs" />
     <Compile Include="GameController.cs" />
     <Compile Include="GameObjects\Link.cs" />

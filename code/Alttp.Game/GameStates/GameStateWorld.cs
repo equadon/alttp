@@ -9,10 +9,10 @@ namespace Alttp.GameStates
     public class GameStateWorld : GameState
     {
         private readonly InputManager _input;
-        private WorldComponent _world;
-        private DebugComponent _debug;
+        private WorldManager _world;
+        private DebugManager _debug;
 
-        public GameStateWorld(GameComponentCollection mainCollection, InputManager input, WorldComponent world, DebugComponent debug)
+        public GameStateWorld(GameComponentCollection mainCollection, InputManager input, WorldManager world, DebugManager debug)
             : base(mainCollection, world, debug)
         {
             _input = input;

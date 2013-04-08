@@ -9,7 +9,7 @@ namespace Alttp.Debugging.Overlays
 {
     public class GameObjectOverlay : Overlay
     {
-        private readonly DebugComponent _debug;
+        private readonly DebugManager _debug;
         private readonly Camera _camera;
 
         // String formats
@@ -29,7 +29,7 @@ namespace Alttp.Debugging.Overlays
         public string AnimationFrameText { get { return String.Format(LblAnimationFrameFormat, _debug.SelectedGameObjects[0].Animation.FrameIndex); } }
         public string FpsText { get { return String.Format(LblFpsFormat, _debug.SelectedGameObjects[0].Animation.Fps); } }
 
-        public GameObjectOverlay(DebugComponent debug, string title, int width, Camera camera)
+        public GameObjectOverlay(DebugManager debug, string title, int width, Camera camera)
             : base(title, width)
         {
             _debug = debug;

@@ -10,7 +10,7 @@ namespace Alttp.Debugging.Overlays
 {
     public class CameraOverlay : Overlay
     {
-        private readonly WorldComponent _world;
+        private readonly WorldManager _world;
         private readonly InputManager _input;
 
         // String formats
@@ -44,7 +44,7 @@ namespace Alttp.Debugging.Overlays
         public string ZoomText { get { return String.Format(LblZoomFormat, _world.ActiveCamera.InvZoom); } }
         public string TileSizeText { get { return String.Format(LblTileSizeFormat, _world.ActiveCamera.TileWidth); } }
 
-        public CameraOverlay(WorldComponent world, string title, int width, InputManager input)
+        public CameraOverlay(WorldManager world, string title, int width, InputManager input)
             : base(title, width)
         {
             _world = world;
