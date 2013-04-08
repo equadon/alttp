@@ -134,9 +134,19 @@ namespace Alttp.Debugging
 
                 // Set camera mode if there are game objects selected
                 if (SelectedGameObjects.Length > 0)
+                {
                     _world.ActiveCamera.Follow(SelectedGameObjects[0]);
+
+                    if (!_gui.Screen.Desktop.Children.Contains(GameObjectOverlay))
+                        _gui.Screen.Desktop.Children.Add(GameObjectOverlay);
+                }
                 else
+                {
                     _world.ActiveCamera.Free();
+
+                    if (_gui.Screen.Desktop.Children.Contains(GameObjectOverlay))
+                        _gui.Screen.Desktop.Children.Remove(GameObjectOverlay);
+                }
             }
 
             if (_input.IsMouseButtonDown(MouseButtons.Left) && SelectionBounds != Rectangle.Empty)
@@ -273,7 +283,6 @@ namespace Alttp.Debugging
 
             _gui.Screen.Desktop.Children.Add(CameraOverlay);
             _gui.Screen.Desktop.Children.Add(GameInfoOverlay);
-            _gui.Screen.Desktop.Children.Add(GameObjectOverlay);
             _gui.Screen.Desktop.Children.Add(MinimapOverlay);
 
             // Update minimap viewport bounds
