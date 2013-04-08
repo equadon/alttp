@@ -152,6 +152,23 @@
           </dir>
         </dir>
       </dir>
+      <dir name="Shields">
+        <dir name="Blue">
+          <spr name="Front" x="360" y="8" w="8" h="10"/>
+          <spr name="Side" x="371" y="8" w="4" h="10"/>
+          <spr name="Back" x="378" y="8" w="8" h="10"/>
+        </dir>
+        <dir name="Red">
+          <spr name="Front" x="357" y="23" w="11" h="12"/>
+          <spr name="Side" x="371" y="23" w="4" h="12"/>
+          <spr name="Back" x="379" y="23" w="5" h="12"/>
+        </dir>
+        <dir name="Yellow">
+          <spr name="Front" x="356" y="38" w="13" h="15"/>
+          <spr name="Side" x="371" y="38" w="4" h="14"/>
+          <spr name="Back" x="378" y="39" w="7" h="13"/>
+        </dir>
+      </dir>
       <spr name="Shadow" x="134" y="4" w="12" h="6"/>
     </dir>
   </definitions>
