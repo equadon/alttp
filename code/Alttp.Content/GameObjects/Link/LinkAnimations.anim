@@ -37,41 +37,49 @@
     <cell index="0" delay="2">
       <spr name="/Heads/Right/0" x="0" y="1" z="0"/>
       <spr name="/Lower Body/Run Right/0" x="2" y="11" z="1"/>
+      <spr name="/Shields/Blue/Side" x="9" y="7" z="1"/>
       <spr name="/Shadow" x="2" y="15" z="2"/>
     </cell>
     <cell index="1" delay="3">
       <spr name="/Heads/Right/0" x="0" y="0" z="0"/>
       <spr name="/Lower Body/Run Right/1" x="1" y="10" z="1"/>
+      <spr name="/Shields/Blue/Side" x="9" y="7" z="1"/>
       <spr name="/Shadow" x="2" y="15" z="2"/>
     </cell>
     <cell index="2" delay="2">
       <spr name="/Heads/Right/1" x="1" y="0" z="0"/>
       <spr name="/Lower Body/Run Right/2" x="1" y="9" z="1"/>
+      <spr name="/Shields/Blue/Side" x="9" y="5" z="1"/>
       <spr name="/Shadow" x="2" y="15" z="2"/>
     </cell>
     <cell index="3" delay="2">
       <spr name="/Heads/Right/2" x="0" y="1" z="0"/>
       <spr name="/Lower Body/Run Right/3" x="2" y="10" z="1"/>
+      <spr name="/Shields/Blue/Side" x="9" y="6" z="1"/>
       <spr name="/Shadow" x="2" y="15" z="2"/>
     </cell>
     <cell index="4" delay="2">
       <spr name="/Heads/Right/0" x="0" y="1" z="0"/>
       <spr name="/Lower Body/Run Right/4" x="2" y="10" z="1"/>
+      <spr name="/Shields/Blue/Side" x="9" y="7" z="1"/>
       <spr name="/Shadow" x="2" y="15" z="2"/>
     </cell>
     <cell index="5" delay="3">
       <spr name="/Heads/Right/0" x="0" y="0" z="0"/>
       <spr name="/Lower Body/Run Right/5" x="1" y="10" z="1"/>
+      <spr name="/Shields/Blue/Side" x="9" y="6" z="1"/>
       <spr name="/Shadow" x="2" y="15" z="2"/>
     </cell>
     <cell index="6" delay="2">
       <spr name="/Heads/Right/1" x="1" y="0" z="0"/>
       <spr name="/Lower Body/Run Right/6" x="2" y="9" z="1"/>
+      <spr name="/Shields/Blue/Side" x="9" y="5" z="1"/>
       <spr name="/Shadow" x="2" y="15" z="2"/>
     </cell>
     <cell index="7" delay="1">
       <spr name="/Heads/Right/2" x="1" y="1" z="0"/>
       <spr name="/Lower Body/Run Right/7" x="2" y="10" z="1"/>
+      <spr name="/Shields/Blue/Side" x="9" y="6" z="1"/>
       <spr name="/Shadow" x="2" y="15" z="2"/>
     </cell>
   </anim>
@@ -79,41 +87,49 @@
     <cell index="0" delay="2">
       <spr name="/Heads/Right/0" x="4" y="1" z="0" flipH="1"/>
       <spr name="/Lower Body/Run Right/0" x="2" y="11" z="1" flipH="1"/>
+      <spr name="/Shields/Blue/Side" x="-5" y="7" z="1" flipH="1"/>
       <spr name="/Shadow" x="2" y="15" z="2"/>
     </cell>
     <cell index="1" delay="3">
       <spr name="/Heads/Right/0" x="4" y="0" z="0" flipH="1"/>
       <spr name="/Lower Body/Run Right/1" x="3" y="10" z="1" flipH="1"/>
+      <spr name="/Shields/Blue/Side" x="-5" y="6" z="1" flipH="1"/>
       <spr name="/Shadow" x="2" y="15" z="2"/>
     </cell>
     <cell index="2" delay="2">
       <spr name="/Heads/Right/1" x="3" y="0" z="0" flipH="1"/>
       <spr name="/Lower Body/Run Right/2" x="3" y="9" z="1" flipH="1"/>
+      <spr name="/Shields/Blue/Side" x="-5" y="5" z="1" flipH="1"/>
       <spr name="/Shadow" x="2" y="15" z="2"/>
     </cell>
     <cell index="3" delay="2">
       <spr name="/Heads/Right/2" x="4" y="1" z="0" flipH="1"/>
       <spr name="/Lower Body/Run Right/3" x="2" y="10" z="1" flipH="1"/>
+      <spr name="/Shields/Blue/Side" x="-5" y="6" z="1" flipH="1"/>
       <spr name="/Shadow" x="2" y="15" z="2"/>
     </cell>
     <cell index="4" delay="2">
       <spr name="/Heads/Right/0" x="4" y="1" z="0" flipH="1"/>
       <spr name="/Lower Body/Run Right/4" x="2" y="10" z="1" flipH="1"/>
+      <spr name="/Shields/Blue/Side" x="-5" y="7" z="1" flipH="1"/>
       <spr name="/Shadow" x="2" y="15" z="2"/>
     </cell>
     <cell index="5" delay="3">
       <spr name="/Heads/Right/0" x="4" y="0" z="0" flipH="1"/>
       <spr name="/Lower Body/Run Right/5" x="2" y="10" z="1" flipH="1"/>
+      <spr name="/Shields/Blue/Side" x="-5" y="6" z="1" flipH="1"/>
       <spr name="/Shadow" x="2" y="15" z="2"/>
     </cell>
     <cell index="6" delay="2">
       <spr name="/Heads/Right/1" x="3" y="0" z="0" flipH="1"/>
       <spr name="/Lower Body/Run Right/6" x="2" y="9" z="1" flipH="1"/>
+      <spr name="/Shields/Blue/Side" x="-5" y="5" z="1" flipH="1"/>
       <spr name="/Shadow" x="2" y="15" z="2"/>
     </cell>
     <cell index="7" delay="1">
       <spr name="/Heads/Right/2" x="3" y="1" z="0" flipH="1"/>
       <spr name="/Lower Body/Run Right/7" x="2" y="10" z="1" flipH="1"/>
+      <spr name="/Shields/Blue/Side" x="-5" y="6" z="1" flipH="1"/>
       <spr name="/Shadow" x="2" y="15" z="2"/>
     </cell>
   </anim>
