@@ -14,7 +14,8 @@ namespace Alttp.GameObjects
     public enum AnimationPlayAction
     {
         Loop,
-        PlayOnce
+        PlayOnce,
+        LoopReverse
     }
 
     public class GameObject
@@ -83,7 +84,7 @@ namespace Alttp.GameObjects
         public int FrameIndex
         {
             get { return _frameIndex; }
-            set
+            protected set
             {
                 if (value < 0)
                 {
