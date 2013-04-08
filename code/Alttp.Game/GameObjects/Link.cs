@@ -28,6 +28,10 @@ namespace Alttp.GameObjects
         public override void Attack()
         {
             base.Attack();
+
+            ChangeAnimation("/Swing/Sword/" + DirectionText, AnimationPlayAction.PlayOnce, GameObjectState.Attacking);
+
+            Animation.Finished += IdleAnimationOnFinished;
         }
 
         public override void Idle()
@@ -35,6 +39,16 @@ namespace Alttp.GameObjects
             base.Idle();
 
             ChangeAnimation("/Idle/" + DirectionText, AnimationPlayAction.Loop, GameObjectState.Idle);
+        }
+
+        /// <summary>
+        /// Set animation to idle once it's finished.
+        /// </summary>
+        private void IdleAnimationOnFinished(object sender, EventArgs eventArgs)
+        {
+            ChangeAnimation("/Idle/" + DirectionText, AnimationPlayAction.Loop, GameObjectState.Idle);
+
+            Animation.Finished -= IdleAnimationOnFinished;
         }
     }
 }

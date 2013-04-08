@@ -121,6 +121,7 @@ namespace Alttp.Core.Animation
         public void Play()
         {
             State = AnimationState.Playing;
+            FrameIndex = 0;
         }
 
         /// <summary>
