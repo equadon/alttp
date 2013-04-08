@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Input;
 using Nuclex.Input;
@@ -52,6 +53,16 @@ namespace Alttp.Core.Input
         public bool IsKeyDown(Keys key)
         {
             return KeyboardState.IsKeyDown(key);
+        }
+
+        public bool AreAnyKeysDown(params Keys[] keys)
+        {
+            return keys.Any(IsKeyDown);
+        }
+
+        public bool AreAllKeysDown(params Keys[] keys)
+        {
+            return keys.All(IsKeyDown);
         }
 
         #endregion

@@ -30,7 +30,6 @@ namespace Alttp.Core.Animation
     {
         // Events
         public event AnimationEventHandler Finished;
-        public event AnimationEventHandler FrameIndexChanged;
 
         #region Fields
 
@@ -55,16 +54,7 @@ namespace Alttp.Core.Animation
         }
 
         /// <summary>Current animation frame index. The FrameIndexChanged event will be triggered when the value changes.</summary>
-        public int FrameIndex
-        {
-            get { return _frameIndex; }
-            set
-            {
-                if (_frameIndex != value)
-                    OnFrameIndexChanged(new FrameIndexEventArgs(_frameIndex, value));
-                _frameIndex = value;
-            }
-        }
+        public int FrameIndex { get; private set; }
 
         /// <summary>Current animation state.</summary>
         public AnimationState State
@@ -243,16 +233,6 @@ namespace Alttp.Core.Animation
         {
             if (Finished != null)
                 Finished(this, e);
-        }
-
-        /// <summary>
-        /// Invoke the FrameIndexChanged event.
-        /// </summary>
-        /// <param name="e"></param>
-        public void OnFrameIndexChanged(FrameIndexEventArgs e)
-        {
-            if (FrameIndexChanged != null)
-                FrameIndexChanged(this, e);
         }
     }
 }
