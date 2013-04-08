@@ -26,8 +26,8 @@ namespace Alttp.Debugging.Overlays
 
         public string PositionText { get { return String.Format(LblPositionFormat, _debug.SelectedGameObjects[0].Position); } }
         public string AnimationText { get { return String.Format(LblAnimationFormat, _debug.SelectedGameObjects[0].AnimationName); } }
-        public string AnimationFrameText { get { return String.Format(LblAnimationFrameFormat, _debug.SelectedGameObjects[0].FrameIndex); } }
-        public string FpsText { get { return String.Format(LblFpsFormat, _debug.SelectedGameObjects[0].Fps); } }
+        public string AnimationFrameText { get { return String.Format(LblAnimationFrameFormat, _debug.SelectedGameObjects[0].Animation.FrameIndex); } }
+        public string FpsText { get { return String.Format(LblFpsFormat, _debug.SelectedGameObjects[0].Animation.Fps); } }
 
         public GameObjectOverlay(DebugComponent debug, string title, int width, Camera camera)
             : base(title, width)

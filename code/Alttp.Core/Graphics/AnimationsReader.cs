@@ -79,7 +79,8 @@ namespace Alttp.Core.Graphics
             {
                 animations = new AnimationsDict();
                 foreach (var key in anims.Keys)
-                    animations[key] = anims[key].ToArray();
+                    //animations[key] = anims[key].ToArray();
+                    animations[key] = new Animation(key, anims[key].ToArray());
             }
 
             return animations;

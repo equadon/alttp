@@ -5,7 +5,7 @@ using System.Text;
 
 namespace Alttp.Core.Graphics
 {
-    public class AnimationsDict : Dictionary<string, Frame[]>
+    public class AnimationsDict : Dictionary<string, Animation>
     {
     }
 }

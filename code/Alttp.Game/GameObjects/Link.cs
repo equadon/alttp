@@ -11,10 +11,10 @@ namespace Alttp.GameObjects
     public class Link : GameObject
     {
         public Link(Vector2 position, AnimationsDict animations)
-            : base(position,  animations, "/Idle/Down")
+            : base(position, animations, "/Idle/Down")
         {
-            Fps = 60f;
             MaxSpeed = 1.3f;
+            Animation.Fps = 60;
 
             Pause();
         }
