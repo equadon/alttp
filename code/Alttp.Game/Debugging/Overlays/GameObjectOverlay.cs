@@ -13,7 +13,7 @@ namespace Alttp.Debugging.Overlays
         private readonly Camera _camera;
 
         // String formats
-        private const string LblPositionFormat = "Position: {0}";
+        private const string LblPositionFormat = "Position: ({0:F1}, {1:F1})";
         private const string LblAnimationFormat = "Animation: {0}";
         private const string LblAnimationFrameFormat = "Frame: {0}";
         private const string LblFpsFormat = "FPS: {0}";
@@ -24,7 +24,7 @@ namespace Alttp.Debugging.Overlays
         private LabelControl _lblAnimationFrame;
         private LabelControl _lblFps;
 
-        public string PositionText { get { return String.Format(LblPositionFormat, _debug.SelectedGameObjects[0].Position); } }
+        public string PositionText { get { return String.Format(LblPositionFormat, _debug.SelectedGameObjects[0].Position.X, _debug.SelectedGameObjects[0].Position.Y); } }
         public string AnimationText { get { return String.Format(LblAnimationFormat, _debug.SelectedGameObjects[0].AnimationName); } }
         public string AnimationFrameText { get { return String.Format(LblAnimationFrameFormat, _debug.SelectedGameObjects[0].Animation.FrameIndex); } }
         public string FpsText { get { return String.Format(LblFpsFormat, _debug.SelectedGameObjects[0].Animation.Fps); } }
