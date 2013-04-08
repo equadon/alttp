@@ -92,13 +92,8 @@ namespace Alttp.Worlds
             // Handle user input in Player class
             Player.Update(gameTime);
 
-            switch (ActiveCamera.CameraMode)
-            {
-                case CameraMode.Free:
-                    HandleKeyboardInput(gameTime);
-                    HandleMouseInput(gameTime);
-                    break;
-            }
+            HandleKeyboardInput(gameTime);
+            HandleMouseInput(gameTime);
         }
 
         private void HandleKeyboardInput(GameTime gameTime)
@@ -111,6 +106,10 @@ namespace Alttp.Worlds
 
             if (_input.IsKeyPressed(Keys.D2))
                 ActiveCamera = _secondaryCamera;
+
+            // None of the below should be checked if the camera is in follow mode
+            if (ActiveCamera.CameraMode == CameraMode.Follow)
+                return;
 
             // Camera movement
             Vector2 camDirection = Vector2.Zero;
@@ -146,6 +145,19 @@ namespace Alttp.Worlds
         {
             Vector2 mousePos = _input.MousePos;
 
+            // Mouse wheel
+            if (_input.MouseWheelValueChanged())
+            {
+                if (_input.MouseWheelValueDiff > 0)
+                    ActiveCamera.ZoomIn(8);
+                else
+                    ActiveCamera.ZoomOut(8);
+            }
+
+            // None of the below should be checked if the camera is in follow mode
+            if (ActiveCamera.CameraMode == CameraMode.Follow)
+                return;
+
             // Move around with middle mouse button
             if (_input.MouseState.MiddleButton == ButtonState.Pressed)
             {
@@ -165,15 +177,6 @@ namespace Alttp.Worlds
             else if (_middleMouseDown && _input.MouseState.MiddleButton == ButtonState.Released)
             {
                 _middleMouseDown = false;
-            }
-
-            // Mouse wheel
-            if (_input.MouseWheelValueChanged())
-            {
-                if (_input.MouseWheelValueDiff > 0)
-                    ActiveCamera.ZoomIn(8);
-                else
-                    ActiveCamera.ZoomOut(8);
             }
         }
     }
