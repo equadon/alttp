@@ -40,7 +40,9 @@ namespace Alttp
             Kernel.Bind<DebugManager>().ToSelf().InNamedScope(GameStateScope);
 
             // Worlds
-            Kernel.Bind<IWorld>().To<LightWorld>().InNamedScope(GameStateScope).WithConstructorArgument("mapResource", "Maps/LightWorld");
+            Kernel.Bind<IWorld>().To<LightWorld>().InNamedScope(GameStateScope)
+                .WithConstructorArgument("mapResource", "Maps/LightWorld")
+                .WithConstructorArgument("worldObjectsResource", "GameObjects/WorldObjects/LightWorldObjectAnimations");
 
             // Cameras
             Kernel.Bind<Camera>().ToSelf().InNamedScope(GameStateScope).Named("Main").WithConstructorArgument("name", "Main");

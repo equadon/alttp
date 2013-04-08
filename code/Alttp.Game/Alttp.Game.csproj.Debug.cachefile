@@ -11,4 +11,7 @@ Content\Textures\Minimap.xnb
 Content\GameObjects\Link\LinkTileset.xnb
 Content\Maps\LightWorld\00.xnb
 Content\Maps\LightWorld\01.xnb
+Content\GameObjects\WorldObjects\LightWorldObjectAnimations.xnb
+Content\GameObjects\WorldObjects\LightWorldObjectSprites.xnb
+Content\GameObjects\WorldObjects\LightWorldObjectsTileset.xnb
 Content\Skins\Alttp\Alttp.skin.xml

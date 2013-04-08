@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using Alttp.Core.Animation;
+using Alttp.GameObjects;
 using FuncWorks.XNA.XTiled;
 using Microsoft.Xna.Framework;
 using Nuclex.Ninject.Xna;
@@ -30,18 +32,26 @@ namespace Alttp.Worlds
         public TileLayer ForegroundTiles { get; private set; }
         public TileLayer CollisionTiles { get; private set; }
 
-        public World(IContentManager content, string mapResource)
-            : this(content.Load<Map>(mapResource))
+        // Objects
+        public AnimationsDict WorldObjectAnimations { get; private set; }
+
+        public List<GameObject>[,] Objects { get; private set; }
+
+        public World(IContentManager content, string mapResource, string worldObjectsResource)
+            : this(content.Load<Map>(mapResource), content.Load<AnimationsDict>(worldObjectsResource))
         {
         }
 
-        public World(Map map)
+        public World(Map map, AnimationsDict worldObjectAnimations)
         {
             TileWidth = map.TileWidth;
             TileHeight = map.TileHeight;
 
             Width = map.Width;
             Height = map.Height;
+
+            Objects = new List<GameObject>[Width, Height];
+            WorldObjectAnimations = worldObjectAnimations;
 
             // Layers
             LoadTileLayers(map);
@@ -64,6 +74,8 @@ namespace Alttp.Worlds
             }
 
             Regions = LoadRegions(regions);
+
+            LoadBushes(bushes);
         }
 
         private void LoadTileLayers(Map map)
@@ -96,6 +108,35 @@ namespace Alttp.Worlds
         }
 
         /// <summary>
+        /// Load all the bush objects into the world.
+        /// </summary>
+        /// <param name="bushes"></param>
+        private void LoadBushes(ObjectLayer bushes)
+        {
+            int count = 0;
+
+            foreach (var mapObject in bushes.MapObjects)
+            {
+                int x = mapObject.Bounds.X,
+                    y = mapObject.Bounds.Y;
+                int tileX = x / TileWidth,
+                    tileY = y / TileHeight;
+
+                var position = new Vector2(x - mapObject.Bounds.Width / 2f, y - mapObject.Bounds.Height / 2f);
+
+                var bush = new Bush(position, WorldObjectAnimations, "/Bush/Green/Idle");
+
+                if (Objects[tileX, tileY] == null)
+                    Objects[tileX, tileY] = new List<GameObject>();
+                Objects[tileX, tileY].Add(bush);
+
+                count++;
+            }
+
+            Console.WriteLine("Loaded {0} bush objects.", count);
+        }
+
+        /// <summary>
         /// Returns the region the provided position is in
         /// </summary>
         /// <param name="position">Position in world</param>
@@ -107,13 +148,15 @@ namespace Alttp.Worlds
 
         public void Draw(GameTime gameTime, ISpriteBatch spriteBatch, Camera camera)
         {
-            DrawLayer(gameTime, spriteBatch, BackgroundTiles, camera, 0);
+            DrawLayer(gameTime, spriteBatch, BackgroundTiles, camera);
+
+            DrawObjects(spriteBatch, camera);
 
             if (RenderCollisionTiles)
-                DrawLayer(gameTime, spriteBatch, CollisionTiles, camera, 0);
+                DrawLayer(gameTime, spriteBatch, CollisionTiles, camera);
         }
 
-        public void DrawLayer(GameTime gameTime, ISpriteBatch spriteBatch, TileLayer layer, Camera camera, Single layerDepth)
+        public void DrawLayer(GameTime gameTime, ISpriteBatch spriteBatch, TileLayer layer, Camera camera)
         {
             Rectangle region = camera.GetTilesRegion();
 
@@ -149,8 +192,29 @@ namespace Alttp.Worlds
                             layer.Tiles[x][y].Effects,
 
                             // depth for SpriteSortMode
-                            layerDepth);
+                            0);
                     }
+                }
+            }
+        }
+
+        /// <summary>
+        /// Draw objects inside camera viewport.
+        /// </summary>
+        /// <param name="batch"></param>
+        /// <param name="camera"></param>
+        private void DrawObjects(ISpriteBatch batch, Camera camera)
+        {
+            Rectangle region = camera.GetTilesRegion();
+
+            for (int y = region.Top; y <= region.Bottom; y++)
+            {
+                for (int x = region.Left; x <= region.Right; x++)
+                {
+                    var objects = Objects[x, y];
+                    if (objects != null)
+                        foreach (var obj in objects)
+                            obj.Draw(batch);
                 }
             }
         }

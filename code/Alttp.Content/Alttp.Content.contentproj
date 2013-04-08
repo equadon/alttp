@@ -62,6 +62,16 @@
       <Importer>FontDescriptionImporter</Importer>
       <Processor>FontDescriptionProcessor</Processor>
     </Compile>
+    <Compile Include="GameObjects\WorldObjects\LightWorldObjectAnimations.anim">
+      <Name>LightWorldObjectAnimations</Name>
+      <Importer>DarkFunctionAnimationsImporter</Importer>
+      <Processor>DarkFunctionAnimationsProcessor</Processor>
+    </Compile>
+    <Compile Include="GameObjects\WorldObjects\LightWorldObjectSprites.sprites">
+      <Name>LightWorldObjectSprites</Name>
+      <Importer>DarkFunctionSpritesImporter</Importer>
+      <Processor>DarkFunctionSpritesProcessor</Processor>
+    </Compile>
     <None Include="Skins\skin.xsd">
       <Name>skin</Name>
       <SubType>Designer</SubType>
@@ -110,6 +120,13 @@
       <Project>{FAF645EA-EDD8-44E4-B694-D3762B5EBCC3}</Project>
       <Name>Alttp.darkFunction</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="GameObjects\WorldObjects\LightWorldObjectsTileset.png">
+      <Name>LightWorldObjectsTileset</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </None>
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Microsoft\XNA Game Studio\$(XnaFrameworkVersion)\Microsoft.Xna.GameStudio.ContentPipeline.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

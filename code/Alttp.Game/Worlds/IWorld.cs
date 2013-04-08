@@ -1,3 +1,4 @@
+using Alttp.Core.Animation;
 using FuncWorks.XNA.XTiled;
 using Microsoft.Xna.Framework;
 using Nuclex.Ninject.Xna;
@@ -14,6 +15,8 @@ namespace Alttp.Worlds
         int Height { get; }
         int WidthInPixels { get; }
         int HeightInPixels { get; }
+
+        AnimationsDict WorldObjectAnimations { get; }
 
         Region[] Regions { get; }
 
