@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using FuncWorks.XNA.XTiled;
 using Microsoft.Xna.Framework;
 using Nuclex.Ninject.Xna;
@@ -50,9 +51,19 @@ namespace Alttp.Worlds
             var regions = new List<Region>();
 
             foreach (var obj in layer.MapObjects)
-                regions.Add(Region.FromMapObject(obj));
+                regions.Add(new Region(obj.Name, obj.Bounds, obj.Polygon));
 
             return regions.ToArray();
+        }
+
+        /// <summary>
+        /// Returns the region the provided position is in
+        /// </summary>
+        /// <param name="position">Position in world</param>
+        /// <returns></returns>
+        public Region GetRegion(Vector2 position)
+        {
+            return Regions.FirstOrDefault(region => region.Contains(position));
         }
 
         public void Draw(GameTime gameTime, ISpriteBatch spriteBatch, Camera camera)

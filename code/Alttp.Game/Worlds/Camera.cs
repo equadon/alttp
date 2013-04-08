@@ -36,6 +36,12 @@ namespace Alttp.Worlds
         /// <summary>GameObject the camera will target if Mode is set to Follow</summary>
         public GameObject Target { get; private set; }
 
+        /// <summary>Returns the region this camera is currently in</summary>
+        public Region Region
+        {
+            get { return World.GetRegion(CenterPosition); }
+        }
+
         public float Zoom
         {
             get { return _viewportF.Width / ScreenWidth; }
@@ -76,6 +82,11 @@ namespace Alttp.Worlds
 
                 OnViewportChanged(EventArgs.Empty);
             }
+        }
+
+        public Vector2 CenterPosition
+        {
+            get { return new Vector2(Position.X + Width / 2f, Position.Y + Height / 2f); }
         }
 
         public int ScreenWidth { get { return _game.GraphicsDevice.Viewport.Width; } }

@@ -20,6 +20,7 @@ namespace Alttp.Debugging.Overlays
         private const string LblSizeFormat = "Size: {0}x{1}";
         private const string LblZoomFormat = "Zoom: {0:F2}";
         private const string LblTileSizeFormat = "Tile Width: {0:F1} px";
+        private const string LblRegionFormat = "Region: {0}";
 
         // Controls
         private LabelControl _lblPosition;
@@ -27,6 +28,7 @@ namespace Alttp.Debugging.Overlays
         private LabelControl _lblSize;
         private LabelControl _lblZoom;
         private LabelControl _lblTileSize;
+        private LabelControl _lblRegion;
 
         public string TitleText { get { return String.Format(LblTitleFormat, _world.ActiveCamera.Name); } }
         public string PositionText { get { return String.Format(LblPositionFormat, _world.ActiveCamera.Position.X, _world.ActiveCamera.Position.Y); } }
@@ -43,6 +45,7 @@ namespace Alttp.Debugging.Overlays
 
         public string ZoomText { get { return String.Format(LblZoomFormat, _world.ActiveCamera.InvZoom); } }
         public string TileSizeText { get { return String.Format(LblTileSizeFormat, _world.ActiveCamera.TileWidth); } }
+        public string RegionText { get { return String.Format(LblRegionFormat, _world.ActiveCamera.Region.Name); } }
 
         public CameraOverlay(WorldManager world, string title, int width, InputManager input)
             : base(title, width)
@@ -91,6 +94,13 @@ namespace Alttp.Debugging.Overlays
                 Text = ZoomText
             };
             Children.Add(_lblTileSize);
+
+            _lblRegion = new LabelControl()
+            {
+                Bounds = new UniRectangle(new UniScalar(0, 10), new UniScalar(0, 40 + Children.Count * 25), new UniScalar(1, -10), new UniScalar(0, 0)),
+                Text = ZoomText
+            };
+            Children.Add(_lblRegion);
         }
 
         public override void Update(GameTime gameTime)
@@ -104,6 +114,7 @@ namespace Alttp.Debugging.Overlays
             _lblSize.Text = SizeText;
             _lblZoom.Text = ZoomText;
             _lblTileSize.Text = TileSizeText;
+            _lblRegion.Text = RegionText;
         }
     }
 }

@@ -11,28 +11,27 @@ namespace Alttp.Worlds
     {
         public string Name { get; private set; }
         public Rectangle Bounds { get; private set; }
-        public Point[] PolygonPoint { get; private set; }
+        public Polygon Polygon { get; private set; }
 
-        public Region(string name, Rectangle bounds, Point[] polygonPoints)
+        public Region(string name, Rectangle bounds, Polygon polygon)
         {
-            if (polygonPoints == null && (bounds.Width == 0 || bounds.Height == 0))
+            if (polygon == null && (bounds.Width == 0 || bounds.Height == 0))
                 throw new Exception("Width/height cannot be zero if no polygon points are present.");
 
             Name = name;
             Bounds = bounds;
-            PolygonPoint = polygonPoints;
+            Polygon = polygon;
         }
 
         /// <summary>
-        /// Creates a Region object from a Tiled map object.
+        /// Returns true if the position is inside the region borders.
         /// </summary>
-        /// <param name="obj">Map object to load the data from</param>
-        public static Region FromMapObject(MapObject obj)
+        /// <param name="position">World position</param>
+        /// <returns></returns>
+        public bool Contains(Vector2 position)
         {
-            if (obj.Polygon != null)
-                return new Region(obj.Name, obj.Bounds, obj.Polygon.Points);
-
-            return new Region(obj.Name, obj.Bounds, null);
+            return (Polygon == null) ? Bounds.Contains((int)position.X, (int)position.Y)
+                                     : Polygon.Contains(position);
         }
     }
 }
