@@ -141,6 +141,15 @@
             <spr name="7" x="300" y="11" w="14" h="14"/>
             <spr name="8" x="321" y="12" w="12" h="14"/>
           </dir>
+          <dir name="Right">
+            <spr name="0" x="193" y="60" w="4" h="12"/>
+            <spr name="1" x="206" y="57" w="14" h="14"/>
+            <spr name="2" x="227" y="57" w="11" h="14"/>
+            <spr name="3" x="249" y="62" w="12" h="7"/>
+            <spr name="4" x="272" y="62" w="12" h="7"/>
+            <spr name="5" x="291" y="58" w="14" h="14"/>
+            <spr name="6" x="314" y="60" w="14" h="12"/>
+          </dir>
         </dir>
       </dir>
       <spr name="Shadow" x="134" y="4" w="12" h="6"/>
