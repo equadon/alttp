@@ -214,15 +214,15 @@ namespace Alttp.GameObjects
                     FrameIndex %= Frames.Length;
                     break;
 
-                case AnimationPlayAction.PlayOnce:
-                    if (FrameIndex < Frames.Length - 1)
-                        FrameIndex++;
-                    break;
-
                 case AnimationPlayAction.ReverseLoop:
                     FrameIndex--;
                     if (FrameIndex < 0)
                         FrameIndex = Frames.Length - 1;
+                    break;
+
+                case AnimationPlayAction.PlayOnce:
+                    if (FrameIndex < Frames.Length - 1)
+                        FrameIndex++;
                     break;
 
                 case AnimationPlayAction.ReversePlayOnce:
@@ -231,17 +231,24 @@ namespace Alttp.GameObjects
                     break;
 
                 case AnimationPlayAction.LoopBackForth:
-                    if (_advanceAnimationForward)
+                case AnimationPlayAction.PlayOnceBackForth:
+                    // We played the animation once, stop here unless we want to loop
+                    if (!(AnimationPlayAction == AnimationPlayAction.PlayOnceBackForth &&
+                        !_advanceAnimationForward &&
+                        FrameIndex == 0))
                     {
-                        FrameIndex++;
-                        if (FrameIndex >= Frames.Length - 1)
-                            _advanceAnimationForward = false;
-                    }
-                    else
-                    {
-                        FrameIndex--;
-                        if (FrameIndex <= 0)
-                            _advanceAnimationForward = true;
+                        if (_advanceAnimationForward)
+                        {
+                            FrameIndex++;
+                            if (FrameIndex >= Frames.Length - 1)
+                                _advanceAnimationForward = false;
+                        }
+                        else
+                        {
+                            FrameIndex--;
+                            if (FrameIndex <= 0)
+                                _advanceAnimationForward = AnimationPlayAction == AnimationPlayAction.LoopBackForth;
+                        }
                     }
                     break;
             }
