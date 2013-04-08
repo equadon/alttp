@@ -78,11 +78,12 @@
     <Reference Include="System.Net" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Animation\AnimationEvents.cs" />
     <Compile Include="GameStates\GameState.cs" />
-    <Compile Include="Graphics\Animation.cs" />
-    <Compile Include="Graphics\AnimationsDict.cs" />
-    <Compile Include="Graphics\AnimationsReader.cs" />
-    <Compile Include="Graphics\Frame.cs" />
+    <Compile Include="Animation\Animation.cs" />
+    <Compile Include="Animation\AnimationsDict.cs" />
+    <Compile Include="Animation\AnimationsReader.cs" />
+    <Compile Include="Animation\Frame.cs" />
     <Compile Include="Graphics\Sprite.cs" />
     <Compile Include="Graphics\SpriteRef.cs" />
     <Compile Include="Graphics\SpriteSheet.cs" />

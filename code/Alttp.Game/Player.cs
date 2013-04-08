@@ -37,6 +37,8 @@ namespace Alttp
             if (Object == null)
                 return;
 
+            Object.Update(gameTime);
+
             // Handle keyboard input
             HandleKeyboardInput();
         }

@@ -1,4 +1,5 @@
-﻿using Alttp.Core.Graphics;
+﻿using Alttp.Core.Animation;
+using Alttp.Core.Graphics;
 using Alttp.Core.Input;
 using Alttp.GameObjects;
 using FuncWorks.XNA.XTiled;

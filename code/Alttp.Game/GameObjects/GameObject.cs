@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using Alttp.Core;
+using Alttp.Core.Animation;
 using Alttp.Core.Graphics;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
@@ -16,8 +17,6 @@ namespace Alttp.GameObjects
         public static readonly List<GameObject> GameObjects = new List<GameObject>();
 
         private readonly AnimationsDict _animations;
-
-        private double _frameDuration;
 
         private Vector2 _position;
 
@@ -35,8 +34,6 @@ namespace Alttp.GameObjects
         }
 
         public Vector2 Direction { get; protected set; }
-
-        public bool Paused { get; private set; }
 
         public string AnimationName { get; private set; }
 
@@ -91,20 +88,12 @@ namespace Alttp.GameObjects
 
         public virtual void Update(GameTime gameTime)
         {
-            if (!Paused)
+            if (Speed > 0)
             {
-                _frameDuration += gameTime.ElapsedGameTime.TotalSeconds;
-
-                if (_frameDuration >= Animation.FrameTime)
-                {
-                    AdvanceFrame();
-
-                    _frameDuration = 0;
-                }
-
-                // Move object
                 _position.X += Speed * Direction.X * (float)(gameTime.ElapsedGameTime.TotalSeconds * Animation.Fps);
-                _position.Y += Speed * Direction.Y * (float)(gameTime.ElapsedGameTime.TotalSeconds * Animation.Fps) * 0.75f;
+
+                // Move slightly slower vertically
+                _position.Y += Speed * 0.75f * Direction.Y * (float)(gameTime.ElapsedGameTime.TotalSeconds * Animation.Fps);
             }
         }
 
@@ -119,8 +108,6 @@ namespace Alttp.GameObjects
             Direction = direction;
 
             Speed = MaxSpeed;
-
-            Resume();
         }
 
         /// <summary>
@@ -128,11 +115,10 @@ namespace Alttp.GameObjects
         /// </summary>
         public virtual void Attack()
         {
-            Resume();
         }
 
-        protected void Play(string animation, AnimationPlayAction action, string nextAnimation = null)
-        {
+//        protected void Play(string animation, AnimationPlayAction action, string nextAnimation = null)
+//        {
 //            if (animation != AnimationName)
 //            {
 //                AnimationName = animation;
@@ -151,30 +137,28 @@ namespace Alttp.GameObjects
 //                     action == AnimationPlayAction.ReversePlayOnceBackForth))
 //                    NextAnimationName = nextAnimation;
 //            }
-        }
+//        }
 
-        protected void Resume()
-        {
+//        protected void Resume()
+//        {
 //            Paused = false;
-        }
+//        }
 
-        protected void Pause()
-        {
+//        protected void Pause()
+//        {
 //            Paused = true;
-        }
-
+//        }
+//
         public virtual void Stop()
         {
-//            Speed = 0;
-//            Pause();
-//            FrameIndex = 0;
+            Speed = 0;
         }
 
         /// <summary>
         /// Advance to the next frame.
         /// </summary>
-        public void AdvanceFrame()
-        {
+//        public void AdvanceFrame()
+//        {
 //            switch (AnimationPlayAction)
 //            {
 //                case AnimationPlayAction.Loop:
@@ -253,7 +237,7 @@ namespace Alttp.GameObjects
 //                    }
 //                    break;
 //            }
-        }
+//        }
 
         /// <summary>
         /// Find object inside the specified area.

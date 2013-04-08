@@ -1,13 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using Microsoft.Xna.Framework;
+using Alttp.Core.Graphics;
 using Microsoft.Xna.Framework.Content;
-using Microsoft.Xna.Framework.Graphics;
 using Nuclex.UserInterface;
 
-namespace Alttp.Core.Graphics
+namespace Alttp.Core.Animation
 {
     public class AnimationsReader : ContentTypeReader<AnimationsDict>
     {

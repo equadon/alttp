@@ -50,12 +50,12 @@ namespace Alttp.DarkFunction
 
         public override string GetRuntimeReader(TargetPlatform targetPlatform)
         {
-            return "Alttp.Core.Graphics.AnimationsReader, Alttp.Core";
+            return "Alttp.Core.Animation.AnimationsReader, Alttp.Core";
         }
 
         public override string GetRuntimeType(TargetPlatform targetPlatform)
         {
-            return "Alttp.Core.Graphics.AnimationsDict, Alttp.Core";
+            return "Alttp.Core.Animation.AnimationsDict, Alttp.Core";
         }
     }
 }

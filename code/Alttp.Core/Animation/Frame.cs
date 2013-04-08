@@ -1,12 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using Alttp.Core.Graphics;
 using Microsoft.Xna.Framework;
 using Nuclex.Ninject.Xna;
 using Nuclex.UserInterface;
 
-namespace Alttp.Core.Graphics
+namespace Alttp.Core.Animation
 {
     public class Frame
     {
