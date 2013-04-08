@@ -42,6 +42,8 @@ namespace Alttp.DarkFunction.Data
             foreach (var xSpr in definitions.Descendants("spr"))
             {
                 var dirs = GetDirs(xSpr, new List<string>());
+                dirs.Reverse();
+
                 string key = "/" + string.Join("/", dirs);
 
                 if (!Sprites.ContainsKey(key))
@@ -67,8 +69,6 @@ namespace Alttp.DarkFunction.Data
                 dirs.Add((string) e.Parent.Attribute("name"));
                 dirs = GetDirs(e.Parent, dirs);
             }
-
-            dirs.Reverse();
 
             return dirs;
         }
