@@ -15,7 +15,15 @@ namespace Alttp.GameObjects
     {
         Loop,
         PlayOnce,
-        LoopReverse
+
+        ReverseLoop,
+        ReversePlayOnce,
+
+        LoopBackForth,
+        PlayOnceBackForth,
+
+        ReverseLoopBackForth,
+        ReversePlayOnceBackForth,
     }
 
     public class GameObject
@@ -26,7 +34,7 @@ namespace Alttp.GameObjects
 
         private int _frameIndex;
 
-        private double _moveStartTime;
+        private double _frameDuration;
 
         private Vector2 _position;
 
@@ -84,26 +92,27 @@ namespace Alttp.GameObjects
         public int FrameIndex
         {
             get { return _frameIndex; }
-            protected set
-            {
-                if (value < 0)
-                {
-                    value = (AnimationPlayAction == AnimationPlayAction.Loop) ? Frames.Length - 1 : 0;
-                }
-                else
-                {
-                    if (value >= Frames.Length - 1 &&
-                        AnimationPlayAction == AnimationPlayAction.PlayOnce)
-                    {
-                        FrameIndex = 0;
-                    }
-                    else
-                    {
-                        value %= Frames.Length;
-                    }
-                }
-                _frameIndex = value;
-            }
+            protected set { _frameIndex = value; }
+//            protected set
+//            {
+//                if (value < 0)
+//                {
+//                    value = (AnimationPlayAction == AnimationPlayAction.Loop) ? Frames.Length - 1 : 0;
+//                }
+//                else
+//                {
+//                    if (value >= Frames.Length - 1 &&
+//                        AnimationPlayAction == AnimationPlayAction.PlayOnce)
+//                    {
+//                        FrameIndex = 0;
+//                    }
+//                    else
+//                    {
+//                        value %= Frames.Length;
+//                    }
+//                }
+//                _frameIndex = value;
+//            }
         }
 
         public Rectangle Bounds
@@ -134,15 +143,11 @@ namespace Alttp.GameObjects
         {
             if (!Paused)
             {
-                _moveStartTime += gameTime.ElapsedGameTime.TotalSeconds;
+                _frameDuration += gameTime.ElapsedGameTime.TotalSeconds;
 
-                if (!(AnimationPlayAction == AnimationPlayAction.PlayOnce && FrameIndex == Frames.Length - 1) &&
-                    _moveStartTime >= FrameDelay)
-                {
-                    FrameIndex++;
-                    _moveStartTime = 0;
-                }
+                AdvanceFrame();
 
+                // Move object
                 _position.X += Speed * Direction.X * (float) (gameTime.ElapsedGameTime.TotalSeconds * Fps);
                 _position.Y += Speed * Direction.Y * (float)(gameTime.ElapsedGameTime.TotalSeconds * Fps) * 0.75f;
             }
@@ -167,6 +172,10 @@ namespace Alttp.GameObjects
             {
                 AnimationName = animation;
                 AnimationPlayAction = action;
+
+                if (action == AnimationPlayAction.ReverseLoop ||
+                    action == AnimationPlayAction.ReversePlayOnce)
+                    FrameIndex = Frames.Length - 1;
             }
         }
 
@@ -184,6 +193,46 @@ namespace Alttp.GameObjects
         {
             Pause();
             FrameIndex = 0;
+        }
+
+        /// <summary>
+        /// Advance to the next frame.
+        /// </summary>
+        public void AdvanceFrame()
+        {
+            switch (AnimationPlayAction)
+            {
+                case AnimationPlayAction.Loop:
+                    FrameIndex++;
+                    FrameIndex %= Frames.Length;
+
+                    _frameDuration = 0;
+                    break;
+
+                case AnimationPlayAction.PlayOnce:
+                    if (FrameIndex < Frames.Length - 1)
+                    {
+                        FrameIndex++;
+                        _frameDuration = 0;
+                    }
+                    break;
+
+                case AnimationPlayAction.ReverseLoop:
+                    FrameIndex--;
+                    if (FrameIndex < 0)
+                        FrameIndex = Frames.Length - 1;
+
+                    _frameDuration = 0;
+                    break;
+
+                case AnimationPlayAction.ReversePlayOnce:
+                    if (FrameIndex > 0)
+                    {
+                        FrameIndex--;
+                        _frameDuration = 0;
+                    }
+                    break;
+            }
         }
 
         /// <summary>
