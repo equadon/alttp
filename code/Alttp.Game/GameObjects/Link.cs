@@ -23,7 +23,7 @@ namespace Alttp.GameObjects
         {
             base.Move(direction);
 
-            Play("/Run/" + DirectionText, AnimationPlayAction.ReversePlayOnce);
+            Play("/Run/" + DirectionText, AnimationPlayAction.Loop);
         }
 
         public override void Stop()

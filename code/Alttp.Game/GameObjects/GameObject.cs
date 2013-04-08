@@ -181,7 +181,9 @@ namespace Alttp.GameObjects
                 AnimationPlayAction = action;
 
                 if (action == AnimationPlayAction.ReverseLoop ||
-                    action == AnimationPlayAction.ReversePlayOnce)
+                    action == AnimationPlayAction.ReversePlayOnce ||
+                    action == AnimationPlayAction.ReverseLoopBackForth ||
+                    action == AnimationPlayAction.ReversePlayOnceBackForth)
                     FrameIndex = Frames.Length - 1;
             }
         }
@@ -248,6 +250,28 @@ namespace Alttp.GameObjects
                             FrameIndex--;
                             if (FrameIndex <= 0)
                                 _advanceAnimationForward = AnimationPlayAction == AnimationPlayAction.LoopBackForth;
+                        }
+                    }
+                    break;
+
+                case AnimationPlayAction.ReverseLoopBackForth:
+                case AnimationPlayAction.ReversePlayOnceBackForth:
+                    // We played the animation once, stop here unless we want to loop
+                    if (!(AnimationPlayAction == AnimationPlayAction.ReversePlayOnceBackForth &&
+                        !_advanceAnimationForward &&
+                        FrameIndex == Frames.Length - 1))
+                    {
+                        if (_advanceAnimationForward)
+                        {
+                            FrameIndex--;
+                            if (FrameIndex <= 0)
+                                _advanceAnimationForward = false;
+                        }
+                        else
+                        {
+                            FrameIndex++;
+                            if (FrameIndex >= Frames.Length - 1)
+                                _advanceAnimationForward = AnimationPlayAction == AnimationPlayAction.ReverseLoopBackForth;
                         }
                     }
                     break;
