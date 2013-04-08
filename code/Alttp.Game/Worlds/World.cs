@@ -11,6 +11,8 @@ namespace Alttp.Worlds
     {
         private readonly Map _map;
 
+        public bool RenderCollisionTiles { get; set; }
+
         public Region[] Regions { get; private set; }
 
         public int TileWidth { get { return _map.TileWidth; } }
@@ -69,6 +71,9 @@ namespace Alttp.Worlds
         public void Draw(GameTime gameTime, ISpriteBatch spriteBatch, Camera camera)
         {
             DrawLayer(gameTime, spriteBatch, 0, camera, 0);
+
+            if (RenderCollisionTiles)
+                DrawLayer(gameTime, spriteBatch, 2, camera, 0);
         }
 
         public void DrawLayer(GameTime gameTime, ISpriteBatch spriteBatch, int layerId, Camera camera, Single layerDepth)

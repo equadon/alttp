@@ -113,6 +113,10 @@ namespace Alttp.Debugging
                     overlay.Update(gameTime);
             }
 
+            // Enable/disable drawing of the collision tiles layer
+            if (_input.IsKeyPressed(Keys.C))
+                _world.ActiveCamera.World.RenderCollisionTiles = !_world.ActiveCamera.World.RenderCollisionTiles;
+
             // Enable/disable grid lines with the G key
             if (_input.IsKeyPressed(Keys.G))
                 RenderGrid = !RenderGrid;
