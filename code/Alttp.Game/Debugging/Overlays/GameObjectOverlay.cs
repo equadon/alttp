@@ -17,17 +17,20 @@ namespace Alttp.Debugging.Overlays
         private const string LblAnimationFormat = "Animation: {0}";
         private const string LblAnimationFrameFormat = "Frame: {0}";
         private const string LblFpsFormat = "FPS: {0}";
+        private const string LblRegionFormat = "Region: {0}";
 
         // Controls
         private LabelControl _lblPosition;
         private LabelControl _lblAnimation;
         private LabelControl _lblAnimationFrame;
         private LabelControl _lblFps;
+        private LabelControl _lblRegion;
 
         public string PositionText { get { return String.Format(LblPositionFormat, _debug.SelectedGameObjects[0].Position.X, _debug.SelectedGameObjects[0].Position.Y); } }
         public string AnimationText { get { return String.Format(LblAnimationFormat, _debug.SelectedGameObjects[0].AnimationName); } }
         public string AnimationFrameText { get { return String.Format(LblAnimationFrameFormat, _debug.SelectedGameObjects[0].Animation.FrameIndex); } }
         public string FpsText { get { return String.Format(LblFpsFormat, _debug.SelectedGameObjects[0].Animation.Fps); } }
+        public string RegionText { get { return String.Format(LblRegionFormat, _camera.World.GetRegion(_debug.SelectedGameObjects[0].Position).Name); } }
 
         public GameObjectOverlay(DebugManager debug, string title, int width, Camera camera)
             : base(title, width)
@@ -69,6 +72,12 @@ namespace Alttp.Debugging.Overlays
                 Bounds = new UniRectangle(new UniScalar(0, 10), new UniScalar(0, 40 + Children.Count * height), new UniScalar(1, -10), new UniScalar(0, 0))
             };
             Children.Add(_lblFps);
+
+            _lblRegion = new LabelControl()
+            {
+                Bounds = new UniRectangle(new UniScalar(0, 10), new UniScalar(0, 40 + Children.Count * height), new UniScalar(1, -10), new UniScalar(0, 0))
+            };
+            Children.Add(_lblRegion);
         }
 
         public override void Update(GameTime gameTime)
@@ -82,6 +91,7 @@ namespace Alttp.Debugging.Overlays
                 _lblAnimation.Text = "";
                 _lblAnimationFrame.Text = "";
                 _lblFps.Text = "";
+                _lblRegion.Text = "";
             }
             else
             {
@@ -90,6 +100,7 @@ namespace Alttp.Debugging.Overlays
                 _lblAnimation.Text = AnimationText;
                 _lblAnimationFrame.Text = AnimationFrameText;
                 _lblFps.Text = FpsText;
+                _lblRegion.Text = RegionText;
             }
         }
     }
