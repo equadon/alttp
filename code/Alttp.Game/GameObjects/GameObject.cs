@@ -33,8 +33,10 @@ namespace Alttp.GameObjects
         private readonly AnimationsDict _animations;
 
         private int _frameIndex;
-
         private double _frameDuration;
+
+        /// <summary>If true advances the animation by 1, otherwise -1.</summary>
+        private bool _advanceAnimationForward = true;
 
         private Vector2 _position;
 
@@ -145,10 +147,15 @@ namespace Alttp.GameObjects
             {
                 _frameDuration += gameTime.ElapsedGameTime.TotalSeconds;
 
-                AdvanceFrame();
+                if (_frameDuration >= FrameDelay)
+                {
+                    AdvanceFrame();
+
+                    _frameDuration = 0;
+                }
 
                 // Move object
-                _position.X += Speed * Direction.X * (float) (gameTime.ElapsedGameTime.TotalSeconds * Fps);
+                _position.X += Speed * Direction.X * (float)(gameTime.ElapsedGameTime.TotalSeconds * Fps);
                 _position.Y += Speed * Direction.Y * (float)(gameTime.ElapsedGameTime.TotalSeconds * Fps) * 0.75f;
             }
         }
@@ -205,31 +212,36 @@ namespace Alttp.GameObjects
                 case AnimationPlayAction.Loop:
                     FrameIndex++;
                     FrameIndex %= Frames.Length;
-
-                    _frameDuration = 0;
                     break;
 
                 case AnimationPlayAction.PlayOnce:
                     if (FrameIndex < Frames.Length - 1)
-                    {
                         FrameIndex++;
-                        _frameDuration = 0;
-                    }
                     break;
 
                 case AnimationPlayAction.ReverseLoop:
                     FrameIndex--;
                     if (FrameIndex < 0)
                         FrameIndex = Frames.Length - 1;
-
-                    _frameDuration = 0;
                     break;
 
                 case AnimationPlayAction.ReversePlayOnce:
                     if (FrameIndex > 0)
+                        FrameIndex--;
+                    break;
+
+                case AnimationPlayAction.LoopBackForth:
+                    if (_advanceAnimationForward)
+                    {
+                        FrameIndex++;
+                        if (FrameIndex >= Frames.Length - 1)
+                            _advanceAnimationForward = false;
+                    }
+                    else
                     {
                         FrameIndex--;
-                        _frameDuration = 0;
+                        if (FrameIndex <= 0)
+                            _advanceAnimationForward = true;
                     }
                     break;
             }
