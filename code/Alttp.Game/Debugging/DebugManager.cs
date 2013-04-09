@@ -144,17 +144,12 @@ namespace Alttp.Debugging
                 SelectionBounds = Rectangle.Empty;
 
                 // Set camera mode if there are game objects selected
-                if (SelectedGameObjects.Length > 0)
+                if (SelectedGameObjects.Length > 0 && !_gui.Screen.Desktop.Children.Contains(GameObjectOverlay))
                 {
-                    _world.ActiveCamera.Follow(SelectedGameObjects[0]);
-
-                    if (!_gui.Screen.Desktop.Children.Contains(GameObjectOverlay))
-                        _gui.Screen.Desktop.Children.Add(GameObjectOverlay);
+                    _gui.Screen.Desktop.Children.Add(GameObjectOverlay);
                 }
                 else
                 {
-                    _world.ActiveCamera.Free();
-
                     if (_gui.Screen.Desktop.Children.Contains(GameObjectOverlay))
                         _gui.Screen.Desktop.Children.Remove(GameObjectOverlay);
                 }
