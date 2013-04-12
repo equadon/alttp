@@ -149,10 +149,9 @@ namespace Alttp.Debugging
                 {
                     _gui.Screen.Desktop.Children.Add(GameObjectOverlay);
                 }
-                else
+                else if (SelectedGameObjects.Length == 0 && _gui.Screen.Desktop.Children.Contains(GameObjectOverlay))
                 {
-                    if (_gui.Screen.Desktop.Children.Contains(GameObjectOverlay))
-                        _gui.Screen.Desktop.Children.Remove(GameObjectOverlay);
+                    _gui.Screen.Desktop.Children.Remove(GameObjectOverlay);
                 }
             }
 
