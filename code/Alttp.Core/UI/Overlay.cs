@@ -1,6 +1,7 @@
 ﻿using System;
 using Microsoft.Xna.Framework;
 using Nuclex.UserInterface;
+using Nuclex.UserInterface.Controls;
 using Nuclex.UserInterface.Controls.Desktop;
 
 namespace Alttp.Core.UI
@@ -75,6 +76,16 @@ namespace Alttp.Core.UI
 
         public virtual void Update(GameTime gameTime)
         {
+        }
+
+        protected void ClearAllLabelTexts()
+        {
+            foreach (var c in Children)
+            {
+                var label = c as LabelControl;
+                if (label != null)
+                    label.Text = "";
+            }
         }
     }
 }
