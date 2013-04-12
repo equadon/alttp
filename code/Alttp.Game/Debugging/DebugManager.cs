@@ -137,7 +137,8 @@ namespace Alttp.Debugging
             {
                 SelectionBounds = new Rectangle((int) mousePos.X, (int) mousePos.Y, 0, 0);
             }
-            else if (_input.IsMouseButtonReleased(MouseButtons.Left) && !minimapBounds.Contains(mousePos))
+            else if (_input.IsMouseButtonReleased(MouseButtons.Left) &&
+                SelectionBounds != Rectangle.Empty)
             {
                 SelectedGameObjects = GameObject.FindAll(Utils.RenderableRectangle(SelectionBounds), _world.ActiveCamera.Position, _world.ActiveCamera.InvZoom);
                 
@@ -168,6 +169,7 @@ namespace Alttp.Debugging
             // Move minimap viewport with left mouse button.
             // Do not check this if the overlay is hidden.
             if (_gui.Visible &&
+                SelectionBounds == Rectangle.Empty &&
                 _world.ActiveCamera.CameraMode != CameraMode.Follow &&
                 _input.MouseState.LeftButton == ButtonState.Pressed &&
                 minimapBounds.Contains(mousePos))
