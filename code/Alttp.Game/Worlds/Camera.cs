@@ -273,10 +273,10 @@ namespace Alttp.Worlds
         public Rectangle GetTilesRegion()
         {
             int minX = Viewport.Left / World.TileWidth;
-            int maxX = (int)Math.Ceiling(Viewport.Right / (float)World.TileWidth);
+            int maxX = (int)MathHelper.Clamp((int)Math.Ceiling(Viewport.Right / (float)World.TileWidth), 0, World.Width - 1);
 
             int minY = Viewport.Top / World.TileHeight;
-            int maxY = 1 + (int)Math.Ceiling(Viewport.Bottom / (float)World.TileHeight);
+            int maxY = (int)MathHelper.Clamp(1 + (int)Math.Ceiling(Viewport.Bottom / (float)World.TileHeight), 0, World.Height - 1);
 
             return new Rectangle(minX, minY, maxX - minX, maxY - minY);
         }
