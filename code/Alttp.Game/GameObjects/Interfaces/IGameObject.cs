@@ -7,6 +7,8 @@ namespace Alttp.GameObjects
 {
     public interface IGameObject
     {
+        int Index { get; }
+        string Name { get; }
         GameObjectState State { get; }
         float MaxSpeed { get; }
         float Speed { get; }

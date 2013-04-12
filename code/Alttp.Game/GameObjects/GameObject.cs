@@ -23,11 +23,17 @@ namespace Alttp.GameObjects
     {
         public static readonly List<GameObject> GameObjects = new List<GameObject>();
 
+        private static int _nextAvailableIndex = 0;
+
         private readonly AnimationsDict _animations;
 
         private Vector2 _position;
 
         #region Properties
+
+        public int Index { get; private set; }
+
+        public string Name { get { return GetType().Name + Index; } }
 
         public GameObjectState State { get; private set; }
 
@@ -95,6 +101,9 @@ namespace Alttp.GameObjects
             Direction = new Vector2(0, 1);
 
             GameObjects.Add(this);
+
+            // Retrieve a unique index
+            Index = GetUniqueIndex(GameObjects);
         }
 
         public virtual void Update(GameTime gameTime)
@@ -231,6 +240,21 @@ namespace Alttp.GameObjects
             }
 
             return objects.ToArray();
+        }
+
+        /// <summary>
+        /// Retrieve the next unique index and update the variable holding the next index.
+        /// </summary>
+        /// <param name="objects">List of objects</param>
+        /// <returns>A unique index</returns>
+        public static int GetUniqueIndex(List<GameObject> objects)
+        {
+            int nextIndex = _nextAvailableIndex;
+
+            // Update the next available index
+            _nextAvailableIndex++;
+
+            return nextIndex;
         }
     }
 }
