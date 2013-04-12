@@ -18,6 +18,7 @@ namespace Alttp.Debugging.Overlays
         private const string LblAnimationFrameFormat = "Frame: {0}";
         private const string LblFpsFormat = "FPS: {0}";
         private const string LblRegionFormat = "Region: {0}";
+        private const string LblNameFormat = "Name: {0}";
 
         // Controls
         private LabelControl _lblPosition;
@@ -25,12 +26,14 @@ namespace Alttp.Debugging.Overlays
         private LabelControl _lblAnimationFrame;
         private LabelControl _lblFps;
         private LabelControl _lblRegion;
+        private LabelControl _lblName;
 
         public string PositionText { get { return String.Format(LblPositionFormat, _debug.SelectedGameObjects[0].Position.X, _debug.SelectedGameObjects[0].Position.Y); } }
         public string AnimationText { get { return String.Format(LblAnimationFormat, _debug.SelectedGameObjects[0].AnimationName); } }
         public string AnimationFrameText { get { return String.Format(LblAnimationFrameFormat, _debug.SelectedGameObjects[0].Animation.FrameIndex); } }
         public string FpsText { get { return String.Format(LblFpsFormat, _debug.SelectedGameObjects[0].Animation.Fps); } }
         public string RegionText { get { return String.Format(LblRegionFormat, _camera.World.GetRegion(_debug.SelectedGameObjects[0].Position).Name); } }
+        public string NameText { get { return String.Format(LblNameFormat, _debug.SelectedGameObjects[0].Name); } }
 
         public GameObjectOverlay(DebugManager debug, string title, int width, Camera camera)
             : base(title, width)
@@ -48,6 +51,12 @@ namespace Alttp.Debugging.Overlays
         private void SetupControls()
         {
             const int height = 24;
+
+            _lblName = new LabelControl()
+            {
+                Bounds = new UniRectangle(new UniScalar(0, 10), new UniScalar(0, 40 + Children.Count * height), new UniScalar(1, -10), new UniScalar(0, 0))
+            };
+            Children.Add(_lblName);
 
             _lblPosition = new LabelControl()
             {
@@ -86,14 +95,10 @@ namespace Alttp.Debugging.Overlays
 
             if (_debug.SelectedGameObjects == null || _debug.SelectedGameObjects.Length == 0)
             {
+                ClearAllLabelTexts();
                 Title = "Object: None";
-                _lblPosition.Text = "";
-                _lblAnimation.Text = "";
-                _lblAnimationFrame.Text = "";
-                _lblFps.Text = "";
-                _lblRegion.Text = "";
             }
-            else
+            else if (_debug.SelectedGameObjects.Length == 1)
             {
                 Title = "Object: " + _debug.SelectedGameObjects[0].GetType().Name;
                 _lblPosition.Text = PositionText;
@@ -101,6 +106,12 @@ namespace Alttp.Debugging.Overlays
                 _lblAnimationFrame.Text = AnimationFrameText;
                 _lblFps.Text = FpsText;
                 _lblRegion.Text = RegionText;
+                _lblName.Text = NameText;
+            }
+            else
+            {
+                ClearAllLabelTexts();
+                Title = "Objects Selected: " + _debug.SelectedGameObjects.Length;
             }
         }
     }
