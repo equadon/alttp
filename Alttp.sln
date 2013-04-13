@@ -1,23 +1,23 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 11.00
 # Visual Studio 2010
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Alttp.Content", "Alttp.Content\Alttp.Content.contentproj", "{121D0087-343C-4DA2-8C3B-03CD078CED5A}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Alttp.Content", "src\Alttp.Content\Alttp.Content.contentproj", "{121D0087-343C-4DA2-8C3B-03CD078CED5A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Alttp.Core", "Alttp.Core\Alttp.Core.csproj", "{0EA6B877-3AFE-4236-868A-DE6F8C0744C6}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Alttp.Core", "src\Alttp.Core\Alttp.Core.csproj", "{0EA6B877-3AFE-4236-868A-DE6F8C0744C6}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Alttp.Game", "Alttp.Game\Alttp.Game.csproj", "{D40AC206-574C-4F85-B17F-B00551F02C6F}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Alttp.Game", "src\Alttp.Game\Alttp.Game.csproj", "{D40AC206-574C-4F85-B17F-B00551F02C6F}"
 	ProjectSection(ProjectDependencies) = postProject
 		{FAF645EA-EDD8-44E4-B694-D3762B5EBCC3} = {FAF645EA-EDD8-44E4-B694-D3762B5EBCC3}
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Nuclex.UserInterface (xna-4.0-x86)", "Nuclex.UserInterface\Nuclex.UserInterface (xna-4.0-x86).csproj", "{2CB08AB5-46B8-44A9-92AE-33790629696D}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Nuclex.UserInterface (xna-4.0-x86)", "src\Nuclex.UserInterface\Nuclex.UserInterface (xna-4.0-x86).csproj", "{2CB08AB5-46B8-44A9-92AE-33790629696D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Alttp.darkFunction", "Alttp.darkFunction\Alttp.darkFunction.csproj", "{FAF645EA-EDD8-44E4-B694-D3762B5EBCC3}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Alttp.darkFunction", "src\Alttp.darkFunction\Alttp.darkFunction.csproj", "{FAF645EA-EDD8-44E4-B694-D3762B5EBCC3}"
 	ProjectSection(ProjectDependencies) = postProject
 		{0EA6B877-3AFE-4236-868A-DE6F8C0744C6} = {0EA6B877-3AFE-4236-868A-DE6F8C0744C6}
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ContentPipelineDebug", "ContentPipelineDebug\ContentPipelineDebug.csproj", "{09C92067-EBBF-439E-8F7E-D06DF4719675}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ContentPipelineDebug", "src\ContentPipelineDebug\ContentPipelineDebug.csproj", "{09C92067-EBBF-439E-8F7E-D06DF4719675}"
 	ProjectSection(ProjectDependencies) = postProject
 		{FAF645EA-EDD8-44E4-B694-D3762B5EBCC3} = {FAF645EA-EDD8-44E4-B694-D3762B5EBCC3}
 	EndProjectSection

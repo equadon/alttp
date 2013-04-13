@@ -21,7 +21,7 @@
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
-    <OutputPath>..\..\lib\Debug\Alttp.Core</OutputPath>
+    <OutputPath>..\..\bin\lib\Debug\Alttp.Core</OutputPath>
     <IntermediateOutputPath>..\..\obj\Debug\Alttp.Core</IntermediateOutputPath>
     <BaseIntermediateOutputPath>..\..\obj\Debug\Alttp.Core</BaseIntermediateOutputPath>
     <DefineConstants>DEBUG;TRACE;WINDOWS</DefineConstants>
@@ -35,7 +35,7 @@
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|x86' ">
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
-    <OutputPath>..\..\lib\Release\Alttp.Core</OutputPath>
+    <OutputPath>..\..\bin\lib\Release\Alttp.Core</OutputPath>
     <IntermediateOutputPath>..\..\obj\Release\Alttp.Core</IntermediateOutputPath>
     <BaseIntermediateOutputPath>..\..\obj\Release\Alttp.Core</BaseIntermediateOutputPath>
     <DefineConstants>TRACE;WINDOWS</DefineConstants>

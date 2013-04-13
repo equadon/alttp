@@ -21,7 +21,7 @@
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
-    <OutputPath>..\..\lib\Debug\Nuclex.UserInterface</OutputPath>
+    <OutputPath>..\..\bin\lib\Debug\Nuclex.UserInterface</OutputPath>
     <IntermediateOutputPath>..\..\obj\Debug\Nuclex.UserInterface</IntermediateOutputPath>
     <BaseIntermediateOutputPath>..\..\obj\Debug\Nuclex.UserInterface</BaseIntermediateOutputPath>
     <DefineConstants>TRACE;DEBUG;WINDOWS;UNITTEST</DefineConstants>
@@ -35,7 +35,7 @@
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|x86' ">
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
-    <OutputPath>..\..\lib\Release\Nuclex.UserInterface</OutputPath>
+    <OutputPath>..\..\bin\lib\Release\Nuclex.UserInterface</OutputPath>
     <IntermediateOutputPath>..\..\obj\Release\Nuclex.UserInterface</IntermediateOutputPath>
     <BaseIntermediateOutputPath>..\..\obj\Release\Nuclex.UserInterface</BaseIntermediateOutputPath>
     <DefineConstants>TRACE;WINDOWS;UNITTEST</DefineConstants>
