@@ -72,6 +72,9 @@
       <Importer>DarkFunctionSpritesImporter</Importer>
       <Processor>DarkFunctionSpritesProcessor</Processor>
     </Compile>
+    <None Include="pdn\AlttpSkin.pdn">
+      <Name>AlttpSkin</Name>
+    </None>
     <None Include="Skins\skin.xsd">
       <Name>skin</Name>
       <SubType>Designer</SubType>
