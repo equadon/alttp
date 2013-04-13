@@ -70,7 +70,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="FuncWorks.XNA.XTiled">
-      <HintPath>..\Libraries\XTiled\FuncWorks.XNA.XTiled.dll</HintPath>
+      <HintPath>..\..\lib\XTiled\FuncWorks.XNA.XTiled.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.Xna.Framework, Version=4.0.0.0, Culture=neutral, PublicKeyToken=842cf8be1de50553, processorArchitecture=x86" />
     <Reference Include="Microsoft.Xna.Framework.Game, Version=4.0.0.0, Culture=neutral, PublicKeyToken=842cf8be1de50553, processorArchitecture=x86" />
@@ -94,22 +94,22 @@
       <HintPath>..\..\packages\NLog.2.0.1.2\lib\net40\NLog.dll</HintPath>
     </Reference>
     <Reference Include="Nuclex.Game">
-      <HintPath>..\Libraries\Nuclex\Nuclex.Game.dll</HintPath>
+      <HintPath>..\..\lib\Nuclex\Nuclex.Game.dll</HintPath>
     </Reference>
     <Reference Include="Nuclex.Input">
-      <HintPath>..\Libraries\Nuclex\Nuclex.Input.dll</HintPath>
+      <HintPath>..\..\lib\Nuclex\Nuclex.Input.dll</HintPath>
     </Reference>
     <Reference Include="Nuclex.Ninject.Xna">
-      <HintPath>..\Libraries\Nuclex\Nuclex.Ninject.Xna.dll</HintPath>
+      <HintPath>..\..\lib\Nuclex\Nuclex.Ninject.Xna.dll</HintPath>
     </Reference>
     <Reference Include="Nuclex.Support">
-      <HintPath>..\Libraries\Nuclex\Nuclex.Support.dll</HintPath>
+      <HintPath>..\..\lib\Nuclex\Nuclex.Support.dll</HintPath>
     </Reference>
     <Reference Include="Nuclex.Support.Plugins">
-      <HintPath>..\Libraries\Nuclex\Nuclex.Support.Plugins.dll</HintPath>
+      <HintPath>..\..\lib\Nuclex\Nuclex.Support.Plugins.dll</HintPath>
     </Reference>
     <Reference Include="nunit.framework">
-      <HintPath>..\Libraries\Nuclex\nunit.framework.dll</HintPath>
+      <HintPath>..\..\lib\Nuclex\nunit.framework.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Xml" />

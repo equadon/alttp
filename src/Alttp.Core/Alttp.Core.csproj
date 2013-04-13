@@ -48,7 +48,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="FuncWorks.XNA.XTiled">
-      <HintPath>..\Libraries\XTiled\FuncWorks.XNA.XTiled.dll</HintPath>
+      <HintPath>..\..\lib\XTiled\FuncWorks.XNA.XTiled.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.Xna.Framework, Version=4.0.0.0, Culture=neutral, PublicKeyToken=842cf8be1de50553, processorArchitecture=x86" />
     <Reference Include="Microsoft.Xna.Framework.Game, Version=4.0.0.0, Culture=neutral, PublicKeyToken=842cf8be1de50553, processorArchitecture=x86" />
@@ -56,16 +56,16 @@
     <Reference Include="Microsoft.Xna.Framework.GamerServices, Version=4.0.0.0, Culture=neutral, PublicKeyToken=842cf8be1de50553, processorArchitecture=x86" />
     <Reference Include="mscorlib" />
     <Reference Include="Ninject">
-      <HintPath>..\Libraries\Nuclex\Ninject.dll</HintPath>
+      <HintPath>..\..\lib\Nuclex\Ninject.dll</HintPath>
     </Reference>
     <Reference Include="Nuclex.Game">
-      <HintPath>..\Libraries\Nuclex\Nuclex.Game.dll</HintPath>
+      <HintPath>..\..\lib\Nuclex\Nuclex.Game.dll</HintPath>
     </Reference>
     <Reference Include="Nuclex.Input">
-      <HintPath>..\Libraries\Nuclex\Nuclex.Input.dll</HintPath>
+      <HintPath>..\..\lib\Nuclex\Nuclex.Input.dll</HintPath>
     </Reference>
     <Reference Include="Nuclex.Ninject.Xna">
-      <HintPath>..\Libraries\Nuclex\Nuclex.Ninject.Xna.dll</HintPath>
+      <HintPath>..\..\lib\Nuclex\Nuclex.Ninject.Xna.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Xml" />
