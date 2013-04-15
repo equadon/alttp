@@ -180,8 +180,8 @@ namespace Alttp.Debugging
                 var minimapBoundsInt = new Rectangle((int)minimapBounds.X, (int)minimapBounds.Y, (int)minimapBounds.Width, (int)minimapBounds.Height);
 
                 Vector2 newViewportPos = _world.ActiveCamera.MinimapToWorldCoordinates(minimapPos, minimapBoundsInt);
-                newViewportPos.X -= _world.ActiveCamera.Viewport.Width / (float)2;
-                newViewportPos.Y -= _world.ActiveCamera.Viewport.Height / (float)2;
+                newViewportPos.X -= _world.ActiveCamera.Viewport.Width / 2f;
+                newViewportPos.Y -= _world.ActiveCamera.Viewport.Height / 2f;
 
                 _world.ActiveCamera.Position = newViewportPos;
             }
@@ -302,7 +302,7 @@ namespace Alttp.Debugging
             // Update minimap viewport bounds
             RectangleF minimapBounds = MinimapOverlay.Minimap.GetAbsoluteBounds();
 
-            MinimapOverlay.Viewport = _world.ActiveCamera.GetMiniMapViewport(Utils.CastRectangleF(minimapBounds));
+            MinimapOverlay.UpdateCameraBorderBounds(0, _world.ActiveCamera.GetMiniMapViewport(Utils.CastRectangleF(minimapBounds)));
         }
     }
 }

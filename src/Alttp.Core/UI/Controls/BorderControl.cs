@@ -8,8 +8,8 @@ namespace Alttp.Core.UI.Controls
     /// </summary>
     public class BorderControl : ImageControl
     {
-        public int BorderSize { get; private set; }
-        public Color BorderColor { get; private set; }
+        public int BorderSize { get; set; }
+        public Color BorderColor { get; set; }
 
         public BorderControl(Texture2D texture, int borderSize, Color borderColor)
             : base(texture)
