@@ -22,29 +22,34 @@
   </data>
  </layer>
  <objectgroup name="Regions" width="256" height="256" visible="0">
-  <object name="Death Mountain" type="Region" x="2736" y="0">
-   <polygon points="-1200,0 -1200,1024 848,1024 848,512 1360,512 1360,0"/>
+  <object name="Lost Woods" type="Region" x="0" y="0" width="1024" height="1024"/>
+  <object name="Lost Woods Outer" type="Region" x="0" y="1024">
+   <polygon points="0,0 1024,0 1024,-1024 1536,-1024 1536,512 0,512"/>
+  </object>
+  <object name="Kakariko Village" type="Region" x="0" y="1536">
+   <polygon points="0,0 1024,0 1024,512 1536,512 1536,1024 1024,1024 1024,1536 0,1536"/>
+  </object>
+  <object name="Death Mountain" type="Region" x="1536" y="0">
+   <polygon points="0,0 2560,0 2560,512 2048,512 2048,1024 0,1024"/>
+  </object>
+  <object name="Hyrule Castle" type="Region" x="1536" y="1024">
+   <polygon points="0,0 1024,0 1024,1872 0,1872 0,1024 -512,1024 -512,512 0,512"/>
   </object>
   <object name="Desert Palace" type="Region" x="0" y="3072">
    <polygon points="0,0 1024,0 1024,512 1536,512 1536,1024 0,1024"/>
   </object>
-  <object name="Eastern Palace" type="Region" x="2560" y="1024">
-   <polygon points="0,0 1024,0 1024,512 1536,512 1536,2048 1024,2048 1024,1536 0,1536"/>
-  </object>
-  <object name="Hyrule Castle" type="Region" x="2560" y="2896">
-   <polygon points="0,0 -1024,0 -1024,-848 -1536,-848 -1536,-1360 -1024,-1360 -1024,-1872 0,-1872"/>
-  </object>
-  <object name="Kakariko Village" type="Region" x="1024" y="3072">
-   <polygon points="0,0 -1024,0 -1024,-1536 0,-1536 0,-1024 512,-1024 512,-512 0,-512"/>
+  <object name="The Great Swamp" type="Region" x="1024" y="2560">
+   <polygon points="0,0 512,0 512,336 1536,336 1536,1536 512,1536 512,1024 0,1024"/>
   </object>
   <object name="Lake Hylia" type="Region" x="2560" y="2560">
    <polygon points="0,0 1024,0 1024,512 1536,512 1536,1536 0,1536"/>
   </object>
-  <object name="Lost Woods" type="Region" x="0" y="0" width="1536" height="1536"/>
-  <object name="The Great Swamp" type="Region" x="1024" y="2560">
-   <polygon points="0,0 512,0 512,336 1536,336 1536,1536 512,1536 512,1024 0,1024"/>
+  <object name="Eastern Palace" type="Region" x="2560" y="1024">
+   <polygon points="0,0 1024,0 1024,512 1536,512 1536,2048 1024,2048 1024,1536 0,1536"/>
   </object>
-  <object name="Zora's Falls" type="Region" x="3584" y="512" width="512" height="1024"/>
+  <object name="Zora's Falls" type="Region" x="3584" y="512">
+   <polygon points="0,0 512,0 512,1024 0,1024"/>
+  </object>
  </objectgroup>
  <objectgroup name="Bushes" width="256" height="256">
   <object name="Bush 1" type="Bush" gid="3211" x="448" y="112" width="16" height="16"/>
