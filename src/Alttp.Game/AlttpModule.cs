@@ -44,10 +44,6 @@ namespace Alttp
                 .WithConstructorArgument("mapResource", "Maps/LightWorld")
                 .WithConstructorArgument("worldObjectsResource", "GameObjects/WorldObjects/LightWorldObjectAnimations");
 
-            // Cameras
-            Kernel.Bind<Camera>().ToSelf().InNamedScope(GameStateScope).Named("Main").WithConstructorArgument("name", "Main");
-            Kernel.Bind<Camera>().ToSelf().InNamedScope(GameStateScope).Named("Secondary").WithConstructorArgument("name", "Secondary");
-
             // Player
             Kernel.Bind<Player>().ToSelf().InNamedScope(GameStateScope);
         }
