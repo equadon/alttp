@@ -22,11 +22,11 @@ namespace Alttp.Worlds
         private bool _middleMouseDown;
         private Vector2 _middleMouseStartPosition;
 
-        private int _activeCamIndex;
+        public int ActiveCameraIndex { get; private set; }
 
         #region Properties
 
-        public List<Camera> Cameras { get; private set; }
+        public Dictionary<int, Camera> Cameras { get; private set; }
 
         public AnimationsDict WorldObjectAnimations { get; private set; }
 
@@ -37,7 +37,7 @@ namespace Alttp.Worlds
 
         public Camera ActiveCamera
         {
-            get { return Cameras[_activeCamIndex]; }
+            get { return Cameras[ActiveCameraIndex]; }
         }
 
         #endregion
@@ -49,7 +49,7 @@ namespace Alttp.Worlds
             _batch = batch;
             _input = input;
 
-            Cameras = new List<Camera>();
+            Cameras = new Dictionary<int, Camera>();
 
             World = world;
 
@@ -61,23 +61,14 @@ namespace Alttp.Worlds
             base.Initialize();
 
             // Cameras
-            var camera = new Camera("Main", Game, World)
+            var camera = new Camera("Camera 1", Game, World)
                 {
-                    World = World,
                     Position = new Vector2(2015, 2673)
                 };
             camera.DefaultZoom();
-            Cameras.Add(camera);
-
-            _activeCamIndex = 0;
-
-            camera = new Camera("Secondary", Game, World)
-                {
-                    World = World,
-                    Position = new Vector2(1000, 1000)
-                };
-            camera.ResetZoom();
-            Cameras.Add(camera);
+            Cameras.Add(0, camera);
+            
+            SelectCamera(0);
         }
 
         protected override void LoadContent()
@@ -115,13 +106,24 @@ namespace Alttp.Worlds
 
         private void HandleKeyboardInput(GameTime gameTime)
         {
-            // Switch active camera
-            //    1 = main camera
-            //    2 = secondary camera
             if (_input.IsKeyPressed(Keys.D1))
-                SelectCamera(0);
+                SelectCamera(0, true);
             if (_input.IsKeyPressed(Keys.D2))
-                SelectCamera(1);
+                SelectCamera(1, true);
+            if (_input.IsKeyPressed(Keys.D3))
+                SelectCamera(2, true);
+            if (_input.IsKeyPressed(Keys.D4))
+                SelectCamera(3, true);
+            if (_input.IsKeyPressed(Keys.D5))
+                SelectCamera(4, true);
+            if (_input.IsKeyPressed(Keys.D6))
+                SelectCamera(5, true);
+            if (_input.IsKeyPressed(Keys.D7))
+                SelectCamera(6, true);
+            if (_input.IsKeyPressed(Keys.D8))
+                SelectCamera(7, true);
+            if (_input.IsKeyPressed(Keys.D9))
+                SelectCamera(8, true);
 
             // None of the below should be checked if the camera is in follow mode
             if (ActiveCamera.CameraMode == CameraMode.Follow)
@@ -199,11 +201,20 @@ namespace Alttp.Worlds
         /// <summary>
         /// Set the active camera to the camera with the specified index.
         /// </summary>
-        /// <param name="cameraIndex"></param>
-        private void SelectCamera(int cameraIndex)
+        /// <param name="cameraIndex">Index of the camera</param>
+        /// <param name="createCamera">Creates a new camera if true</param>
+        private void SelectCamera(int cameraIndex, bool createCamera = false)
         {
-            if (cameraIndex >= 0 && cameraIndex < Cameras.Count)
-                _activeCamIndex = cameraIndex;
+            if (createCamera && !Cameras.ContainsKey(cameraIndex))
+            {
+                var camera = new Camera("Camera " + (cameraIndex + 1), Game, World) { Position = Vector2.Zero };
+                camera.DefaultZoom();
+
+                Cameras.Add(cameraIndex, camera);
+            }
+
+            if (Cameras.ContainsKey(cameraIndex))
+                ActiveCameraIndex = cameraIndex;
         }
     }
 }
