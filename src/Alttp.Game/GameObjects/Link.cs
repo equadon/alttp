@@ -35,9 +35,17 @@ namespace Alttp.GameObjects
                 Shadow.Draw(batch);
 
             if (ShieldEquipped)
-                Frame.Draw(batch, Frame, Position, (Shield as GameObject).Frame);
+            {
+                var obj = (Shield as GameObject);
+                if (obj.Frame == null)
+                    Frame.Draw(batch, Frame, Position);
+                else
+                    Frame.Draw(batch, Frame, Position, obj.Frame);
+            }
             else
+            {
                 Frame.Draw(batch, Frame, Position);
+            }
         }
 
         public override void Move(Vector2 direction)

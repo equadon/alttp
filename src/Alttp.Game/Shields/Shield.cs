@@ -26,7 +26,7 @@ namespace Alttp.Shields
 
         public override Frame Frame
         {
-            get { return Animation.Frames[Parent.Animation.FrameIndex]; }
+            get { return (Animations.ContainsKey(AnimationName)) ? Animation.Frames[Parent.Animation.FrameIndex] : null; }
         }
 
         public override Vector2 Position
