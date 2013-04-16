@@ -8,6 +8,7 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using Ninject;
+using Ninject.Extensions.Logging;
 using Nuclex.Ninject.Xna;
 
 namespace Alttp.Worlds
@@ -22,9 +23,11 @@ namespace Alttp.Worlds
         private bool _middleMouseDown;
         private Vector2 _middleMouseStartPosition;
 
-        public int ActiveCameraIndex { get; private set; }
-
         #region Properties
+
+        protected ILogger Log { get; set; }
+
+        public int ActiveCameraIndex { get; private set; }
 
         public Dictionary<int, Camera> Cameras { get; private set; }
 
@@ -42,9 +45,11 @@ namespace Alttp.Worlds
 
         #endregion
 
-        public WorldManager(Game game, IContentManager content, IWorld world, ISpriteBatch batch, InputManager input, Player player)
+        public WorldManager(ILogger logger, Game game, IContentManager content, IWorld world, ISpriteBatch batch, InputManager input, Player player)
             : base(game)
         {
+            Log = logger;
+
             _content = content;
             _batch = batch;
             _input = input;
@@ -61,11 +66,9 @@ namespace Alttp.Worlds
             base.Initialize();
 
             // Cameras
-            var camera = new Camera("Camera 1", Game, World)
-                {
-                    Position = new Vector2(2015, 2673)
-                };
+            var camera = new Camera("Camera 1", Game, World, new Vector2(2015, 2673));
             camera.DefaultZoom();
+
             Cameras.Add(0, camera);
             
             SelectCamera(0);
@@ -75,7 +78,7 @@ namespace Alttp.Worlds
         {
             base.LoadContent();
 
-            Player.Object = new Link(new Vector2(2200, 2850), _content.Load<AnimationsDict>("GameObjects/Link/LinkAnimations"));
+            Player.Object = new Link(new Vector2(2230, 2820), _content.Load<AnimationsDict>("GameObjects/Link/LinkAnimations"));
         }
 
         public override void Draw(GameTime gameTime)
@@ -207,10 +210,12 @@ namespace Alttp.Worlds
         {
             if (createCamera && !Cameras.ContainsKey(cameraIndex))
             {
-                var camera = new Camera("Camera " + (cameraIndex + 1), Game, World) { Position = Vector2.Zero };
+                var camera = new Camera("Camera " + (cameraIndex + 1), Game, World, Vector2.Zero);
                 camera.DefaultZoom();
 
                 Cameras.Add(cameraIndex, camera);
+
+                Log.Debug("\"{0}\" was created", camera.Name);
             }
 
             if (Cameras.ContainsKey(cameraIndex))

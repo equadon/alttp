@@ -145,20 +145,21 @@ namespace Alttp.Worlds
 
         #endregion
 
-        public Camera(string name, Game game, IWorld world)
+        public Camera(string name, Game game, IWorld world, Vector2 position)
         {
             Name = name;
 
             _game = game;
             World = world;
 
-            CameraMode = CameraMode.Free;
-
-            Bounds = new Rectangle(0, 0, ScreenWidth, ScreenHeight);
-
-            Speed = DefaultCameraSpeed;
-
             _viewportF = RectangleF.Empty;
+
+            CameraMode = CameraMode.Free;
+            Bounds = new Rectangle(0, 0, ScreenWidth, ScreenHeight);
+            Speed = DefaultCameraSpeed;
+            DefaultZoom();
+
+            Position = position;
         }
 
         public void Move(Vector2 direction)
