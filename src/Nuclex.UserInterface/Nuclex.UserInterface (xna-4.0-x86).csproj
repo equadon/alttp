@@ -24,7 +24,7 @@
     <OutputPath>..\..\bin\lib\Debug\Nuclex.UserInterface</OutputPath>
     <IntermediateOutputPath>..\..\obj\Debug\Nuclex.UserInterface</IntermediateOutputPath>
     <BaseIntermediateOutputPath>..\..\obj\Debug\Nuclex.UserInterface</BaseIntermediateOutputPath>
-    <DefineConstants>TRACE;DEBUG;WINDOWS;UNITTEST</DefineConstants>
+    <DefineConstants>TRACE;DEBUG;WINDOWS</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <NoStdLib>true</NoStdLib>
@@ -38,7 +38,7 @@
     <OutputPath>..\..\bin\lib\Release\Nuclex.UserInterface</OutputPath>
     <IntermediateOutputPath>..\..\obj\Release\Nuclex.UserInterface</IntermediateOutputPath>
     <BaseIntermediateOutputPath>..\..\obj\Release\Nuclex.UserInterface</BaseIntermediateOutputPath>
-    <DefineConstants>TRACE;WINDOWS;UNITTEST</DefineConstants>
+    <DefineConstants>TRACE;WINDOWS</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <NoStdLib>true</NoStdLib>
@@ -84,23 +84,23 @@
       <Private>False</Private>
     </Reference>
     <Reference Include="NMock.StrongNamed">
-      <HintPath>..\Libraries\Nuclex\NMock.StrongNamed.dll</HintPath>
+      <HintPath>..\..\lib\Nuclex\NMock.StrongNamed.dll</HintPath>
     </Reference>
     <Reference Include="Nuclex.Input">
-      <HintPath>..\Libraries\Nuclex\Nuclex.Input.dll</HintPath>
+      <HintPath>..\..\lib\Nuclex\Nuclex.Input.dll</HintPath>
     </Reference>
     <Reference Include="Nuclex.Support">
-      <HintPath>..\Libraries\Nuclex\Nuclex.Support.dll</HintPath>
+      <HintPath>..\..\lib\Nuclex\Nuclex.Support.dll</HintPath>
     </Reference>
     <Reference Include="Nuclex.Support.Plugins">
-      <HintPath>..\Libraries\Nuclex\Nuclex.Support.Plugins.dll</HintPath>
+      <HintPath>..\..\lib\Nuclex\Nuclex.Support.Plugins.dll</HintPath>
     </Reference>
     <Reference Include="Nuclex.Testing.Xna">
-      <HintPath>..\Libraries\Nuclex\Nuclex.Testing.Xna.dll</HintPath>
+      <HintPath>..\..\lib\Nuclex\Nuclex.Testing.Xna.dll</HintPath>
     </Reference>
     <Reference Include="nunit.framework, Version=2.5.5.0, Culture=neutral, PublicKeyToken=96bb577564343f16, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\Libraries\Nuclex\nunit.framework.dll</HintPath>
+      <HintPath>..\..\lib\Nuclex\nunit.framework.dll</HintPath>
     </Reference>
     <Reference Include="System">
       <Private>False</Private>
