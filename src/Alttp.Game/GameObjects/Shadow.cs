@@ -12,7 +12,7 @@ namespace Alttp.GameObjects
     {
         public Sprite Sprite { get; private set; }
 
-        public GameObject Parent { get; private set; }
+        public IGameObject Parent { get; private set; }
 
         public Vector2 Offset { get; private set; }
 
@@ -21,7 +21,7 @@ namespace Alttp.GameObjects
             get { return new Vector2(Parent.Position.X + Offset.X - Sprite.Origin.X, Parent.Position.Y + Offset.Y - Sprite.Origin.Y); }
         }
 
-        public Shadow(GameObject parent, Sprite sprite, Vector2 offset)
+        public Shadow(IGameObject parent, Sprite sprite, Vector2 offset)
         {
             Parent = parent;
             Sprite = sprite;

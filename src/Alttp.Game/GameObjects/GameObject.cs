@@ -26,13 +26,11 @@ namespace Alttp.GameObjects
 
         private static int _nextAvailableIndex = 0;
 
-        private readonly AnimationsDict _animations;
-
         private Vector2 _position;
 
         #region Properties
 
-        public ILogger Log { get; set; }
+        public AnimationsDict Animations { get; private set; }
 
         public int Index { get; private set; }
 
@@ -45,11 +43,11 @@ namespace Alttp.GameObjects
 
         public Vector2 Direction { get; protected set; }
 
-        public string AnimationName { get; private set; }
+        public virtual string AnimationName { get; private set; }
 
         public Shadow Shadow { get; protected set; }
 
-        public Vector2 Position
+        public virtual Vector2 Position
         {
             get { return _position; }
             set { _position = value; }
@@ -61,10 +59,10 @@ namespace Alttp.GameObjects
 
         public Animation Animation
         {
-            get { return _animations[AnimationName]; }
+            get { return Animations[AnimationName]; }
         }
 
-        public Frame Frame
+        public virtual Frame Frame
         {
             get { return Animation.Frame; }
         }
@@ -96,11 +94,9 @@ namespace Alttp.GameObjects
 
         #endregion
 
-        public GameObject(ILogger logger, Vector2 position, AnimationsDict animations, string currentAnimation)
+        public GameObject(Vector2 position, AnimationsDict animations, string currentAnimation = "")
         {
-            Log = logger;
-
-            _animations = animations;
+            Animations = animations;
 
             AnimationName = currentAnimation;
 
@@ -131,7 +127,7 @@ namespace Alttp.GameObjects
             if (Shadow != null)
                 Shadow.Draw(batch);
 
-            Frame.Draw(batch, Position);
+            Frame.Draw(batch, Frame, Position);
         }
 
         public virtual void Move(Vector2 direction)

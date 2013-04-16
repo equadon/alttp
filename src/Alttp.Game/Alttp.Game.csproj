@@ -123,11 +123,14 @@
     <Compile Include="Debugging\DebugManager.cs" />
     <Compile Include="GameObjects\Bush.cs" />
     <Compile Include="GameObjects\GameObject.cs" />
+    <Compile Include="GameObjects\Interfaces\IEquipment.cs" />
     <Compile Include="GameObjects\Interfaces\IGameObject.cs" />
     <Compile Include="GameObjects\Interfaces\ILiftable.cs" />
     <Compile Include="GameObjects\Interfaces\ILootable.cs" />
     <Compile Include="GameObjects\Shadow.cs" />
     <Compile Include="Player.cs" />
+    <Compile Include="Shields\IShield.cs" />
+    <Compile Include="Shields\Shield.cs" />
     <Compile Include="Worlds\Camera.cs" />
     <Compile Include="Worlds\IWorld.cs" />
     <Compile Include="Worlds\Region.cs" />

@@ -10,8 +10,8 @@ namespace Alttp.GameObjects
 {
     public class Bush : GameObject//, ILootable, ILiftable
     {
-        public Bush(ILogger logger, Vector2 position, AnimationsDict animations, string currentAnimation)
-            : base(logger, position, animations, currentAnimation)
+        public Bush(Vector2 position, AnimationsDict animations, string currentAnimation)
+            : base(position, animations, currentAnimation)
         {
         }
     }

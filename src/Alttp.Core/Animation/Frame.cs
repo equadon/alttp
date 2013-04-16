@@ -38,10 +38,26 @@ namespace Alttp.Core.Animation
         /// Draw sprites in this frame.
         /// </summary>
         /// <param name="batch">SpriteBatch to draw with</param>
+        /// <param name="frame">Frame to draw</param>
         /// <param name="position">World position of frame</param>
-        public void Draw(ISpriteBatch batch, Vector2 position)
+        public static void Draw(ISpriteBatch batch, Frame frame, Vector2 position, params Frame[] extraFrames)
         {
-            foreach (var spriteRef in SpriteRefs)
+            var spriteRefs = new List<SpriteRef>(frame.SpriteRefs);
+
+            foreach (var extraFrame in extraFrames)
+            {
+                foreach (var sprRef in extraFrame.SpriteRefs)
+                {
+                    if (sprRef.Z < 0)
+                        spriteRefs.Add(sprRef);
+                    else if (sprRef.Z >= spriteRefs.Count)
+                        spriteRefs.Insert(0, sprRef);
+                    else
+                        spriteRefs.Insert(spriteRefs.Count - sprRef.Z, sprRef);
+                }
+            }
+
+            foreach (var spriteRef in spriteRefs)
             {
                 Vector2 spritePos = position;
                 spritePos.X += spriteRef.X;

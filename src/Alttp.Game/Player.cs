@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using Alttp.Core.Input;
 using Alttp.GameObjects;
+using Alttp.Shields;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Input;
 using Ninject.Extensions.Logging;
@@ -21,6 +22,11 @@ namespace Alttp
         public ILogger Log { get; set; }
 
         public GameObject Object { get; set; }
+
+        public Link Link
+        {
+            get { return Object as Link; }
+        }
 
         public Player(InputManager input)
         {

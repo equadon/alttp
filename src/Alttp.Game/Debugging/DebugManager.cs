@@ -4,6 +4,7 @@ using Alttp.Core.UI;
 using Alttp.Core.UI.Controls;
 using Alttp.Debugging.Overlays;
 using Alttp.GameObjects;
+using Alttp.Shields;
 using Alttp.Worlds;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
@@ -53,6 +54,9 @@ namespace Alttp.Debugging
         public GameObjectOverlay GameObjectOverlay { get; private set; }
         public MinimapOverlay MinimapOverlay { get; private set; }
 
+        // Test shield
+        public IShield TestShield { get; private set; }
+
         public DebugManager(Game game, GuiManager gui, IContentManager content, ISpriteBatch batch, InputManager input, WorldManager world)
             : base(game)
         {
@@ -93,6 +97,8 @@ namespace Alttp.Debugging
 
             BlankTexture = _content.Load<Texture2D>("Textures/Blank");
             MinimapTexture = _content.Load<Texture2D>("Textures/Minimap");
+
+            TestShield = new Shield(_world.Player.Object.Position, _world.Player.Object.Animations, _world.Player.Object, Vector2.Zero, ShieldTypes.Blue);
         }
 
         public override void Update(GameTime gameTime)
@@ -128,6 +134,14 @@ namespace Alttp.Debugging
             // Enable/disable region borders with the R key
             if (_input.IsKeyPressed(Keys.R))
                 RenderRegionBorders = !RenderRegionBorders;
+
+            // Equip shield
+            if (_input.IsKeyPressed(Keys.H))
+                if (_world.Player.Link != null)
+                    if (_world.Player.Link.ShieldEquipped)
+                        _world.Player.Link.UnequipShield();
+                    else
+                        _world.Player.Link.Equip(TestShield);
 
             Vector2 mousePos = _input.MousePos;
             RectangleF minimapBounds = MinimapOverlay.Minimap.GetAbsoluteBounds();

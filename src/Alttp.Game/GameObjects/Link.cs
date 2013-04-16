@@ -5,6 +5,7 @@ using System.Text;
 using Alttp.Core;
 using Alttp.Core.Animation;
 using Alttp.Core.Graphics;
+using Alttp.Shields;
 using Microsoft.Xna.Framework;
 using Ninject.Extensions.Logging;
 
@@ -12,15 +13,31 @@ namespace Alttp.GameObjects
 {
     public class Link : GameObject
     {
-        public Link(ILogger logger, Vector2 position, AnimationsDict animations, Sprite shadowSprite)
-            : base(logger, position, animations, "/Idle/Down")
+        public IShield Shield { get; private set; }
+
+        public bool ShieldEquipped
+        {
+            get { return Shield != null; }
+        }
+
+        public Link(Vector2 position, AnimationsDict animations, Sprite shadowSprite)
+            : base(position, animations, "/Idle/Down")
         {
             MaxSpeed = 1.3f;
             Animation.Fps = 60;
 
             Shadow = new Shadow(this, shadowSprite, new Vector2(2, 15));
+        }
 
-            Log.Debug("Loaded \"Link\" with {0} animation(s).", animations.Keys.Count);
+        public override void Draw(Nuclex.Ninject.Xna.ISpriteBatch batch)
+        {
+            if (Shadow != null)
+                Shadow.Draw(batch);
+
+            if (ShieldEquipped)
+                Frame.Draw(batch, Frame, Position, (Shield as GameObject).Frame);
+            else
+                Frame.Draw(batch, Frame, Position);
         }
 
         public override void Move(Vector2 direction)
@@ -41,6 +58,23 @@ namespace Alttp.GameObjects
             ChangeAnimation("/Swing/Sword/" + DirectionText, AnimationPlayAction.PlayOnce, GameObjectState.Attacking);
 
             Animation.Finished += IdleAnimationOnFinished;
+        }
+
+        /// <summary>
+        /// Equip shield.
+        /// </summary>
+        /// <param name="shield">Shield object to equip.</param>
+        public void Equip(IShield shield)
+        {
+            Shield = shield;
+        }
+
+        /// <summary>
+        /// Unequip shield.
+        /// </summary>
+        public void UnequipShield()
+        {
+            Shield = null;
         }
 
         public override void Idle()
