@@ -6,16 +6,19 @@ using Alttp.Core;
 using Alttp.Core.Animation;
 using Alttp.Core.Graphics;
 using Microsoft.Xna.Framework;
+using Ninject.Extensions.Logging;
 
 namespace Alttp.GameObjects
 {
     public class Link : GameObject
     {
-        public Link(Vector2 position, AnimationsDict animations)
-            : base(position, animations, "/Idle/Down")
+        public Link(ILogger logger, Vector2 position, AnimationsDict animations)
+            : base(logger, position, animations, "/Idle/Down")
         {
             MaxSpeed = 1.3f;
             Animation.Fps = 60;
+
+            Log.Debug("Loaded \"Link\" with {0} animation(s).", animations.Keys.Count);
         }
 
         public override void Move(Vector2 direction)

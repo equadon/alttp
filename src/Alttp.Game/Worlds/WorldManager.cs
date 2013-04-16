@@ -78,7 +78,7 @@ namespace Alttp.Worlds
         {
             base.LoadContent();
 
-            Player.Object = new Link(new Vector2(2230, 2820), _content.Load<AnimationsDict>("GameObjects/Link/LinkAnimations"));
+            Player.Object = new Link(Log, new Vector2(2230, 2820), _content.Load<AnimationsDict>("GameObjects/Link/LinkAnimations"));
         }
 
         public override void Draw(GameTime gameTime)

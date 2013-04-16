@@ -141,7 +141,7 @@ namespace Alttp.Worlds
 
                 var position = new Vector2(x - mapObject.Bounds.Width / 2f, y - mapObject.Bounds.Height / 2f);
 
-                var bush = new Bush(position, WorldObjectAnimations, "/Bush/Green/Idle");
+                var bush = new Bush(Log, position, WorldObjectAnimations, "/Bush/Green/Idle");
 
                 if (Objects[tileX, tileY] == null)
                     Objects[tileX, tileY] = new List<GameObject>();

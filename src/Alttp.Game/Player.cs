@@ -6,6 +6,7 @@ using Alttp.Core.Input;
 using Alttp.GameObjects;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Input;
+using Ninject.Extensions.Logging;
 using Nuclex.Ninject.Xna;
 
 namespace Alttp
@@ -16,6 +17,8 @@ namespace Alttp
     public class Player
     {
         private readonly InputManager _input;
+
+        public ILogger Log { get; set; }
 
         public GameObject Object { get; set; }
 

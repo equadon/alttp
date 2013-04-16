@@ -7,6 +7,7 @@ using Alttp.Core.Animation;
 using Alttp.Core.Graphics;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using Ninject.Extensions.Logging;
 using Nuclex.Ninject.Xna;
 using Nuclex.UserInterface;
 
@@ -30,6 +31,8 @@ namespace Alttp.GameObjects
         private Vector2 _position;
 
         #region Properties
+
+        public ILogger Log { get; set; }
 
         public int Index { get; private set; }
 
@@ -91,8 +94,10 @@ namespace Alttp.GameObjects
 
         #endregion
 
-        public GameObject(Vector2 position, AnimationsDict animations, string currentAnimation)
+        public GameObject(ILogger logger, Vector2 position, AnimationsDict animations, string currentAnimation)
         {
+            Log = logger;
+
             _animations = animations;
 
             AnimationName = currentAnimation;
