@@ -83,6 +83,52 @@
       <region source="controls" hplacement="stretch" vplacement="stretch" x="0" y="64" w="19" h="19" />
       <text font="default" hplacement="left" vplacement="center" xoffset="10" yoffset="0" color="#3F3F3F" />
     </frame>
+
+    <!--
+      Check button OFF
+    -->
+    <frame name="check.off.disabled">
+      <region source="controls" hplacement="stretch" vplacement="stretch" x="60" y="84" w="19" h="19" />
+      <text font="default" hplacement="left" vplacement="center" xoffset="10" yoffset="0" color="#7f7f7f" />
+    </frame>
+
+    <frame name="check.off.normal">
+      <region source="controls" hplacement="stretch" vplacement="stretch" x="60" y="64" w="19" h="19" />
+      <text font="default" hplacement="left" vplacement="center" xoffset="10" yoffset="0" color="#3F3F3F" />
+    </frame>
+
+    <frame name="check.off.highlighted">
+      <region source="controls" hplacement="stretch" vplacement="stretch" x="60" y="104" w="19" h="19" />
+      <text font="default" hplacement="left" vplacement="center" xoffset="10" yoffset="0" color="#3F3F3F" />
+    </frame>
+
+    <frame name="check.off.depressed">
+      <region source="controls" hplacement="stretch" vplacement="stretch" x="60" y="104" w="19" h="19" />
+      <text font="default" hplacement="left" vplacement="center" xoffset="10" yoffset="0" color="#3F3F3F" />
+    </frame>
+
+    <!--
+      Check button ON
+    -->
+    <frame name="check.on.disabled">
+      <region source="controls" hplacement="stretch" vplacement="stretch" x="40" y="84" w="19" h="19" />
+      <text font="default" hplacement="left" vplacement="center" xoffset="10" yoffset="0" color="#7f7f7f" />
+    </frame>
+
+    <frame name="check.on.normal">
+      <region source="controls" hplacement="stretch" vplacement="stretch" x="40" y="64" w="19" h="19" />
+      <text font="default" hplacement="left" vplacement="center" xoffset="10" yoffset="0" color="#3F3F3F" />
+    </frame>
+
+    <frame name="check.on.highlighted">
+      <region source="controls" hplacement="stretch" vplacement="stretch" x="40" y="104" w="19" h="19" />
+      <text font="default" hplacement="left" vplacement="center" xoffset="10" yoffset="0" color="#3F3F3F" />
+    </frame>
+
+    <frame name="check.on.depressed">
+      <region source="controls" hplacement="stretch" vplacement="stretch" x="40" y="104" w="19" h="19" />
+      <text font="default" hplacement="left" vplacement="center" xoffset="10" yoffset="0" color="#3F3F3F" />
+    </frame>
     
   </frames>
 
