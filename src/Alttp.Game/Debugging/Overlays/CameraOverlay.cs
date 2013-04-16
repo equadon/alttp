@@ -5,6 +5,7 @@ using Alttp.Worlds;
 using Microsoft.Xna.Framework;
 using Nuclex.UserInterface;
 using Nuclex.UserInterface.Controls;
+using Nuclex.UserInterface.Controls.Desktop;
 
 namespace Alttp.Debugging.Overlays
 {
@@ -30,6 +31,8 @@ namespace Alttp.Debugging.Overlays
         private LabelControl _lblTileSize;
         private LabelControl _lblRegion;
 
+        private OptionControl _optLockCamera;
+
         public string TitleText { get { return String.Format(LblTitleFormat, _world.ActiveCamera.Name); } }
         public string PositionText { get { return String.Format(LblPositionFormat, _world.ActiveCamera.Position.X, _world.ActiveCamera.Position.Y); } }
 
@@ -54,6 +57,9 @@ namespace Alttp.Debugging.Overlays
             _input = input;
 
             SetupControls();
+
+            // Register event for when the lock camera check box is changed
+            _optLockCamera.Changed += OptLockCameraOnChanged;
 
             CalculateHeight();
         }
@@ -101,6 +107,15 @@ namespace Alttp.Debugging.Overlays
                 Text = ZoomText
             };
             Children.Add(_lblRegion);
+
+            _optLockCamera = new OptionControl()
+                {
+                    Bounds = new UniRectangle(new UniScalar(0, 10), new UniScalar(0, 40 + Children.Count * 25), 15, 19),
+                    Enabled = true,
+                    Selected = false,
+                    Text = "Lock Camera"
+                };
+            Children.Add(_optLockCamera);
         }
 
         public override void Update(GameTime gameTime)
@@ -115,6 +130,14 @@ namespace Alttp.Debugging.Overlays
             _lblZoom.Text = ZoomText;
             _lblTileSize.Text = TileSizeText;
             _lblRegion.Text = RegionText;
+        }
+
+        private void OptLockCameraOnChanged(object sender, EventArgs eventArgs)
+        {
+            if (_optLockCamera.Selected)
+                _world.ActiveCamera.Follow(_world.Player.Object);
+            else
+                _world.ActiveCamera.Free();
         }
     }
 }
