@@ -130,6 +130,7 @@ namespace Alttp.Debugging.Overlays
             _lblZoom.Text = ZoomText;
             _lblTileSize.Text = TileSizeText;
             _lblRegion.Text = RegionText;
+            _optLockCamera.Selected = _world.ActiveCamera.CameraMode == CameraMode.Follow;
         }
 
         private void OptLockCameraOnChanged(object sender, EventArgs eventArgs)
