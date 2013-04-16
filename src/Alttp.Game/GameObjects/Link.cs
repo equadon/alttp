@@ -12,11 +12,13 @@ namespace Alttp.GameObjects
 {
     public class Link : GameObject
     {
-        public Link(ILogger logger, Vector2 position, AnimationsDict animations)
+        public Link(ILogger logger, Vector2 position, AnimationsDict animations, Sprite shadowSprite)
             : base(logger, position, animations, "/Idle/Down")
         {
             MaxSpeed = 1.3f;
             Animation.Fps = 60;
+
+            Shadow = new Shadow(this, shadowSprite, new Vector2(2, 15));
 
             Log.Debug("Loaded \"Link\" with {0} animation(s).", animations.Keys.Count);
         }

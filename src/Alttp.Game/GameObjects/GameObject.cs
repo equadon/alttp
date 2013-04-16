@@ -47,6 +47,8 @@ namespace Alttp.GameObjects
 
         public string AnimationName { get; private set; }
 
+        public Shadow Shadow { get; protected set; }
+
         public Vector2 Position
         {
             get { return _position; }
@@ -126,6 +128,9 @@ namespace Alttp.GameObjects
 
         public virtual void Draw(ISpriteBatch batch)
         {
+            if (Shadow != null)
+                Shadow.Draw(batch);
+
             Frame.Draw(batch, Position);
         }
 

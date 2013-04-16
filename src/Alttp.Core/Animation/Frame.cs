@@ -27,6 +27,8 @@ namespace Alttp.Core.Animation
 
         /// <summary>
         /// Draw sprites in this frame.
+        /// 
+        /// TODO: Remove shadows from anims?
         /// </summary>
         /// <param name="batch">SpriteBatch to draw with</param>
         /// <param name="position">World position of frame</param>
@@ -34,6 +36,9 @@ namespace Alttp.Core.Animation
         {
             foreach (var spriteRef in SpriteRefs)
             {
+                if (spriteRef.Name == "/Shadow")
+                    continue;
+
                 Vector2 spritePos = position;
                 spritePos.X += spriteRef.X;
                 spritePos.Y += spriteRef.Y;
