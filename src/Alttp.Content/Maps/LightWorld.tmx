@@ -22,7 +22,6 @@
   </data>
  </layer>
  <objectgroup name="Regions" width="256" height="256" visible="0">
-  <object name="Lost Woods" type="Region" x="0" y="0" width="1024" height="1024"/>
   <object name="Lost Woods Outer" type="Region" x="0" y="1024">
    <polygon points="0,0 1024,0 1024,-1024 1536,-1024 1536,512 0,512"/>
   </object>
@@ -49,6 +48,9 @@
   </object>
   <object name="Zora's Falls" type="Region" x="3584" y="512">
    <polygon points="0,0 512,0 512,1024 0,1024"/>
+  </object>
+  <object name="Lost Woods" type="Region" x="0" y="0">
+   <polygon points="0,0 1024,0 1024,1024 0,1024"/>
   </object>
  </objectgroup>
  <objectgroup name="Bushes" width="256" height="256">

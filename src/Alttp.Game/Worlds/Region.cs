@@ -24,6 +24,39 @@ namespace Alttp.Worlds
             Name = name;
             Bounds = bounds;
             Polygon = polygon;
+
+            // Move polygon points at x=0 or y=0 to -1 so 0,0 is Contained within the region
+            UpdatePolygon();
+        }
+
+        private void UpdatePolygon()
+        {
+            for (int i = 0; i < Polygon.Points.Length; i++)
+            {
+                var point = Polygon.Points[i];
+
+                if (point.X == 0)
+                    Polygon.Points[i] = new Point(-1, point.Y);
+                if (point.Y == 0)
+                    Polygon.Points[i] = new Point(point.X, -1);
+            }
+
+            for (int i = 0; i < Polygon.Lines.Length; i++)
+            {
+                var line = Polygon.Lines[i];
+
+                if (line.Start.X == 0)
+                    line.Start = new Vector2(-1, line.Start.Y);
+                if (line.Start.Y == 0)
+                    line.Start = new Vector2(line.Start.X, -1);
+
+                if (line.End.X == 0)
+                    line.End = new Vector2(-1, line.End.Y);
+                if (line.End.Y == 0)
+                    line.End = new Vector2(line.End.X, -1);
+
+                Polygon.Lines[i] = line;
+            }
         }
 
         /// <summary>

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using Alttp.Core.Animation;
 using Alttp.GameObjects;
@@ -102,7 +103,9 @@ namespace Alttp.Worlds
             var regions = new List<Region>();
 
             foreach (var obj in layer.MapObjects)
+            {
                 regions.Add(new Region(obj.Name, obj.Bounds, obj.Polygon));
+            }
 
             return regions.ToArray();
         }
