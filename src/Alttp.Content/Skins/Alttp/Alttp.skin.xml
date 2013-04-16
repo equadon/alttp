@@ -37,6 +37,47 @@
     <frame name="label">
       <text font="default" hplacement="left" vplacement="center" yoffset="5" color="#3F3F3F" />
     </frame>
+
+    <!--
+      Radio button OFF
+    -->
+    <frame name="radio.off.disabled">
+      <region source="controls" hplacement="stretch" vplacement="stretch" x="0" y="106" w="13" h="13" />
+      <text font="default" hplacement="left" vplacement="center" xoffset="10" yoffset="0" color="#7f7f7f" />
+    </frame>
+    
+    <frame name="radio.off.normal">
+      <region source="controls" hplacement="stretch" vplacement="stretch" x="0" y="64" w="13" h="13" />
+      <text font="default" hplacement="left" vplacement="center" xoffset="10" yoffset="0" color="#3F3F3F" />
+    </frame>
+    
+    <frame name="radio.off.highlighted">
+      <region source="controls" hplacement="stretch" vplacement="stretch" x="0" y="78" w="13" h="13" />
+      <text font="default" hplacement="left" vplacement="center" xoffset="10" yoffset="0" color="#3F3F3F" />
+    </frame>
+    
+    <frame name="radio.off.depressed">
+      <region source="controls" hplacement="stretch" vplacement="stretch" x="0" y="92" w="13" h="13" />
+      <text font="default" hplacement="left" vplacement="center" xoffset="10" yoffset="0" color="#3F3F3F" />
+    </frame>
+
+    <!--
+      Radio button ON
+    -->
+    <frame name="radio.on.normal">
+      <region source="controls" hplacement="stretch" vplacement="stretch" x="14" y="64" w="13" h="13" />
+      <text font="default" hplacement="left" vplacement="center" xoffset="10" yoffset="0" color="#3F3F3F" />
+    </frame>
+
+    <frame name="radio.on.highlighted">
+      <region source="controls" hplacement="stretch" vplacement="stretch" x="14" y="78" w="13" h="13" />
+      <text font="default" hplacement="left" vplacement="center" xoffset="10" yoffset="0" color="#3F3F3F" />
+    </frame>
+
+    <frame name="radio.on.depressed">
+      <region source="controls" hplacement="stretch" vplacement="stretch" x="14" y="92" w="13" h="13" />
+      <text font="default" hplacement="left" vplacement="center" xoffset="10" yoffset="0" color="#3F3F3F" />
+    </frame>
     
   </frames>
 
