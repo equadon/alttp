@@ -1,4 +1,5 @@
-﻿using Alttp.Core.Graphics;
+﻿using System.Collections.Generic;
+using Alttp.Core.Graphics;
 using Microsoft.Xna.Framework;
 using Nuclex.Ninject.Xna;
 using Nuclex.UserInterface;
@@ -21,14 +22,20 @@ namespace Alttp.Core.Animation
         public Frame(int index, SpriteRef[] spriteRefs, RectangleF bounds)
         {
             Index = index;
-            SpriteRefs = spriteRefs;
             Bounds = bounds;
+
+            // TEMP TODO: Remove shadow sprite since we draw that separately. Eventually we need
+            // to delete it from the .anim file.
+            var refs = new List<SpriteRef>();
+            foreach (var spriteRef in spriteRefs)
+                if (spriteRef.Name != "/Shadow")
+                    refs.Add(spriteRef);
+
+            SpriteRefs = refs.ToArray();
         }
 
         /// <summary>
         /// Draw sprites in this frame.
-        /// 
-        /// TODO: Remove shadows from anims?
         /// </summary>
         /// <param name="batch">SpriteBatch to draw with</param>
         /// <param name="position">World position of frame</param>
@@ -36,9 +43,6 @@ namespace Alttp.Core.Animation
         {
             foreach (var spriteRef in SpriteRefs)
             {
-                if (spriteRef.Name == "/Shadow")
-                    continue;
-
                 Vector2 spritePos = position;
                 spritePos.X += spriteRef.X;
                 spritePos.Y += spriteRef.Y;
