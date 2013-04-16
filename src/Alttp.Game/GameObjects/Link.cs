@@ -61,12 +61,15 @@ namespace Alttp.GameObjects
         }
 
         /// <summary>
-        /// Equip shield.
+        /// Equip equipment.
         /// </summary>
-        /// <param name="shield">Shield object to equip.</param>
-        public void Equip(IShield shield)
+        /// <param name="equipment">Equipment to equip.</param>
+        public void Equip(IEquipment equipment)
         {
-            Shield = shield;
+            var shield = equipment as IShield;
+
+            if (shield != null)
+                Shield = shield;
         }
 
         /// <summary>
