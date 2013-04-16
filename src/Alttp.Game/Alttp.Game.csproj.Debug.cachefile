@@ -15,3 +15,4 @@ Content\GameObjects\WorldObjects\LightWorldObjectsTileset.xnb
 Content\Maps\LightWorld\00.xnb
 Content\Maps\LightWorld\01.xnb
 Content\Skins\Alttp\Alttp.skin.xml
+NLog.config

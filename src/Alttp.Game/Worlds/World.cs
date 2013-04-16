@@ -6,12 +6,15 @@ using Alttp.Core.Animation;
 using Alttp.GameObjects;
 using FuncWorks.XNA.XTiled;
 using Microsoft.Xna.Framework;
+using Ninject.Extensions.Logging;
 using Nuclex.Ninject.Xna;
 
 namespace Alttp.Worlds
 {
     public class World : IWorld
     {
+        protected ILogger Log { get; set; }
+
         public bool RenderCollisionTiles { get; set; }
 
         public Region[] Regions { get; private set; }
@@ -38,18 +41,22 @@ namespace Alttp.Worlds
 
         public List<GameObject>[,] Objects { get; private set; }
 
-        public World(IContentManager content, string mapResource, string worldObjectsResource)
-            : this(content.Load<Map>(mapResource), content.Load<AnimationsDict>(worldObjectsResource))
+        public World(IContentManager content, string mapResource, string worldObjectsResource, ILogger logger)
+            : this(content.Load<Map>(mapResource), content.Load<AnimationsDict>(worldObjectsResource), logger)
         {
         }
 
-        public World(Map map, AnimationsDict worldObjectAnimations)
+        public World(Map map, AnimationsDict worldObjectAnimations, ILogger logger)
         {
+            Log = logger;
+
             TileWidth = map.TileWidth;
             TileHeight = map.TileHeight;
 
             Width = map.Width;
             Height = map.Height;
+
+            Log.Info("Loading \"" + GetType().Name + "\"...");
 
             Objects = new List<GameObject>[Width, Height];
             WorldObjectAnimations = worldObjectAnimations;
@@ -74,9 +81,11 @@ namespace Alttp.Worlds
                     bushes = layer;
             }
 
-            Regions = LoadRegions(regions);
+            LoadRegions(regions);
 
             LoadBushes(bushes);
+
+            Log.Info("Successfully loaded \"" + GetType().Name + "\".");
         }
 
         private void LoadTileLayers(Map map)
@@ -93,21 +102,26 @@ namespace Alttp.Worlds
 
             if (BackgroundTiles == null || ForegroundTiles == null || CollisionTiles == null)
                 throw new Exception("Failed to load map layers");
+
+            Log.Debug(" + 3 tile layers.");
         }
 
-        private Region[] LoadRegions(ObjectLayer layer)
+        private void LoadRegions(ObjectLayer layer)
         {
             if (layer == null)
-                return new Region[0];
+            {
+                Regions = new Region[0];
+                return;
+            }
 
             var regions = new List<Region>();
 
             foreach (var obj in layer.MapObjects)
-            {
                 regions.Add(new Region(obj.Name, obj.Bounds, obj.Polygon));
-            }
 
-            return regions.ToArray();
+            Regions = regions.ToArray();
+
+            Log.Debug(" + {0} region(s).", Regions.Length);
         }
 
         /// <summary>
@@ -136,7 +150,7 @@ namespace Alttp.Worlds
                 count++;
             }
 
-            Console.WriteLine("Loaded {0} bush objects.", count);
+            Log.Debug(" + {0} bushes.", count);
         }
 
         /// <summary>
