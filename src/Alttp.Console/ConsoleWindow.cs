@@ -51,6 +51,8 @@ namespace Alttp.Console
         {
             _state = ConsoleState.Closed;
 
+            EnableDragging = false;
+
             Width = width;
             Height = height;
 
