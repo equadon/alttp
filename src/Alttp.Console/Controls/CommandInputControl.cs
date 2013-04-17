@@ -9,15 +9,17 @@ namespace Alttp.Console
 {
     public class CommandInputControl : InputControl
     {
-        public CommandInputControl()
+        private CommandProcessor _processor;
+
+        public CommandInputControl(CommandProcessor processor)
         {
-            
+            _processor = processor;
         }
 
         protected override bool OnKeyPressed(Keys key)
         {
             if (key == Keys.Enter)
-                Clear();
+                ProcessCommand(Text);
 
             return base.OnKeyPressed(key);
         }
@@ -26,9 +28,18 @@ namespace Alttp.Console
         {
         }
 
+        public void ProcessCommand(string input)
+        {
+            if (input != null || input != "")
+            {
+                _processor.Process(input);
+                Clear();
+            }
+        }
+
         public void Clear()
         {
-            Text = "> ";
+            Text = ">>> ";
         }
     }
 }

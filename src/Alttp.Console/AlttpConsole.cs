@@ -9,6 +9,8 @@ using Microsoft.Xna.Framework.Input;
 using Ninject.Extensions.Logging;
 using Nuclex.Ninject.Xna;
 using Nuclex.UserInterface;
+using Boo.Lang.Compiler;
+using Boo.Lang.Interpreter;
 
 namespace Alttp.Console
 {
@@ -27,6 +29,8 @@ namespace Alttp.Console
         private readonly GuiManager _gui;
         private readonly Game _game;
 
+        private readonly CommandProcessor _processor;
+
         protected ILogger Log { get; set; }
 
         public ConsoleWindow Window { get; private set; }
@@ -40,6 +44,8 @@ namespace Alttp.Console
             _batch = batch;
             _gui = gui;
 
+            _processor = new CommandProcessor();
+
             Log.Debug("Initialized console");
         }
 
@@ -48,7 +54,7 @@ namespace Alttp.Console
             base.Initialize();
 
             // Setup UI
-            Window = new ConsoleWindow(_gui.Screen, (int)(_game.GraphicsDevice.Viewport.Width * 0.75f), (int)(_game.GraphicsDevice.Viewport.Height * 0.67f));
+            Window = new ConsoleWindow(_processor, _gui.Screen, (int)(_game.GraphicsDevice.Viewport.Width * 0.75f), (int)(_game.GraphicsDevice.Viewport.Height * 0.67f));
 
             _gui.Screen.Desktop.Children.Add(Window);
         }

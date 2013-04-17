@@ -2,16 +2,19 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using Boo.Lang.Interpreter;
 
 namespace Alttp.Console
 {
     public class CommandProcessor
     {
-        private Dictionary<string, IConsoleCommand> _commands;
+        private readonly InteractiveInterpreter _boo;
 
         public CommandProcessor()
         {
-            _commands = new Dictionary<string, IConsoleCommand>();
+            _boo = new InteractiveInterpreter();
+            _boo.Ducky = true;
+            _boo.RememberLastValue = true;
         }
 
         /// <summary>
@@ -22,11 +25,6 @@ namespace Alttp.Console
         public string Process(string input)
         {
             return "";
-        }
-
-        public void AddCommand(IConsoleCommand command)
-        {
-            _commands.Add(command.Name, command);
         }
     }
 }

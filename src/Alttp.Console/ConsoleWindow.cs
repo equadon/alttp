@@ -16,6 +16,7 @@ namespace Alttp.Console
 
         private ConsoleState _state;
         private Screen _screen;
+        private CommandProcessor _processor;
 
         private DateTime _stateChangeTime;
 
@@ -56,10 +57,11 @@ namespace Alttp.Console
 
         #endregion
 
-        public ConsoleWindow(Screen screen, int width, int height)
+        public ConsoleWindow(CommandProcessor processor, Screen screen, int width, int height)
         {
             _state = ConsoleState.Closed;
             _screen = screen;
+            _processor = processor;
 
             EnableDragging = false;
 
@@ -75,12 +77,12 @@ namespace Alttp.Console
         {
             // Command input prompt
             const int cmdPromptHeight = 26;
-            CommandInput = new CommandInputControl()
+            CommandInput = new CommandInputControl(_processor)
                 {
                     Bounds = new UniRectangle(1, Bounds.Size.Y - cmdPromptHeight - 1, Bounds.Size.X - 2, cmdPromptHeight),
-                    Enabled = false,
-                    Text = "> "
+                    Enabled = false
                 };
+            CommandInput.Clear();
 
             Children.Add(CommandInput);
         }
