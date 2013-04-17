@@ -73,19 +73,6 @@ namespace Alttp.Debugging
         {
             base.Initialize();
 
-            _gui.Visualizer = FlatGuiVisualizer.FromFile(Game.Services, @"Content/Skins/Alttp/Alttp.skin.xml");
-            
-            // Add image control renderer to renderer repository
-            var flatGuiVisualizer = _gui.Visualizer as FlatGuiVisualizer;
-
-            if (flatGuiVisualizer == null)
-                throw new NullReferenceException("flatGuiVisualizer cannot be null");
-
-            flatGuiVisualizer.RendererRepository.AddAssembly(typeof(FlatImageControlRenderer).Assembly);
-
-            _gui.Screen = new Screen(Game.GraphicsDevice.Viewport.Width, Game.GraphicsDevice.Viewport.Height);
-            _gui.DrawOrder = 1100;
-
             SelectionBounds = Rectangle.Empty;
 
             SetupOverlays();
@@ -107,8 +94,6 @@ namespace Alttp.Debugging
             ElapsedTime = gameTime;
 
             base.Update(gameTime);
-
-            _gui.Update(gameTime);
             
             // Update overlays
             foreach (var child in _gui.Screen.Desktop.Children)
