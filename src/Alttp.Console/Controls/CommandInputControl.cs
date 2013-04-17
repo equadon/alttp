@@ -9,7 +9,7 @@ namespace Alttp.Console
 {
     public class CommandInputControl : InputControl
     {
-        private PythonInterpreter _processor;
+        private readonly PythonInterpreter _processor;
 
         public CommandInputControl(PythonInterpreter processor)
         {
@@ -18,14 +18,13 @@ namespace Alttp.Console
 
         protected override bool OnKeyPressed(Keys key)
         {
-            if (key == Keys.Enter)
-                ProcessCommand(Text);
-
-            return base.OnKeyPressed(key);
+            return (key == Keys.Enter || base.OnKeyPressed(key));
         }
 
         protected override void OnKeyReleased(Keys key)
         {
+            if (key == Keys.Enter)
+                ProcessCommand(Text);
         }
 
         public void ProcessCommand(string input)

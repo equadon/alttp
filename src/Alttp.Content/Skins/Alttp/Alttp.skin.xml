@@ -160,7 +160,7 @@
       <region source="controls" hplacement="left" vplacement="bottom" x="0" y="161" w="5" h="5" />
       <region source="controls" hplacement="stretch" vplacement="bottom" x="5" y="161" w="1" h="5" />
       <region source="controls" hplacement="right" vplacement="bottom" x="122" y="161" w="5" h="5" />
-      <text font="default" color="#000000" hplacement="left" vplacement="top" xoffset="4" yoffset="15" />
+      <text font="console" color="#000000" hplacement="left" vplacement="top" xoffset="0" yoffset="0" />
     </frame>
     <frame name="list.selection">
       <region source="controls" hplacement="left" vplacement="top" x="0" y="189" w="2" h="2" />
@@ -187,7 +187,7 @@
       <region source="controls" hplacement="left" vplacement="bottom" x="0" y="161" w="5" h="5" />
       <region source="controls" hplacement="stretch" vplacement="bottom" x="5" y="161" w="1" h="5" />
       <region source="controls" hplacement="right" vplacement="bottom" x="122" y="161" w="5" h="5" />
-      <text font="default" color="#000000" hplacement="left" vplacement="top" xoffset="4" yoffset="15" />
+      <text font="console" color="#000000" hplacement="left" vplacement="top" xoffset="4" yoffset="15" />
     </frame>
 
     <!--

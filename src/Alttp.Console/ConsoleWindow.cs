@@ -79,8 +79,8 @@ namespace Alttp.Console
             SetupControls();
 
             // Subscribe to command events
-            _python.CommandReceived += PythonOnCommand;
-            _python.CommandProcessed += PythonOnCommand;
+            _python.CommandInputReceived += PythonOnCommandReceived;
+            _python.CommandProcessed += PythonOnCommandProcessed;
         }
 
         private void SetupControls()
@@ -157,11 +157,16 @@ namespace Alttp.Console
 
         #region Command Events
 
-        private void PythonOnCommand(object sender, OutputEventArgs e)
+        private void PythonOnCommandReceived(object sender, OutputEventArgs e)
         {
             var output = new ConsoleOutput(e.Output, e.Type);
             Outputs.Add(output);
-            OutputList.Items.Add(output.ToString());
+            OutputList.Items.Add(e.ToString());
+        }
+
+        private void PythonOnCommandProcessed(object sender, OutputEventArgs e)
+        {
+            OutputList.Items.Add(e.ToString());
         }
 
         #endregion

@@ -20,8 +20,6 @@ namespace Alttp.Console
         {
             if (Type == ConsoleOutputType.Command)
                 return ">>> " + Output;
-            if (Type == ConsoleOutputType.Output)
-                return "<<< " + Output;
             return Output;
         }
     }

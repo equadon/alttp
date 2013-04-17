@@ -14,7 +14,7 @@ namespace Alttp.Console
 
     public class PythonInterpreter
     {
-        public event CommandEventHandler CommandReceived;
+        public event CommandEventHandler CommandInputReceived;
         public event CommandEventHandler CommandProcessed;
 
         private readonly ScriptEngine _engine;
@@ -26,6 +26,8 @@ namespace Alttp.Console
         {
             _engine = Python.CreateEngine();
             _scope = _engine.CreateScope();
+
+            CommandHistory = new List<string>();
         }
 
         /// <summary>
@@ -47,13 +49,13 @@ namespace Alttp.Console
                 output = source.Execute(_scope).ToString();
 
                 CommandHistory.Add(input);
-
-                OnCommandProcessed(new OutputEventArgs(output, ConsoleOutputType.Output));
             }
             catch (Exception e)
             {
                 output = "Error executing code: " + e;
             }
+
+            OnCommandProcessed(new OutputEventArgs(output, ConsoleOutputType.Output));
 
             return output;
         }
@@ -65,7 +67,9 @@ namespace Alttp.Console
         /// <returns>Cleaned user input</returns>
         private string CleanInput(string input)
         {
-            string cleaned = input.Trim(' ');
+            string cleaned = input.Replace(@"\r", "");
+                
+            cleaned = input.Trim(' ');
 
             if (cleaned.StartsWith(">"))
                 cleaned = cleaned.TrimStart('>');
@@ -75,8 +79,8 @@ namespace Alttp.Console
 
         private void OnCommandReceived(OutputEventArgs e)
         {
-            if (CommandReceived != null)
-                CommandReceived(this, e);
+            if (CommandInputReceived != null)
+                CommandInputReceived(this, e);
         }
 
         private void OnCommandProcessed(OutputEventArgs e)
