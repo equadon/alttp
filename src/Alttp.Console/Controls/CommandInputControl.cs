@@ -9,9 +9,9 @@ namespace Alttp.Console
 {
     public class CommandInputControl : InputControl
     {
-        private CommandProcessor _processor;
+        private PythonInterpreter _processor;
 
-        public CommandInputControl(CommandProcessor processor)
+        public CommandInputControl(PythonInterpreter processor)
         {
             _processor = processor;
         }

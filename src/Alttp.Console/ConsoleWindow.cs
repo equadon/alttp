@@ -14,9 +14,9 @@ namespace Alttp.Console
         public static readonly int OffsetX = 20;
         public static readonly int OffsetY = -26;
 
+        private readonly PythonInterpreter _python;
+        private readonly Screen _screen;
         private ConsoleState _state;
-        private Screen _screen;
-        private CommandProcessor _processor;
 
         private DateTime _stateChangeTime;
 
@@ -57,11 +57,11 @@ namespace Alttp.Console
 
         #endregion
 
-        public ConsoleWindow(CommandProcessor processor, Screen screen, int width, int height)
+        public ConsoleWindow(PythonInterpreter python, Screen screen, int width, int height)
         {
             _state = ConsoleState.Closed;
             _screen = screen;
-            _processor = processor;
+            _python = python;
 
             EnableDragging = false;
 
@@ -77,7 +77,7 @@ namespace Alttp.Console
         {
             // Command input prompt
             const int cmdPromptHeight = 26;
-            CommandInput = new CommandInputControl(_processor)
+            CommandInput = new CommandInputControl(_python)
                 {
                     Bounds = new UniRectangle(1, Bounds.Size.Y - cmdPromptHeight - 1, Bounds.Size.X - 2, cmdPromptHeight),
                     Enabled = false
