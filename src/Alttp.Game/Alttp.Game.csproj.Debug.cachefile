@@ -2,6 +2,7 @@ Content\Fonts\DebugFont.xnb
 Content\Fonts\DebugTitleFont.xnb
 Content\Skins\Alttp\DefaultFont.xnb
 Content\Skins\Alttp\TitleFont.xnb
+Content\Skins\Alttp\ConsoleFont.xnb
 Content\GameObjects\Link\LinkAnimations.xnb
 Content\GameObjects\WorldObjects\LightWorldObjectAnimations.xnb
 Content\GameObjects\Link\LinkSprites.xnb
@@ -14,6 +15,5 @@ Content\GameObjects\Link\LinkTileset.xnb
 Content\GameObjects\WorldObjects\LightWorldObjectsTileset.xnb
 Content\Maps\LightWorld\00.xnb
 Content\Maps\LightWorld\01.xnb
-Content\Skins\Alttp\ConsoleFont.xnb
 Content\Skins\Alttp\Alttp.skin.xml
 NLog.config
