@@ -22,6 +22,9 @@ namespace Alttp.Console
 
         #region Properties
 
+        /// <summary>List of all command lines</summary>
+        public List<ConsoleOutput> Outputs { get; private set; }
+
         public int Width { get; private set; }
         public int Height { get; private set; }
 
@@ -57,11 +60,11 @@ namespace Alttp.Console
 
         #endregion
 
-        public ConsoleWindow(PythonInterpreter python, Screen screen, int width, int height)
+        public ConsoleWindow(Screen screen, int width, int height)
         {
             _state = ConsoleState.Closed;
             _screen = screen;
-            _python = python;
+            _python = new PythonInterpreter();
 
             EnableDragging = false;
 
@@ -70,7 +73,13 @@ namespace Alttp.Console
 
             Bounds = new UniRectangle(20, ClosedY, Width, Height);
 
+            Outputs = new List<ConsoleOutput>();
+
             SetupControls();
+
+            // Subscribe to command events
+            _python.CommandReceived += PythonOnCommand;
+            _python.CommandProcessed += PythonOnCommand;
         }
 
         private void SetupControls()
@@ -131,6 +140,15 @@ namespace Alttp.Console
             _stateChangeTime = DateTime.Now;
             CommandInput.Enabled = false;
             _screen.FocusedControl = this;
+        }
+
+        #endregion
+
+        #region Command Events
+
+        private void PythonOnCommand(object sender, OutputEventArgs e)
+        {
+            Outputs.Add(new ConsoleOutput(e.Output, e.Type));
         }
 
         #endregion

@@ -27,7 +27,7 @@ namespace Alttp.Console
         private readonly GuiManager _gui;
         private readonly Game _game;
 
-        private readonly PythonInterpreter _python;
+        private PythonInterpreter _python;
 
         protected ILogger Log { get; set; }
 
@@ -42,8 +42,6 @@ namespace Alttp.Console
             _batch = batch;
             _gui = gui;
 
-            _python = new PythonInterpreter();
-
             Log.Debug("Initialized console");
         }
 
@@ -52,9 +50,11 @@ namespace Alttp.Console
             base.Initialize();
 
             // Setup UI
-            Window = new ConsoleWindow(_python, _gui.Screen, (int)(_game.GraphicsDevice.Viewport.Width * 0.75f), (int)(_game.GraphicsDevice.Viewport.Height * 0.67f));
+            Window = new ConsoleWindow(_gui.Screen, (int)(_game.GraphicsDevice.Viewport.Width * 0.75f), (int)(_game.GraphicsDevice.Viewport.Height * 0.67f));
 
             _gui.Screen.Desktop.Children.Add(Window);
+
+            _python = new PythonInterpreter();
         }
 
         #region Update

@@ -10,10 +10,17 @@ using Microsoft.Scripting.Hosting;
 
 namespace Alttp.Console
 {
+    public delegate void CommandEventHandler(object sender, OutputEventArgs e);
+
     public class PythonInterpreter
     {
+        public event CommandEventHandler CommandReceived;
+        public event CommandEventHandler CommandProcessed;
+
         private readonly ScriptEngine _engine;
         private readonly ScriptScope _scope;
+
+        public List<string> CommandHistory { get; private set; }
 
         public PythonInterpreter()
         {
@@ -30,12 +37,18 @@ namespace Alttp.Console
         {
             input = CleanInput(input);
 
+            OnCommandReceived(new OutputEventArgs(input, ConsoleOutputType.Command));
+
             string output;
 
             try
             {
                 ScriptSource source = _engine.CreateScriptSourceFromString(input, SourceCodeKind.Expression);
                 output = source.Execute(_scope).ToString();
+
+                CommandHistory.Add(input);
+
+                OnCommandProcessed(new OutputEventArgs(output, ConsoleOutputType.Output));
             }
             catch (Exception e)
             {
@@ -58,6 +71,18 @@ namespace Alttp.Console
                 cleaned = cleaned.TrimStart('>');
 
             return cleaned.Trim(' ');
+        }
+
+        private void OnCommandReceived(OutputEventArgs e)
+        {
+            if (CommandReceived != null)
+                CommandReceived(this, e);
+        }
+
+        private void OnCommandProcessed(OutputEventArgs e)
+        {
+            if (CommandProcessed != null)
+                CommandProcessed(this, e);
         }
     }
 }

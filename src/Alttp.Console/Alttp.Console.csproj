@@ -113,6 +113,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AlttpConsole.cs" />
+    <Compile Include="ConsoleOutput.cs" />
+    <Compile Include="OutputEventArgs.cs" />
     <Compile Include="PythonInterpreter.cs" />
     <Compile Include="Commands\ConsoleCommand.cs" />
     <Compile Include="Commands\ExitCommand.cs" />
