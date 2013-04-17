@@ -79,6 +79,13 @@ namespace Alttp.Console
             Log.Info("Registered command: " + command.Name);
         }
 
+        public void SetVariable(string name, object obj)
+        {
+            _scope.SetVariable(name, obj);
+
+            Log.Info("Set variable: " + name);
+        }
+
         /// <summary>
         /// Strip white spaces and the command prompt >>> chars.
         /// </summary>
