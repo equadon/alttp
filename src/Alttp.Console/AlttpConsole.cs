@@ -49,6 +49,9 @@ namespace Alttp.Console
             _python.CommandInput += PythonOnCommandInput;
             _python.CommandOutput += PythonOnCommandOutput;
 
+            SetVariables(player);
+            RegisterCommands();
+
             Log.Debug("Initialized console");
         }
 
@@ -60,8 +63,12 @@ namespace Alttp.Console
             Window = new ConsoleWindow(_python, _gui.Screen, (int)(_game.GraphicsDevice.Viewport.Width * 0.75f), (int)(_game.GraphicsDevice.Viewport.Height * 0.67f));
 
             _gui.Screen.Desktop.Children.Add(Window);
+        }
 
-            RegisterCommands();
+        private void SetVariables(Player player)
+        {
+            // Player
+            _python.SetVariable("player", player);
         }
 
         private void RegisterCommands()

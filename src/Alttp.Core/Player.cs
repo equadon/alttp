@@ -18,7 +18,7 @@ namespace Alttp.Core
     {
         private readonly InputManager _input;
 
-        public ILogger Log { get; set; }
+        protected ILogger Log { get; set; }
 
         public GameObject Object { get; set; }
 
