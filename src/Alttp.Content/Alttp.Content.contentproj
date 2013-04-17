@@ -75,6 +75,11 @@
     <None Include="pdn\AlttpSkin.pdn">
       <Name>AlttpSkin</Name>
     </None>
+    <Compile Include="Skins\Alttp\ConsoleFont.spritefont">
+      <Name>ConsoleFont</Name>
+      <Importer>FontDescriptionImporter</Importer>
+      <Processor>FontDescriptionProcessor</Processor>
+    </Compile>
     <None Include="Skins\skin.xsd">
       <Name>skin</Name>
       <SubType>Designer</SubType>

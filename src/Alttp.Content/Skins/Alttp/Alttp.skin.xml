@@ -12,6 +12,7 @@
   <resources>
     <font name="title" contentPath="TitleFont" />
     <font name="default" contentPath="DefaultFont" />
+    <font name="console" contentPath="ConsoleFont" />
     <bitmap name="controls" contentPath="AlttpSkin" />
   </resources>
 
@@ -128,6 +129,38 @@
     <frame name="check.on.depressed">
       <region source="controls" hplacement="stretch" vplacement="stretch" x="40" y="104" w="19" h="19" />
       <text font="default" hplacement="left" vplacement="center" xoffset="10" yoffset="0" color="#3F3F3F" />
+    </frame>
+    
+    <!--
+      Frame used to draw an input box
+    -->
+    <frame name="input.normal">
+      <region source="controls" hplacement="left" vplacement="top" x="0 " y="145" w="5" h="5" />
+      <region source="controls" hplacement="stretch" vplacement="top" x="5" y="145" w="1" h="5" />
+      <region source="controls" hplacement="right" vplacement="top" x="122" y="145" w="5" h="5 " />
+      <region source="controls" hplacement="left" vplacement="stretch" x="0" y="150" w="5" h="1" />
+      <region source="controls" hplacement="stretch" vplacement="stretch" x="5" y="150" w="1" h="1" />
+      <region source="controls" hplacement="right" vplacement="stretch" x="122" y="150" w="5" h="1" />
+      <region source="controls" hplacement="left" vplacement="bottom" x="0" y="161" w="5" h="5" />
+      <region source="controls" hplacement="stretch" vplacement="bottom" x="5" y="161" w="1" h="5" />
+      <region source="controls" hplacement="right" vplacement="bottom" x="122" y="161" w="5" h="5" />
+      <text font="console" color="#000000" hplacement="left" vplacement="center" xoffset="5" yoffset="0" />
+    </frame>
+
+    <!--
+      Frame used to draw an input box when the mouse is hovering over it
+    -->
+    <frame name="input.highlighted">
+      <region source="controls" hplacement="left" vplacement="top" x="157" y="1" w="1" h="1" />
+      <region source="controls" hplacement="stretch" vplacement="top" x="158" y="1" w="62" h="1" />
+      <region source="controls" hplacement="right" vplacement="top" x="220" y="1" w="1" h="1" />
+      <region source="controls" hplacement="left" vplacement="stretch" x="157" y="2" w="1" h="21" />
+      <region source="controls" hplacement="stretch" vplacement="stretch" x="158" y="2" w="62" h="21" />
+      <region source="controls" hplacement="right" vplacement="stretch" x="220" y="2" w="1" h="21" />
+      <region source="controls" hplacement="left" vplacement="bottom" x="157" y="23" w="1" h="1" />
+      <region source="controls" hplacement="stretch" vplacement="bottom" x="158" y="23" w="62" h="1" />
+      <region source="controls" hplacement="right" vplacement="bottom" x="220" y="23" w="1" h="1" />
+      <text font="console" color="#000000" hplacement="left" vplacement="center" xoffset="5" yoffset="0" />
     </frame>
     
   </frames>

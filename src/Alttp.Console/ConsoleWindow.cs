@@ -22,8 +22,13 @@ namespace Alttp.Console
         public int Width { get; private set; }
         public int Height { get; private set; }
 
+        // Controls
+        public InputControl CommandInput { get; private set; }
+
         public float OpenedY { get { return OffsetY; } }
         public float ClosedY { get { return OffsetY - Height; } }
+
+        #region State Properties
 
         public bool IsOpen
         {
@@ -47,6 +52,8 @@ namespace Alttp.Console
 
         #endregion
 
+        #endregion
+
         public ConsoleWindow(int width, int height)
         {
             _state = ConsoleState.Closed;
@@ -57,6 +64,22 @@ namespace Alttp.Console
             Height = height;
 
             Bounds = new UniRectangle(20, ClosedY, Width, Height);
+
+            SetupControls();
+        }
+
+        private void SetupControls()
+        {
+            // Command input prompt
+            const int cmdPromptHeight = 26;
+            CommandInput = new InputControl()
+                {
+                    Bounds = new UniRectangle(1, Bounds.Size.Y - cmdPromptHeight - 1, Bounds.Size.X - 2, cmdPromptHeight),
+                    Enabled = true,
+                    Text = "> "
+                };
+
+            Children.Add(CommandInput);
         }
 
         public void Update(GameTime gameTime)
