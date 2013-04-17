@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using Alttp.Console.Commands;
 using Alttp.Core.Input;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
@@ -49,16 +50,28 @@ namespace Alttp.Console
         {
             base.Initialize();
 
-            _python = new PythonInterpreter();
+            // Python interpreter
+            _python = new PythonInterpreter(Log);
+
+            // Subscribe to command events
+            _python.CommandInput += PythonOnCommandInput;
+            _python.CommandOutput += PythonOnCommandOutput;
 
             // Setup UI
             Window = new ConsoleWindow(_python, _gui.Screen, (int)(_game.GraphicsDevice.Viewport.Width * 0.75f), (int)(_game.GraphicsDevice.Viewport.Height * 0.67f));
 
             _gui.Screen.Desktop.Children.Add(Window);
 
-            // Subscribe to command events
-            _python.CommandInput += PythonOnCommandInput;
-            _python.CommandOutput += PythonOnCommandOutput;
+            RegisterCommands();
+        }
+
+        private void RegisterCommands()
+        {
+            // Help
+            _python.RegisterCommand(new HelpCommand(_python.Commands));
+
+            // Exit
+            _python.RegisterCommand(new ExitCommand(_game));
         }
 
         #region Update

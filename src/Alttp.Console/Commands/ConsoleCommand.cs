@@ -21,9 +21,14 @@ namespace Alttp.Console.Commands
             Description = description;
         }
 
+        public virtual string Execute()
+        {
+            throw new NotImplementedException();
+        }
+
         public virtual string Execute(string[] arguments)
         {
-            return "Unknown";
+            throw new NotImplementedException();
         }
     }
 }

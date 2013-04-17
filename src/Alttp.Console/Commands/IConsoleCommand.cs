@@ -10,6 +10,7 @@ namespace Alttp.Console
         string Name { get; }
         string Description { get; }
 
+        string Execute();
         string Execute(string[] arguments);
     }
 }

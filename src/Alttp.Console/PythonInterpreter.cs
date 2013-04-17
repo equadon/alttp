@@ -2,11 +2,12 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-
+using Alttp.Console.Commands;
 using IronPython;
 using IronPython.Hosting;
 using Microsoft.Scripting;
 using Microsoft.Scripting.Hosting;
+using Ninject.Extensions.Logging;
 
 namespace Alttp.Console
 {
@@ -20,13 +21,19 @@ namespace Alttp.Console
         private readonly ScriptEngine _engine;
         private readonly ScriptScope _scope;
 
+        protected ILogger Log { get; set; }
+
+        public Dictionary<string, IConsoleCommand> Commands { get; private set; }
+
         public List<string> CommandHistory { get; private set; }
 
-        public PythonInterpreter()
+        public PythonInterpreter(ILogger logger)
         {
             _engine = Python.CreateEngine();
             _scope = _engine.CreateScope();
+            Log = logger;
 
+            Commands = new Dictionary<string, IConsoleCommand>();
             CommandHistory = new List<string>();
         }
 
@@ -61,6 +68,15 @@ namespace Alttp.Console
             OnCommandOutput(new OutputEventArgs(Clean(output), ConsoleOutputType.Output));
 
             return output;
+        }
+
+        public void RegisterCommand(IConsoleCommand command)
+        {
+            Commands.Add(command.Name, command);
+
+            _scope.SetVariable(command.Name, new Func<string>(command.Execute));
+
+            Log.Info("Registered command: " + command.Name);
         }
 
         /// <summary>

@@ -11,12 +11,12 @@ namespace Alttp.Console.Commands
         private readonly Game _game;
 
         public ExitCommand(Game game)
-            : base("Exit", "Exit the game")
+            : base("exit", "Exit the game")
         {
             _game = game;
         }
 
-        public override string Execute(string[] arguments)
+        public override string Execute()
         {
             _game.Exit();
 

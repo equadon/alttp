@@ -117,6 +117,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AlttpConsole.cs" />
+    <Compile Include="Commands\HelpCommand.cs" />
     <Compile Include="ConsoleOutput.cs" />
     <Compile Include="OutputEventArgs.cs" />
     <Compile Include="PythonInterpreter.cs" />
@@ -124,7 +125,7 @@
     <Compile Include="Commands\ExitCommand.cs" />
     <Compile Include="ConsoleWindow.cs" />
     <Compile Include="Controls\CommandInputControl.cs" />
-    <Compile Include="IConsoleCommand.cs" />
+    <Compile Include="Commands\IConsoleCommand.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
