@@ -13,8 +13,9 @@ namespace Alttp.Core.GameObjects.Interfaces
         float MaxSpeed { get; }
         float Speed { get; }
         Vector2 Direction { get; }
-        string AnimationName { get; }
         Vector2 Position { get; set; }
+        AnimationsDict Animations { get; }
+        string AnimationName { get; }
         Animation.Animation Animation { get; }
         Frame Frame { get; }
 

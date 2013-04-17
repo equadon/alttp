@@ -10,7 +10,6 @@ namespace Alttp.Core.Shields
     public class Shield : GameObject, IShield
     {
         public IGameObject Parent { get; private set; }
-        public Vector2 Offset { get; private set; }
 
         public ShieldTypes Type { get; private set; }
 
@@ -30,11 +29,10 @@ namespace Alttp.Core.Shields
             set { }
         }
 
-        public Shield(Vector2 position, AnimationsDict animations, IGameObject parent, Vector2 offset, ShieldTypes type)
-            : base(position, animations)
+        public Shield(IGameObject parent, ShieldTypes type)
+            : base(parent.Position, parent.Animations)
         {
             Parent = parent;
-            Offset = offset;
             Type = type;
         }
     }
