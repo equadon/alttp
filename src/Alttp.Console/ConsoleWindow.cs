@@ -115,12 +115,7 @@ namespace Alttp.Console
             {
                 Bounds.Top = MathHelper.SmoothStep(Bounds.Top.Offset, OpenedY, ((float)((DateTime.Now - _stateChangeTime).TotalSeconds / 1)));
                 if (Bounds.Top == OpenedY)
-                {
                     _state = ConsoleState.Opened;
-                    CommandInput.Enabled = true;
-                    CommandInput.CaretPosition = CommandInput.Text.Length;
-                    _screen.FocusedControl = CommandInput;
-                }
             }
 
             if (IsClosing)
@@ -145,12 +140,17 @@ namespace Alttp.Console
         {
             _state = ConsoleState.Opening;
             _stateChangeTime = DateTime.Now;
+
+            CommandInput.Enabled = true;
+            CommandInput.CaretPosition = CommandInput.Text.Length;
+            _screen.FocusedControl = CommandInput;
         }
 
-        private void Close()
+        private new void Close()
         {
             _state = ConsoleState.Closing;
             _stateChangeTime = DateTime.Now;
+
             CommandInput.Enabled = false;
             _screen.FocusedControl = this;
         }

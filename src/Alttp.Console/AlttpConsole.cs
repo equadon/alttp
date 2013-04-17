@@ -87,11 +87,11 @@ namespace Alttp.Console
 
         private void HandleInput()
         {
-            if (_input.IsKeyPressed(Keys.OemTilde))
+            if (_input.IsKeyPressed(Keys.OemTilde) ||
+                (_input.IsKeyPressed(Keys.Escape) && (Window.IsOpen || Window.IsOpening)))
+            {
                 Window.Toggle();
-            
-            if (_input.IsKeyPressed(Keys.Escape) && Window.IsOpen)
-                Window.Toggle();
+            }
         }
 
         #endregion

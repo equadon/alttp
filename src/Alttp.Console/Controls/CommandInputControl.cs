@@ -35,8 +35,23 @@ namespace Alttp.Console
 
         protected override void OnKeyReleased(Keys key)
         {
-            if (key == Keys.Enter)
-                ProcessCommand(Text);
+            switch (key)
+            {
+                case Keys.Enter:
+                    ProcessCommand(Text);
+                    break;
+            }
+        }
+
+        protected override void OnCharacterEntered(char character)
+        {
+            base.OnCharacterEntered(character);
+
+            if (character == (char)Keys.Escape ||
+                character == '`')
+            {
+                Text = Text.Substring(0, Text.Length - 1);
+            }
         }
 
         public void ProcessCommand(string input)
