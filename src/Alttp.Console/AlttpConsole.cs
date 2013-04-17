@@ -8,6 +8,7 @@ using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using Ninject.Extensions.Logging;
 using Nuclex.Ninject.Xna;
+using Nuclex.UserInterface;
 
 namespace Alttp.Console
 {
@@ -23,21 +24,33 @@ namespace Alttp.Console
     {
         private readonly InputManager _input;
         private readonly ISpriteBatch _batch;
+        private readonly GuiManager _gui;
+        private readonly Game _game;
 
         protected ILogger Log { get; set; }
 
         public ConsoleWindow Window { get; private set; }
 
-        public AlttpConsole(Game game, ILogger logger, InputManager input, ISpriteBatch batch)
+        public AlttpConsole(Game game, ILogger logger, InputManager input, ISpriteBatch batch, GuiManager gui)
             : base(game)
         {
             Log = logger;
+            _game = game;
             _input = input;
             _batch = batch;
-
-            Window = new ConsoleWindow(game.GraphicsDevice.Viewport.Width / 2, game.GraphicsDevice.Viewport.Height / 2);
+            _gui = gui;
 
             Log.Debug("Initialized console");
+        }
+
+        public override void Initialize()
+        {
+            base.Initialize();
+
+            // Setup UI
+            Window = new ConsoleWindow((int)(_game.GraphicsDevice.Viewport.Width * 0.75f), (int)(_game.GraphicsDevice.Viewport.Height * 0.67f));
+
+            _gui.Screen.Desktop.Children.Add(Window);
         }
 
         #region Update
@@ -48,13 +61,7 @@ namespace Alttp.Console
 
             HandleInput(gameTime);
 
-            if (Window.IsOpening)
-            {
-            }
-
-            if (Window.IsClosing)
-            {
-            }
+            Window.Update(gameTime);
         }
 
         private void HandleInput(GameTime gameTime)
