@@ -14,8 +14,8 @@ namespace Alttp.Console
 
     public class PythonInterpreter
     {
-        public event CommandEventHandler CommandInputReceived;
-        public event CommandEventHandler CommandProcessed;
+        public event CommandEventHandler CommandInput;
+        public event CommandEventHandler CommandOutput;
 
         private readonly ScriptEngine _engine;
         private readonly ScriptScope _scope;
@@ -37,9 +37,9 @@ namespace Alttp.Console
         /// <returns>Command output</returns>
         public string Process(string input)
         {
-            input = CleanInput(input);
+            input = Clean(input);
 
-            OnCommandReceived(new OutputEventArgs(input, ConsoleOutputType.Command));
+            OnCommandInput(new OutputEventArgs(input, ConsoleOutputType.Command));
 
             string output;
 
@@ -55,7 +55,7 @@ namespace Alttp.Console
                 output = "Error executing code: " + e;
             }
 
-            OnCommandProcessed(new OutputEventArgs(output, ConsoleOutputType.Output));
+            OnCommandOutput(new OutputEventArgs(Clean(output), ConsoleOutputType.Output));
 
             return output;
         }
@@ -65,11 +65,9 @@ namespace Alttp.Console
         /// </summary>
         /// <param name="input">User input</param>
         /// <returns>Cleaned user input</returns>
-        private string CleanInput(string input)
+        private string Clean(string input)
         {
-            string cleaned = input.Replace(@"\r", "");
-                
-            cleaned = input.Trim(' ');
+            string cleaned = input.Replace("\r", "").Trim(' ');
 
             if (cleaned.StartsWith(">"))
                 cleaned = cleaned.TrimStart('>');
@@ -77,16 +75,16 @@ namespace Alttp.Console
             return cleaned.Trim(' ');
         }
 
-        private void OnCommandReceived(OutputEventArgs e)
+        private void OnCommandInput(OutputEventArgs e)
         {
-            if (CommandInputReceived != null)
-                CommandInputReceived(this, e);
+            if (CommandInput != null)
+                CommandInput(this, e);
         }
 
-        private void OnCommandProcessed(OutputEventArgs e)
+        private void OnCommandOutput(OutputEventArgs e)
         {
-            if (CommandProcessed != null)
-                CommandProcessed(this, e);
+            if (CommandOutput != null)
+                CommandOutput(this, e);
         }
     }
 }

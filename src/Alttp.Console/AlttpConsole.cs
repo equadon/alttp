@@ -49,12 +49,16 @@ namespace Alttp.Console
         {
             base.Initialize();
 
+            _python = new PythonInterpreter();
+
             // Setup UI
-            Window = new ConsoleWindow(_gui.Screen, (int)(_game.GraphicsDevice.Viewport.Width * 0.75f), (int)(_game.GraphicsDevice.Viewport.Height * 0.67f));
+            Window = new ConsoleWindow(_python, _gui.Screen, (int)(_game.GraphicsDevice.Viewport.Width * 0.75f), (int)(_game.GraphicsDevice.Viewport.Height * 0.67f));
 
             _gui.Screen.Desktop.Children.Add(Window);
 
-            _python = new PythonInterpreter();
+            // Subscribe to command events
+            _python.CommandInput += PythonOnCommandInput;
+            _python.CommandOutput += PythonOnCommandOutput;
         }
 
         #region Update
@@ -75,6 +79,26 @@ namespace Alttp.Console
             
             if (_input.IsKeyPressed(Keys.Escape) && Window.IsOpen)
                 Window.Toggle();
+        }
+
+        #endregion
+
+        #region Command Events
+
+        private void PythonOnCommandInput(object sender, OutputEventArgs e)
+        {
+            var output = new ConsoleOutput(e.Output, e.Type);
+            Window.Outputs.Add(output);
+            Window.OutputList.Items.Add(e.ToString());
+        }
+
+        private void PythonOnCommandOutput(object sender, OutputEventArgs e)
+        {
+            // Add one item per line
+            var lines = e.ToString().Split('\n');
+
+            foreach (var line in lines)
+                Window.OutputList.Items.Add(line);
         }
 
         #endregion
