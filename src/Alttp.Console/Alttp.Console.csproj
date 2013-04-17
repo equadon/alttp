@@ -83,7 +83,12 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AlttpConsole.cs" />
+    <Compile Include="CommandProcessor.cs" />
+    <Compile Include="Commands\ConsoleCommand.cs" />
+    <Compile Include="Commands\ExitCommand.cs" />
     <Compile Include="ConsoleWindow.cs" />
+    <Compile Include="Controls\CommandInputControl.cs" />
+    <Compile Include="IConsoleCommand.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

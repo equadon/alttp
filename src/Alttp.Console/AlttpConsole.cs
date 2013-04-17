@@ -48,7 +48,7 @@ namespace Alttp.Console
             base.Initialize();
 
             // Setup UI
-            Window = new ConsoleWindow((int)(_game.GraphicsDevice.Viewport.Width * 0.75f), (int)(_game.GraphicsDevice.Viewport.Height * 0.67f));
+            Window = new ConsoleWindow(_gui.Screen, (int)(_game.GraphicsDevice.Viewport.Width * 0.75f), (int)(_game.GraphicsDevice.Viewport.Height * 0.67f));
 
             _gui.Screen.Desktop.Children.Add(Window);
         }
@@ -59,17 +59,18 @@ namespace Alttp.Console
         {
             base.Update(gameTime);
 
-            HandleInput(gameTime);
+            HandleInput();
 
             Window.Update(gameTime);
         }
 
-        private void HandleInput(GameTime gameTime)
+        private void HandleInput()
         {
             if (_input.IsKeyPressed(Keys.OemTilde))
-            {
                 Window.Toggle();
-            }
+            
+            if (_input.IsKeyPressed(Keys.Escape) && Window.IsOpen)
+                Window.Toggle();
         }
 
         #endregion

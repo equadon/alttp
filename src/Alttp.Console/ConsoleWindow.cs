@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Input;
 using Nuclex.UserInterface;
 using Nuclex.UserInterface.Controls.Desktop;
 
@@ -14,6 +15,7 @@ namespace Alttp.Console
         public static readonly int OffsetY = -26;
 
         private ConsoleState _state;
+        private Screen _screen;
 
         private DateTime _stateChangeTime;
 
@@ -23,7 +25,7 @@ namespace Alttp.Console
         public int Height { get; private set; }
 
         // Controls
-        public InputControl CommandInput { get; private set; }
+        public CommandInputControl CommandInput { get; private set; }
 
         public float OpenedY { get { return OffsetY; } }
         public float ClosedY { get { return OffsetY - Height; } }
@@ -54,9 +56,10 @@ namespace Alttp.Console
 
         #endregion
 
-        public ConsoleWindow(int width, int height)
+        public ConsoleWindow(Screen screen, int width, int height)
         {
             _state = ConsoleState.Closed;
+            _screen = screen;
 
             EnableDragging = false;
 
@@ -72,10 +75,10 @@ namespace Alttp.Console
         {
             // Command input prompt
             const int cmdPromptHeight = 26;
-            CommandInput = new InputControl()
+            CommandInput = new CommandInputControl()
                 {
                     Bounds = new UniRectangle(1, Bounds.Size.Y - cmdPromptHeight - 1, Bounds.Size.X - 2, cmdPromptHeight),
-                    Enabled = true,
+                    Enabled = false,
                     Text = "> "
                 };
 
@@ -88,7 +91,12 @@ namespace Alttp.Console
             {
                 Bounds.Top = MathHelper.SmoothStep(Bounds.Top.Offset, OpenedY, ((float)((DateTime.Now - _stateChangeTime).TotalSeconds / 1)));
                 if (Bounds.Top == OpenedY)
+                {
                     _state = ConsoleState.Opened;
+                    CommandInput.Enabled = true;
+                    CommandInput.CaretPosition = CommandInput.Text.Length;
+                    _screen.FocusedControl = CommandInput;
+                }
             }
 
             if (IsClosing)
@@ -98,6 +106,8 @@ namespace Alttp.Console
                     _state = ConsoleState.Closed;
             }
         }
+
+        #region Toggle Methods
 
         public void Toggle()
         {
@@ -117,6 +127,10 @@ namespace Alttp.Console
         {
             _state = ConsoleState.Closing;
             _stateChangeTime = DateTime.Now;
+            CommandInput.Enabled = false;
+            _screen.FocusedControl = this;
         }
+
+        #endregion
     }
 }
