@@ -20,7 +20,7 @@ namespace Alttp.Console
         Closing
     }
 
-    public class AlttpConsole : DrawableGameComponent
+    public class AlttpConsole : GameComponent
     {
         private readonly InputManager _input;
         private readonly ISpriteBatch _batch;
@@ -73,13 +73,5 @@ namespace Alttp.Console
         }
 
         #endregion
-
-        public override void Draw(GameTime gameTime)
-        {
-            if (Window.IsClosed)
-                return;
-
-            // Render console window
-        }
     }
 }
