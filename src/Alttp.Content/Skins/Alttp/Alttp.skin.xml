@@ -27,9 +27,9 @@
       <region source="controls" hplacement="stretch" vplacement="stretch" x="4" y="29" w="32" h="18" id="client" />
       <region source="controls" hplacement="right" vplacement="stretch" x="59" y="29" w="4" h="18" id="border-e" />
 
-      <region source="controls" hplacement="left" vplacement="bottom" x="0" y="62" w="4" h="4" id="border-sw" />
-      <region source="controls" hplacement="stretch" vplacement="bottom" x="4" y="62" w="32" h="4" id="border-s" />
-      <region source="controls" hplacement="right" vplacement="bottom" x="59" y="62" w="4" h="4" id="border-se" />
+      <region source="controls" hplacement="left" vplacement="bottom" x="0" y="59" w="4" h="4" id="border-sw" />
+      <region source="controls" hplacement="stretch" vplacement="bottom" x="4" y="59" w="32" h="4" id="border-s" />
+      <region source="controls" hplacement="right" vplacement="bottom" x="59" y="59" w="4" h="4" id="border-se" />
       
       <text font="title" hplacement="left" vplacement="top" xoffset="5" yoffset="2" color="#3F3F3F" />
     </frame>
@@ -161,6 +161,17 @@
       <region source="controls" hplacement="stretch" vplacement="bottom" x="5" y="161" w="1" h="5" />
       <region source="controls" hplacement="right" vplacement="bottom" x="122" y="161" w="5" h="5" />
       <text font="default" color="#000000" hplacement="left" vplacement="top" xoffset="4" yoffset="15" />
+    </frame>
+    <frame name="list.selection">
+      <region source="controls" hplacement="left" vplacement="top" x="0" y="189" w="2" h="2" />
+      <region source="controls" hplacement="stretch" vplacement="top" x="2" y="189" w="60" h="2" />
+      <region source="controls" hplacement="right" vplacement="top" x="60" y="189" w="2" h="2" />
+      <region source="controls" hplacement="left" vplacement="stretch" x="0" y="191" w="2" h="19" />
+      <region source="controls" hplacement="stretch" vplacement="stretch" x="2" y="191" w="60" h="19" />
+      <region source="controls" hplacement="right" vplacement="stretch" x="60" y="191" w="2" h="19" />
+      <region source="controls" hplacement="left" vplacement="bottom" x="0" y="210" w="2" h="2" />
+      <region source="controls" hplacement="stretch" vplacement="bottom" x="2" y="210" w="60" h="2" />
+      <region source="controls" hplacement="right" vplacement="bottom" x="60" y="210" w="2" h="2" />
     </frame>
 
     <!--
