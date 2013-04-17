@@ -5,13 +5,13 @@ using Microsoft.Xna.Framework;
 
 namespace Alttp.Core.Shields
 {
-    public enum ShieldTypes { Blue }
+    public enum ShieldType { Blue }
 
     public class Shield : GameObject, IShield
     {
         public IGameObject Parent { get; private set; }
 
-        public ShieldTypes Type { get; private set; }
+        public ShieldType Type { get; private set; }
 
         public override string AnimationName
         {
@@ -29,7 +29,7 @@ namespace Alttp.Core.Shields
             set { }
         }
 
-        public Shield(IGameObject parent, ShieldTypes type)
+        public Shield(IGameObject parent, ShieldType type)
             : base(parent.Position, parent.Animations)
         {
             Parent = parent;
