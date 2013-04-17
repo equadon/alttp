@@ -100,8 +100,8 @@ namespace Alttp.Console
             // List with command and output history
             OutputList = new ListControl()
                 {
-                    Bounds = new UniRectangle(0, 0, Bounds.Size.X, Bounds.Size.Y - cmdPromptHeight),
-                    SelectionMode = ListSelectionMode.None
+                    Bounds = new UniRectangle(0, Math.Abs(OffsetY) - 1, Bounds.Size.X, Bounds.Size.Y - cmdPromptHeight - Math.Abs(OffsetY) + 1),
+                    SelectionMode = ListSelectionMode.Single
                 };
 
             Children.Add(OutputList);
@@ -159,7 +159,9 @@ namespace Alttp.Console
 
         private void PythonOnCommand(object sender, OutputEventArgs e)
         {
-            Outputs.Add(new ConsoleOutput(e.Output, e.Type));
+            var output = new ConsoleOutput(e.Output, e.Type);
+            Outputs.Add(output);
+            OutputList.Items.Add(output.ToString());
         }
 
         #endregion

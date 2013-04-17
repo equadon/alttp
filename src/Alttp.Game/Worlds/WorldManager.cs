@@ -110,10 +110,9 @@ namespace Alttp.Worlds
             Player.Update(gameTime, _console.Window.IsClosed);
 
             if (_console.Window.IsClosed)
-            {
                 HandleKeyboardInput(gameTime);
-                HandleMouseInput(gameTime);
-            }
+
+            HandleMouseInput(gameTime);
         }
 
         private void HandleKeyboardInput(GameTime gameTime)

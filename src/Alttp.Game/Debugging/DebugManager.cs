@@ -107,6 +107,30 @@ namespace Alttp.Debugging
                     overlay.Update(gameTime);
             }
 
+            Vector2 mousePos = _input.MousePos;
+            RectangleF minimapBounds = MinimapOverlay.Minimap.GetAbsoluteBounds();
+
+            // Move minimap viewport with left mouse button.
+            // Do not check this if the overlay is hidden.
+            if (_gui.Visible &&
+                SelectionBounds == Rectangle.Empty &&
+                _world.ActiveCamera.CameraMode != CameraMode.Follow &&
+                _input.MouseState.LeftButton == ButtonState.Pressed &&
+                minimapBounds.Contains(mousePos))
+            {
+                Vector2 minimapPos = mousePos;
+                minimapPos.X -= minimapBounds.Left;
+                minimapPos.Y -= minimapBounds.Top;
+
+                var minimapBoundsInt = new Rectangle((int)minimapBounds.X, (int)minimapBounds.Y, (int)minimapBounds.Width, (int)minimapBounds.Height);
+
+                Vector2 newViewportPos = _world.ActiveCamera.MinimapToWorldCoordinates(minimapPos, minimapBoundsInt);
+                newViewportPos.X -= _world.ActiveCamera.Viewport.Width / 2f;
+                newViewportPos.Y -= _world.ActiveCamera.Viewport.Height / 2f;
+
+                _world.ActiveCamera.Position = newViewportPos;
+            }
+
             // Do not process any of the commands if the console is open
             if (_console.Window.IsClosed)
             {
@@ -133,9 +157,6 @@ namespace Alttp.Debugging
                             _world.Player.Link.UnequipShield();
                         else
                             _world.Player.Link.Equip(TestShield);
-
-                Vector2 mousePos = _input.MousePos;
-                RectangleF minimapBounds = MinimapOverlay.Minimap.GetAbsoluteBounds();
 
                 // Selection region controls
                 if (_input.IsMouseButtonPressed(MouseButtons.Left) && !minimapBounds.Contains(mousePos))
@@ -168,27 +189,6 @@ namespace Alttp.Debugging
                         height = (int)mousePos.Y - bounds.Y;
 
                     SelectionBounds = new Rectangle(bounds.X, bounds.Y, width, height);
-                }
-
-                // Move minimap viewport with left mouse button.
-                // Do not check this if the overlay is hidden.
-                if (_gui.Visible &&
-                    SelectionBounds == Rectangle.Empty &&
-                    _world.ActiveCamera.CameraMode != CameraMode.Follow &&
-                    _input.MouseState.LeftButton == ButtonState.Pressed &&
-                    minimapBounds.Contains(mousePos))
-                {
-                    Vector2 minimapPos = mousePos;
-                    minimapPos.X -= minimapBounds.Left;
-                    minimapPos.Y -= minimapBounds.Top;
-
-                    var minimapBoundsInt = new Rectangle((int)minimapBounds.X, (int)minimapBounds.Y, (int)minimapBounds.Width, (int)minimapBounds.Height);
-
-                    Vector2 newViewportPos = _world.ActiveCamera.MinimapToWorldCoordinates(minimapPos, minimapBoundsInt);
-                    newViewportPos.X -= _world.ActiveCamera.Viewport.Width / 2f;
-                    newViewportPos.Y -= _world.ActiveCamera.Viewport.Height / 2f;
-
-                    _world.ActiveCamera.Position = newViewportPos;
                 }
             }
         }
