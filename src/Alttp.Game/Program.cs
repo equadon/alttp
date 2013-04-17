@@ -1,4 +1,5 @@
 using System;
+using Alttp.Console;
 using Alttp.Core.Input;
 using Microsoft.Xna.Framework;
 using Ninject;
@@ -50,12 +51,11 @@ namespace Alttp
         {
             var gameComponents = kernel.Get<GameComponentCollection>();
 
+            gameComponents.Add(kernel.Get<AlttpConsole>());
+
             // Nuclex framework components
             gameComponents.Add(kernel.Get<InputManager>());
-
-            var guiManager = kernel.Get<GuiManager>();
-            gameComponents.Add(guiManager);
-
+            gameComponents.Add(kernel.Get<GuiManager>());
             gameComponents.Add(kernel.Get<GameStateManager>());
 
             // Start the game

@@ -1,29 +1,29 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
-    <ProjectGuid>{0EA6B877-3AFE-4236-868A-DE6F8C0744C6}</ProjectGuid>
+    <ProjectGuid>{356D7E84-E512-4C88-8417-74E2B0C5C775}</ProjectGuid>
     <ProjectTypeGuids>{6D335F3A-9D43-41b4-9D22-F6F17C4BE596};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Alttp.Core</RootNamespace>
-    <AssemblyName>Alttp.Core</AssemblyName>
+    <RootNamespace>Alttp.Console</RootNamespace>
+    <AssemblyName>Alttp.Console</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <TargetFrameworkProfile>Client</TargetFrameworkProfile>
     <XnaFrameworkVersion>v4.0</XnaFrameworkVersion>
     <XnaPlatform>Windows</XnaPlatform>
     <XnaProfile>Reach</XnaProfile>
-    <XnaCrossPlatformGroupID>22928316-031f-40e8-9ac6-d0d4de73289c</XnaCrossPlatformGroupID>
+    <XnaCrossPlatformGroupID>6a5e82af-6aeb-4761-8e54-2d110af1677e</XnaCrossPlatformGroupID>
     <XnaOutputType>Library</XnaOutputType>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
-    <OutputPath>..\..\bin\lib\Debug\Alttp.Core</OutputPath>
-    <IntermediateOutputPath>..\..\obj\Debug\Alttp.Core</IntermediateOutputPath>
-    <BaseIntermediateOutputPath>..\..\obj\Debug\Alttp.Core</BaseIntermediateOutputPath>
+    <OutputPath>..\..\bin\lib\Debug\Alttp.Console</OutputPath>
+    <IntermediateOutputPath>..\..\obj\Debug\Alttp.Console</IntermediateOutputPath>
+    <BaseIntermediateOutputPath>..\..\obj\Debug\Alttp.Console</BaseIntermediateOutputPath>
     <DefineConstants>DEBUG;TRACE;WINDOWS</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
@@ -35,9 +35,9 @@
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|x86' ">
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
-    <OutputPath>..\..\bin\lib\Release\Alttp.Core</OutputPath>
-    <IntermediateOutputPath>..\..\obj\Release\Alttp.Core</IntermediateOutputPath>
-    <BaseIntermediateOutputPath>..\..\obj\Release\Alttp.Core</BaseIntermediateOutputPath>
+    <OutputPath>..\..\bin\lib\Release\Alttp.Console</OutputPath>
+    <IntermediateOutputPath>..\..\obj\Release\Alttp.Console</IntermediateOutputPath>
+    <BaseIntermediateOutputPath>..\..\obj\Release\Alttp.Console</BaseIntermediateOutputPath>
     <DefineConstants>TRACE;WINDOWS</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
@@ -47,36 +47,28 @@
     <XnaCompressContent>true</XnaCompressContent>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Boo.Lang">
-      <HintPath>..\..\packages\Boo.0.9.4\lib\Boo.Lang.dll</HintPath>
-    </Reference>
-    <Reference Include="Boo.Lang.Compiler">
-      <HintPath>..\..\packages\Boo-Compiler.0.9.4\lib\Boo.Lang.Compiler.dll</HintPath>
-    </Reference>
-    <Reference Include="Boo.Lang.Interpreter">
-      <HintPath>..\..\packages\Boo-Interpreter.0.9.4\lib\Boo.Lang.Interpreter.dll</HintPath>
-    </Reference>
-    <Reference Include="Boo.Lang.Parser">
-      <HintPath>..\..\packages\Boo-Compiler.0.9.4\lib\Boo.Lang.Parser.dll</HintPath>
-    </Reference>
-    <Reference Include="FuncWorks.XNA.XTiled">
-      <HintPath>..\..\lib\XTiled\FuncWorks.XNA.XTiled.dll</HintPath>
-    </Reference>
     <Reference Include="Microsoft.Xna.Framework, Version=4.0.0.0, Culture=neutral, PublicKeyToken=842cf8be1de50553, processorArchitecture=x86" />
     <Reference Include="Microsoft.Xna.Framework.Game, Version=4.0.0.0, Culture=neutral, PublicKeyToken=842cf8be1de50553, processorArchitecture=x86" />
     <Reference Include="Microsoft.Xna.Framework.Graphics, Version=4.0.0.0, Culture=neutral, PublicKeyToken=842cf8be1de50553, processorArchitecture=x86" />
     <Reference Include="Microsoft.Xna.Framework.GamerServices, Version=4.0.0.0, Culture=neutral, PublicKeyToken=842cf8be1de50553, processorArchitecture=x86" />
     <Reference Include="mscorlib" />
-    <Reference Include="Ninject">
-      <HintPath>..\..\lib\Nuclex\Ninject.dll</HintPath>
+    <Reference Include="Ninject, Version=3.0.0.0, Culture=neutral, PublicKeyToken=c7192dc5380945e7, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Ninject.3.0.1.10\lib\net40\Ninject.dll</HintPath>
     </Reference>
-    <Reference Include="Nuclex.Game">
-      <HintPath>..\..\lib\Nuclex\Nuclex.Game.dll</HintPath>
+    <Reference Include="Ninject.Extensions.Logging, Version=3.0.0.0, Culture=neutral, PublicKeyToken=c7192dc5380945e7, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Ninject.Extensions.Logging.3.0.1.0\lib\net40\Ninject.Extensions.Logging.dll</HintPath>
+    </Reference>
+    <Reference Include="Ninject.Extensions.Logging.NLog2, Version=3.0.0.0, Culture=neutral, PublicKeyToken=c7192dc5380945e7, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Ninject.Extensions.Logging.nlog2.3.0.1.0\lib\net40\Ninject.Extensions.Logging.NLog2.dll</HintPath>
+    </Reference>
+    <Reference Include="NLog, Version=2.0.1.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\NLog.2.0.1.2\lib\net40\NLog.dll</HintPath>
     </Reference>
     <Reference Include="Nuclex.Input">
       <HintPath>..\..\lib\Nuclex\Nuclex.Input.dll</HintPath>
     </Reference>
-    <Reference Include="Nuclex.Ninject.Xna">
+    <Reference Include="Nuclex.Ninject.Xna, Version=1.0.0.0, Culture=neutral, processorArchitecture=x86">
+      <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\lib\Nuclex\Nuclex.Ninject.Xna.dll</HintPath>
     </Reference>
     <Reference Include="System" />
@@ -90,29 +82,19 @@
     <Reference Include="System.Net" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Animation\AnimationEvents.cs" />
-    <Compile Include="GameStates\GameState.cs" />
-    <Compile Include="Animation\Animation.cs" />
-    <Compile Include="Animation\AnimationsDict.cs" />
-    <Compile Include="Animation\AnimationsReader.cs" />
-    <Compile Include="Animation\Frame.cs" />
-    <Compile Include="Graphics\Sprite.cs" />
-    <Compile Include="Graphics\SpriteRef.cs" />
-    <Compile Include="Graphics\SpriteSheet.cs" />
-    <Compile Include="Graphics\SpriteSheetReader.cs" />
-    <Compile Include="Input\InputManager.cs" />
+    <Compile Include="AlttpConsole.cs" />
+    <Compile Include="ConsoleWindow.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="UI\Controls\BorderControl.cs" />
-    <Compile Include="UI\Controls\FlatBorderControlRenderer.cs" />
-    <Compile Include="UI\Controls\FlatImageControlRenderer.cs" />
-    <Compile Include="UI\Controls\ImageControl.cs" />
-    <Compile Include="UI\Overlay.cs" />
-    <Compile Include="Utils.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="app.config" />
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Alttp.Core\Alttp.Core.csproj">
+      <Project>{0EA6B877-3AFE-4236-868A-DE6F8C0744C6}</Project>
+      <Name>Alttp.Core</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Nuclex.UserInterface\Nuclex.UserInterface %28xna-4.0-x86%29.csproj">
       <Project>{2CB08AB5-46B8-44A9-92AE-33790629696D}</Project>
       <Name>Nuclex.UserInterface %28xna-4.0-x86%29</Name>
