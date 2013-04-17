@@ -41,7 +41,7 @@ namespace Alttp
             Object.Draw(batch);
         }
 
-        public void Update(GameTime gameTime)
+        public void Update(GameTime gameTime, bool processInput = true)
         {
             if (Object == null)
                 return;
@@ -49,7 +49,8 @@ namespace Alttp
             Object.Update(gameTime);
 
             // Handle keyboard input
-            HandleKeyboardInput();
+            if (processInput)
+                HandleKeyboardInput();
         }
 
         private void HandleKeyboardInput()

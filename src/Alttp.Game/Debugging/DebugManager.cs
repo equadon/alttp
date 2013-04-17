@@ -1,4 +1,5 @@
 ﻿using System;
+using Alttp.Console;
 using Alttp.Core;
 using Alttp.Core.UI;
 using Alttp.Core.UI.Controls;
@@ -24,6 +25,7 @@ namespace Alttp.Debugging
         private readonly ISpriteBatch _batch;
         private readonly InputManager _input;
         private readonly WorldManager _world;
+        private readonly AlttpConsole _console;
 
         public int Frame { get; private set; }
         public GameTime ElapsedTime { get; private set; }
@@ -57,7 +59,7 @@ namespace Alttp.Debugging
         // Test shield
         public IShield TestShield { get; private set; }
 
-        public DebugManager(Game game, GuiManager gui, IContentManager content, ISpriteBatch batch, InputManager input, WorldManager world)
+        public DebugManager(Game game, GuiManager gui, IContentManager content, ISpriteBatch batch, InputManager input, WorldManager world, AlttpConsole console)
             : base(game)
         {
             _gui = gui;
@@ -65,6 +67,7 @@ namespace Alttp.Debugging
             _batch = batch;
             _input = input;
             _world = world;
+            _console = console;
 
             RenderOverlay = true;
         }
@@ -104,85 +107,89 @@ namespace Alttp.Debugging
                     overlay.Update(gameTime);
             }
 
-            // Enable/disable drawing of the collision tiles layer
-            if (_input.IsKeyPressed(Keys.C))
-                _world.ActiveCamera.World.RenderCollisionTiles = !_world.ActiveCamera.World.RenderCollisionTiles;
-
-            // Enable/disable grid lines with the G key
-            if (_input.IsKeyPressed(Keys.G))
-                RenderGrid = !RenderGrid;
-
-            // Enable/disable grid lines with the O key
-            if (_input.IsKeyPressed(Keys.O))
-                RenderOverlay = !RenderOverlay;
-
-            // Enable/disable region borders with the R key
-            if (_input.IsKeyPressed(Keys.R))
-                RenderRegionBorders = !RenderRegionBorders;
-
-            // Equip shield
-            if (_input.IsKeyPressed(Keys.H))
-                if (_world.Player.Link != null)
-                    if (_world.Player.Link.ShieldEquipped)
-                        _world.Player.Link.UnequipShield();
-                    else
-                        _world.Player.Link.Equip(TestShield);
-
-            Vector2 mousePos = _input.MousePos;
-            RectangleF minimapBounds = MinimapOverlay.Minimap.GetAbsoluteBounds();
-            
-            // Selection region controls
-            if (_input.IsMouseButtonPressed(MouseButtons.Left) && !minimapBounds.Contains(mousePos))
+            // Do not process any of the commands if the console is open
+            if (_console.Window.IsClosed)
             {
-                SelectionBounds = new Rectangle((int) mousePos.X, (int) mousePos.Y, 0, 0);
-            }
-            else if (_input.IsMouseButtonReleased(MouseButtons.Left) &&
-                SelectionBounds != Rectangle.Empty)
-            {
-                SelectedGameObjects = GameObject.FindAll(Utils.RenderableRectangle(SelectionBounds), _world.ActiveCamera.Position, _world.ActiveCamera.InvZoom);
-                
-                SelectionBounds = Rectangle.Empty;
+                // Enable/disable drawing of the collision tiles layer
+                if (_input.IsKeyPressed(Keys.C))
+                    _world.ActiveCamera.World.RenderCollisionTiles = !_world.ActiveCamera.World.RenderCollisionTiles;
 
-                // Set camera mode if there are game objects selected
-                if (SelectedGameObjects.Length > 0 && !_gui.Screen.Desktop.Children.Contains(GameObjectOverlay))
+                // Enable/disable grid lines with the G key
+                if (_input.IsKeyPressed(Keys.G))
+                    RenderGrid = !RenderGrid;
+
+                // Enable/disable grid lines with the O key
+                if (_input.IsKeyPressed(Keys.O))
+                    RenderOverlay = !RenderOverlay;
+
+                // Enable/disable region borders with the R key
+                if (_input.IsKeyPressed(Keys.R))
+                    RenderRegionBorders = !RenderRegionBorders;
+
+                // Equip shield
+                if (_input.IsKeyPressed(Keys.H))
+                    if (_world.Player.Link != null)
+                        if (_world.Player.Link.ShieldEquipped)
+                            _world.Player.Link.UnequipShield();
+                        else
+                            _world.Player.Link.Equip(TestShield);
+
+                Vector2 mousePos = _input.MousePos;
+                RectangleF minimapBounds = MinimapOverlay.Minimap.GetAbsoluteBounds();
+
+                // Selection region controls
+                if (_input.IsMouseButtonPressed(MouseButtons.Left) && !minimapBounds.Contains(mousePos))
                 {
-                    _gui.Screen.Desktop.Children.Add(GameObjectOverlay);
+                    SelectionBounds = new Rectangle((int)mousePos.X, (int)mousePos.Y, 0, 0);
                 }
-                else if (SelectedGameObjects.Length == 0 && _gui.Screen.Desktop.Children.Contains(GameObjectOverlay))
+                else if (_input.IsMouseButtonReleased(MouseButtons.Left) &&
+                    SelectionBounds != Rectangle.Empty)
                 {
-                    _gui.Screen.Desktop.Children.Remove(GameObjectOverlay);
+                    SelectedGameObjects = GameObject.FindAll(Utils.RenderableRectangle(SelectionBounds), _world.ActiveCamera.Position, _world.ActiveCamera.InvZoom);
+
+                    SelectionBounds = Rectangle.Empty;
+
+                    // Set camera mode if there are game objects selected
+                    if (SelectedGameObjects.Length > 0 && !_gui.Screen.Desktop.Children.Contains(GameObjectOverlay))
+                    {
+                        _gui.Screen.Desktop.Children.Add(GameObjectOverlay);
+                    }
+                    else if (SelectedGameObjects.Length == 0 && _gui.Screen.Desktop.Children.Contains(GameObjectOverlay))
+                    {
+                        _gui.Screen.Desktop.Children.Remove(GameObjectOverlay);
+                    }
                 }
-            }
 
-            if (_input.IsMouseButtonDown(MouseButtons.Left) && SelectionBounds != Rectangle.Empty)
-            {
-                var bounds = SelectionBounds;
+                if (_input.IsMouseButtonDown(MouseButtons.Left) && SelectionBounds != Rectangle.Empty)
+                {
+                    var bounds = SelectionBounds;
 
-                int width = (int)mousePos.X - bounds.X,
-                    height = (int)mousePos.Y - bounds.Y;
+                    int width = (int)mousePos.X - bounds.X,
+                        height = (int)mousePos.Y - bounds.Y;
 
-                SelectionBounds = new Rectangle(bounds.X, bounds.Y, width, height);
-            }
+                    SelectionBounds = new Rectangle(bounds.X, bounds.Y, width, height);
+                }
 
-            // Move minimap viewport with left mouse button.
-            // Do not check this if the overlay is hidden.
-            if (_gui.Visible &&
-                SelectionBounds == Rectangle.Empty &&
-                _world.ActiveCamera.CameraMode != CameraMode.Follow &&
-                _input.MouseState.LeftButton == ButtonState.Pressed &&
-                minimapBounds.Contains(mousePos))
-            {
-                Vector2 minimapPos = mousePos;
-                minimapPos.X -= minimapBounds.Left;
-                minimapPos.Y -= minimapBounds.Top;
+                // Move minimap viewport with left mouse button.
+                // Do not check this if the overlay is hidden.
+                if (_gui.Visible &&
+                    SelectionBounds == Rectangle.Empty &&
+                    _world.ActiveCamera.CameraMode != CameraMode.Follow &&
+                    _input.MouseState.LeftButton == ButtonState.Pressed &&
+                    minimapBounds.Contains(mousePos))
+                {
+                    Vector2 minimapPos = mousePos;
+                    minimapPos.X -= minimapBounds.Left;
+                    minimapPos.Y -= minimapBounds.Top;
 
-                var minimapBoundsInt = new Rectangle((int)minimapBounds.X, (int)minimapBounds.Y, (int)minimapBounds.Width, (int)minimapBounds.Height);
+                    var minimapBoundsInt = new Rectangle((int)minimapBounds.X, (int)minimapBounds.Y, (int)minimapBounds.Width, (int)minimapBounds.Height);
 
-                Vector2 newViewportPos = _world.ActiveCamera.MinimapToWorldCoordinates(minimapPos, minimapBoundsInt);
-                newViewportPos.X -= _world.ActiveCamera.Viewport.Width / 2f;
-                newViewportPos.Y -= _world.ActiveCamera.Viewport.Height / 2f;
+                    Vector2 newViewportPos = _world.ActiveCamera.MinimapToWorldCoordinates(minimapPos, minimapBoundsInt);
+                    newViewportPos.X -= _world.ActiveCamera.Viewport.Width / 2f;
+                    newViewportPos.Y -= _world.ActiveCamera.Viewport.Height / 2f;
 
-                _world.ActiveCamera.Position = newViewportPos;
+                    _world.ActiveCamera.Position = newViewportPos;
+                }
             }
         }
 

@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using Alttp.Console;
 using Alttp.Core.Animation;
 using Alttp.Core.Graphics;
 using Alttp.Core.Input;
@@ -18,6 +19,7 @@ namespace Alttp.Worlds
         private readonly InputManager _input;
         private readonly IContentManager _content;
         private readonly ISpriteBatch _batch;
+        private readonly AlttpConsole _console;
 
         // Middle mouse camera movement
         private bool _middleMouseDown;
@@ -45,7 +47,7 @@ namespace Alttp.Worlds
 
         #endregion
 
-        public WorldManager(ILogger logger, Game game, IContentManager content, IWorld world, ISpriteBatch batch, InputManager input, Player player)
+        public WorldManager(ILogger logger, Game game, IContentManager content, IWorld world, ISpriteBatch batch, InputManager input, Player player, AlttpConsole console)
             : base(game)
         {
             Log = logger;
@@ -53,6 +55,7 @@ namespace Alttp.Worlds
             _content = content;
             _batch = batch;
             _input = input;
+            _console = console;
 
             Cameras = new Dictionary<int, Camera>();
 
@@ -104,10 +107,13 @@ namespace Alttp.Worlds
             ActiveCamera.Update(gameTime);
 
             // Handle user input in Player class
-            Player.Update(gameTime);
+            Player.Update(gameTime, _console.Window.IsClosed);
 
-            HandleKeyboardInput(gameTime);
-            HandleMouseInput(gameTime);
+            if (_console.Window.IsClosed)
+            {
+                HandleKeyboardInput(gameTime);
+                HandleMouseInput(gameTime);
+            }
         }
 
         private void HandleKeyboardInput(GameTime gameTime)
