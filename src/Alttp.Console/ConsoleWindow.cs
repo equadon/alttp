@@ -30,6 +30,7 @@ namespace Alttp.Console
 
         // Controls
         public CommandInputControl CommandInput { get; private set; }
+        public ListControl OutputList { get; private set; }
 
         public float OpenedY { get { return OffsetY; } }
         public float ClosedY { get { return OffsetY - Height; } }
@@ -86,14 +87,24 @@ namespace Alttp.Console
         {
             // Command input prompt
             const int cmdPromptHeight = 26;
+
             CommandInput = new CommandInputControl(_python)
                 {
-                    Bounds = new UniRectangle(1, Bounds.Size.Y - cmdPromptHeight - 1, Bounds.Size.X - 2, cmdPromptHeight),
+                    Bounds = new UniRectangle(0, Bounds.Size.Y - cmdPromptHeight, Bounds.Size.X, cmdPromptHeight),
                     Enabled = false
                 };
             CommandInput.Clear();
 
             Children.Add(CommandInput);
+
+            // List with command and output history
+            OutputList = new ListControl()
+                {
+                    Bounds = new UniRectangle(0, 0, Bounds.Size.X, Bounds.Size.Y - cmdPromptHeight),
+                    SelectionMode = ListSelectionMode.None
+                };
+
+            Children.Add(OutputList);
         }
 
         public void Update(GameTime gameTime)
