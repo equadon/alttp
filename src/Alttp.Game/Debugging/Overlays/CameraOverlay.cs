@@ -136,7 +136,7 @@ namespace Alttp.Debugging.Overlays
         private void OptLockCameraOnChanged(object sender, EventArgs eventArgs)
         {
             if (_optLockCamera.Selected)
-                _world.ActiveCamera.Follow(_world.Player.Object);
+                _world.ActiveCamera.Follow(_world.Player.Link);
             else
                 _world.ActiveCamera.Free();
         }

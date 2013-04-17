@@ -2,7 +2,9 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using Alttp.Core.Animation;
 using Alttp.Core.GameObjects;
+using Alttp.Core.Graphics;
 using Alttp.Core.Input;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Input;
@@ -18,34 +20,34 @@ namespace Alttp.Core
     {
         private readonly InputManager _input;
 
+        public Link Link { get; private set; }
+
         protected ILogger Log { get; set; }
 
-        public GameObject Object { get; set; }
-
-        public Link Link
-        {
-            get { return Object as Link; }
-        }
-
-        public Player(InputManager input)
+        public Player(InputManager input, IContentManager content)
         {
             _input = input;
+
+            LoadLink(content);
+        }
+
+        private void LoadLink(IContentManager content)
+        {
+            // Load link
+            var linkAnimations = content.Load<AnimationsDict>("GameObjects/Link/LinkAnimations");
+            var linkSprites = content.Load<SpriteSheet>("GameObjects/Link/LinkSprites");
+
+            Link = new Link(new Vector2(2230, 2820), linkAnimations, linkSprites.FindSprite("/Shadow"));
         }
 
         public void Draw(ISpriteBatch batch)
         {
-            if (Object == null)
-                return;
-
-            Object.Draw(batch);
+            Link.Draw(batch);
         }
 
         public void Update(GameTime gameTime, bool processInput = true)
         {
-            if (Object == null)
-                return;
-
-            Object.Update(gameTime);
+            Link.Update(gameTime);
 
             // Handle keyboard input
             if (processInput)
@@ -67,20 +69,20 @@ namespace Alttp.Core
                 direction.X++;
 
             if (direction != Vector2.Zero)
-                Object.Move(direction);
+                Link.Move(direction);
 
             if (_input.IsKeyReleased(Keys.W))
-                Object.Idle();
+                Link.Idle();
             if (_input.IsKeyReleased(Keys.A))
-                Object.Idle();
+                Link.Idle();
             if (_input.IsKeyReleased(Keys.S))
-                Object.Idle();
+                Link.Idle();
             if (_input.IsKeyReleased(Keys.D))
-                Object.Idle();
+                Link.Idle();
 
             // Attack
             if (_input.IsKeyPressed(Keys.Space))
-                Object.Attack();
+                Link.Attack();
         }
     }
 }

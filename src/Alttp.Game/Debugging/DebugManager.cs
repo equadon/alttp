@@ -87,7 +87,7 @@ namespace Alttp.Debugging
             BlankTexture = _content.Load<Texture2D>("Textures/Blank");
             MinimapTexture = _content.Load<Texture2D>("Textures/Minimap");
 
-            TestShield = new Shield(_world.Player.Object.Position, _world.Player.Object.Animations, _world.Player.Object, Vector2.Zero, ShieldTypes.Blue);
+            TestShield = new Shield(_world.Player.Link.Position, _world.Player.Link.Animations, _world.Player.Link, Vector2.Zero, ShieldTypes.Blue);
         }
 
         public override void Update(GameTime gameTime)

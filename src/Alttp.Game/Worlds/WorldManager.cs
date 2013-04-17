@@ -78,16 +78,6 @@ namespace Alttp.Worlds
             SelectCamera(0);
         }
 
-        protected override void LoadContent()
-        {
-            base.LoadContent();
-
-            var linkAnimations = _content.Load<AnimationsDict>("GameObjects/Link/LinkAnimations");
-            var linkSprites = _content.Load<SpriteSheet>("GameObjects/Link/LinkSprites");
-
-            Player.Object = new Link(new Vector2(2230, 2820), linkAnimations, linkSprites.FindSprite("/Shadow"));
-        }
-
         public override void Draw(GameTime gameTime)
         {
             base.Draw(gameTime);
