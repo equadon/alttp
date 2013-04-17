@@ -15,5 +15,14 @@ namespace Alttp.Console
             Output = output;
             Type = type;
         }
+
+        public override string ToString()
+        {
+            if (Type == ConsoleOutputType.Command)
+                return ">>> " + Output;
+            if (Type == ConsoleOutputType.Output)
+                return "<<< " + Output;
+            return Output;
+        }
     }
 }
