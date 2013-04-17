@@ -43,6 +43,9 @@ namespace Alttp.Console
 
             string output;
 
+            if (input == String.Empty)
+                return String.Empty;
+
             try
             {
                 ScriptSource source = _engine.CreateScriptSourceFromString(input, SourceCodeKind.Expression);
@@ -52,7 +55,7 @@ namespace Alttp.Console
             }
             catch (Exception e)
             {
-                output = "Error executing code: " + e;
+                output = "Error: " + e;
             }
 
             OnCommandOutput(new OutputEventArgs(Clean(output), ConsoleOutputType.Output));
