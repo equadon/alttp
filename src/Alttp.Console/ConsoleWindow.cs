@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Input;
+using Nuclex.Support.Collections;
 using Nuclex.UserInterface;
 using Nuclex.UserInterface.Controls.Desktop;
 
@@ -77,6 +78,11 @@ namespace Alttp.Console
             Outputs = new List<ConsoleOutput>();
 
             SetupControls();
+
+            // Whenever a new item is added to the output list scroll the slider to the bottom
+            var outputList = OutputList.Items as ObservableList<string>;
+            if (outputList != null)
+                outputList.ItemAdded += OutputListOnItemAdded;
         }
 
         private void SetupControls()
@@ -150,5 +156,15 @@ namespace Alttp.Console
         }
 
         #endregion
+
+        /// <summary>
+        /// When an item is added to the output list scroll down the slider to the bottom.
+        /// </summary>
+        /// <param name="sender">Sender</param>
+        /// <param name="itemEventArgs">Event args</param>
+        private void OutputListOnItemAdded(object sender, ItemEventArgs<string> itemEventArgs)
+        {
+            OutputList.Slider.ThumbPosition = 1.0f;
+        }
     }
 }
