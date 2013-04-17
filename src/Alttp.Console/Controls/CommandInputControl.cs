@@ -9,6 +9,8 @@ namespace Alttp.Console
 {
     public class CommandInputControl : InputControl
     {
+        public static readonly string Prompt = ">>> ";
+
         private readonly PythonInterpreter _processor;
 
         public CommandInputControl(PythonInterpreter processor)
@@ -18,7 +20,17 @@ namespace Alttp.Console
 
         protected override bool OnKeyPressed(Keys key)
         {
-            return (key == Keys.Enter || base.OnKeyPressed(key));
+            switch (key)
+            {
+                case Keys.Enter:
+                    return true;
+                case Keys.Back:
+                    if (Text == Prompt)
+                        return false;
+                    goto default;
+                default:
+                    return base.OnKeyPressed(key);
+            }
         }
 
         protected override void OnKeyReleased(Keys key)
@@ -38,7 +50,7 @@ namespace Alttp.Console
 
         public void Clear()
         {
-            Text = ">>> ";
+            Text = Prompt;
         }
     }
 }
