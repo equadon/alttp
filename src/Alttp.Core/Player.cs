@@ -2,15 +2,14 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using Alttp.Core.GameObjects;
 using Alttp.Core.Input;
-using Alttp.GameObjects;
-using Alttp.Shields;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Input;
 using Ninject.Extensions.Logging;
 using Nuclex.Ninject.Xna;
 
-namespace Alttp
+namespace Alttp.Core
 {
     /// <summary>
     /// Store and handle player information.

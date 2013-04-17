@@ -3,7 +3,7 @@ using Microsoft.Xna.Framework;
 using Nuclex.Ninject.Xna;
 using Nuclex.UserInterface;
 
-namespace Alttp.GameObjects
+namespace Alttp.Core.GameObjects.Interfaces
 {
     public interface IGameObject
     {
@@ -15,7 +15,7 @@ namespace Alttp.GameObjects
         Vector2 Direction { get; }
         string AnimationName { get; }
         Vector2 Position { get; set; }
-        Animation Animation { get; }
+        Animation.Animation Animation { get; }
         Frame Frame { get; }
 
         /// <summary>Returns the current direction as text (Up, Down, Left, Right)</summary>

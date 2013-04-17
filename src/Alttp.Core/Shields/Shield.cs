@@ -1,14 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using Alttp.Core.Animation;
-using Alttp.GameObjects;
+﻿using Alttp.Core.Animation;
+using Alttp.Core.GameObjects;
+using Alttp.Core.GameObjects.Interfaces;
 using Microsoft.Xna.Framework;
-using Ninject.Extensions.Logging;
-using Nuclex.Ninject.Xna;
 
-namespace Alttp.Shields
+namespace Alttp.Core.Shields
 {
     public enum ShieldTypes { Blue }
 

@@ -1,15 +1,11 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using Alttp.Core;
 using Alttp.Core.Animation;
+using Alttp.Core.GameObjects.Interfaces;
 using Alttp.Core.Graphics;
-using Alttp.Shields;
+using Alttp.Core.Shields;
 using Microsoft.Xna.Framework;
-using Ninject.Extensions.Logging;
 
-namespace Alttp.GameObjects
+namespace Alttp.Core.GameObjects
 {
     public class Link : GameObject
     {

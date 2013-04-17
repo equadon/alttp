@@ -1,12 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using Alttp.Core.Animation;
+﻿using Alttp.Core.Animation;
 using Microsoft.Xna.Framework;
-using Ninject.Extensions.Logging;
 
-namespace Alttp.GameObjects
+namespace Alttp.Core.GameObjects
 {
     public class Bush : GameObject//, ILootable, ILiftable
     {

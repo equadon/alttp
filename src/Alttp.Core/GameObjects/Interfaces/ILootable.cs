@@ -1,9 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using System.Collections.Generic;
 
-namespace Alttp.GameObjects
+namespace Alttp.Core.GameObjects.Interfaces
 {
     public interface ILootable
     {

@@ -1,4 +1,5 @@
-﻿using Alttp.Core.GameStates;
+﻿using Alttp.Core;
+using Alttp.Core.GameStates;
 using Alttp.Core.Input;
 using Alttp.Core.UI.Controls;
 using Alttp.Debugging;
@@ -15,8 +16,8 @@ namespace Alttp.GameStates
         private WorldManager _world;
         private DebugManager _debug;
         private Player _player;
-        private GuiManager _gui;
-        private Game _game;
+        private readonly GuiManager _gui;
+        private readonly Game _game;
 
         public GameStateWorld(GameComponentCollection mainCollection, InputManager input, WorldManager world, DebugManager debug, Player player, GuiManager gui, Game game)
             : base(mainCollection, world, debug)

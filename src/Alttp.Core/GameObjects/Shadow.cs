@@ -1,12 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using Alttp.Core.GameObjects.Interfaces;
 using Alttp.Core.Graphics;
 using Microsoft.Xna.Framework;
 using Nuclex.Ninject.Xna;
 
-namespace Alttp.GameObjects
+namespace Alttp.Core.GameObjects
 {
     public class Shadow
     {

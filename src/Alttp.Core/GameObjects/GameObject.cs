@@ -1,17 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using Alttp.Core;
+﻿using System.Collections.Generic;
 using Alttp.Core.Animation;
-using Alttp.Core.Graphics;
+using Alttp.Core.GameObjects.Interfaces;
 using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Graphics;
-using Ninject.Extensions.Logging;
 using Nuclex.Ninject.Xna;
 using Nuclex.UserInterface;
 
-namespace Alttp.GameObjects
+namespace Alttp.Core.GameObjects
 {
     public enum GameObjectState
     {
@@ -57,7 +51,7 @@ namespace Alttp.GameObjects
         public bool IsMoving { get { return State == GameObjectState.Moving; } }
         public bool IsAttacking { get { return State == GameObjectState.Attacking; } }
 
-        public Animation Animation
+        public Animation.Animation Animation
         {
             get { return Animations[AnimationName]; }
         }

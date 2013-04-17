@@ -1,11 +1,11 @@
 ﻿using System;
 using Alttp.Console;
 using Alttp.Core;
+using Alttp.Core.GameObjects;
+using Alttp.Core.Shields;
 using Alttp.Core.UI;
 using Alttp.Core.UI.Controls;
 using Alttp.Debugging.Overlays;
-using Alttp.GameObjects;
-using Alttp.Shields;
 using Alttp.Worlds;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;

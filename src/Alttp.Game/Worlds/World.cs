@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using Alttp.Core.Animation;
-using Alttp.GameObjects;
+using Alttp.Core.GameObjects;
 using FuncWorks.XNA.XTiled;
 using Microsoft.Xna.Framework;
 using Ninject.Extensions.Logging;

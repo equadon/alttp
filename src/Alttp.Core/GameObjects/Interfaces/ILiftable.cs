@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
-namespace Alttp.GameObjects
+﻿namespace Alttp.Core.GameObjects.Interfaces
 {
     public interface ILiftable
     {

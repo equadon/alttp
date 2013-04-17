@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using Alttp.Console;
+using Alttp.Core;
 using Alttp.Core.Input;
 using Alttp.Debugging;
-using Alttp.GameObjects;
 using Alttp.GameStates;
 using Alttp.Worlds;
 using Ninject;
@@ -34,6 +34,8 @@ namespace Alttp
             Kernel.Bind<GameController>().ToSelf().InSingletonScope();
 
             Kernel.Bind<AlttpConsole>().ToSelf().InSingletonScope();
+
+            Kernel.Bind<PythonInterpreter>().ToSelf().InSingletonScope();
 
             // Game states
             Kernel.Bind<GameStateWorld>().ToSelf().DefinesNamedScope(GameStateScope);

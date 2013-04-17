@@ -1,9 +1,10 @@
 ﻿using System.Collections.Generic;
 using Alttp.Console;
+using Alttp.Core;
 using Alttp.Core.Animation;
+using Alttp.Core.GameObjects;
 using Alttp.Core.Graphics;
 using Alttp.Core.Input;
-using Alttp.GameObjects;
 using FuncWorks.XNA.XTiled;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;

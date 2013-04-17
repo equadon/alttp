@@ -120,16 +120,6 @@
     <Compile Include="AlttpGame.cs" />
     <Compile Include="AlttpModule.cs" />
     <Compile Include="Debugging\DebugManager.cs" />
-    <Compile Include="GameObjects\Bush.cs" />
-    <Compile Include="GameObjects\GameObject.cs" />
-    <Compile Include="GameObjects\Interfaces\IEquipment.cs" />
-    <Compile Include="GameObjects\Interfaces\IGameObject.cs" />
-    <Compile Include="GameObjects\Interfaces\ILiftable.cs" />
-    <Compile Include="GameObjects\Interfaces\ILootable.cs" />
-    <Compile Include="GameObjects\Shadow.cs" />
-    <Compile Include="Player.cs" />
-    <Compile Include="Shields\IShield.cs" />
-    <Compile Include="Shields\Shield.cs" />
     <Compile Include="Worlds\Camera.cs" />
     <Compile Include="Worlds\IWorld.cs" />
     <Compile Include="Worlds\Region.cs" />
@@ -137,7 +127,6 @@
     <Compile Include="Worlds\WorldManager.cs" />
     <Compile Include="Config.cs" />
     <Compile Include="GameController.cs" />
-    <Compile Include="GameObjects\Link.cs" />
     <Compile Include="GameStates\GameStateWorld.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

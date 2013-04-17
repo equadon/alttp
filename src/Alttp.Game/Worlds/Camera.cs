@@ -1,6 +1,6 @@
 ﻿using System;
 using Alttp.Core;
-using Alttp.GameObjects;
+using Alttp.Core.GameObjects;
 using Microsoft.Xna.Framework;
 using Nuclex.UserInterface;
 
