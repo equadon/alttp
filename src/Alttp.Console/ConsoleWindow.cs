@@ -13,7 +13,7 @@ namespace Alttp.Console
     public class ConsoleWindow : WindowControl
     {
         public static readonly int OffsetX = 20;
-        public static readonly int OffsetY = -26;
+        public static readonly int OffsetY = -29;
 
         private readonly PythonInterpreter _python;
         private readonly Screen _screen;

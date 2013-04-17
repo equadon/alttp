@@ -132,7 +132,6 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Debugging\Overlays\CameraOverlay.cs" />
     <Compile Include="Debugging\Overlays\GameInfoOverlay.cs" />
-    <Compile Include="Debugging\Overlays\GameObjectOverlay.cs" />
     <Compile Include="Debugging\Overlays\MinimapOverlay.cs" />
     <Compile Include="Worlds\LightWorld.cs" />
   </ItemGroup>

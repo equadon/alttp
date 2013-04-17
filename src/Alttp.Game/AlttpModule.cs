@@ -33,12 +33,12 @@ namespace Alttp
 
             Kernel.Bind<GameController>().ToSelf().InSingletonScope();
 
-            Kernel.Bind<AlttpConsole>().ToSelf().InSingletonScope();
-
-            Kernel.Bind<PythonInterpreter>().ToSelf().InSingletonScope();
-
             // Game states
             Kernel.Bind<GameStateWorld>().ToSelf().DefinesNamedScope(GameStateScope);
+
+            Kernel.Bind<AlttpConsole>().ToSelf().InNamedScope(GameStateScope);
+
+            Kernel.Bind<PythonInterpreter>().ToSelf().InNamedScope(GameStateScope);
 
             // Game components
             Kernel.Bind<WorldManager>().ToSelf().InNamedScope(GameStateScope);

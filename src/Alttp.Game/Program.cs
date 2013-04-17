@@ -51,8 +51,6 @@ namespace Alttp
         {
             var gameComponents = kernel.Get<GameComponentCollection>();
 
-            gameComponents.Add(kernel.Get<AlttpConsole>());
-
             // Nuclex framework components
             gameComponents.Add(kernel.Get<InputManager>());
             gameComponents.Add(kernel.Get<GuiManager>());

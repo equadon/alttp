@@ -53,7 +53,6 @@ namespace Alttp.Debugging
         // Overlays
         public CameraOverlay CameraOverlay { get; private set; }
         public GameInfoOverlay GameInfoOverlay { get; private set; }
-        public GameObjectOverlay GameObjectOverlay { get; private set; }
         public MinimapOverlay MinimapOverlay { get; private set; }
 
         // Test shield
@@ -169,16 +168,6 @@ namespace Alttp.Debugging
                     SelectedGameObjects = GameObject.FindAll(Utils.RenderableRectangle(SelectionBounds), _world.ActiveCamera.Position, _world.ActiveCamera.InvZoom);
 
                     SelectionBounds = Rectangle.Empty;
-
-                    // Set camera mode if there are game objects selected
-                    if (SelectedGameObjects.Length > 0 && !_gui.Screen.Desktop.Children.Contains(GameObjectOverlay))
-                    {
-                        _gui.Screen.Desktop.Children.Add(GameObjectOverlay);
-                    }
-                    else if (SelectedGameObjects.Length == 0 && _gui.Screen.Desktop.Children.Contains(GameObjectOverlay))
-                    {
-                        _gui.Screen.Desktop.Children.Remove(GameObjectOverlay);
-                    }
                 }
 
                 if (_input.IsMouseButtonDown(MouseButtons.Left) && SelectionBounds != Rectangle.Empty)
@@ -276,21 +265,15 @@ namespace Alttp.Debugging
             // Camera overlay
             CameraOverlay = new CameraOverlay(_world, "Camera", 230, _input)
             {
-                X = new UniScalar(0, 10),
-                Y = new UniScalar(0, 10)
+                X = new UniScalar(0, 10)
             };
+            CameraOverlay.Y = new UniScalar(1, -CameraOverlay.Height - 10);
 
             const int gameInfoWidth = 245;
             GameInfoOverlay = new GameInfoOverlay(this, "Game Info", gameInfoWidth, _world.ActiveCamera)
             {
                 X = new UniScalar(1, -gameInfoWidth - 10),
                 Y = new UniScalar(0, 10)
-            };
-
-            const int gameObjectWidth = 250;
-            GameObjectOverlay = new GameObjectOverlay(this, "Object", gameObjectWidth, _world.ActiveCamera)
-            {
-                X = new UniScalar(0, 10)
             };
 
             const int minimapWidth = 276,

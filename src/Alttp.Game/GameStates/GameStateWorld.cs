@@ -1,4 +1,5 @@
-﻿using Alttp.Core;
+﻿using Alttp.Console;
+using Alttp.Core;
 using Alttp.Core.GameStates;
 using Alttp.Core.Input;
 using Alttp.Core.UI.Controls;
@@ -18,9 +19,10 @@ namespace Alttp.GameStates
         private Player _player;
         private readonly GuiManager _gui;
         private readonly Game _game;
+        private readonly AlttpConsole _console;
 
-        public GameStateWorld(GameComponentCollection mainCollection, InputManager input, WorldManager world, DebugManager debug, Player player, GuiManager gui, Game game)
-            : base(mainCollection, world, debug)
+        public GameStateWorld(GameComponentCollection mainCollection, InputManager input, WorldManager world, DebugManager debug, Player player, GuiManager gui, Game game, AlttpConsole console)
+            : base(mainCollection, world, debug, console)
         {
             _input = input;
             _world = world;
@@ -28,6 +30,7 @@ namespace Alttp.GameStates
             _player = player;
             _gui = gui;
             _game = game;
+            _console = console;
 
             RegisterComponents();
 

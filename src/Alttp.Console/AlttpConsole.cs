@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using Alttp.Console.Commands;
+using Alttp.Core;
 using Alttp.Core.Input;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
@@ -28,13 +29,13 @@ namespace Alttp.Console
         private readonly GuiManager _gui;
         private readonly Game _game;
 
-        private PythonInterpreter _python;
+        private readonly PythonInterpreter _python;
 
         protected ILogger Log { get; set; }
 
         public ConsoleWindow Window { get; private set; }
 
-        public AlttpConsole(Game game, ILogger logger, InputManager input, ISpriteBatch batch, GuiManager gui)
+        public AlttpConsole(Game game, ILogger logger, InputManager input, ISpriteBatch batch, GuiManager gui, Player player, PythonInterpreter python)
             : base(game)
         {
             Log = logger;
@@ -42,6 +43,11 @@ namespace Alttp.Console
             _input = input;
             _batch = batch;
             _gui = gui;
+            _python = python;
+
+            // Subscribe to command events
+            _python.CommandInput += PythonOnCommandInput;
+            _python.CommandOutput += PythonOnCommandOutput;
 
             Log.Debug("Initialized console");
         }
@@ -49,13 +55,6 @@ namespace Alttp.Console
         public override void Initialize()
         {
             base.Initialize();
-
-            // Python interpreter
-            _python = new PythonInterpreter(Log);
-
-            // Subscribe to command events
-            _python.CommandInput += PythonOnCommandInput;
-            _python.CommandOutput += PythonOnCommandOutput;
 
             // Setup UI
             Window = new ConsoleWindow(_python, _gui.Screen, (int)(_game.GraphicsDevice.Viewport.Width * 0.75f), (int)(_game.GraphicsDevice.Viewport.Height * 0.67f));
