@@ -120,6 +120,10 @@
     <Compile Include="UI\Controls\ImageControl.cs" />
     <Compile Include="UI\Overlay.cs" />
     <Compile Include="Utils.cs" />
+    <Compile Include="World\Camera.cs" />
+    <Compile Include="World\IWorld.cs" />
+    <Compile Include="World\Region.cs" />
+    <Compile Include="World\World.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Nuclex.UserInterface\Nuclex.UserInterface %28xna-4.0-x86%29.csproj">

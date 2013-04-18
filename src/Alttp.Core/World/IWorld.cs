@@ -3,7 +3,7 @@ using FuncWorks.XNA.XTiled;
 using Microsoft.Xna.Framework;
 using Nuclex.Ninject.Xna;
 
-namespace Alttp.Worlds
+namespace Alttp.Core.World
 {
     public interface IWorld
     {

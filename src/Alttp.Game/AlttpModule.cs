@@ -5,6 +5,7 @@ using System.Text;
 using Alttp.Console;
 using Alttp.Core;
 using Alttp.Core.Input;
+using Alttp.Core.World;
 using Alttp.Debugging;
 using Alttp.GameStates;
 using Alttp.Worlds;

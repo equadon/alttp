@@ -5,6 +5,7 @@ using Alttp.Core.GameObjects;
 using Alttp.Core.Shields;
 using Alttp.Core.UI;
 using Alttp.Core.UI.Controls;
+using Alttp.Core.World;
 using Alttp.Debugging.Overlays;
 using Alttp.Worlds;
 using Microsoft.Xna.Framework;

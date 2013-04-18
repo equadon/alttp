@@ -6,6 +6,7 @@ using Alttp.Core.Animation;
 using Alttp.Core.GameObjects;
 using Alttp.Core.Graphics;
 using Alttp.Core.Input;
+using Alttp.Core.World;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Input;
 using Ninject.Extensions.Logging;
@@ -20,13 +21,16 @@ namespace Alttp.Core
     {
         private readonly InputManager _input;
 
+        public IWorld World { get; private set; }
+
         public Link Link { get; private set; }
 
         protected ILogger Log { get; set; }
 
-        public Player(InputManager input, IContentManager content)
+        public Player(InputManager input, IContentManager content, IWorld world)
         {
             _input = input;
+            World = world;
 
             LoadLink(content);
         }

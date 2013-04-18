@@ -5,6 +5,7 @@ using Alttp.Core.Animation;
 using Alttp.Core.GameObjects;
 using Alttp.Core.Graphics;
 using Alttp.Core.Input;
+using Alttp.Core.World;
 using FuncWorks.XNA.XTiled;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
@@ -26,11 +27,11 @@ namespace Alttp.Worlds
         private bool _middleMouseDown;
         private Vector2 _middleMouseStartPosition;
 
+        private int _activeCameraIndex;
+
         #region Properties
 
         protected ILogger Log { get; set; }
-
-        public int ActiveCameraIndex { get; private set; }
 
         public Dictionary<int, Camera> Cameras { get; private set; }
 
@@ -40,6 +41,16 @@ namespace Alttp.Worlds
         public IWorld World { get; private set; }
 
         public Player Player { get; private set; }
+
+        public int ActiveCameraIndex
+        {
+            get { return _activeCameraIndex; }
+            private set
+            {
+                _activeCameraIndex = value;
+                _console.SetActiveCamera(ActiveCamera);
+            }
+        }
 
         public Camera ActiveCamera
         {

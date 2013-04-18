@@ -6,6 +6,7 @@ using Alttp.Console.Commands;
 using Alttp.Core;
 using Alttp.Core.Input;
 using Alttp.Core.Shields;
+using Alttp.Core.World;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
@@ -84,6 +85,15 @@ namespace Alttp.Console
         {
             // Player
             _python.SetVariable("player", player);
+        }
+
+        /// <summary>
+        /// Sets the camera variable in the console to the currently active camera.
+        /// </summary>
+        /// <param name="camera">Current active camera</param>
+        public void SetActiveCamera(Camera camera)
+        {
+            _python.SetVariable("camera", camera);
         }
 
         /// <summary>

@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.IO;
 using System.Linq;
 using Alttp.Core.Animation;
 using Alttp.Core.GameObjects;
@@ -9,7 +8,7 @@ using Microsoft.Xna.Framework;
 using Ninject.Extensions.Logging;
 using Nuclex.Ninject.Xna;
 
-namespace Alttp.Worlds
+namespace Alttp.Core.World
 {
     public class World : IWorld
     {

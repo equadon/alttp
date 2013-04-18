@@ -1,4 +1,5 @@
 ﻿using Alttp.Core.Animation;
+using Alttp.Core.World;
 using FuncWorks.XNA.XTiled;
 using Ninject.Extensions.Logging;
 using Nuclex.Ninject.Xna;

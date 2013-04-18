@@ -1,10 +1,9 @@
 ﻿using System;
-using Alttp.Core;
 using Alttp.Core.GameObjects;
 using Microsoft.Xna.Framework;
 using Nuclex.UserInterface;
 
-namespace Alttp.Worlds
+namespace Alttp.Core.World
 {
     public enum CameraMode { Free, Follow }
 
