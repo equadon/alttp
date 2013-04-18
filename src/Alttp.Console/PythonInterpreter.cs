@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using Alttp.Console.Commands;
 using IronPython;
@@ -29,12 +30,18 @@ namespace Alttp.Console
 
         public PythonInterpreter(ILogger logger)
         {
-            _engine = Python.CreateEngine();
-            _scope = _engine.CreateScope();
             Log = logger;
 
             Commands = new Dictionary<string, IConsoleCommand>();
             CommandHistory = new List<string>();
+
+            _engine = Python.CreateEngine();
+            _scope = _engine.CreateScope();
+
+            // Load all Alttp assemblies
+            foreach (var assembly in AppDomain.CurrentDomain.GetAssemblies())
+                if (assembly.GetName().Name.Contains("Alttp"))
+                    _engine.Runtime.LoadAssembly(assembly);
         }
 
         /// <summary>
@@ -46,6 +53,8 @@ namespace Alttp.Console
         {
             input = Clean(input);
 
+            CommandHistory.Add(input);
+
             OnCommandInput(new OutputEventArgs(input, ConsoleOutputType.Command));
 
             string output;
@@ -55,19 +64,26 @@ namespace Alttp.Console
 
             try
             {
-                ScriptSource source = _engine.CreateScriptSourceFromString(input, SourceCodeKind.Expression);
-                output = source.Execute(_scope).ToString();
-
-                CommandHistory.Add(input);
+                ScriptSource source = _engine.CreateScriptSourceFromString(input, SourceCodeKind.AutoDetect);
+                var results = source.Execute(_scope);
+                output = (results == null) ? "null" : results.ToString();
             }
             catch (Exception e)
             {
                 output = "Error: " + e;
             }
 
-            OnCommandOutput(new OutputEventArgs(Clean(output), ConsoleOutputType.Output));
+            if (output != "null")
+                OnCommandOutput(new OutputEventArgs(Clean(output), ConsoleOutputType.Output));
 
             return output;
+        }
+
+        public void AddImport(string import)
+        {
+            _engine.Execute(import);
+
+            Log.Debug("Added import: " + import);
         }
 
         public void RegisterCommand(IConsoleCommand command)
@@ -76,14 +92,14 @@ namespace Alttp.Console
 
             _scope.SetVariable(command.Name, new Func<string>(command.Execute));
 
-            Log.Info("Registered command: " + command.Name);
+            Log.Debug("Registered command: " + command.Name);
         }
 
         public void SetVariable(string name, object obj)
         {
             _scope.SetVariable(name, obj);
 
-            Log.Info("Set variable: " + name);
+            Log.Debug("Set variable: " + name);
         }
 
         /// <summary>

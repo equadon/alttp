@@ -5,6 +5,7 @@ using System.Text;
 using Alttp.Console.Commands;
 using Alttp.Core;
 using Alttp.Core.Input;
+using Alttp.Core.Shields;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
@@ -49,6 +50,7 @@ namespace Alttp.Console
             _python.CommandInput += PythonOnCommandInput;
             _python.CommandOutput += PythonOnCommandOutput;
 
+            AddImports();
             SetVariables(player);
             RegisterCommands();
 
@@ -65,12 +67,26 @@ namespace Alttp.Console
             _gui.Screen.Desktop.Children.Add(Window);
         }
 
+        /// <summary>
+        /// Add python imports.
+        /// </summary>
+        private void AddImports()
+        {
+        }
+
+        /// <summary>
+        /// Set python global variables
+        /// </summary>
+        /// <param name="player">Player object</param>
         private void SetVariables(Player player)
         {
             // Player
             _python.SetVariable("player", player);
         }
 
+        /// <summary>
+        /// Register global python functions
+        /// </summary>
         private void RegisterCommands()
         {
             // Help
