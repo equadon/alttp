@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Reflection;
 using System.Text;
@@ -38,10 +39,10 @@ namespace Alttp.Console
             _engine = Python.CreateEngine();
             _scope = _engine.CreateScope();
 
-            // Load all Alttp assemblies
-            foreach (var assembly in AppDomain.CurrentDomain.GetAssemblies())
-                if (assembly.GetName().Name.Contains("Alttp"))
-                    _engine.Runtime.LoadAssembly(assembly);
+            var root = Directory.GetParent(Assembly.GetExecutingAssembly().Location).FullName;
+
+            _engine.Runtime.LoadAssembly(Assembly.LoadFile(Path.Combine(root, "Alttp.Core.dll")));
+            _engine.Runtime.LoadAssembly(Assembly.LoadFile(Path.Combine(root, "Alttp.Game.exe")));
         }
 
         /// <summary>
