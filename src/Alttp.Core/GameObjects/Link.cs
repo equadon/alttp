@@ -7,7 +7,7 @@ using Microsoft.Xna.Framework;
 
 namespace Alttp.Core.GameObjects
 {
-    public class Link : GameObject
+    public class Link : Character
     {
         public IShield Shield { get; private set; }
 
@@ -62,33 +62,6 @@ namespace Alttp.Core.GameObjects
             ChangeAnimation("/Swing/Sword/" + DirectionText, AnimationPlayAction.PlayOnce, GameObjectState.Attacking);
 
             Animation.Finished += IdleAnimationOnFinished;
-        }
-
-        /// <summary>
-        /// Equip equipment.
-        /// </summary>
-        /// <param name="equipment">Equipment to equip.</param>
-        public void Equip(IEquipment equipment)
-        {
-            var shield = equipment as IShield;
-
-            if (shield != null)
-                Shield = shield;
-
-            equipment.Parent = this;
-        }
-
-        /// <summary>
-        /// Unequip shield.
-        /// </summary>
-        public void Unequip(IEquipment equipment)
-        {
-            var shield = equipment as IShield;
-
-            if (shield != null)
-                Shield = null;
-
-            equipment.Parent = null;
         }
 
         public override void Idle()

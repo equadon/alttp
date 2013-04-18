@@ -2,6 +2,7 @@ Content\Fonts\DebugFont.xnb
 Content\Fonts\DebugTitleFont.xnb
 Content\Skins\Alttp\DefaultFont.xnb
 Content\Skins\Alttp\TitleFont.xnb
+Content\Skins\Alttp\ConsoleFont.xnb
 Content\GameObjects\Link\LinkAnimations.xnb
 Content\GameObjects\WorldObjects\LightWorldObjectAnimations.xnb
 Content\GameObjects\Link\LinkSprites.xnb

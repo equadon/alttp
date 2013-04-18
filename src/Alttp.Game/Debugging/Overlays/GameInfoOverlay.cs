@@ -16,6 +16,7 @@ namespace Alttp.Debugging.Overlays
         // String formats
         private const string LblFpsFormat = "FPS: {0}";
         private const string LblResolutionFormat = "Resolution: {0}x{1}";
+        private const string LblVsyncFormat = "Vsync: {0}";
         private const string LblTilesFormat = "Visible Tiles: {0}";
         private const string LblFrameFormat = "Frame: {0}";
         private const string LblTimeFormat = "Elapsed Time: {0:hh\\:mm\\:ss\\.ff}";
@@ -23,6 +24,7 @@ namespace Alttp.Debugging.Overlays
         // Controls
         private LabelControl _lblFps;
         private LabelControl _lblResolution;
+        private LabelControl _lblVsync;
         private LabelControl _lblTiles;
         private LabelControl _lblFrame;
         private LabelControl _lblTime;
@@ -44,6 +46,7 @@ namespace Alttp.Debugging.Overlays
 
         public string FpsText { get { return String.Format(LblFpsFormat, MeasuredFps); } }
         public string ResolutionText { get { return String.Format(LblResolutionFormat, _debug.Game.GraphicsDevice.Viewport.Width, _debug.Game.GraphicsDevice.Viewport.Height); } }
+        public string VsyncText { get { return String.Format(LblVsyncFormat, (Config.VsyncEnabled) ? "Enabled" : "Disabled"); } }
         public string TilesText { get { return String.Format(LblTilesFormat, VisibleTiles); } }
         public string FrameText { get { return String.Format(LblFrameFormat, _debug.Frame); } }
         public string TimeText { get { return String.Format(LblTimeFormat, _debug.ElapsedTime.TotalGameTime); } }
@@ -69,6 +72,13 @@ namespace Alttp.Debugging.Overlays
                 Text = ResolutionText
             };
             Children.Add(_lblResolution);
+
+            _lblVsync = new LabelControl()
+            {
+                Bounds = new UniRectangle(new UniScalar(0, 10), new UniScalar(0, 40 + Children.Count * height), new UniScalar(1, -10), new UniScalar(0, 0)),
+                Text = VsyncText
+            };
+            Children.Add(_lblVsync);
 
             _lblFps = new LabelControl()
             {
@@ -116,6 +126,7 @@ namespace Alttp.Debugging.Overlays
             }
 
             _lblResolution.Text = ResolutionText;
+            _lblVsync.Text = VsyncText;
             _lblTiles.Text = TilesText;
             _lblFrame.Text = FrameText;
             _lblTime.Text = TimeText;

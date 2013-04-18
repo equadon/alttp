@@ -44,7 +44,7 @@ namespace Alttp.Core.GameObjects
         public virtual Vector2 Position
         {
             get { return _position; }
-            set { AbsMove(value.X, value.Y); }
+            set { Move(value.X, value.Y); }
         }
 
         public bool IsIdle { get { return State == GameObjectState.Idle; } }
@@ -126,10 +126,11 @@ namespace Alttp.Core.GameObjects
             if (Shadow != null)
                 Shadow.Draw(batch);
 
-            Frame.Draw(batch, Frame, Position);
+            if (Frame != null)
+                Frame.Draw(batch, Frame, Position);
         }
 
-        public void AbsMove(float x, float y)
+        public void Move(float x, float y)
         {
             _position.X = x;
             _position.Y = y;

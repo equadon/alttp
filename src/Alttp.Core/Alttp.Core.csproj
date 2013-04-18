@@ -93,6 +93,7 @@
   <ItemGroup>
     <Compile Include="Animation\AnimationEvents.cs" />
     <Compile Include="GameObjects\Bush.cs" />
+    <Compile Include="GameObjects\Character.cs" />
     <Compile Include="GameObjects\GameObject.cs" />
     <Compile Include="GameObjects\Interfaces\IEquipment.cs" />
     <Compile Include="GameObjects\Interfaces\IGameObject.cs" />
