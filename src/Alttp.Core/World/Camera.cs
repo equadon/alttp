@@ -261,7 +261,7 @@ namespace Alttp.Core.World
         /// <returns>World position</returns>
         public Vector2 ScreenToWorld(Vector2 screenPosition)
         {
-            return Utils.ScreenToWorld(screenPosition, Position, InvZoom);
+            return Utils.ScreenToWorld(screenPosition, Position, Zoom);
         }
 
         private void OnViewportChanged(EventArgs e)
