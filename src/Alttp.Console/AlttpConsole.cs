@@ -85,7 +85,7 @@ namespace Alttp.Console
         private void SetVariables(Player player)
         {
             // Player
-            _python.SetVariable("player", player);
+            _python.SetVariable("player", "Player object", player);
         }
 
         /// <summary>
@@ -94,7 +94,7 @@ namespace Alttp.Console
         /// <param name="camera">Current active camera</param>
         public void SetActiveCamera(Camera camera)
         {
-            _python.SetVariable("camera", camera);
+            _python.SetVariable("camera", "Currently active camera", camera);
         }
 
         /// <summary>
@@ -106,9 +106,9 @@ namespace Alttp.Console
         public void SetSelectedObjects(GameObject[] selectedGameObjects)
         {
             if (selectedGameObjects.Length == 1)
-                _python.SetVariable("o", selectedGameObjects[0]);
+                _python.SetVariable("o", "Selected objects", selectedGameObjects[0]);
             else
-                _python.SetVariable("o", selectedGameObjects);
+                _python.SetVariable("o", "Selected objects", selectedGameObjects);
 
             if (Window.CommandInput.Text == CommandInputControl.Prompt)
                 Window.CommandInput.SetText("o");
@@ -120,7 +120,7 @@ namespace Alttp.Console
         private void RegisterCommands()
         {
             // Help
-            _python.RegisterCommand(new HelpCommand(_python.Commands));
+            _python.RegisterCommand(new HelpCommand(_python.Commands, _python.Variables));
 
             // Exit
             _python.RegisterCommand(new ExitCommand(_game));

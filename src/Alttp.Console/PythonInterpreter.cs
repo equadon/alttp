@@ -21,11 +21,13 @@ namespace Alttp.Console
         public event CommandEventHandler CommandOutput;
 
         private readonly ScriptEngine _engine;
+
         private readonly ScriptScope _scope;
 
         protected ILogger Log { get; set; }
 
         public Dictionary<string, IConsoleCommand> Commands { get; private set; }
+        public Dictionary<string, string> Variables { get; private set; }
 
         public List<string> CommandHistory { get; private set; }
 
@@ -34,6 +36,8 @@ namespace Alttp.Console
             Log = logger;
 
             Commands = new Dictionary<string, IConsoleCommand>();
+            Variables = new Dictionary<string, string>();
+
             CommandHistory = new List<string>();
 
             _engine = Python.CreateEngine();
@@ -96,9 +100,11 @@ namespace Alttp.Console
             Log.Debug("Registered command: " + command.Name);
         }
 
-        public void SetVariable(string name, object obj)
+        public void SetVariable(string name, string description, object obj)
         {
             _scope.SetVariable(name, obj);
+
+            Variables.Add(name, description);
 
             Log.Debug("Set variable: " + name);
         }

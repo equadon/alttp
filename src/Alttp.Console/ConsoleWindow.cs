@@ -103,7 +103,7 @@ namespace Alttp.Console
             OutputList = new ListControl()
                 {
                     Bounds = new UniRectangle(0, Math.Abs(OffsetY) - 1, Bounds.Size.X, Bounds.Size.Y - cmdPromptHeight - Math.Abs(OffsetY) + 1),
-                    SelectionMode = ListSelectionMode.Single
+                    SelectionMode = ListSelectionMode.None
                 };
 
             Children.Add(OutputList);
