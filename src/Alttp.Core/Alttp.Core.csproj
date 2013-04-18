@@ -112,6 +112,7 @@
     <Compile Include="Input\InputManager.cs" />
     <Compile Include="Player.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Shields\BlueShield.cs" />
     <Compile Include="Shields\IShield.cs" />
     <Compile Include="Shields\Shield.cs" />
     <Compile Include="UI\Controls\BorderControl.cs" />
