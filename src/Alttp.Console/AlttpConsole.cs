@@ -160,6 +160,10 @@ namespace Alttp.Console
                 Window.CommandInput.Text = NextCommand();
                 Window.CommandInput.UpdateCaret();
             }
+
+            // Make sure we don't lose focus of text box when caret no longer can move left
+            if (_input.IsKeyPressed(Keys.Left))
+                _gui.Screen.FocusedControl = Window.CommandInput;
         }
 
         #endregion

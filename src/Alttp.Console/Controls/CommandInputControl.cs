@@ -34,6 +34,8 @@ namespace Alttp.Console
             {
                 case Keys.Enter:
                     return true;
+                case Keys.Left:
+                    return (CaretPosition > Prompt.Length) && base.OnKeyPressed(key);
                 case Keys.Back:
                     if (Text == Prompt)
                         return false;
