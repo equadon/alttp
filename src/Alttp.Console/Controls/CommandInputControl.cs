@@ -66,6 +66,7 @@ namespace Alttp.Console
         public void SetText(string text)
         {
             Text = Prompt + text;
+            UpdateCaret();
         }
 
         public void Clear()

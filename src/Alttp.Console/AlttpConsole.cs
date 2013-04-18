@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using Alttp.Console.Commands;
 using Alttp.Core;
+using Alttp.Core.GameObjects;
 using Alttp.Core.Input;
 using Alttp.Core.Shields;
 using Alttp.Core.World;
@@ -94,6 +95,23 @@ namespace Alttp.Console
         public void SetActiveCamera(Camera camera)
         {
             _python.SetVariable("camera", camera);
+        }
+
+        /// <summary>
+        /// Sets the selected game objects from the debug manager.
+        /// 
+        /// If the text box is empty add the objects variable name.
+        /// </summary>
+        /// <param name="selectedGameObjects">Array of selected game objects</param>
+        public void SetSelectedObjects(GameObject[] selectedGameObjects)
+        {
+            if (selectedGameObjects.Length == 1)
+                _python.SetVariable("o", selectedGameObjects[0]);
+            else
+                _python.SetVariable("o", selectedGameObjects);
+
+            if (Window.CommandInput.Text == CommandInputControl.Prompt)
+                Window.CommandInput.SetText("o");
         }
 
         /// <summary>

@@ -5,6 +5,7 @@ using Alttp.Core.Animation;
 using Alttp.Core.GameObjects;
 using Alttp.Core.Graphics;
 using Alttp.Core.Input;
+using Alttp.Core.Shields;
 using Alttp.Core.World;
 using FuncWorks.XNA.XTiled;
 using Microsoft.Xna.Framework;
@@ -41,6 +42,7 @@ namespace Alttp.Worlds
         public IWorld World { get; private set; }
 
         public Player Player { get; private set; }
+        public BlueShield BlueShield { get; private set; }
 
         public int ActiveCameraIndex
         {
@@ -74,6 +76,10 @@ namespace Alttp.Worlds
             World = world;
 
             Player = player;
+            BlueShield = new BlueShield(Player.Link.Animations)
+                {
+                    Position = new Vector2(2270, 2870)
+                };
         }
 
         public override void Initialize()
@@ -98,6 +104,8 @@ namespace Alttp.Worlds
             World.Draw(gameTime, _batch, ActiveCamera);
 
             Player.Draw(_batch);
+
+            BlueShield.Draw(_batch);
 
             _batch.End();
         }

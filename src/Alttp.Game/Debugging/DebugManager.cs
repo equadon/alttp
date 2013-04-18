@@ -126,6 +126,32 @@ namespace Alttp.Debugging
                 _world.ActiveCamera.Position = newViewportPos;
             }
 
+            // Selection region controls
+            if (_input.IsMouseButtonPressed(MouseButtons.Left) && !minimapBounds.Contains(mousePos))
+            {
+                SelectionBounds = new Rectangle((int)mousePos.X, (int)mousePos.Y, 0, 0);
+            }
+            else if (_input.IsMouseButtonReleased(MouseButtons.Left) &&
+                SelectionBounds != Rectangle.Empty)
+            {
+                SelectedGameObjects = GameObject.FindAll(Utils.RenderableRectangle(SelectionBounds), _world.ActiveCamera.Position, _world.ActiveCamera.InvZoom);
+
+                // Update selected objects variable in console
+                _console.SetSelectedObjects(SelectedGameObjects);
+
+                SelectionBounds = Rectangle.Empty;
+            }
+
+            if (_input.IsMouseButtonDown(MouseButtons.Left) && SelectionBounds != Rectangle.Empty)
+            {
+                var bounds = SelectionBounds;
+
+                int width = (int)mousePos.X - bounds.X,
+                    height = (int)mousePos.Y - bounds.Y;
+
+                SelectionBounds = new Rectangle(bounds.X, bounds.Y, width, height);
+            }
+
             // Do not process any of the commands if the console is open
             if (_console.Window.IsClosed)
             {
@@ -144,29 +170,6 @@ namespace Alttp.Debugging
                 // Enable/disable region borders with the R key
                 if (_input.IsKeyPressed(Keys.R))
                     RenderRegionBorders = !RenderRegionBorders;
-
-                // Selection region controls
-                if (_input.IsMouseButtonPressed(MouseButtons.Left) && !minimapBounds.Contains(mousePos))
-                {
-                    SelectionBounds = new Rectangle((int)mousePos.X, (int)mousePos.Y, 0, 0);
-                }
-                else if (_input.IsMouseButtonReleased(MouseButtons.Left) &&
-                    SelectionBounds != Rectangle.Empty)
-                {
-                    SelectedGameObjects = GameObject.FindAll(Utils.RenderableRectangle(SelectionBounds), _world.ActiveCamera.Position, _world.ActiveCamera.InvZoom);
-
-                    SelectionBounds = Rectangle.Empty;
-                }
-
-                if (_input.IsMouseButtonDown(MouseButtons.Left) && SelectionBounds != Rectangle.Empty)
-                {
-                    var bounds = SelectionBounds;
-
-                    int width = (int)mousePos.X - bounds.X,
-                        height = (int)mousePos.Y - bounds.Y;
-
-                    SelectionBounds = new Rectangle(bounds.X, bounds.Y, width, height);
-                }
             }
         }
 
