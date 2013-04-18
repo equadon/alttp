@@ -32,6 +32,8 @@ namespace Alttp.Console
 
         private readonly PythonInterpreter _python;
 
+        private int _cmdListIndex;
+
         protected ILogger Log { get; set; }
 
         public ConsoleWindow Window { get; private set; }
@@ -114,6 +116,53 @@ namespace Alttp.Console
             {
                 Window.Toggle();
             }
+
+            // Previous command in list
+            if (_input.IsKeyPressed(Keys.Up))
+            {
+                _gui.Screen.FocusedControl = Window.CommandInput;
+                Window.CommandInput.SetText(PreviousCommand());
+                Window.CommandInput.UpdateCaret();
+            }
+
+            // Next command in list
+            if (_input.IsKeyPressed(Keys.Down))
+            {
+                _gui.Screen.FocusedControl = Window.CommandInput;
+                Window.CommandInput.SetText(NextCommand());
+                Window.CommandInput.UpdateCaret();
+            }
+        }
+
+        #endregion
+
+        #region Next/previous command
+
+        private string PreviousCommand()
+        {
+            if (_python.CommandHistory.Count == 0)
+                return Window.CommandInput.Text;
+
+            string s = (_cmdListIndex >= _python.CommandHistory.Count) ? "" : _python.CommandHistory[_cmdListIndex];
+            while (_cmdListIndex > 0)
+            {
+                _cmdListIndex--;
+                if (_python.CommandHistory[_cmdListIndex] != s)
+                    break;
+            }
+
+            return _python.CommandHistory[_cmdListIndex];
+        }
+
+        private string NextCommand()
+        {
+            if (_python.CommandHistory.Count == 0)
+                return Window.CommandInput.Text;
+
+            if (_cmdListIndex < _python.CommandHistory.Count - 1)
+                _cmdListIndex++;
+
+            return _python.CommandHistory[_cmdListIndex];
         }
 
         #endregion
@@ -125,6 +174,7 @@ namespace Alttp.Console
             var output = new ConsoleOutput(e.Output, e.Type);
             Window.Outputs.Add(output);
             Window.OutputList.Items.Add(e.ToString());
+            _cmdListIndex = _python.CommandHistory.Count;
         }
 
         private void PythonOnCommandOutput(object sender, OutputEventArgs e)

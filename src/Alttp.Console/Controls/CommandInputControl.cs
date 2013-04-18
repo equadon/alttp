@@ -63,9 +63,19 @@ namespace Alttp.Console
             }
         }
 
+        public void SetText(string text)
+        {
+            Text = Prompt + text;
+        }
+
         public void Clear()
         {
             Text = Prompt;
+        }
+
+        public void UpdateCaret()
+        {
+            CaretPosition = Text.Length;
         }
     }
 }
