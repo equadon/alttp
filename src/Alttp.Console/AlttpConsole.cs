@@ -109,9 +109,6 @@ namespace Alttp.Console
                 _python.SetVariable("o", "Selected objects", selectedGameObjects[0]);
             else
                 _python.SetVariable("o", "Selected objects", selectedGameObjects);
-
-            if (Window.CommandInput.Text == CommandInputControl.Prompt)
-                Window.CommandInput.Text = "o";
         }
 
         /// <summary>
