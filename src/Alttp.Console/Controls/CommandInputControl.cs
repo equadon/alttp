@@ -13,6 +13,16 @@ namespace Alttp.Console
 
         private readonly PythonInterpreter _processor;
 
+        public new string Text
+        {
+            get { return base.Text; }
+            set
+            {
+                base.Text = Prompt + Clean(value);
+                UpdateCaret();
+            }
+        }
+
         public CommandInputControl(PythonInterpreter processor)
         {
             _processor = processor;
@@ -63,10 +73,9 @@ namespace Alttp.Console
             }
         }
 
-        public void SetText(string text)
+        private string Clean(string str)
         {
-            Text = Prompt + text;
-            UpdateCaret();
+            return (str.StartsWith(Prompt)) ? str.Substring(Prompt.Length) : str;
         }
 
         public void Clear()

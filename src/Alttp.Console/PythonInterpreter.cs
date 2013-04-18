@@ -104,7 +104,8 @@ namespace Alttp.Console
         {
             _scope.SetVariable(name, obj);
 
-            Variables.Add(name, description);
+            if (!Variables.ContainsKey(name))
+                Variables.Add(name, description);
 
             Log.Debug("Set variable: " + name);
         }

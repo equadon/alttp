@@ -111,7 +111,7 @@ namespace Alttp.Console
                 _python.SetVariable("o", "Selected objects", selectedGameObjects);
 
             if (Window.CommandInput.Text == CommandInputControl.Prompt)
-                Window.CommandInput.SetText("o");
+                Window.CommandInput.Text = "o";
         }
 
         /// <summary>
@@ -149,7 +149,7 @@ namespace Alttp.Console
             if (_input.IsKeyPressed(Keys.Up))
             {
                 _gui.Screen.FocusedControl = Window.CommandInput;
-                Window.CommandInput.SetText(PreviousCommand());
+                Window.CommandInput.Text = PreviousCommand();
                 Window.CommandInput.UpdateCaret();
             }
 
@@ -157,7 +157,7 @@ namespace Alttp.Console
             if (_input.IsKeyPressed(Keys.Down))
             {
                 _gui.Screen.FocusedControl = Window.CommandInput;
-                Window.CommandInput.SetText(NextCommand());
+                Window.CommandInput.Text = NextCommand();
                 Window.CommandInput.UpdateCaret();
             }
         }
