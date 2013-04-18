@@ -2,5 +2,6 @@
 {
     public interface IEquipment
     {
+        IGameObject Parent { get; set; }
     }
 }

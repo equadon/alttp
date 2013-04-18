@@ -9,13 +9,18 @@ namespace Alttp.Core.Shields
 
     public class Shield : GameObject, IShield
     {
-        public IGameObject Parent { get; private set; }
+        public IGameObject Parent { get; set; }
 
         public ShieldType Type { get; private set; }
 
         public override string AnimationName
         {
-            get { return "/Shield/" + Type.ToString() + Parent.AnimationName; }
+            get
+            {
+                return (Parent == null)
+                           ? base.AnimationName
+                           : "/Shield/" + Type.ToString() + Parent.AnimationName;
+            }
         }
 
         public override Frame Frame
@@ -25,14 +30,22 @@ namespace Alttp.Core.Shields
 
         public override Vector2 Position
         {
-            get { return Parent.Position; }
-            set { }
+            get
+            {
+                return (Parent == null)
+                           ? base.Position
+                           : Parent.Position;
+            }
+            set
+            {
+                if (Parent == null)
+                    base.Position = value;
+            }
         }
 
-        public Shield(IGameObject parent, ShieldType type)
-            : base(parent.Position, parent.Animations)
+        public Shield(ShieldType type, AnimationsDict animations, string animationName)
+            : base(animations, animationName)
         {
-            Parent = parent;
             Type = type;
         }
     }

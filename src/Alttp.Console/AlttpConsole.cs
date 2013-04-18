@@ -161,6 +161,8 @@ namespace Alttp.Console
                     break;
             }
 
+            _cmdListIndex = (int)MathHelper.Clamp(_cmdListIndex, 0, _python.CommandHistory.Count - 1);
+
             return _python.CommandHistory[_cmdListIndex];
         }
 
@@ -169,8 +171,7 @@ namespace Alttp.Console
             if (_python.CommandHistory.Count == 0)
                 return Window.CommandInput.Text;
 
-            if (_cmdListIndex < _python.CommandHistory.Count - 1)
-                _cmdListIndex++;
+            _cmdListIndex = (int) MathHelper.Clamp(_cmdListIndex + 1, 0, _python.CommandHistory.Count - 1);
 
             return _python.CommandHistory[_cmdListIndex];
         }

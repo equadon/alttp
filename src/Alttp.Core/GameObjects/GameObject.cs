@@ -44,7 +44,7 @@ namespace Alttp.Core.GameObjects
         public virtual Vector2 Position
         {
             get { return _position; }
-            set { _position = value; }
+            set { AbsMove(value.X, value.Y); }
         }
 
         public bool IsIdle { get { return State == GameObjectState.Idle; } }
@@ -88,6 +88,11 @@ namespace Alttp.Core.GameObjects
 
         #endregion
 
+        public GameObject(AnimationsDict animations, string currentAnimation = "")
+            : this(Vector2.Zero, animations, currentAnimation)
+        {
+        }
+
         public GameObject(Vector2 position, AnimationsDict animations, string currentAnimation = "")
         {
             Animations = animations;
@@ -122,6 +127,12 @@ namespace Alttp.Core.GameObjects
                 Shadow.Draw(batch);
 
             Frame.Draw(batch, Frame, Position);
+        }
+
+        public void AbsMove(float x, float y)
+        {
+            _position.X = x;
+            _position.Y = y;
         }
 
         public virtual void Move(Vector2 direction)

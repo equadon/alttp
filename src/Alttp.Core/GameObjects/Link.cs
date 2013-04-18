@@ -74,14 +74,21 @@ namespace Alttp.Core.GameObjects
 
             if (shield != null)
                 Shield = shield;
+
+            equipment.Parent = this;
         }
 
         /// <summary>
         /// Unequip shield.
         /// </summary>
-        public void UnequipShield()
+        public void Unequip(IEquipment equipment)
         {
-            Shield = null;
+            var shield = equipment as IShield;
+
+            if (shield != null)
+                Shield = null;
+
+            equipment.Parent = null;
         }
 
         public override void Idle()
