@@ -166,7 +166,7 @@ namespace Alttp.Worlds
             Vector2 mousePos = _input.MousePos;
 
             // Mouse wheel
-            if (_input.MouseWheelValueChanged())
+            if ((_console.Window.IsClosed || _console.Window.IsClosing) && _input.MouseWheelValueChanged())
             {
                 if (_input.MouseWheelValueDiff > 0)
                     ActiveCamera.ZoomIn(8);
