@@ -60,11 +60,23 @@ namespace Alttp.Console
         protected override void OnCharacterEntered(char c)
         {
             // Do not enter these chars
-            if (c == (char)Keys.Escape || c == (char)Keys.Tab ||
-                c == '`' || c == Convert.ToChar(167))
+            if (c == (char)Keys.Escape ||
+                c == '`' ||
+                c == Convert.ToChar(167)) // § - console
                 return;
 
+            // Handle tab completion
+            if (c == (char)Keys.Tab)
+            {
+                SuggestTabCompletion();
+                return;
+            }
+
             base.OnCharacterEntered(c);
+        }
+
+        private void SuggestTabCompletion()
+        {
         }
 
         public void ProcessCommand(string input)
