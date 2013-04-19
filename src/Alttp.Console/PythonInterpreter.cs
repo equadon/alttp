@@ -108,9 +108,11 @@ namespace Alttp.Console
             _scope.SetVariable(name, obj);
 
             if (!Variables.ContainsKey(name))
+            {
                 Variables.Add(name, description);
 
-            Log.Debug("Set variable: " + name);
+                Log.Debug("Set variable: " + name);
+            }
         }
 
         #region Auto Completion Methods
