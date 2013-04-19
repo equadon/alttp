@@ -82,8 +82,7 @@ namespace Alttp.Console
                 output = "Error: " + e;
             }
 
-            if (output != "null")
-                OnCommandOutput(Clean(output));
+            OnCommandOutput(Clean(output));
 
             return output;
         }
@@ -114,6 +113,8 @@ namespace Alttp.Console
             Log.Debug("Set variable: " + name);
         }
 
+        #region Auto Completion Methods
+
         /// <summary>
         /// Auto complete text and send the results back.
         /// </summary>
@@ -128,8 +129,8 @@ namespace Alttp.Console
             string baseText = text.Substring(0, text.IndexOf(objStr, StringComparison.Ordinal));
 
             string res = baseText + (objStr.Contains(".")
-                ? AutoCompleteMember(objStr, moveBackward)
-                : AutoCompleteGlobal(objStr, moveBackward));
+                                         ? AutoCompleteMember(objStr, moveBackward)
+                                         : AutoCompleteGlobal(objStr, moveBackward));
 
             Log.Debug("Requested auto completion: \"{0}\" => \"{1}\"", text, res);
 
@@ -208,7 +209,9 @@ namespace Alttp.Console
                 foreach (var m in type.GetMembers(BindingFlags.Public | BindingFlags.Instance))
                 {
                     string mName = m.Name;
-                    if (!(mName.StartsWith("get_") || mName.StartsWith("set_") || mName.StartsWith("add_") || mName.StartsWith("remove_") || mName.StartsWith(".")))
+                    if (
+                        !(mName.StartsWith("get_") || mName.StartsWith("set_") || mName.StartsWith("add_") ||
+                          mName.StartsWith("remove_") || mName.StartsWith(".")))
                     {
                         _autoCompleteMembers.Add((m.MemberType == MemberTypes.Method) ? mName + "()" : mName);
                     }
@@ -266,7 +269,8 @@ namespace Alttp.Console
 
                     if (member == null)
                     {
-                        OnCommandOutput("Error: \"" + s + "\" is not a member of \"" + String.Join(".", split.Take(split.Length - 1)) + "\"");
+                        OnCommandOutput("Error: \"" + s + "\" is not a member of \"" +
+                                        String.Join(".", split.Take(split.Length - 1)) + "\"");
                         return null;
                     }
 
@@ -291,6 +295,8 @@ namespace Alttp.Console
                 _autoCompleteIndex %= length;
             }
         }
+
+        #endregion
 
         /// <summary>
         /// Strip white spaces and the command prompt >>> chars.
