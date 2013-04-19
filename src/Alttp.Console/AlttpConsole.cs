@@ -14,6 +14,8 @@ using Microsoft.Xna.Framework.Input;
 using Ninject.Extensions.Logging;
 using Nuclex.Ninject.Xna;
 using Nuclex.UserInterface;
+using Nuclex.UserInterface.Controls;
+using Nuclex.UserInterface.Controls.Desktop;
 
 namespace Alttp.Console
 {
@@ -67,6 +69,8 @@ namespace Alttp.Console
 
             // Setup UI
             Window = new ConsoleWindow(_python, _gui.Screen, (int)(_game.GraphicsDevice.Viewport.Width * 0.75f), (int)(_game.GraphicsDevice.Viewport.Height * 0.67f));
+
+            _gui.Screen.FocusChanged += ScreenOnFocusChanged;
 
             _gui.Screen.Desktop.Children.Add(Window);
         }
@@ -197,7 +201,18 @@ namespace Alttp.Console
 
         #endregion
 
-        #region Command Events
+        #region Events
+
+        /// <summary>
+        /// Force focus to text box if user clicks the list.
+        /// </summary>
+        /// <param name="sender">Screen object</param>
+        /// <param name="e">Event args</param>
+        private void ScreenOnFocusChanged(object sender, ControlEventArgs e)
+        {
+            if (e.Control == Window.OutputList)
+                _gui.Screen.FocusedControl = Window.CommandInput;
+        }
 
         private void PythonOnCommandInput(object sender, OutputEventArgs e)
         {
