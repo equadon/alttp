@@ -123,11 +123,13 @@ namespace Alttp.Console
         public string AutoComplete(string text, bool moveBackward)
         {
             var cmdSplit = text.Split(' ', ';');
-            text = String.Join(".", cmdSplit.Last().Split('.'));
+            var objStr = cmdSplit.Last();
 
-            string res = text.Contains(".")
-                ? AutoCompleteMember(text, moveBackward)
-                : AutoCompleteGlobal(text, moveBackward);
+            string baseText = text.Substring(0, text.IndexOf(objStr, StringComparison.Ordinal));
+
+            string res = baseText + (objStr.Contains(".")
+                ? AutoCompleteMember(objStr, moveBackward)
+                : AutoCompleteGlobal(objStr, moveBackward));
 
             Log.Debug("Requested auto completion: \"{0}\" => \"{1}\"", text, res);
 
