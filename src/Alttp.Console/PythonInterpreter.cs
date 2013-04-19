@@ -26,6 +26,7 @@ namespace Alttp.Console
 
         private int _autoCompleteIndex = -1;
         private int _prevAutoCheckNumDots = -1; // the number of dots present in the previous check, used to reset index
+        private List<string> _autoCompleteMembers;
 
         protected ILogger Log { get; set; }
 
@@ -117,72 +118,109 @@ namespace Alttp.Console
         /// Auto complete text and send the results back.
         /// </summary>
         /// <param name="text">Currently entered text</param>
+        /// <param name="moveBackward">Move in opposite direction</param>
         /// <returns>Auto completed text</returns>
         public string AutoComplete(string text, bool moveBackward)
         {
-            string res = String.Empty;
-
-            if (text.Contains("."))
-            {
-                // Do we need to reset the index?
-                int count = text.Count(x => x == '.');
-
-                if (_prevAutoCheckNumDots != count)
-                    _autoCompleteIndex = -1;
-                _prevAutoCheckNumDots = count;
-
-                // Split text by dots
-                string[] split = text.Split('.');
-            }
-            else
-            {
-                var variables = _scope.GetVariableNames().OrderBy(x => x).ToArray();
-
-                if (text != String.Empty)
-                {
-                    // Text already present, check for variables/functions starting with `text`.
-                    res = variables.FirstOrDefault(x => x.StartsWith(text));
-
-                    if (res != null && res != text)
-                        return (Commands.ContainsKey(res)) ? res + "()" : res;
-                }
-
-                int lastParenthesis = text.LastIndexOf('(');
-                string textWithoutParenthesis = (lastParenthesis == -1) ? text : text.Substring(0, lastParenthesis);
-
-                if (text != String.Empty && !variables.Contains(textWithoutParenthesis))
-                    return text;
-
-                // If text is a function without parenthesis just return text with parenthesis
-                if (Commands.ContainsKey(text))
-                    return text + "()";
-
-                if (_autoCompleteIndex == -1 && moveBackward)
-                    _autoCompleteIndex = variables.Length;
-
-                NextAutoCompleteIndex(moveBackward, variables.Length);
-
-                // Cycle through the global variables
-                string name = variables[_autoCompleteIndex];
-
-                while (name.StartsWith("_"))
-                {
-                    NextAutoCompleteIndex(moveBackward, variables.Length);
-
-                    name = variables[_autoCompleteIndex];
-                }
-
-                if (Variables.ContainsKey(name))
-                    res = name;
-                else if (Commands.ContainsKey(name))
-                    res = name + "()";
-                else
-                    res = text;
-            }
+            string res = text.Contains(".")
+                ? AutoCompleteMember(text, moveBackward)
+                : AutoCompleteGlobal(text, moveBackward);
 
             Log.Debug("Requested auto completion: \"{0}\" => \"{1}\"", text, res);
 
             return res;
+        }
+
+        private string AutoCompleteGlobal(string text, bool moveBackward)
+        {
+            string res = String.Empty;
+            var variables = _scope.GetVariableNames().OrderBy(x => x).ToArray();
+
+            if (text != String.Empty)
+            {
+                // Text already present, check for variables/functions starting with `text`.
+                res = variables.FirstOrDefault(x => x.StartsWith(text));
+
+                if (res != null && res != text)
+                    return (Commands.ContainsKey(res)) ? res + "()" : res;
+            }
+
+            int lastParenthesis = text.LastIndexOf('(');
+            string textWithoutParenthesis = (lastParenthesis == -1) ? text : text.Substring(0, lastParenthesis);
+
+            if (text != String.Empty && !variables.Contains(textWithoutParenthesis))
+                return text;
+
+            // If text is a function without parenthesis just return text with parenthesis
+            if (Commands.ContainsKey(text))
+                return text + "()";
+
+            if (_autoCompleteIndex == -1 && moveBackward)
+                _autoCompleteIndex = variables.Length;
+
+            NextAutoCompleteIndex(moveBackward, variables.Length);
+
+            // Cycle through the global variables
+            string name = variables[_autoCompleteIndex];
+
+            while (name.StartsWith("_"))
+            {
+                NextAutoCompleteIndex(moveBackward, variables.Length);
+
+                name = variables[_autoCompleteIndex];
+            }
+
+            if (Variables.ContainsKey(name))
+                return name;
+            if (Commands.ContainsKey(name))
+                return name + "()";
+            return text;
+        }
+
+        private string AutoCompleteMember(string text, bool moveBackward)
+        {
+            // Do we need to reset the index?
+            int count = text.Count(x => x == '.');
+
+            if (_prevAutoCheckNumDots != count)
+            {
+                _autoCompleteIndex = -1;
+                _autoCompleteMembers = null;
+            }
+            _prevAutoCheckNumDots = count;
+
+            // Split text by dots
+            string[] split = text.Split('.');
+
+            dynamic variable;
+            _scope.TryGetVariable(split[0], out variable);
+
+            if (variable == null)
+                return text;
+
+            if (_autoCompleteMembers == null)
+            {
+                _autoCompleteMembers = new List<string>();
+
+                var type = variable.GetType();
+                foreach (var m in type.GetMembers(BindingFlags.Public | BindingFlags.Instance))
+                {
+                    string memberName = m.Name;
+                    if (!memberName.StartsWith("set_") && !memberName.StartsWith("."))
+                    {
+                        if (memberName.StartsWith("get_"))
+                            _autoCompleteMembers.Add(memberName.Substring(4));
+                        else
+                            _autoCompleteMembers.Add(memberName);
+                    }
+                }
+
+                _autoCompleteMembers = _autoCompleteMembers.Distinct().OrderBy(x => x).ToList();
+            }
+
+            NextAutoCompleteIndex(moveBackward, _autoCompleteMembers.Count);
+
+            return String.Join(".", split.Take(split.Length - 1)) + "." + _autoCompleteMembers[_autoCompleteIndex];
         }
 
         private void NextAutoCompleteIndex(bool moveBackward, int length)
