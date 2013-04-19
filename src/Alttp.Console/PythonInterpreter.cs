@@ -188,7 +188,7 @@ namespace Alttp.Console
             var cmdSplit = text.Split(' ', ';');
             var dotSplit = cmdSplit.Last().Split('.');
 
-            dynamic variable = AutoCompleteGetMemberVariable(dotSplit.Take(dotSplit.Length - 1));
+            dynamic variable = AutoCompleteGetMemberVariable(dotSplit.Take(dotSplit.Length - 1).ToArray());
 
             if (_prevAutoCompleteObject != variable)
             {
@@ -242,7 +242,7 @@ namespace Alttp.Console
             return String.Join(".", dotSplit.Take(dotSplit.Length - 1)) + "." + _autoCompleteMembers[_autoCompleteIndex];
         }
 
-        private dynamic AutoCompleteGetMemberVariable(IEnumerable<string> split)
+        private dynamic AutoCompleteGetMemberVariable(string[] split)
         {
             dynamic variable = null;
 
@@ -252,11 +252,25 @@ namespace Alttp.Console
             {
                 if (variable == null)
                 {
-                    variable = _scope.GetVariable(s);
+                    _scope.TryGetVariable(s, out variable);
+                    if (variable == null)
+                    {
+                        OnCommandOutput("Error: Variable \"" + s + "\" not present in scope");
+                        return null;
+                    }
                 }
                 else
                 {
-                    variable = ops.GetMember(variable, s);
+                    dynamic member = null;
+                    ops.TryGetMember(variable, s, out member);
+
+                    if (member == null)
+                    {
+                        OnCommandOutput("Error: \"" + s + "\" is not a member of \"" + String.Join(".", split.Take(split.Length - 1)) + "\"");
+                        return null;
+                    }
+
+                    variable = member;
                 }
             }
 
