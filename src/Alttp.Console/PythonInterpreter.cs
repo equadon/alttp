@@ -25,6 +25,7 @@ namespace Alttp.Console
         private readonly ScriptScope _scope;
 
         private int _autoCompleteIndex;
+        private int _prevAutoCheckNumDots; // the number of dots present in the previous check, used to reset index
 
         protected ILogger Log { get; set; }
 
@@ -121,11 +122,38 @@ namespace Alttp.Console
         {
             string res = String.Empty;
 
-            if (!text.Contains("."))
+            if (text.Contains("."))
             {
-                // Cycle through the global variables
-                var variables = _scope.GetVariableNames().ToArray();
+                // Do we need to reset the index?
+                int count = text.Count(x => x == '.');
 
+                // Split text by dots
+                string[] split = text.Split('.');
+            }
+            else
+            {
+                var variables = _scope.GetVariableNames().OrderBy(x => x).ToArray();
+
+                if (text != String.Empty)
+                {
+                    // Text already present, check for variables/functions starting with `text`.
+                    res = variables.FirstOrDefault(x => x.StartsWith(text));
+
+                    if (res != null && res != text)
+                        return (Commands.ContainsKey(res)) ? res + "()" : res;
+                }
+
+                int lastParenthesis = text.LastIndexOf('(');
+                string textWithoutParenthesis = (lastParenthesis == -1) ? text : text.Substring(0, lastParenthesis);
+
+                if (!variables.Contains(textWithoutParenthesis))
+                    return text;
+
+                // If text is a function without parenthesis just return text with parenthesis
+                if (Commands.ContainsKey(text))
+                    return text + "()";
+
+                // Cycle through the global variables
                 string name = variables[_autoCompleteIndex];
 
                 _autoCompleteIndex++;
