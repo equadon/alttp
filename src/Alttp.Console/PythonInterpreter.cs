@@ -134,12 +134,12 @@ namespace Alttp.Console
         private string AutoCompleteGlobal(string text, bool moveBackward)
         {
             string res = String.Empty;
-            var variables = _scope.GetVariableNames().OrderBy(x => x).ToArray();
+            _autoCompleteMembers = _scope.GetVariableNames().OrderBy(x => x).ToList();
 
             if (text != String.Empty)
             {
                 // Text already present, check for variables/functions starting with `text`.
-                res = variables.FirstOrDefault(x => x.StartsWith(text));
+                res = _autoCompleteMembers.FirstOrDefault(x => x.StartsWith(text));
 
                 if (res != null && res != text)
                     return (Commands.ContainsKey(res)) ? res + "()" : res;
@@ -148,7 +148,7 @@ namespace Alttp.Console
             int lastParenthesis = text.LastIndexOf('(');
             string textWithoutParenthesis = (lastParenthesis == -1) ? text : text.Substring(0, lastParenthesis);
 
-            if (text != String.Empty && !variables.Contains(textWithoutParenthesis))
+            if (text != String.Empty && !_autoCompleteMembers.Contains(textWithoutParenthesis))
                 return text;
 
             // If text is a function without parenthesis just return text with parenthesis
@@ -156,18 +156,18 @@ namespace Alttp.Console
                 return text + "()";
 
             if (_autoCompleteIndex == -1 && moveBackward)
-                _autoCompleteIndex = variables.Length;
+                _autoCompleteIndex = _autoCompleteMembers.Count;
 
-            NextAutoCompleteIndex(moveBackward, variables.Length);
+            NextAutoCompleteIndex(moveBackward, _autoCompleteMembers.Count);
 
             // Cycle through the global variables
-            string name = variables[_autoCompleteIndex];
+            string name = _autoCompleteMembers[_autoCompleteIndex];
 
             while (name.StartsWith("_"))
             {
-                NextAutoCompleteIndex(moveBackward, variables.Length);
+                NextAutoCompleteIndex(moveBackward, _autoCompleteMembers.Count);
 
-                name = variables[_autoCompleteIndex];
+                name = _autoCompleteMembers[_autoCompleteIndex];
             }
 
             if (Variables.ContainsKey(name))
@@ -205,7 +205,7 @@ namespace Alttp.Console
                 foreach (var m in type.GetMembers(BindingFlags.Public | BindingFlags.Instance))
                 {
                     string mName = m.Name;
-                    if (!(mName.StartsWith("get_") || mName.StartsWith("set_") || mName.StartsWith(".")))
+                    if (!(mName.StartsWith("get_") || mName.StartsWith("set_") || mName.StartsWith("add_") || mName.StartsWith("remove_") || mName.StartsWith(".")))
                     {
                         _autoCompleteMembers.Add((m.MemberType == MemberTypes.Method) ? mName + "()" : mName);
                     }
