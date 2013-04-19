@@ -34,6 +34,8 @@ namespace Alttp.Console
             {
                 case Keys.Enter:
                     return true;
+                case Keys.Tab:
+                    return false;
                 case Keys.Left:
                     return (CaretPosition > Prompt.Length) && base.OnKeyPressed(key);
                 case Keys.Back:
@@ -55,15 +57,14 @@ namespace Alttp.Console
             }
         }
 
-        protected override void OnCharacterEntered(char character)
+        protected override void OnCharacterEntered(char c)
         {
-            base.OnCharacterEntered(character);
+            // Do not enter these chars
+            if (c == (char)Keys.Escape || c == (char)Keys.Tab ||
+                c == '`' || c == Convert.ToChar(167))
+                return;
 
-            if (character == (char)Keys.Escape ||
-                character == '`')
-            {
-                Text = Text.Substring(0, Text.Length - 1);
-            }
+            base.OnCharacterEntered(c);
         }
 
         public void ProcessCommand(string input)
