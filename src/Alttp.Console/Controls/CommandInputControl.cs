@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using Alttp.Core.Input;
 using Microsoft.Xna.Framework.Input;
 using Nuclex.UserInterface.Controls.Desktop;
 
@@ -68,7 +69,8 @@ namespace Alttp.Console
             // Handle tab completion
             if (c == (char)Keys.Tab)
             {
-                Text = _processor.AutoComplete(Clean(Text));
+                // If shift is pressed auto complete in the opposite direction
+                Text = _processor.AutoComplete(Clean(Text), Keyboard.GetState().IsKeyDown(Keys.LeftShift) || Keyboard.GetState().IsKeyDown(Keys.RightShift));
                 return;
             }
 

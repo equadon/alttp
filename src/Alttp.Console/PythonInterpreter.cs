@@ -24,8 +24,8 @@ namespace Alttp.Console
 
         private readonly ScriptScope _scope;
 
-        private int _autoCompleteIndex;
-        private int _prevAutoCheckNumDots; // the number of dots present in the previous check, used to reset index
+        private int _autoCompleteIndex = -1;
+        private int _prevAutoCheckNumDots = -1; // the number of dots present in the previous check, used to reset index
 
         protected ILogger Log { get; set; }
 
@@ -118,7 +118,7 @@ namespace Alttp.Console
         /// </summary>
         /// <param name="text">Currently entered text</param>
         /// <returns>Auto completed text</returns>
-        public string AutoComplete(string text)
+        public string AutoComplete(string text, bool moveBackward)
         {
             string res = String.Empty;
 
@@ -126,6 +126,10 @@ namespace Alttp.Console
             {
                 // Do we need to reset the index?
                 int count = text.Count(x => x == '.');
+
+                if (_prevAutoCheckNumDots != count)
+                    _autoCompleteIndex = -1;
+                _prevAutoCheckNumDots = count;
 
                 // Split text by dots
                 string[] split = text.Split('.');
@@ -146,36 +150,54 @@ namespace Alttp.Console
                 int lastParenthesis = text.LastIndexOf('(');
                 string textWithoutParenthesis = (lastParenthesis == -1) ? text : text.Substring(0, lastParenthesis);
 
-                if (!variables.Contains(textWithoutParenthesis))
+                if (text != String.Empty && !variables.Contains(textWithoutParenthesis))
                     return text;
 
                 // If text is a function without parenthesis just return text with parenthesis
                 if (Commands.ContainsKey(text))
                     return text + "()";
 
+                if (_autoCompleteIndex == -1 && moveBackward)
+                    _autoCompleteIndex = variables.Length;
+
+                NextAutoCompleteIndex(moveBackward, variables.Length);
+
                 // Cycle through the global variables
                 string name = variables[_autoCompleteIndex];
 
-                _autoCompleteIndex++;
-                _autoCompleteIndex %= variables.Length;
-
                 while (name.StartsWith("_"))
                 {
-                    name = variables[_autoCompleteIndex];
+                    NextAutoCompleteIndex(moveBackward, variables.Length);
 
-                    _autoCompleteIndex++;
-                    _autoCompleteIndex %= variables.Length;
+                    name = variables[_autoCompleteIndex];
                 }
 
                 if (Variables.ContainsKey(name))
                     res = name;
                 else if (Commands.ContainsKey(name))
                     res = name + "()";
+                else
+                    res = text;
             }
 
             Log.Debug("Requested auto completion: \"{0}\" => \"{1}\"", text, res);
 
             return res;
+        }
+
+        private void NextAutoCompleteIndex(bool moveBackward, int length)
+        {
+            if (moveBackward)
+            {
+                _autoCompleteIndex--;
+                if (_autoCompleteIndex < 0)
+                    _autoCompleteIndex = length - 1;
+            }
+            else
+            {
+                _autoCompleteIndex++;
+                _autoCompleteIndex %= length;
+            }
         }
 
         /// <summary>
