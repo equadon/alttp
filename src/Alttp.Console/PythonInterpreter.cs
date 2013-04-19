@@ -220,6 +220,7 @@ namespace Alttp.Console
                 }
 
                 _autoCompleteMembers = _autoCompleteMembers.Distinct().OrderBy(x => x).ToList();
+                _prevAutoCompleteObject = variable;
             }
 
             // Find the member starting with the last part of split[]

@@ -5,7 +5,7 @@ using Microsoft.Xna.Framework;
 
 namespace Alttp.Core.Shields
 {
-    public enum ShieldType { Blue }
+    public enum ShieldType { Fighters, Fire, Mirror }
 
     public class Shield : GameObject, IShield
     {
@@ -41,17 +41,35 @@ namespace Alttp.Core.Shields
                            ? base.Position
                            : Parent.Position;
             }
-            set
-            {
-                if (Parent == null)
-                    base.Position = value;
-            }
+            set { base.Position = value; }
         }
 
         public Shield(ShieldType type, AnimationsDict animations, string animationName)
             : base(animations, animationName)
         {
             Type = type;
+        }
+
+        /// <summary>
+        /// This item was equipped by its parent
+        /// </summary>
+        /// <param name="parent">Parent object</param>
+        public void EquippedBy(IGameObject parent)
+        {
+            Parent = parent;
+        }
+
+        /// <summary>
+        /// This item was unequipped by its parent
+        /// </summary>
+        /// <param name="parent">Parent object</param>
+        public void UnequippedBy(IGameObject parent)
+        {
+            if (Parent == parent)
+            {
+                Parent = null;
+                Position = parent.Position;
+            }
         }
     }
 }

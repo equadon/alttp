@@ -423,27 +423,27 @@
       <spr name="/Shadow" x="2" y="15" z="2" flipH="1"/>
     </cell>
   </anim>
-  <anim name="/Shield/Blue/Idle/Right" loops="0">
+  <anim name="/Shield/Fighters/Idle/Right" loops="0">
     <cell index="0" delay="1">
       <spr name="/Shields/Blue/Side" x="9" y="7" z="2"/>
     </cell>
   </anim>
-  <anim name="/Shield/Blue/Idle/Left" loops="0">
+  <anim name="/Shield/Fighters/Idle/Left" loops="0">
     <cell index="0" delay="1">
       <spr name="/Shields/Blue/Side" x="-5" y="7" z="2" flipH="1"/>
     </cell>
   </anim>
-  <anim name="/Shield/Blue/Idle/Down" loops="0">
+  <anim name="/Shield/Fighters/Idle/Down" loops="0">
     <cell index="0" delay="1">
       <spr name="/Shields/Blue/Front" x="-2" y="12" z="-1"/>
     </cell>
   </anim>
-  <anim name="/Shield/Blue/Idle/Up" loops="0">
+  <anim name="/Shield/Fighters/Idle/Up" loops="0">
     <cell index="0" delay="1">
       <spr name="/Shields/Blue/Back" x="7" y="8" z="2"/>
     </cell>
   </anim>
-  <anim name="/Shield/Blue/Run/Right" loops="0">
+  <anim name="/Shield/Fighters/Run/Right" loops="0">
     <cell index="0" delay="2">
       <spr name="/Shields/Blue/Side" x="9" y="7" z="1"/>
     </cell>
@@ -469,7 +469,7 @@
       <spr name="/Shields/Blue/Side" x="9" y="6" z="1"/>
     </cell>
   </anim>
-  <anim name="/Shield/Blue/Run/Left" loops="0">
+  <anim name="/Shield/Fighters/Run/Left" loops="0">
     <cell index="0" delay="2">
       <spr name="/Shields/Blue/Side" x="-5" y="7" z="1" flipH="1"/>
     </cell>
@@ -495,7 +495,7 @@
       <spr name="/Shields/Blue/Side" x="-5" y="6" z="1" flipH="1"/>
     </cell>
   </anim>
-  <anim name="/Shield/Blue/Run/Down" loops="0">
+  <anim name="/Shield/Fighters/Run/Down" loops="0">
     <cell index="0" delay="2">
       <spr name="/Shields/Blue/Front" x="-2" y="13" z="-1"/>
     </cell>
@@ -521,7 +521,7 @@
       <spr name="/Shields/Blue/Front" x="-2" y="12" z="-1"/>
     </cell>
   </anim>
-  <anim name="/Shield/Blue/Run/Up" loops="0">
+  <anim name="/Shield/Fighters/Run/Up" loops="0">
     <cell index="0" delay="2">
       <spr name="/Shields/Blue/Back" x="7" y="8" z="2"/>
     </cell>
@@ -547,7 +547,7 @@
       <spr name="/Shields/Blue/Back" x="7" y="8" z="2"/>
     </cell>
   </anim>
-  <anim name="/Shield/Blue/Swing/Sword/Up" loops="0">
+  <anim name="/Shield/Fighters/Swing/Sword/Up" loops="0">
     <cell index="0" delay="1">
       <spr name="/Shields/Blue/Side" x="12" y="11" z="-1"/>
     </cell>
@@ -576,7 +576,7 @@
       <spr name="/Shields/Blue/Side" x="12" y="9" z="-1"/>
     </cell>
   </anim>
-  <anim name="/Shield/Blue/Swing/Sword/Down" loops="0">
+  <anim name="/Shield/Fighters/Swing/Sword/Down" loops="0">
     <cell index="0" delay="1">
       <spr name="/Shields/Blue/Side" x="-7" y="4" z="2" flipH="1"/>
     </cell>
@@ -603,6 +603,26 @@
     </cell>
     <cell index="8" delay="1">
       <spr name="/Shields/Blue/Side" x="-8" y="9" z="2" flipH="1"/>
+    </cell>
+  </anim>
+  <anim name="/Shield/Fire/Idle/Right" loops="0">
+    <cell index="0" delay="1">
+      <spr name="/Shields/Red/Side" x="9" y="7" z="2"/>
+    </cell>
+  </anim>
+  <anim name="/Shield/Fire/Idle/Left" loops="0">
+    <cell index="0" delay="1">
+      <spr name="/Shields/Red/Side" x="-5" y="7" z="2" flipH="1"/>
+    </cell>
+  </anim>
+  <anim name="/Shield/Fire/Idle/Down" loops="0">
+    <cell index="0" delay="1">
+      <spr name="/Shields/Red/Front" x="-2" y="12" z="-1"/>
+    </cell>
+  </anim>
+  <anim name="/Shield/Fire/Idle/Up" loops="0">
+    <cell index="0" delay="1">
+      <spr name="/Shields/Red/Back" x="9" y="10" z="2"/>
     </cell>
   </anim>
 </animations>

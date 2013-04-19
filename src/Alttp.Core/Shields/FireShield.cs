@@ -7,10 +7,10 @@ using Alttp.Core.GameObjects.Interfaces;
 
 namespace Alttp.Core.Shields
 {
-    public class BlueShield : Shield
+    public class FireShield : Shield
     {
-        public BlueShield(AnimationsDict animations)
-            : base(ShieldType.Fighters, animations, "/Shield/Fighters/Idle/Down")
+        public FireShield(AnimationsDict animations)
+            : base(ShieldType.Fire, animations, "/Shield/Fire/Idle/Down")
         {
         }
     }

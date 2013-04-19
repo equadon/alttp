@@ -42,7 +42,9 @@ namespace Alttp.Worlds
         public IWorld World { get; private set; }
 
         public Player Player { get; private set; }
-        public BlueShield BlueShield { get; private set; }
+
+        public BlueShield FightersShield { get; private set; }
+        public FireShield FireShield { get; private set; }
 
         public int ActiveCameraIndex
         {
@@ -76,10 +78,14 @@ namespace Alttp.Worlds
             World = world;
 
             Player = player;
-            BlueShield = new BlueShield(Player.Link.Animations)
+            FightersShield = new BlueShield(Player.Link.Animations)
                 {
                     Position = new Vector2(2270, 2870)
                 };
+            FireShield = new FireShield(Player.Link.Animations)
+            {
+                Position = new Vector2(2250, 2870)
+            };
         }
 
         public override void Initialize()
@@ -106,8 +112,10 @@ namespace Alttp.Worlds
             Player.Draw(_batch);
 
             // TODO: Store world objects in an array [,] of List<GameObject>
-            if (BlueShield.Parent == null)
-                BlueShield.Draw(_batch);
+            if (FightersShield.Parent == null)
+                FightersShield.Draw(_batch);
+            if (FireShield.Parent == null)
+                FireShield.Draw(_batch);
 
             _batch.End();
         }

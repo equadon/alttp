@@ -43,9 +43,15 @@ namespace Alttp.Core.GameObjects
             var shield = equipment as IShield;
 
             if (shield != null)
-                Equipment["shield"] = shield;
+            {
+                // If another shield is already equipped set its position to Position
+                if (IsShieldEquipped)
+                    Equipment["shield"].UnequippedBy(this);
 
-            equipment.Parent = this;
+                Equipment["shield"] = shield;
+            }
+
+            equipment.EquippedBy(this);
         }
 
         /// <summary>
@@ -58,7 +64,7 @@ namespace Alttp.Core.GameObjects
             if (shield != null)
                 Equipment["shield"] = null;
 
-            equipment.Parent = null;
+            equipment.UnequippedBy(this);
         }
     }
 }
