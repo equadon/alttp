@@ -64,7 +64,7 @@ namespace Alttp.Console
 
             CommandHistory.Add(input);
 
-            OnCommandInput(new OutputEventArgs(input, ConsoleOutputType.Command));
+            OnCommandInput(input);
 
             string output;
 
@@ -83,7 +83,7 @@ namespace Alttp.Console
             }
 
             if (output != "null")
-                OnCommandOutput(new OutputEventArgs(Clean(output), ConsoleOutputType.Output));
+                OnCommandOutput(Clean(output));
 
             return output;
         }
@@ -293,16 +293,16 @@ namespace Alttp.Console
             return cleaned.Trim(' ');
         }
 
-        private void OnCommandInput(OutputEventArgs e)
+        private void OnCommandInput(string text)
         {
             if (CommandInput != null)
-                CommandInput(this, e);
+                CommandInput(this, new OutputEventArgs(text, ConsoleOutputType.Command));
         }
 
-        private void OnCommandOutput(OutputEventArgs e)
+        private void OnCommandOutput(string text)
         {
             if (CommandOutput != null)
-                CommandOutput(this, e);
+                CommandOutput(this, new OutputEventArgs(text, ConsoleOutputType.Output));
         }
     }
 }
