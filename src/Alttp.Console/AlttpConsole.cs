@@ -109,10 +109,7 @@ namespace Alttp.Console
         /// <param name="selectedGameObjects">Array of selected game objects</param>
         public void SetSelectedObjects(GameObject[] selectedGameObjects)
         {
-            if (selectedGameObjects.Length == 1)
-                _python.SetVariable("o", "Selected objects", selectedGameObjects[0]);
-            else
-                _python.SetVariable("o", "Selected objects", selectedGameObjects);
+            _python.SetVariable("objects", "Selected objects", selectedGameObjects);
         }
 
         /// <summary>

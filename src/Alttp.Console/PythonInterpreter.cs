@@ -51,6 +51,13 @@ namespace Alttp.Console
 
             _engine.Runtime.LoadAssembly(Assembly.LoadFile(Path.Combine(root, "Alttp.Core.dll")));
             _engine.Runtime.LoadAssembly(Assembly.LoadFile(Path.Combine(root, "Alttp.Game.exe")));
+
+            var stream = new MemoryStream();
+            var outputWriter = new EventRaisingStreamWriter(stream);
+            outputWriter.WroteString += OnInterpreterOutput;
+
+            _engine.Runtime.IO.SetOutput(stream, outputWriter);
+            _engine.Runtime.IO.SetErrorOutput(stream, outputWriter);
         }
 
         /// <summary>
@@ -82,7 +89,8 @@ namespace Alttp.Console
                 output = "Error: " + e;
             }
 
-            OnCommandOutput(Clean(output));
+            if (output != "null")
+                OnCommandOutput(Clean(output));
 
             return output;
         }
@@ -314,6 +322,17 @@ namespace Alttp.Console
                 cleaned = cleaned.TrimStart('>');
 
             return cleaned.Trim(' ');
+        }
+
+        /// <summary>
+        /// Something was written to the output, pass it along to the console
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        void OnInterpreterOutput(object sender, GenericEventArgs<string> e)
+        {
+            if (e.Value.Replace(Environment.NewLine, "") != String.Empty)
+                OnCommandOutput(e.Value);
         }
 
         private void OnCommandInput(string text)

@@ -118,6 +118,7 @@
     <Compile Include="Shields\IShield.cs" />
     <Compile Include="Shields\Shield.cs" />
     <Compile Include="UI\Controls\BorderControl.cs" />
+    <Compile Include="UI\Controls\ContextMenuControl.cs" />
     <Compile Include="UI\Controls\FlatBorderControlRenderer.cs" />
     <Compile Include="UI\Controls\FlatImageControlRenderer.cs" />
     <Compile Include="UI\Controls\ImageControl.cs" />
