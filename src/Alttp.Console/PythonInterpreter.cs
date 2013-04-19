@@ -211,7 +211,7 @@ namespace Alttp.Console
                         if (memberName.StartsWith("get_"))
                             _autoCompleteMembers.Add(memberName.Substring(4));
                         else
-                            _autoCompleteMembers.Add(memberName);
+                            _autoCompleteMembers.Add(memberName + "()");
                     }
                 }
 
