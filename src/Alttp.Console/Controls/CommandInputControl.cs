@@ -68,15 +68,11 @@ namespace Alttp.Console
             // Handle tab completion
             if (c == (char)Keys.Tab)
             {
-                SuggestTabCompletion();
+                Text = _processor.AutoComplete(Clean(Text));
                 return;
             }
 
             base.OnCharacterEntered(c);
-        }
-
-        private void SuggestTabCompletion()
-        {
         }
 
         public void ProcessCommand(string input)

@@ -24,6 +24,8 @@ namespace Alttp.Console
 
         private readonly ScriptScope _scope;
 
+        private int _autoCompleteIndex;
+
         protected ILogger Log { get; set; }
 
         public Dictionary<string, IConsoleCommand> Commands { get; private set; }
@@ -108,6 +110,44 @@ namespace Alttp.Console
                 Variables.Add(name, description);
 
             Log.Debug("Set variable: " + name);
+        }
+
+        /// <summary>
+        /// Auto complete text and send the results back.
+        /// </summary>
+        /// <param name="text">Currently entered text</param>
+        /// <returns>Auto completed text</returns>
+        public string AutoComplete(string text)
+        {
+            string res = String.Empty;
+
+            if (!text.Contains("."))
+            {
+                // Cycle through the global variables
+                var variables = _scope.GetVariableNames().ToArray();
+
+                string name = variables[_autoCompleteIndex];
+
+                _autoCompleteIndex++;
+                _autoCompleteIndex %= variables.Length;
+
+                while (name.StartsWith("_"))
+                {
+                    name = variables[_autoCompleteIndex];
+
+                    _autoCompleteIndex++;
+                    _autoCompleteIndex %= variables.Length;
+                }
+
+                if (Variables.ContainsKey(name))
+                    res = name;
+                else if (Commands.ContainsKey(name))
+                    res = name + "()";
+            }
+
+            Log.Debug("Requested auto completion: \"{0}\" => \"{1}\"", text, res);
+
+            return res;
         }
 
         /// <summary>
