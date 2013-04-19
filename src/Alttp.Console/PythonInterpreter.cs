@@ -218,14 +218,23 @@ namespace Alttp.Console
             }
 
             // Find the member starting with the last part of split[]
-            string s = null;
-            if (split[split.Length - 1] != "")
-                s = _autoCompleteMembers.FirstOrDefault(x => x.ToLower().StartsWith(split[split.Length - 1]));
+            string sEnd = split[split.Length - 1];
+            string found = _autoCompleteMembers.FirstOrDefault(x => x.ToLower().StartsWith(sEnd.ToLower()));
 
-            if (s != null)
-                _autoCompleteIndex = _autoCompleteMembers.IndexOf(s);
+            if (found == null)
+            {
+                if (sEnd == String.Empty)
+                    NextAutoCompleteIndex(moveBackward, _autoCompleteMembers.Count);
+                else
+                    return text;
+            }
             else
-                NextAutoCompleteIndex(moveBackward, _autoCompleteMembers.Count);
+            {
+                if (found != sEnd)
+                    _autoCompleteIndex = _autoCompleteMembers.IndexOf(found);
+                else
+                    NextAutoCompleteIndex(moveBackward, _autoCompleteMembers.Count);
+            }
 
             return String.Join(".", split.Take(split.Length - 1)) + "." + _autoCompleteMembers[_autoCompleteIndex];
         }
