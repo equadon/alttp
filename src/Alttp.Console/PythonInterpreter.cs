@@ -204,17 +204,14 @@ namespace Alttp.Console
                 var type = variable.GetType();
                 foreach (var m in type.GetMembers(BindingFlags.Public | BindingFlags.Instance))
                 {
-                    string memberName = m.Name;
-                    if (!(memberName.StartsWith("set_") || memberName.StartsWith(".") || _autoCompleteMembers.Contains(memberName)))
+                    string mName = m.Name;
+                    if (!(mName.StartsWith("get_") || mName.StartsWith("set_") || mName.StartsWith(".")))
                     {
-                        if (memberName.StartsWith("get_"))
-                            _autoCompleteMembers.Add(memberName.Substring(4));
-                        else
-                            _autoCompleteMembers.Add(memberName + "()");
+                        _autoCompleteMembers.Add((m.MemberType == MemberTypes.Method) ? mName + "()" : mName);
                     }
                 }
 
-                _autoCompleteMembers = _autoCompleteMembers.OrderBy(x => x).ToList();
+                _autoCompleteMembers = _autoCompleteMembers.Distinct().OrderBy(x => x).ToList();
             }
 
             // Find the member starting with the last part of split[]
