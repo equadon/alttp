@@ -25,7 +25,7 @@ namespace Alttp.Console
         private readonly ScriptScope _scope;
 
         private int _autoCompleteIndex = -1;
-        private int _prevAutoCheckNumDots = -1; // the number of dots present in the previous check, used to reset index
+        private object _prevAutoCompleteObject = null;
         private List<string> _autoCompleteMembers;
 
         protected ILogger Log { get; set; }
@@ -122,6 +122,9 @@ namespace Alttp.Console
         /// <returns>Auto completed text</returns>
         public string AutoComplete(string text, bool moveBackward)
         {
+            var cmdSplit = text.Split(' ', ';');
+            text = String.Join(".", cmdSplit.Last().Split('.'));
+
             string res = text.Contains(".")
                 ? AutoCompleteMember(text, moveBackward)
                 : AutoCompleteGlobal(text, moveBackward);
@@ -179,20 +182,18 @@ namespace Alttp.Console
 
         private string AutoCompleteMember(string text, bool moveBackward)
         {
-            // Do we need to reset the index?
-            int count = text.Count(x => x == '.');
+            // Split text by dots
+            var cmdSplit = text.Split(' ', ';');
+            var dotSplit = cmdSplit.Last().Split('.');
 
-            if (_prevAutoCheckNumDots != count)
+            dynamic variable = AutoCompleteGetMemberVariable(dotSplit.Take(dotSplit.Length - 1));
+
+            if (_prevAutoCompleteObject != variable)
             {
+                _prevAutoCompleteObject = variable;
                 _autoCompleteIndex = -1;
                 _autoCompleteMembers = null;
             }
-            _prevAutoCheckNumDots = count;
-
-            // Split text by dots
-            string[] split = text.Split('.');
-
-            dynamic variable = AutoCompleteGetMemberVariable(split.Take(split.Length - 1));
 
             if (variable == null)
                 return text;
@@ -215,8 +216,11 @@ namespace Alttp.Console
             }
 
             // Find the member starting with the last part of split[]
-            string sEnd = split[split.Length - 1];
+            string sEnd = dotSplit[dotSplit.Length - 1];
             string found = _autoCompleteMembers.FirstOrDefault(x => x.ToLower().StartsWith(sEnd.ToLower()));
+
+            if (_autoCompleteIndex == -1 && moveBackward)
+                _autoCompleteIndex = _autoCompleteMembers.Count;
 
             if (found == null)
             {
@@ -233,7 +237,7 @@ namespace Alttp.Console
                     NextAutoCompleteIndex(moveBackward, _autoCompleteMembers.Count);
             }
 
-            return String.Join(".", split.Take(split.Length - 1)) + "." + _autoCompleteMembers[_autoCompleteIndex];
+            return String.Join(".", dotSplit.Take(dotSplit.Length - 1)) + "." + _autoCompleteMembers[_autoCompleteIndex];
         }
 
         private dynamic AutoCompleteGetMemberVariable(IEnumerable<string> split)
