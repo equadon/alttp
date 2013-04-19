@@ -192,8 +192,7 @@ namespace Alttp.Console
             // Split text by dots
             string[] split = text.Split('.');
 
-            dynamic variable;
-            _scope.TryGetVariable(split[0], out variable);
+            dynamic variable = AutoCompleteGetMemberVariable(split.Take(split.Length - 1));
 
             if (variable == null)
                 return text;
@@ -206,7 +205,7 @@ namespace Alttp.Console
                 foreach (var m in type.GetMembers(BindingFlags.Public | BindingFlags.Instance))
                 {
                     string memberName = m.Name;
-                    if (!memberName.StartsWith("set_") && !memberName.StartsWith("."))
+                    if (!(memberName.StartsWith("set_") || memberName.StartsWith(".") || _autoCompleteMembers.Contains(memberName)))
                     {
                         if (memberName.StartsWith("get_"))
                             _autoCompleteMembers.Add(memberName.Substring(4));
@@ -215,7 +214,7 @@ namespace Alttp.Console
                     }
                 }
 
-                _autoCompleteMembers = _autoCompleteMembers.Distinct().OrderBy(x => x).ToList();
+                _autoCompleteMembers = _autoCompleteMembers.OrderBy(x => x).ToList();
             }
 
             // Find the member starting with the last part of split[]
@@ -229,6 +228,27 @@ namespace Alttp.Console
                 NextAutoCompleteIndex(moveBackward, _autoCompleteMembers.Count);
 
             return String.Join(".", split.Take(split.Length - 1)) + "." + _autoCompleteMembers[_autoCompleteIndex];
+        }
+
+        private dynamic AutoCompleteGetMemberVariable(IEnumerable<string> split)
+        {
+            dynamic variable = null;
+
+            var ops = _engine.Operations;
+
+            foreach (var s in split)
+            {
+                if (variable == null)
+                {
+                    variable = _scope.GetVariable(s);
+                }
+                else
+                {
+                    variable = ops.GetMember(variable, s);
+                }
+            }
+
+            return variable;
         }
 
         private void NextAutoCompleteIndex(bool moveBackward, int length)
