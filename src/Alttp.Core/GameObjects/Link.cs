@@ -9,13 +9,6 @@ namespace Alttp.Core.GameObjects
 {
     public class Link : Character
     {
-        public IShield Shield { get; private set; }
-
-        public bool ShieldEquipped
-        {
-            get { return Shield != null; }
-        }
-
         public Link(Vector2 position, AnimationsDict animations, Sprite shadowSprite)
             : base(position, animations, "/Idle/Down")
         {
@@ -30,13 +23,12 @@ namespace Alttp.Core.GameObjects
             if (Shadow != null)
                 Shadow.Draw(batch);
 
-            if (ShieldEquipped)
+            if (IsShieldEquipped)
             {
-                var obj = (Shield as GameObject);
-                if (obj.Frame == null)
+                if (Shield.Frame == null)
                     Frame.Draw(batch, Frame, Position);
                 else
-                    Frame.Draw(batch, Frame, Position, obj.Frame);
+                    Frame.Draw(batch, Frame, Position, Shield.Frame);
             }
             else
             {

@@ -13,6 +13,16 @@ namespace Alttp.Core.GameObjects
     {
         public Dictionary<string, IEquipment> Equipment { get; private set; }
 
+        public Shield Shield
+        {
+            get { return Equipment["shield"] as Shield; }
+        }
+
+        public bool IsShieldEquipped
+        {
+            get { return (Equipment.ContainsKey("shield")) && Equipment["shield"] != null; }
+        }
+
         public Character(AnimationsDict animations, string currentAnimation = "")
             : this(Vector2.Zero, animations, currentAnimation)
         {

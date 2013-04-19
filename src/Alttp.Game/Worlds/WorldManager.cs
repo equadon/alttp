@@ -105,7 +105,9 @@ namespace Alttp.Worlds
 
             Player.Draw(_batch);
 
-            BlueShield.Draw(_batch);
+            // TODO: Store world objects in an array [,] of List<GameObject>
+            if (BlueShield.Parent == null)
+                BlueShield.Draw(_batch);
 
             _batch.End();
         }
