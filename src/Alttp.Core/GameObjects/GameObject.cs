@@ -78,12 +78,22 @@ namespace Alttp.Core.GameObjects
 
         public Rectangle Bounds
         {
-            get { return new Rectangle((int)(Position.X + Frame.Bounds.Left), (int)(Position.Y + Frame.Bounds.Top), (int)Frame.Bounds.Width, (int)Frame.Bounds.Height); }
+            get
+            {
+                return (Frame == null)
+                    ? Rectangle.Empty
+                    : new Rectangle((int)(Position.X + Frame.Bounds.Left), (int)(Position.Y + Frame.Bounds.Top), (int)Frame.Bounds.Width, (int)Frame.Bounds.Height);
+            }
         }
 
         public RectangleF BoundsF
         {
-            get { return new RectangleF(Position.X + Frame.Bounds.Left, Position.Y + Frame.Bounds.Top, Frame.Bounds.Width, Frame.Bounds.Height); }
+            get
+            {
+                return (Frame == null)
+                    ? RectangleF.Empty
+                    : new RectangleF(Position.X + Frame.Bounds.Left, Position.Y + Frame.Bounds.Top, Frame.Bounds.Width, Frame.Bounds.Height);
+            }
         }
 
         #endregion
