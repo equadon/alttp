@@ -26,7 +26,7 @@ namespace Alttp.Console
         private readonly ScriptScope _scope;
 
         private int _autoCompleteIndex = -1;
-        private object _prevAutoCompleteObject = null;
+        private object _prevAutoCompleteObject;
         private List<string> _autoCompleteMembers;
 
         protected ILogger Log { get; set; }
@@ -147,10 +147,22 @@ namespace Alttp.Console
         /// <returns>Auto completed text</returns>
         public string AutoComplete(string text, bool moveBackward)
         {
-            var cmdSplit = text.Split(' ', ';');
-            var objStr = cmdSplit.Last();
+            var cmdSplit = text.Split(' ', ';', '(');
+            string objStr = null;
+            if (cmdSplit.Last() == ")")
+            {
+                int lastIndex = text.LastIndexOf('(', text.Length - 3);
+                if (lastIndex == -1)
+                    objStr = text;
+                else
+                    objStr = text.Substring(lastIndex + 1);
+            }
+            else
+            {
+                objStr = cmdSplit.Last();
+            }
 
-            string baseText = text.Substring(0, text.IndexOf(objStr, StringComparison.Ordinal));
+            string baseText = (objStr == "") ? text : text.Substring(0, text.IndexOf(objStr, StringComparison.Ordinal));
 
             string res = baseText + (objStr.Contains(".")
                                          ? AutoCompleteMember(objStr, moveBackward)
