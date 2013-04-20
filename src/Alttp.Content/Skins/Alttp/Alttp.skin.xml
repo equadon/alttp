@@ -245,15 +245,15 @@
       Frame used to draw a context menu
     -->
     <frame name="context">
-      <region source="controls" hplacement="left" vplacement="top" x="128 " y="145" w="6" h="6" />
+      <region source="controls" hplacement="left" vplacement="top" x="128 " y="145" w="31" h="6" />
       <region source="controls" hplacement="stretch" vplacement="top" x="134" y="145" w="1" h="6" />
       <region source="controls" hplacement="right" vplacement="top" x="325" y="145" w="8" h="6 " />
       
-      <region source="controls" hplacement="left" vplacement="stretch" x="128" y="151" w="6" h="1" />
+      <region source="controls" hplacement="left" vplacement="stretch" x="128" y="151" w="31" h="1" />
       <region source="controls" hplacement="stretch" vplacement="stretch" x="134" y="151" w="1" h="1" />
       <region source="controls" hplacement="right" vplacement="stretch" x="325" y="151" w="8" h="1" />
       
-      <region source="controls" hplacement="left" vplacement="bottom" x="128" y="251" w="7" h="9" />
+      <region source="controls" hplacement="left" vplacement="bottom" x="128" y="251" w="31" h="9" />
       <region source="controls" hplacement="stretch" vplacement="bottom" x="135" y="251" w="1" h="9" />
       <region source="controls" hplacement="right" vplacement="bottom" x="325" y="251" w="8" h="9" />
       
