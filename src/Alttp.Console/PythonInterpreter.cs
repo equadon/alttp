@@ -103,13 +103,26 @@ namespace Alttp.Console
             Log.Debug("Added import: " + import);
         }
 
-        public void RegisterCommand(IConsoleCommand command)
+        public void RegisterCommand(IConsoleCommand command, string name = null)
         {
-            Commands.Add(command.Name, command);
+            if (name == null)
+                name = command.Name;
+            Commands.Add(name, command);
 
-            _scope.SetVariable(command.Name, new Func<string>(command.Execute));
+            _scope.SetVariable(name, new Func<string>(command.Execute));
 
-            Log.Debug("Registered command: " + command.Name);
+            Log.Debug("Registered command: " + name);
+        }
+
+        public void RegisterCommand<T, TResult>(IConsoleCommand command, Func<T, TResult> execute, string name = null)
+        {
+            if (name == null)
+                name = command.Name;
+            Commands.Add(name, command);
+
+            _scope.SetVariable(name, execute);
+
+            Log.Debug("Registered command: " + name);
         }
 
         public void SetVariable(string name, string description, object obj)

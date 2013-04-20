@@ -125,7 +125,9 @@ namespace Alttp.Console
         private void RegisterCommands()
         {
             // Help
-            _python.RegisterCommand(new HelpCommand(_python.Commands, _python.Variables));
+            var help = new HelpCommand(_python.Commands, _python.Variables);
+            _python.RegisterCommand(help);
+            _python.RegisterCommand(help, new Func<object, string>(help.Execute), "h");
 
             // Exit
             _python.RegisterCommand(new ExitCommand(_game));

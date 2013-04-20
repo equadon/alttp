@@ -11,6 +11,7 @@ namespace Alttp.Console
         string Description { get; }
 
         string Execute();
+        string Execute(object obj);
         string Execute(string[] arguments);
     }
 }

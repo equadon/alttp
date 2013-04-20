@@ -26,6 +26,11 @@ namespace Alttp.Console.Commands
             throw new NotImplementedException();
         }
 
+        public virtual string Execute(object obj)
+        {
+            throw new NotImplementedException();
+        }
+
         public virtual string Execute(string[] arguments)
         {
             throw new NotImplementedException();
