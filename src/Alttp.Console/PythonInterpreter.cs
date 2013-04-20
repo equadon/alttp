@@ -162,7 +162,7 @@ namespace Alttp.Console
                 objStr = cmdSplit.Last();
             }
 
-            string baseText = (objStr == "") ? text : text.Substring(0, text.IndexOf(objStr, StringComparison.Ordinal));
+            string baseText = (objStr == "") ? text : text.Substring(0, text.LastIndexOf(objStr, StringComparison.Ordinal));
 
             string res = baseText + (objStr.Contains(".")
                                          ? AutoCompleteMember(objStr, moveBackward)
@@ -177,6 +177,7 @@ namespace Alttp.Console
         {
             string res = String.Empty;
             _autoCompleteMembers = _scope.GetVariableNames().OrderBy(x => x).ToList();
+            _prevAutoCompleteObject = null;
 
             if (text != String.Empty)
             {
@@ -227,7 +228,7 @@ namespace Alttp.Console
 
             dynamic variable = AutoCompleteGetMemberVariable(dotSplit.Take(dotSplit.Length - 1).ToArray());
 
-            if (_prevAutoCompleteObject != variable)
+            if (_prevAutoCompleteObject == null || !_prevAutoCompleteObject.Equals(variable))
             {
                 _prevAutoCompleteObject = variable;
                 _autoCompleteIndex = -1;
