@@ -183,7 +183,7 @@ namespace Alttp.Debugging
                 DrawGridLines();
 
             // Draw selection rectangle
-            if (SelectionBounds != Rectangle.Empty)
+            if (SelectionBounds != Rectangle.Empty && (SelectionBounds.Width > 5 && SelectionBounds.Height > 5))
             {
                 var selectionBounds = Utils.RenderableRectangle(SelectionBounds);
 
