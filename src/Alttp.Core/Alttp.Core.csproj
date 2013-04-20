@@ -117,6 +117,7 @@
     <Compile Include="Shields\FireShield.cs" />
     <Compile Include="Shields\IShield.cs" />
     <Compile Include="Shields\Shield.cs" />
+    <Compile Include="UI\ContextMenus\ContextMenu.cs" />
     <Compile Include="UI\Controls\BorderControl.cs" />
     <Compile Include="UI\Controls\ContextMenuControl.cs" />
     <Compile Include="UI\Controls\FlatBorderControlRenderer.cs" />

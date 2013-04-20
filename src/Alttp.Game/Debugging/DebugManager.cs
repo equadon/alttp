@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using Alttp.Console;
 using Alttp.Core;
 using Alttp.Core.GameObjects;
@@ -11,6 +13,7 @@ using Alttp.Worlds;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
+using Ninject.Extensions.Logging;
 using Nuclex.Input;
 using Nuclex.Ninject.Xna;
 using Nuclex.UserInterface;
@@ -21,6 +24,8 @@ namespace Alttp.Debugging
 {
     public class DebugManager : DrawableGameComponent
     {
+        protected readonly ILogger Log;
+
         private readonly GuiManager _gui;
         private readonly IContentManager _content;
         private readonly ISpriteBatch _batch;
@@ -56,9 +61,10 @@ namespace Alttp.Debugging
         public GameInfoOverlay GameInfoOverlay { get; private set; }
         public MinimapOverlay MinimapOverlay { get; private set; }
 
-        public DebugManager(Game game, GuiManager gui, IContentManager content, ISpriteBatch batch, InputManager input, WorldManager world, AlttpConsole console)
+        public DebugManager(ILogger logger, Game game, GuiManager gui, IContentManager content, ISpriteBatch batch, InputManager input, WorldManager world, AlttpConsole console)
             : base(game)
         {
+            Log = logger;
             _gui = gui;
             _content = content;
             _batch = batch;
@@ -103,6 +109,7 @@ namespace Alttp.Debugging
             }
 
             Vector2 mousePos = _input.MousePos;
+            Vector2 mouseWorldPos = _world.ActiveCamera.ScreenToWorld(mousePos);
             RectangleF minimapBounds = MinimapOverlay.Minimap.GetAbsoluteBounds();
 
             // Move minimap viewport with left mouse button.
@@ -142,6 +149,7 @@ namespace Alttp.Debugging
                 SelectionBounds = Rectangle.Empty;
             }
 
+            // Update selection bounds if mouse is pressed
             if (_input.IsMouseButtonDown(MouseButtons.Left) && SelectionBounds != Rectangle.Empty)
             {
                 var bounds = SelectionBounds;
@@ -150,6 +158,21 @@ namespace Alttp.Debugging
                     height = (int)mousePos.Y - bounds.Y;
 
                 SelectionBounds = new Rectangle(bounds.X, bounds.Y, width, height);
+            }
+
+            // Show context menu with right mouse click
+            if (_input.IsMouseButtonReleased(MouseButtons.Right))
+            {
+                // If objects are selected and user right clicks while not hovering
+                // any of the selected objects, deselect them all.
+                if (SelectedGameObjects.Length > 0)
+                {
+                    bool containsMouse = SelectedGameObjects.Any(o => o.BoundsF.Contains(mouseWorldPos));
+                    if (!containsMouse)
+                        SelectedGameObjects = new GameObject[0];
+                }
+
+                DisplayContextMenu(mouseWorldPos);
             }
 
             // Do not process any of the commands if the console is open
@@ -172,6 +195,8 @@ namespace Alttp.Debugging
                     RenderRegionBorders = !RenderRegionBorders;
             }
         }
+
+        #region Draw Methods
 
         public override void Draw(GameTime gameTime)
         {
@@ -197,9 +222,12 @@ namespace Alttp.Debugging
                 foreach (var o in SelectedGameObjects)
                 {
                     Vector2 objScreenPos = _world.ActiveCamera.WorldToScreen(new Vector2(o.BoundsF.X, o.BoundsF.Y));
-                    var objScreenSize = new Vector2(o.BoundsF.Width * _world.ActiveCamera.InvZoom, o.BoundsF.Height * _world.ActiveCamera.InvZoom);
+                    var objScreenSize = new Vector2(o.BoundsF.Width * _world.ActiveCamera.InvZoom,
+                                                    o.BoundsF.Height * _world.ActiveCamera.InvZoom);
 
-                    Utils.DrawBorder(_batch, BlankTexture, new Rectangle((int)objScreenPos.X, (int)objScreenPos.Y, (int)objScreenSize.X, (int)objScreenSize.Y), 2, Color.DarkRed);
+                    Utils.DrawBorder(_batch, BlankTexture,
+                                     new Rectangle((int) objScreenPos.X, (int) objScreenPos.Y, (int) objScreenSize.X,
+                                                   (int) objScreenSize.Y), 2, Color.DarkRed);
                 }
             }
 
@@ -236,7 +264,8 @@ namespace Alttp.Debugging
             float x = minScreen.X;
             while (x <= maxScreen.X)
             {
-                _batch.Draw(BlankTexture, new Vector2(x - offsetX, 0), null, Config.GridColor, 0, Vector2.Zero, new Vector2(1, Config.ScreenHeight), SpriteEffects.None, 0);
+                _batch.Draw(BlankTexture, new Vector2(x - offsetX, 0), null, Config.GridColor, 0, Vector2.Zero,
+                            new Vector2(1, Config.ScreenHeight), SpriteEffects.None, 0);
 
                 x += tileSizeX;
             }
@@ -245,11 +274,14 @@ namespace Alttp.Debugging
             float y = minScreen.Y;
             while (y <= maxScreen.Y)
             {
-                _batch.Draw(BlankTexture, new Vector2(0, y - offsetY), null, Config.GridColor, 0, Vector2.Zero, new Vector2(Config.ScreenWidth, 1), SpriteEffects.None, 0);
+                _batch.Draw(BlankTexture, new Vector2(0, y - offsetY), null, Config.GridColor, 0, Vector2.Zero,
+                            new Vector2(Config.ScreenWidth, 1), SpriteEffects.None, 0);
 
                 y += tileSizeY;
             }
         }
+
+        #endregion
 
         private void SetupOverlays()
         {
@@ -283,6 +315,15 @@ namespace Alttp.Debugging
             RectangleF minimapBounds = MinimapOverlay.Minimap.GetAbsoluteBounds();
 
             MinimapOverlay.UpdateCameraBorderBounds(0, _world.ActiveCamera.GetMiniMapViewport(Utils.CastRectangleF(minimapBounds)));
+        }
+
+        /// <summary>
+        /// Display context menu related to the object mousePos is hovering
+        /// </summary>
+        /// <param name="mousePos"></param>
+        private void DisplayContextMenu(Vector2 mousePos)
+        {
+
         }
     }
 }
