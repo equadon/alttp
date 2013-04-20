@@ -8,5 +8,9 @@ namespace Alttp.Core.UI.Controls
 {
     public class ContextMenuControl : ListControl
     {
+        public ContextMenuControl()
+        {
+            Children.RemoveAt(0);
+        }
     }
 }

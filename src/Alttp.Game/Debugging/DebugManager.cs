@@ -6,6 +6,7 @@ using Alttp.Core;
 using Alttp.Core.GameObjects;
 using Alttp.Core.Shields;
 using Alttp.Core.UI;
+using Alttp.Core.UI.ContextMenus;
 using Alttp.Core.UI.Controls;
 using Alttp.Core.World;
 using Alttp.Debugging.Overlays;
@@ -184,7 +185,7 @@ namespace Alttp.Debugging
                         SelectedGameObjects = new GameObject[0];
                 }
 
-                DisplayContextMenu(mouseWorldPos);
+                DisplayContextMenu(mousePos, mouseWorldPos);
             }
 
             // Do not process any of the commands if the console is open
@@ -332,8 +333,9 @@ namespace Alttp.Debugging
         /// <summary>
         /// Display context menu related to the object mousePos is hovering
         /// </summary>
-        /// <param name="mousePos"></param>
-        private void DisplayContextMenu(Vector2 worldPos)
+        /// <param name="screenPos">Screen position</param>
+        /// <param name="worldPos">World position</param>
+        private void DisplayContextMenu(Vector2 screenPos, Vector2 worldPos)
         {
             // If objects are still selected show a context menu for an array of GameObjects
             // TODO: context menu for an array of GameObjects
@@ -342,7 +344,7 @@ namespace Alttp.Debugging
             if (obj == null)
             {
                 // No objects found, display context menu for World
-
+                _gui.Screen.Desktop.Children.Add(new WorldContextMenu(screenPos));
             }
         }
     }

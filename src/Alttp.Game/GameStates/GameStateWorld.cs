@@ -45,6 +45,7 @@ namespace Alttp.GameStates
             var flatGuiVisualizer = _gui.Visualizer as FlatGuiVisualizer;
 
             flatGuiVisualizer.RendererRepository.AddAssembly(typeof(FlatImageControlRenderer).Assembly);
+            flatGuiVisualizer.RendererRepository.AddAssembly(typeof(FlatContextMenuControlRenderer).Assembly);
 
             _gui.Screen = new Screen(_game.GraphicsDevice.Viewport.Width, _game.GraphicsDevice.Viewport.Height);
             _gui.DrawOrder = 1100;

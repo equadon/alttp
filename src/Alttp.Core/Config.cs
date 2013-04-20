@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using Microsoft.Xna.Framework;
 
-namespace Alttp
+namespace Alttp.Core
 {
-    static class Config
+    public static class Config
     {
         public static readonly string WindowTitle = "Alttp Remake - Alpha Build";
 
