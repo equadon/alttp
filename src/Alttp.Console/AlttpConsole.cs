@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using Alttp.Console.Commands;
+using Alttp.Console.Events;
 using Alttp.Core;
 using Alttp.Core.GameObjects;
 using Alttp.Core.Input;
@@ -73,6 +74,12 @@ namespace Alttp.Console
             _gui.Screen.FocusChanged += ScreenOnFocusChanged;
 
             _gui.Screen.Desktop.Children.Add(Window);
+
+            // Handle auto complete
+            Window.CommandInput.HandleAutoComplete += CommandInputOnHandleAutoComplete;
+
+            // Process new command
+            Window.CommandInput.ProcessCommand += CommandInputOnProcessCommand;
         }
 
         /// <summary>
@@ -209,6 +216,25 @@ namespace Alttp.Console
         {
             if (e.Control == Window.OutputList)
                 _gui.Screen.FocusedControl = Window.CommandInput;
+        }
+
+        private void CommandInputOnHandleAutoComplete(object sender, GenericEventArgs<bool> e)
+        {
+            var control = sender as CommandInputControl;
+
+            if (control != null)
+                control.Text = _python.AutoComplete(control.CleanText, e.Value);
+        }
+
+        private void CommandInputOnProcessCommand(object sender, OutputEventArgs e)
+        {
+            var control = sender as CommandInputControl;
+
+            if (control != null)
+            {
+                _python.Process(e.Output);
+                control.Clear();
+            }
         }
 
         private void PythonOnCommandInput(object sender, OutputEventArgs e)

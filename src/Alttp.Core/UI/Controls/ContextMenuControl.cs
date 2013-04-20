@@ -2,10 +2,11 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using Nuclex.UserInterface.Controls.Desktop;
 
 namespace Alttp.Core.UI.Controls
 {
-    class ContextMenuControl
+    public class ContextMenuControl : ListControl
     {
     }
 }

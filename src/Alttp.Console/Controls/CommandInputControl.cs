@@ -2,31 +2,34 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using Alttp.Console.Events;
 using Alttp.Core.Input;
 using Microsoft.Xna.Framework.Input;
+using Nuclex.UserInterface.Controls;
 using Nuclex.UserInterface.Controls.Desktop;
 
 namespace Alttp.Console
 {
     public class CommandInputControl : InputControl
     {
-        public static readonly string Prompt = ">>> ";
+        public event CommandEventHandler ProcessCommand;
+        public event EventHandler<GenericEventArgs<bool>>  HandleAutoComplete;
 
-        private readonly PythonInterpreter _processor;
+        public static readonly string Prompt = ">>> ";
 
         public new string Text
         {
             get { return base.Text; }
             set
             {
-                base.Text = Prompt + Clean(value);
+                base.Text = Prompt + CleanPrompt(value);
                 UpdateCaret();
             }
         }
 
-        public CommandInputControl(PythonInterpreter processor)
+        public string CleanText
         {
-            _processor = processor;
+            get { return CleanPrompt(Text); }
         }
 
         protected override bool OnKeyPressed(Keys key)
@@ -53,7 +56,7 @@ namespace Alttp.Console
             switch (key)
             {
                 case Keys.Enter:
-                    ProcessCommand(Text);
+                    OnProcessCommand(Text);
                     break;
             }
         }
@@ -70,23 +73,29 @@ namespace Alttp.Console
             if (c == (char)Keys.Tab)
             {
                 // If shift is pressed auto complete in the opposite direction
-                Text = _processor.AutoComplete(Clean(Text), Keyboard.GetState().IsKeyDown(Keys.LeftShift) || Keyboard.GetState().IsKeyDown(Keys.RightShift));
+                OnHandleAutoComplete();
                 return;
             }
 
             base.OnCharacterEntered(c);
         }
 
-        public void ProcessCommand(string input)
+        private void OnHandleAutoComplete()
         {
-            if (input != null || input != "")
-            {
-                _processor.Process(input);
-                Clear();
-            }
+            bool moveBackwards = Keyboard.GetState().IsKeyDown(Keys.LeftShift) ||
+                                 Keyboard.GetState().IsKeyDown(Keys.RightShift);
+
+            if (HandleAutoComplete != null)
+                HandleAutoComplete(this, new GenericEventArgs<bool>(moveBackwards));
         }
 
-        private string Clean(string str)
+        public void OnProcessCommand(string input)
+        {
+            if (ProcessCommand != null && (input != null || input != ""))
+                ProcessCommand(this, new OutputEventArgs(input, ConsoleOutputType.Command));
+        }
+
+        private string CleanPrompt(string str)
         {
             return (str.StartsWith(Prompt)) ? str.Substring(Prompt.Length) : str;
         }

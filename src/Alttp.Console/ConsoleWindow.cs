@@ -90,7 +90,7 @@ namespace Alttp.Console
             // Command input prompt
             const int cmdPromptHeight = 26;
 
-            CommandInput = new CommandInputControl(_python)
+            CommandInput = new CommandInputControl()
                 {
                     Bounds = new UniRectangle(0, Bounds.Size.Y - cmdPromptHeight, Bounds.Size.X, cmdPromptHeight),
                     Enabled = false

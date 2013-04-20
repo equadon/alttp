@@ -5,6 +5,7 @@ using System.Linq;
 using System.Reflection;
 using System.Text;
 using Alttp.Console.Commands;
+using Alttp.Console.Events;
 using IronPython;
 using IronPython.Hosting;
 using Microsoft.Scripting;
