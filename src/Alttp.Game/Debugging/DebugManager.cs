@@ -80,6 +80,7 @@ namespace Alttp.Debugging
             base.Initialize();
 
             SelectionBounds = Rectangle.Empty;
+            SelectedGameObjects = new GameObject[0];
 
             SetupOverlays();
         }
@@ -158,6 +159,17 @@ namespace Alttp.Debugging
                     height = (int)mousePos.Y - bounds.Y;
 
                 SelectionBounds = new Rectangle(bounds.X, bounds.Y, width, height);
+            }
+
+            if (_input.IsMouseButtonPressed(MouseButtons.Right))
+            {
+                // Remove context menu if any is shown
+                for (int i = 0; i < _gui.Screen.Desktop.Children.Count; i++)
+                {
+                    var context = _gui.Screen.Desktop.Children[i] as ContextMenuControl;
+                    if (context != null)
+                        _gui.Screen.Desktop.Children.RemoveAt(i);
+                }
             }
 
             // Show context menu with right mouse click
@@ -321,9 +333,17 @@ namespace Alttp.Debugging
         /// Display context menu related to the object mousePos is hovering
         /// </summary>
         /// <param name="mousePos"></param>
-        private void DisplayContextMenu(Vector2 mousePos)
+        private void DisplayContextMenu(Vector2 worldPos)
         {
+            // If objects are still selected show a context menu for an array of GameObjects
+            // TODO: context menu for an array of GameObjects
 
+            object obj = GameObject.GameObjects.FirstOrDefault(o => o.BoundsF.Contains(worldPos));
+            if (obj == null)
+            {
+                // No objects found, display context menu for World
+
+            }
         }
     }
 }
