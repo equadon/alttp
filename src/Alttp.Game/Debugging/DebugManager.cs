@@ -39,7 +39,7 @@ namespace Alttp.Debugging
         public int Frame { get; private set; }
         public GameTime ElapsedTime { get; private set; }
 
-        public GameObject[] SelectedGameObjects { get; private set; }
+        public IGameObject[] SelectedGameObjects { get; private set; }
 
         public Rectangle SelectionBounds { get; private set; }
 
@@ -362,7 +362,7 @@ namespace Alttp.Debugging
             }
             else
             {
-                GameObjectContextMenu.Update(screenPos, obj as IGameObject);
+                GameObjectContextMenu.Update(screenPos, obj as IGameObject, _world.Player.Link);
                 ActiveContextMenu = GameObjectContextMenu;
             }
 

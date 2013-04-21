@@ -66,5 +66,15 @@ namespace Alttp.Core.GameObjects
 
             equipment.UnequippedBy(this);
         }
+
+        /// <summary>
+        /// Checks if the specified equipment is equipped
+        /// </summary>
+        /// <param name="equipment">Equipment object</param>
+        /// <returns>True if equipment is equipped</returns>
+        public bool IsEquipped(IEquipment equipment)
+        {
+            return Equipment.ContainsValue(equipment);
+        }
     }
 }

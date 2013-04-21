@@ -4,6 +4,8 @@
     {
         IGameObject Parent { get; set; }
 
+        bool IsEquipped { get; }
+
         void EquippedBy(IGameObject parent);
         void UnequippedBy(IGameObject parent);
     }

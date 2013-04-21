@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using Alttp.Core.Events;
+using Alttp.Core.GameObjects.Interfaces;
 using Alttp.Core.UI.Controls;
 using Microsoft.Xna.Framework;
 using Nuclex.UserInterface;
@@ -52,6 +53,16 @@ namespace Alttp.Core.UI.ContextMenus
             }
         }
 
+        protected void ToggleCommandName(string s1, string s2)
+        {
+            if (!(Commands.ContainsKey(s1) || Commands.ContainsKey(s2)))
+                return;
+
+            string oldName = (Commands.ContainsKey(s1)) ? s1 : s2,
+                   newName = (oldName == s1) ? s2 : s1;
+            ChangeCommand(oldName, newName, Commands[oldName]);
+        }
+
         /// <summary>
         /// Execute command for item on specified row.
         /// </summary>
@@ -61,6 +72,13 @@ namespace Alttp.Core.UI.ContextMenus
             Commands[Items[row]]();
             if (CommandExecuted != null)
                 CommandExecuted(this, EventArgs.Empty);
+        }
+
+        protected virtual void Clear()
+        {
+            // Clear previous commands
+            Items.Clear();
+            Commands.Clear();
         }
 
         protected void UpdateSize()

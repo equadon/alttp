@@ -6,6 +6,7 @@ using Alttp.Console.Commands;
 using Alttp.Core;
 using Alttp.Core.Events;
 using Alttp.Core.GameObjects;
+using Alttp.Core.GameObjects.Interfaces;
 using Alttp.Core.Input;
 using Alttp.Core.Shields;
 using Alttp.Core.World;
@@ -114,7 +115,7 @@ namespace Alttp.Console
         /// If the text box is empty add the objects variable name.
         /// </summary>
         /// <param name="selectedGameObjects">Array of selected game objects</param>
-        public void SetSelectedObjects(GameObject[] selectedGameObjects)
+        public void SetSelectedObjects(IGameObject[] selectedGameObjects)
         {
             _python.SetVariable("objects", "Selected objects", selectedGameObjects);
         }

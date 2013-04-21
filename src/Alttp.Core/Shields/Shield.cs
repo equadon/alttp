@@ -13,6 +13,11 @@ namespace Alttp.Core.Shields
 
         public ShieldType Type { get; private set; }
 
+        public bool IsEquipped
+        {
+            get { return Parent != null; }
+        }
+
         public override string AnimationName
         {
             get
