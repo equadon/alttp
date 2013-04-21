@@ -17,7 +17,7 @@ namespace Alttp.Core.UI.ContextMenus
             
             // Add items
             Items.Add("Test");
-            Items.Add("-"); // Separator
+            //Items.Add("-"); // Separator
             Items.Add("Exit");
         }
     }

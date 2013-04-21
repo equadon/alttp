@@ -80,6 +80,11 @@
       <Importer>FontDescriptionImporter</Importer>
       <Processor>FontDescriptionProcessor</Processor>
     </Compile>
+    <Compile Include="Skins\Alttp\ContextMenuFont.spritefont">
+      <Name>ContextMenuFont</Name>
+      <Importer>FontDescriptionImporter</Importer>
+      <Processor>FontDescriptionProcessor</Processor>
+    </Compile>
     <None Include="Skins\skin.xsd">
       <Name>skin</Name>
       <SubType>Designer</SubType>
