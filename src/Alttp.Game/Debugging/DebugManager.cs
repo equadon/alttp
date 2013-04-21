@@ -68,6 +68,7 @@ namespace Alttp.Debugging
         public WorldContextMenu WorldContextMenu { get; private set; }
         public GameObjectContextMenu GameObjectContextMenu { get; private set; }
         public GameObjectsContextMenu GameObjectsContextMenu { get; private set; }
+        public EquipmentContextMenu EquipmentContextMenu { get; private set; }
 
         /// <summary>Currently showing context menu</summary>
         public ContextMenu ActiveContextMenu { get; private set; }
@@ -99,6 +100,7 @@ namespace Alttp.Debugging
             WorldContextMenu = new WorldContextMenu();
             GameObjectContextMenu = new GameObjectContextMenu();
             GameObjectsContextMenu = new GameObjectsContextMenu();
+            EquipmentContextMenu = new EquipmentContextMenu();
         }
 
         protected override void LoadContent()
@@ -362,8 +364,19 @@ namespace Alttp.Debugging
             }
             else if (SelectedGameObjects.Length == 1)
             {
-                GameObjectContextMenu.Update(screenPos, SelectedGameObjects[0], _world.Player.Link);
-                ActiveContextMenu = GameObjectContextMenu;
+                var equipment = SelectedGameObjects[0] as IEquipment;
+                if (equipment != null)
+                {
+                    EquipmentContextMenu.Update(screenPos, SelectedGameObjects[0], _world.Player.Link);
+                    ActiveContextMenu = EquipmentContextMenu;
+                }
+
+                // No derived game objects context menu found, use default
+                if (ActiveContextMenu == null)
+                {
+                    GameObjectContextMenu.Update(screenPos, SelectedGameObjects[0], _world.Player.Link);
+                    ActiveContextMenu = GameObjectContextMenu;
+                }
             }
             else
             {

@@ -120,6 +120,7 @@
     <Compile Include="Shields\IShield.cs" />
     <Compile Include="Shields\Shield.cs" />
     <Compile Include="UI\ContextMenus\ContextMenu.cs" />
+    <Compile Include="UI\ContextMenus\EquipmentContextMenu.cs" />
     <Compile Include="UI\ContextMenus\GameObjectsContextMenu.cs" />
     <Compile Include="UI\ContextMenus\GameObjectContextMenu.cs" />
     <Compile Include="UI\ContextMenus\WorldContextMenu.cs" />

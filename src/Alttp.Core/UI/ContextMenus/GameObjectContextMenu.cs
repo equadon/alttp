@@ -11,11 +11,16 @@ namespace Alttp.Core.UI.ContextMenus
 {
     public class GameObjectContextMenu : ContextMenu
     {
-        private IGameObject _gameObject;
-        private Link _link;
+        protected IGameObject Object { get; set; }
+        protected Link Link { get; set; }
 
         public GameObjectContextMenu()
             : base("Game Object Menu")
+        {
+        }
+
+        public GameObjectContextMenu(string name)
+            : base(name)
         {
         }
 
@@ -23,21 +28,22 @@ namespace Alttp.Core.UI.ContextMenus
         {
             Clear();
 
-            _gameObject = gameObject;
-            _link = link;
+            Object = gameObject;
+            Link = link;
 
-            Name = _gameObject.GetType().Name + " Object Menu";
+            Name = Object.GetType().Name + " Object Menu";
 
             Position = pos;
 
             // Add commands
-            AddCommand((_gameObject.IsVisible) ? "Hide" : "Show", gameObject.ToggleVisibility);
-
-            var equipment = _gameObject as IEquipment;
-            if (equipment != null)
-                AddCommand((equipment.IsEquipped) ? "Unequip" : "Equip", ToggleEquip);
+            AddCommands();
 
             UpdateSize();
+        }
+
+        protected override void AddCommands()
+        {
+            AddCommand((Object.IsVisible) ? "Hide" : "Show", Object.ToggleVisibility);
         }
 
         public override void Execute(int row)
@@ -45,19 +51,6 @@ namespace Alttp.Core.UI.ContextMenus
             base.Execute(row);
 
             ToggleCommandName("Show", "Hide");
-            ToggleCommandName("Equip", "Unequip");
-        }
-
-        private void ToggleEquip()
-        {
-            var equipment = _gameObject as IEquipment;
-            if (equipment != null)
-            {
-                if (_link.IsEquipped(equipment))
-                    _link.Unequip(equipment);
-                else
-                    _link.Equip(equipment);
-            }
         }
     }
 }

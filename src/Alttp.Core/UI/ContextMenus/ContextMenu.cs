@@ -34,6 +34,10 @@ namespace Alttp.Core.UI.ContextMenus
             UpdateSize();
         }
 
+        protected virtual void AddCommands()
+        {
+        }
+
         protected void AddCommand(string name, Action action)
         {
             if (!Commands.ContainsKey(name))
