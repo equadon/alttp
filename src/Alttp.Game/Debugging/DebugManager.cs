@@ -67,6 +67,7 @@ namespace Alttp.Debugging
         // Context menus
         public WorldContextMenu WorldContextMenu { get; private set; }
         public GameObjectContextMenu GameObjectContextMenu { get; private set; }
+        public GameObjectsContextMenu GameObjectsContextMenu { get; private set; }
 
         /// <summary>Currently showing context menu</summary>
         public ContextMenu ActiveContextMenu { get; private set; }
@@ -97,6 +98,7 @@ namespace Alttp.Debugging
             // Setup context menus
             WorldContextMenu = new WorldContextMenu();
             GameObjectContextMenu = new GameObjectContextMenu();
+            GameObjectsContextMenu = new GameObjectsContextMenu();
         }
 
         protected override void LoadContent()
@@ -362,6 +364,11 @@ namespace Alttp.Debugging
             {
                 GameObjectContextMenu.Update(screenPos, SelectedGameObjects[0], _world.Player.Link);
                 ActiveContextMenu = GameObjectContextMenu;
+            }
+            else
+            {
+                GameObjectsContextMenu.Update(screenPos, SelectedGameObjects, _world.Player.Link);
+                ActiveContextMenu = GameObjectsContextMenu;
             }
 
             if (ActiveContextMenu != null)
