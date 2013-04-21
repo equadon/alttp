@@ -28,7 +28,7 @@ namespace Alttp.Core.UI.ContextMenus
             // Add commands
             AddCommand((gameObject.IsVisible) ? "Hide" : "Show", gameObject.ToggleVisibility);
 
-            UpdateHeight();
+            UpdateSize();
         }
 
         public override void Execute(int row)

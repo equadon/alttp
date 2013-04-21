@@ -21,7 +21,7 @@ namespace Alttp.Core.UI.ContextMenus
             // Add commands
             AddCommand("Exit", game.Exit);
 
-            UpdateHeight();
+            UpdateSize();
         }
     }
 }

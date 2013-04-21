@@ -14,6 +14,8 @@ namespace Alttp.Core.UI.ContextMenus
     {
         public event EventHandler CommandExecuted;
 
+        public static readonly int MinimumWidth = 170;
+
         protected Dictionary<string, Action> Commands { get; set; }
 
         public Vector2 Position
@@ -28,8 +30,7 @@ namespace Alttp.Core.UI.ContextMenus
             SelectionMode = ListSelectionMode.Single;
             Commands = new Dictionary<string, Action>();
 
-            Bounds.Size.X = 200;
-            UpdateHeight();
+            UpdateSize();
         }
 
         protected void AddCommand(string name, Action action)
@@ -62,8 +63,9 @@ namespace Alttp.Core.UI.ContextMenus
                 CommandExecuted(this, EventArgs.Empty);
         }
 
-        protected void UpdateHeight()
+        protected void UpdateSize()
         {
+            Bounds.Size.X = (int) MathHelper.Clamp(Name.Length * 10.5f, MinimumWidth, Config.ScreenWidth);
             Bounds.Size.Y = 39 + Items.Count * ItemHeight;
         }
 
