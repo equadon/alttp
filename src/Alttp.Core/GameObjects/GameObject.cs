@@ -32,6 +32,8 @@ namespace Alttp.Core.GameObjects
 
         public GameObjectState State { get; private set; }
 
+        public bool IsVisible { get; private set; }
+
         public float MaxSpeed { get; protected set; }
         public float Speed { get; protected set; }
 
@@ -59,6 +61,11 @@ namespace Alttp.Core.GameObjects
         public virtual Frame Frame
         {
             get { return Animation.Frame; }
+        }
+
+        public bool IsHidden
+        {
+            get { return !IsVisible; }
         }
 
         /// <summary>Returns the current direction as text (Up, Down, Left, Right)</summary>
@@ -112,6 +119,8 @@ namespace Alttp.Core.GameObjects
             Position = position;
             Direction = new Vector2(0, 1);
 
+            IsVisible = true;
+
             GameObjects.Add(this);
 
             // Retrieve a unique index
@@ -133,6 +142,9 @@ namespace Alttp.Core.GameObjects
 
         public virtual void Draw(ISpriteBatch batch)
         {
+            if (IsHidden)
+                return;
+
             if (Shadow != null)
                 Shadow.Draw(batch);
 
@@ -159,6 +171,22 @@ namespace Alttp.Core.GameObjects
         /// </summary>
         public virtual void Attack()
         {
+        }
+
+        /// <summary>
+        /// Allow this object to be rendered
+        /// </summary>
+        public void Show()
+        {
+            IsVisible = true;
+        }
+
+        /// <summary>
+        /// Hide object.
+        /// </summary>
+        public void Hide()
+        {
+            IsVisible = false;
         }
 
 //        protected void Play(string animation, AnimationPlayAction action, string nextAnimation = null)

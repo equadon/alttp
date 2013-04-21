@@ -10,6 +10,8 @@ namespace Alttp.Core.GameObjects.Interfaces
         int Index { get; }
         string Name { get; }
         GameObjectState State { get; }
+        bool IsVisible { get; }
+        bool IsHidden { get; }
         float MaxSpeed { get; }
         float Speed { get; }
         Vector2 Direction { get; }
@@ -27,5 +29,8 @@ namespace Alttp.Core.GameObjects.Interfaces
         void Update(GameTime gameTime);
         void Draw(ISpriteBatch batch);
         void Move(Vector2 direction);
+
+        void Show();
+        void Hide();
     }
 }

@@ -230,7 +230,8 @@ namespace Alttp.Core.World
                     var objects = Objects[x, y];
                     if (objects != null)
                         foreach (var obj in objects)
-                            obj.Draw(batch);
+                            if (obj.IsVisible)
+                                obj.Draw(batch);
                 }
             }
         }
