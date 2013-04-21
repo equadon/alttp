@@ -21,6 +21,14 @@ namespace Alttp.Core.UI.ContextMenus
         {
             Name = name;
             SelectionMode = ListSelectionMode.Single;
+
+            Bounds.Size.X = 200;
+            UpdateHeight();
+        }
+
+        protected void UpdateHeight()
+        {
+            Bounds.Size.Y = 39 + Items.Count * 22;
         }
     }
 }

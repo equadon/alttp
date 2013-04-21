@@ -13,11 +13,12 @@ namespace Alttp.Core.UI.ContextMenus
             : base("World Menu")
         {
             Position = screenPos;
-            Bounds.Size = new UniVector(200, 200);
             
             // Add items
             Items.Add("Test");
             Items.Add("Exit");
+
+            UpdateHeight();
         }
     }
 }
