@@ -20,6 +20,9 @@ namespace Alttp.Core.GameObjects
 
         public override void Draw(Nuclex.Ninject.Xna.ISpriteBatch batch)
         {
+            if (IsHidden)
+                return;
+
             if (Shadow != null)
                 Shadow.Draw(batch);
 

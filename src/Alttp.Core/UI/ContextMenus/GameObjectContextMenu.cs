@@ -17,7 +17,13 @@ namespace Alttp.Core.UI.ContextMenus
 
         public void Update(Vector2 pos, IGameObject gameObject)
         {
+            Name = gameObject.GetType().Name + " Object Menu";
+
             Position = pos;
+
+            // Clear previous commands
+            Items.Clear();
+            Commands.Clear();
 
             // Add commands
             AddCommand((gameObject.IsVisible) ? "Hide" : "Show", gameObject.ToggleVisibility);
