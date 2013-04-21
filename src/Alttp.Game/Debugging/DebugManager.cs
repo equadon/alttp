@@ -166,10 +166,7 @@ namespace Alttp.Debugging
             else if (_input.IsMouseButtonReleased(MouseButtons.Left) &&
                 SelectionBounds != Rectangle.Empty)
             {
-                SelectedGameObjects = GameObject.FindAll(Utils.RenderableRectangle(SelectionBounds), _world.ActiveCamera.Position, _world.ActiveCamera.InvZoom);
-
-                // Update selected objects variable in console
-                _console.SetSelectedObjects(SelectedGameObjects);
+                SelectedGameObjects = GetSelectedObjects();
 
                 SelectionBounds = Rectangle.Empty;
             }
@@ -194,8 +191,10 @@ namespace Alttp.Debugging
                 {
                     bool containsMouse = SelectedGameObjects.Any(o => o.BoundsF.Contains(mouseWorldPos));
                     if (!containsMouse)
-                        SelectedGameObjects = new GameObject[0];
+                        SelectedGameObjects = new IGameObject[0];
                 }
+
+                SelectedGameObjects = GetSelectedObjects(mouseWorldPos);
 
                 DisplayContextMenu(mousePos, mouseWorldPos);
             }
@@ -353,16 +352,15 @@ namespace Alttp.Debugging
             if (ActiveContextMenu != null)
                 return;
 
-            object obj = GameObject.GameObjects.FirstOrDefault(o => o.BoundsF.Contains(worldPos));
-            if (obj == null)
+            if (SelectedGameObjects.Length == 0)
             {
                 // No objects found, display context menu for World
                 WorldContextMenu.Update(screenPos, Game);
                 ActiveContextMenu = WorldContextMenu;
             }
-            else
+            else if (SelectedGameObjects.Length == 1)
             {
-                GameObjectContextMenu.Update(screenPos, obj as IGameObject, _world.Player.Link);
+                GameObjectContextMenu.Update(screenPos, SelectedGameObjects[0], _world.Player.Link);
                 ActiveContextMenu = GameObjectContextMenu;
             }
 
@@ -389,6 +387,32 @@ namespace Alttp.Debugging
                 _gui.Screen.Desktop.Children.Remove(ActiveContextMenu);
                 ActiveContextMenu = null;
             }
+        }
+
+        private IGameObject[] GetSelectedObjects(Vector2? mousePos = null)
+        {
+            IGameObject[] objs;
+
+            if (mousePos == null)
+            {
+                objs = GameObject.FindAll(Utils.RenderableRectangle(SelectionBounds), _world.ActiveCamera.Position, _world.ActiveCamera.InvZoom);
+            }
+            else
+            {
+                IGameObject obj = GameObject.GameObjects.FirstOrDefault(o => o.BoundsF.Contains((Vector2)mousePos));
+                if (obj == null)
+                    objs = new IGameObject[0];
+                else
+                    if (SelectedGameObjects.Contains(obj))
+                        objs = SelectedGameObjects;
+                    else
+                        objs = new [] { obj };
+            }
+
+            // Update selected objects variable in console
+            _console.SetSelectedObjects(objs);
+
+            return objs;
         }
 
         private void ContextCommandExecuted(object sender, EventArgs e)

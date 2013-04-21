@@ -288,7 +288,7 @@ namespace Alttp.Core.GameObjects
         /// <param name="cameraPosition">Position of the camera</param>
         /// <param name="zoom">Current camera zoom</param>
         /// <returns>The first GameObject found</returns>
-        public static GameObject[] FindAll(Rectangle region, Vector2 cameraPosition, float zoom)
+        public static IGameObject[] FindAll(Rectangle region, Vector2 cameraPosition, float zoom)
         {
             var objects = new List<GameObject>();
 
