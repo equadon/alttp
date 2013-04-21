@@ -9,6 +9,8 @@ namespace Alttp.Core.UI.Controls
 {
     public class ContextMenuControl : ListControl
     {
+        public static readonly int ItemHeight = 22;
+
         private float _mouseY;
 
         public ContextMenuControl()

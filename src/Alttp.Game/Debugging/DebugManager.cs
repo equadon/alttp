@@ -5,6 +5,7 @@ using Alttp.Console;
 using Alttp.Core;
 using Alttp.Core.Events;
 using Alttp.Core.GameObjects;
+using Alttp.Core.GameObjects.Interfaces;
 using Alttp.Core.Shields;
 using Alttp.Core.UI;
 using Alttp.Core.UI.ContextMenus;
@@ -347,10 +348,11 @@ namespace Alttp.Debugging
             if (obj == null)
             {
                 // No objects found, display context menu for World
-                ContextMenu = new WorldContextMenu(screenPos, Game);
-
-                // Subscribe to OnClick event
-                ContextMenu.RowClicked += ContextMenuOnRowClicked;
+                ContextMenu = new WorldContextMenu(HideContextMenu, screenPos, Game);
+            }
+            else
+            {
+                ContextMenu = new GameObjectContextMenu(HideContextMenu, screenPos, obj as IGameObject);
             }
 
             if (ContextMenu != null)
@@ -364,18 +366,10 @@ namespace Alttp.Debugging
         {
             if (ContextMenu != null)
             {
-                // Unsubscribe to OnClick event
-                ContextMenu.RowClicked -= ContextMenuOnRowClicked;
-
                 // Remove from screen
                 _gui.Screen.Desktop.Children.Remove(ContextMenu);
                 ContextMenu = null;
             }
-        }
-
-        private void ContextMenuOnRowClicked(object sender, GenericEventArgs<int> e)
-        {
-            ContextMenu.Execute(e.Value);
         }
     }
 }
