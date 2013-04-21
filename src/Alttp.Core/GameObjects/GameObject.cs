@@ -167,13 +167,6 @@ namespace Alttp.Core.GameObjects
         }
 
         /// <summary>
-        /// Attack with the currently selected IWeapon.
-        /// </summary>
-        public virtual void Attack()
-        {
-        }
-
-        /// <summary>
         /// Allow this object to be rendered
         /// </summary>
         public void Show()

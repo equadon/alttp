@@ -34,6 +34,10 @@ namespace Alttp.Core.GameObjects
             Equipment = new Dictionary<string, IEquipment>();
         }
 
+        public virtual void Attack()
+        {
+        }
+
         /// <summary>
         /// Equip equipment.
         /// </summary>

@@ -18,7 +18,7 @@ namespace Alttp.Core.UI.ContextMenus
         {
         }
 
-        public void Update(Vector2 pos, IGameObject gameObject, Link link)
+        public new void Update(Vector2 pos, IGameObject gameObject, Link link)
         {
             Clear();
 

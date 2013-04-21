@@ -14,11 +14,11 @@ namespace Alttp.Core.UI.ContextMenus
         private Character _character;
 
         public CharacterContextMenu()
-            : base("Character Object Menu")
+            : base("Character Menu")
         {
         }
 
-        public void Update(Vector2 pos, IGameObject gameObject, Link link)
+        public new void Update(Vector2 pos, IGameObject gameObject, Link link)
         {
             Clear();
 
@@ -47,8 +47,8 @@ namespace Alttp.Core.UI.ContextMenus
         {
             base.AddCommands();
 
-            if (_character != null)
-                AddCommand("Unequip All", _character.UnequipAll);
+            AddCommand("Attack", _character.Attack);
+            AddCommand("Unequip All", _character.UnequipAll);
         }
     }
 }
