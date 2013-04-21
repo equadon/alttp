@@ -12,9 +12,8 @@ namespace Alttp.Core.UI.ContextMenus
 {
     public class ContextMenu : ContextMenuControl
     {
-        public event EventHandler<GenericEventArgs<int>> RowClicked;
-
         private readonly Dictionary<string, Action> _commands;
+        public readonly Action Hide;
 
         public Vector2 Position
         {
@@ -22,11 +21,12 @@ namespace Alttp.Core.UI.ContextMenus
             set { Bounds.Location = new UniVector(value.X, value.Y); }
         }
 
-        public ContextMenu(string name)
+        public ContextMenu(string name, Action hide)
         {
             Name = name;
             SelectionMode = ListSelectionMode.Single;
             _commands = new Dictionary<string, Action>();
+            Hide = hide;
 
             Bounds.Size.X = 200;
             UpdateHeight();
@@ -47,20 +47,18 @@ namespace Alttp.Core.UI.ContextMenus
         /// <param name="row">Row of the clicked item</param>
         public virtual void Execute(int row)
         {
-            string name = Items[row];
-
             _commands[Items[row]]();
+            Hide();
         }
 
         protected void UpdateHeight()
         {
-            Bounds.Size.Y = 39 + Items.Count * 22;
+            Bounds.Size.Y = 39 + Items.Count * ItemHeight;
         }
 
         protected override void OnRowClicked(int row)
         {
-            if (RowClicked != null)
-                RowClicked(this, new GenericEventArgs<int>(row));
+            Execute(row);
         }
     }
 }

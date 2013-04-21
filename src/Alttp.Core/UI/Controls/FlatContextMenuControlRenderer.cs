@@ -9,7 +9,6 @@ namespace Alttp.Core.UI.Controls
     public class FlatContextMenuControlRenderer : IFlatControlRenderer<ContextMenuControl>, IListRowLocator
     {
         private IFlatGuiGraphics _graphics;
-        private float _rowHeight = float.NaN;
 
         public void Render(ContextMenuControl control, IFlatGuiGraphics graphics)
         {
@@ -22,7 +21,7 @@ namespace Alttp.Core.UI.Controls
             string text = control.Name;
             graphics.DrawString("context", bounds, text);
 
-            var itemBounds = new RectangleF(bounds.X + 3, bounds.Y + 30, bounds.Width - 12, 22);
+            var itemBounds = new RectangleF(bounds.X + 3, bounds.Y + 30, bounds.Width - 12, ContextMenuControl.ItemHeight);
 
             foreach (var item in control.Items)
             {
@@ -39,8 +38,6 @@ namespace Alttp.Core.UI.Controls
 
         public int GetRow(RectangleF bounds, float thumbPosition, int itemCount, float y)
         {
-            float totalItems = itemCount;
-
             // Calculate the item that should be under the requested Y coordinate
             float res = (y - 30) / GetRowHeight(bounds);
             if (res < 0)
@@ -50,7 +47,7 @@ namespace Alttp.Core.UI.Controls
 
         public float GetRowHeight(RectangleF bounds)
         {
-            return 22;
+            return ContextMenuControl.ItemHeight;
         }
 
         #endregion
