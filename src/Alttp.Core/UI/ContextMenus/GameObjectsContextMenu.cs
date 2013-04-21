@@ -31,11 +31,15 @@ namespace Alttp.Core.UI.ContextMenus
             Position = pos;
 
             // Add commands
-            AddCommand("Toggle Show/Hide", ToggleVisibility);
+            AddCommand("Show All", ShowAll);
+            AddCommand("Hide All", HideAll);
 
-//            var equipment = _gameObjects as IEquipment;
-//            if (equipment != null)
-//                AddCommand((equipment.IsEquipped) ? "Unequip" : "Equip", ToggleEquip);
+            // If all game objects are IEquipment add Equip/Unequip All commands
+            if (_gameObjects.All(o => o is IEquipment))
+            {
+                AddCommand("Equip All", EquipAll);
+                AddCommand("Unequip All", UnequipAll);
+            }
 
             UpdateSize();
         }
@@ -48,14 +52,36 @@ namespace Alttp.Core.UI.ContextMenus
             ToggleCommandName("Equip", "Unequip");
         }
 
-        private void ToggleVisibility()
+        private void ShowAll()
         {
-            foreach (var obj in _gameObjects)
-                obj.ToggleVisibility();
+            foreach (var o in _gameObjects)
+                o.Show();
         }
 
-        private void ToggleEquip()
+        private void HideAll()
         {
+            foreach (var o in _gameObjects)
+                o.Hide();
+        }
+
+        private void EquipAll()
+        {
+            foreach (var o in _gameObjects)
+            {
+                var equipment = o as IEquipment;
+                if (equipment != null)
+                    _link.Equip(equipment);
+            }
+        }
+
+        private void UnequipAll()
+        {
+            foreach (var o in _gameObjects)
+            {
+                var equipment = o as IEquipment;
+                if (equipment != null)
+                    _link.Unequip(equipment);
+            }
         }
     }
 }
