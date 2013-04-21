@@ -9,12 +9,12 @@ using Nuclex.UserInterface;
 
 namespace Alttp.Core.UI.ContextMenus
 {
-    public class EquipmentContextMenu : GameObjectContextMenu
+    public class CharacterContextMenu : GameObjectContextMenu
     {
-        private IEquipment _equipment;
+        private Character _character;
 
-        public EquipmentContextMenu()
-            : base("Equipment Menu")
+        public CharacterContextMenu()
+            : base("Character Object Menu")
         {
         }
 
@@ -23,10 +23,10 @@ namespace Alttp.Core.UI.ContextMenus
             Clear();
 
             Object = gameObject;
-            _equipment = Object as IEquipment;
+            _character = Object as Character;
             Link = link;
 
-            Name = Object.GetType().Name + " Equipment Menu";
+            Name = Object.GetType().Name + " Character Menu";
 
             Position = pos;
 
@@ -41,26 +41,14 @@ namespace Alttp.Core.UI.ContextMenus
             base.Execute(row);
 
             ToggleCommandName("Show", "Hide");
-            ToggleCommandName("Equip", "Unequip");
         }
 
         protected override void AddCommands()
         {
             base.AddCommands();
 
-            if (_equipment != null)
-                AddCommand((_equipment.IsEquipped) ? "Unequip" : "Equip", ToggleEquip);
-        }
-
-        private void ToggleEquip()
-        {
-            if (_equipment != null)
-            {
-                if (Link.IsEquipped(_equipment))
-                    Link.Unequip(_equipment);
-                else
-                    Link.Equip(_equipment);
-            }
+            if (_character != null)
+                AddCommand("Unequip All", _character.UnequipAll);
         }
     }
 }

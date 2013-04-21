@@ -62,9 +62,24 @@ namespace Alttp.Core.GameObjects
             var shield = equipment as IShield;
 
             if (shield != null)
+            {
                 Equipment["shield"] = null;
+                Equipment.Remove("shield");
+            }
 
             equipment.UnequippedBy(this);
+        }
+
+        public void UnequipAll()
+        {
+            var keys = Equipment.Keys.ToArray();
+            for (int i = 0; i < keys.Length; i++)
+            {
+                string key = keys[i];
+                var equipment = Equipment[key];
+                equipment.UnequippedBy(this);
+                Equipment.Remove(key);
+            }
         }
 
         /// <summary>

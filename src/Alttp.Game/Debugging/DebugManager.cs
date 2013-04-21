@@ -69,6 +69,7 @@ namespace Alttp.Debugging
         public GameObjectContextMenu GameObjectContextMenu { get; private set; }
         public GameObjectsContextMenu GameObjectsContextMenu { get; private set; }
         public EquipmentContextMenu EquipmentContextMenu { get; private set; }
+        public CharacterContextMenu CharacterContextMenu { get; private set; }
 
         /// <summary>Currently showing context menu</summary>
         public ContextMenu ActiveContextMenu { get; private set; }
@@ -101,6 +102,7 @@ namespace Alttp.Debugging
             GameObjectContextMenu = new GameObjectContextMenu();
             GameObjectsContextMenu = new GameObjectsContextMenu();
             EquipmentContextMenu = new EquipmentContextMenu();
+            CharacterContextMenu = new CharacterContextMenu();
         }
 
         protected override void LoadContent()
@@ -364,6 +366,13 @@ namespace Alttp.Debugging
             }
             else if (SelectedGameObjects.Length == 1)
             {
+                var character = SelectedGameObjects[0] as Character;
+                if (character != null)
+                {
+                    CharacterContextMenu.Update(screenPos, SelectedGameObjects[0], _world.Player.Link);
+                    ActiveContextMenu = CharacterContextMenu;
+                }
+
                 var equipment = SelectedGameObjects[0] as IEquipment;
                 if (equipment != null)
                 {
