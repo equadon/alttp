@@ -11,16 +11,11 @@ namespace Alttp.Core.GameObjects
 {
     public class Character : GameObject
     {
-        public Dictionary<string, IEquipment> Equipment { get; private set; }
-
-        public Shield Shield
-        {
-            get { return Equipment["shield"] as Shield; }
-        }
+        public IShield Shield { get; private set; }
 
         public bool IsShieldEquipped
         {
-            get { return (Equipment.ContainsKey("shield")) && Equipment["shield"] != null; }
+            get { return Shield != null; }
         }
 
         public Character(AnimationsDict animations, string currentAnimation = "")
@@ -31,7 +26,6 @@ namespace Alttp.Core.GameObjects
         public Character(Vector2 position, AnimationsDict animations, string currentAnimation = "")
             : base(position, animations, currentAnimation)
         {
-            Equipment = new Dictionary<string, IEquipment>();
         }
 
         public virtual void Attack()
@@ -50,9 +44,9 @@ namespace Alttp.Core.GameObjects
             {
                 // If another shield is already equipped set its position to Position
                 if (IsShieldEquipped)
-                    Equipment["shield"].UnequippedBy(this);
+                    Shield.UnequippedBy(this);
 
-                Equipment["shield"] = shield;
+                Shield = shield;
             }
 
             equipment.EquippedBy(this);
@@ -66,24 +60,15 @@ namespace Alttp.Core.GameObjects
             var shield = equipment as IShield;
 
             if (shield != null)
-            {
-                Equipment["shield"] = null;
-                Equipment.Remove("shield");
-            }
+                Shield = null;
 
             equipment.UnequippedBy(this);
         }
 
         public void UnequipAll()
         {
-            var keys = Equipment.Keys.ToArray();
-            for (int i = 0; i < keys.Length; i++)
-            {
-                string key = keys[i];
-                var equipment = Equipment[key];
-                equipment.UnequippedBy(this);
-                Equipment.Remove(key);
-            }
+            Shield.UnequippedBy(this);
+            Shield = null;
         }
 
         /// <summary>
@@ -93,7 +78,7 @@ namespace Alttp.Core.GameObjects
         /// <returns>True if equipment is equipped</returns>
         public bool IsEquipped(IEquipment equipment)
         {
-            return Equipment.ContainsValue(equipment);
+            return (Shield == equipment);
         }
     }
 }
