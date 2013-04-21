@@ -10,15 +10,28 @@ namespace Alttp.Core.UI.ContextMenus
 {
     public class GameObjectContextMenu : ContextMenu
     {
-        public GameObjectContextMenu(Vector2 screenPos, IGameObject gameObject)
+        public GameObjectContextMenu()
             : base("Game Object Menu")
         {
-            Position = screenPos;
-            
+        }
+
+        public void Update(Vector2 pos, IGameObject gameObject)
+        {
+            Position = pos;
+
             // Add commands
-            AddCommand("Hide", gameObject.Hide);
+            AddCommand((gameObject.IsVisible) ? "Hide" : "Show", gameObject.ToggleVisibility);
 
             UpdateHeight();
+        }
+
+        public override void Execute(int row)
+        {
+            base.Execute(row);
+
+            string oldName = (Commands.ContainsKey("Hide")) ? "Hide" : "Show",
+                   newName = (Commands.ContainsKey("Hide")) ? "Show" : "Hide";
+            ChangeCommand(oldName, newName, Commands[oldName]);
         }
     }
 }

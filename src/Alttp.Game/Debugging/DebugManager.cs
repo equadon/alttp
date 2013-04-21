@@ -64,7 +64,12 @@ namespace Alttp.Debugging
         public GameInfoOverlay GameInfoOverlay { get; private set; }
         public MinimapOverlay MinimapOverlay { get; private set; }
 
-        public ContextMenu ContextMenu { get; private set; }
+        // Context menus
+        public WorldContextMenu WorldContextMenu { get; private set; }
+        public GameObjectContextMenu GameObjectContextMenu { get; private set; }
+
+        /// <summary>Currently showing context menu</summary>
+        public ContextMenu ActiveContextMenu { get; private set; }
 
         public DebugManager(ILogger logger, Game game, GuiManager gui, IContentManager content, ISpriteBatch batch, InputManager input, WorldManager world, AlttpConsole console)
             : base(game)
@@ -88,6 +93,10 @@ namespace Alttp.Debugging
             SelectedGameObjects = new GameObject[0];
 
             SetupOverlays();
+
+            // Setup context menus
+            WorldContextMenu = new WorldContextMenu();
+            GameObjectContextMenu = new GameObjectContextMenu();
         }
 
         protected override void LoadContent()
@@ -140,15 +149,15 @@ namespace Alttp.Debugging
             }
 
             // Clear context menu
-            if (ContextMenu != null &&
+            if (ActiveContextMenu != null &&
                 (_input.IsMouseButtonPressed(MouseButtons.Left) || _input.IsMouseButtonPressed(MouseButtons.Right)) &&
-                !ContextMenu.GetAbsoluteBounds().Contains(mousePos))
+                !ActiveContextMenu.GetAbsoluteBounds().Contains(mousePos))
             {
                 HideContextMenu();
             }
 
             // Selection region controls
-            if (ContextMenu == null &&
+            if (ActiveContextMenu == null &&
                 _input.IsMouseButtonPressed(MouseButtons.Left) && !minimapBounds.Contains(mousePos))
             {
                 SelectionBounds = new Rectangle((int)mousePos.X, (int)mousePos.Y, 0, 0);
@@ -341,26 +350,28 @@ namespace Alttp.Debugging
         /// <param name="worldPos">World position</param>
         private void DisplayContextMenu(Vector2 screenPos, Vector2 worldPos)
         {
-            if (ContextMenu != null)
+            if (ActiveContextMenu != null)
                 return;
 
             object obj = GameObject.GameObjects.FirstOrDefault(o => o.BoundsF.Contains(worldPos));
             if (obj == null)
             {
                 // No objects found, display context menu for World
-                ContextMenu = new WorldContextMenu(screenPos, Game);
+                WorldContextMenu.Update(screenPos, Game);
+                ActiveContextMenu = WorldContextMenu;
             }
             else
             {
-                ContextMenu = new GameObjectContextMenu(screenPos, obj as IGameObject);
+                GameObjectContextMenu.Update(screenPos, obj as IGameObject);
+                ActiveContextMenu = GameObjectContextMenu;
             }
 
-            if (ContextMenu != null)
+            if (ActiveContextMenu != null)
             {
-                _gui.Screen.Desktop.Children.Add(ContextMenu);
+                _gui.Screen.Desktop.Children.Add(ActiveContextMenu);
 
                 // Subscribe to command executed event
-                ContextMenu.CommandExecuted += ContextCommandExecuted;
+                ActiveContextMenu.CommandExecuted += ContextCommandExecuted;
             }
         }
 
@@ -369,14 +380,14 @@ namespace Alttp.Debugging
         /// </summary>
         private void HideContextMenu()
         {
-            if (ContextMenu != null)
+            if (ActiveContextMenu != null)
             {
                 // Unsubscribe to command executed event
-                ContextMenu.CommandExecuted -= ContextCommandExecuted;
+                ActiveContextMenu.CommandExecuted -= ContextCommandExecuted;
 
                 // Remove from screen
-                _gui.Screen.Desktop.Children.Remove(ContextMenu);
-                ContextMenu = null;
+                _gui.Screen.Desktop.Children.Remove(ActiveContextMenu);
+                ActiveContextMenu = null;
             }
         }
 

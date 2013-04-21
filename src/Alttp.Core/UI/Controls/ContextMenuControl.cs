@@ -29,15 +29,22 @@ namespace Alttp.Core.UI.Controls
 
             if (ListRowLocator != null)
             {
-                int row = ListRowLocator.GetRow(GetAbsoluteBounds(), 0, Items.Count, _mouseY);
-                if (row >= 0 && row < Items.Count)
+                try
                 {
-                    SelectedItems.Clear();
-                    SelectedItems.Add(row);
+                    int row = ListRowLocator.GetRow(GetAbsoluteBounds(), 0, Items.Count, _mouseY);
+
+                    if (row >= 0 && row < Items.Count)
+                    {
+                        SelectedItems.Clear();
+                        SelectedItems.Add(row);
+                    }
+                    else
+                    {
+                        SelectedItems.Clear();
+                    }
                 }
-                else
+                catch (InvalidOperationException e)
                 {
-                    SelectedItems.Clear();
                 }
             }
         }

@@ -14,7 +14,7 @@ namespace Alttp.Core.UI.ContextMenus
     {
         public event EventHandler CommandExecuted;
 
-        private readonly Dictionary<string, Action> _commands;
+        protected Dictionary<string, Action> Commands { get; set; }
 
         public Vector2 Position
         {
@@ -26,7 +26,7 @@ namespace Alttp.Core.UI.ContextMenus
         {
             Name = name;
             SelectionMode = ListSelectionMode.Single;
-            _commands = new Dictionary<string, Action>();
+            Commands = new Dictionary<string, Action>();
 
             Bounds.Size.X = 200;
             UpdateHeight();
@@ -34,10 +34,20 @@ namespace Alttp.Core.UI.ContextMenus
 
         protected void AddCommand(string name, Action action)
         {
-            if (!_commands.ContainsKey(name))
+            if (!Commands.ContainsKey(name))
             {
-                _commands.Add(name, action);
+                Commands.Add(name, action);
                 Items.Add(name);
+            }
+        }
+
+        protected void ChangeCommand(string oldName, string newName, Action newAction)
+        {
+            if (Commands.ContainsKey(oldName) && Items.Contains(oldName))
+            {
+                Items[Items.IndexOf(oldName)] = newName;
+                Commands.Remove(oldName);
+                Commands.Add(newName, newAction);
             }
         }
 
@@ -47,7 +57,7 @@ namespace Alttp.Core.UI.ContextMenus
         /// <param name="row">Row of the clicked item</param>
         public virtual void Execute(int row)
         {
-            _commands[Items[row]]();
+            Commands[Items[row]]();
             if (CommandExecuted != null)
                 CommandExecuted(this, EventArgs.Empty);
         }
