@@ -32,5 +32,6 @@ namespace Alttp.Core.GameObjects.Interfaces
 
         void Show();
         void Hide();
+        void ToggleVisibility();
     }
 }

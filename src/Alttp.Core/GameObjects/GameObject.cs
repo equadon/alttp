@@ -189,6 +189,17 @@ namespace Alttp.Core.GameObjects
             IsVisible = false;
         }
 
+        /// <summary>
+        /// Toggle visibility between hidden and visible
+        /// </summary>
+        public void ToggleVisibility()
+        {
+            if (IsVisible)
+                Hide();
+            else
+                Show();
+        }
+
 //        protected void Play(string animation, AnimationPlayAction action, string nextAnimation = null)
 //        {
 //            if (animation != AnimationName)
