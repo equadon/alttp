@@ -62,6 +62,8 @@ namespace Alttp.Debugging
         public GameInfoOverlay GameInfoOverlay { get; private set; }
         public MinimapOverlay MinimapOverlay { get; private set; }
 
+        public ContextMenu ContextMenu { get; private set; }
+
         public DebugManager(ILogger logger, Game game, GuiManager gui, IContentManager content, ISpriteBatch batch, InputManager input, WorldManager world, AlttpConsole console)
             : base(game)
         {
@@ -135,10 +137,15 @@ namespace Alttp.Debugging
                 _world.ActiveCamera.Position = newViewportPos;
             }
 
+            if (_input.IsMouseButtonPressed(MouseButtons.Left) || _input.IsMouseButtonPressed(MouseButtons.Right))
+                if (ContextMenu != null)
+                    _gui.Screen.Desktop.Children.Remove(ContextMenu);
+
             // Selection region controls
             if (_input.IsMouseButtonPressed(MouseButtons.Left) && !minimapBounds.Contains(mousePos))
             {
                 SelectionBounds = new Rectangle((int)mousePos.X, (int)mousePos.Y, 0, 0);
+
             }
             else if (_input.IsMouseButtonReleased(MouseButtons.Left) &&
                 SelectionBounds != Rectangle.Empty)
@@ -160,17 +167,6 @@ namespace Alttp.Debugging
                     height = (int)mousePos.Y - bounds.Y;
 
                 SelectionBounds = new Rectangle(bounds.X, bounds.Y, width, height);
-            }
-
-            if (_input.IsMouseButtonPressed(MouseButtons.Right))
-            {
-                // Remove context menu if any is shown
-                for (int i = 0; i < _gui.Screen.Desktop.Children.Count; i++)
-                {
-                    var context = _gui.Screen.Desktop.Children[i] as ContextMenuControl;
-                    if (context != null)
-                        _gui.Screen.Desktop.Children.RemoveAt(i);
-                }
             }
 
             // Show context menu with right mouse click
@@ -339,13 +335,17 @@ namespace Alttp.Debugging
         {
             // If objects are still selected show a context menu for an array of GameObjects
             // TODO: context menu for an array of GameObjects
+            ContextMenu = null;
 
             object obj = GameObject.GameObjects.FirstOrDefault(o => o.BoundsF.Contains(worldPos));
             if (obj == null)
             {
                 // No objects found, display context menu for World
-                _gui.Screen.Desktop.Children.Add(new WorldContextMenu(screenPos));
+                ContextMenu = new WorldContextMenu(screenPos);
             }
+
+            if (ContextMenu != null)
+                _gui.Screen.Desktop.Children.Add(ContextMenu);
         }
     }
 }
