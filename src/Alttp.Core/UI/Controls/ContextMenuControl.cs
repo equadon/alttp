@@ -57,7 +57,7 @@ namespace Alttp.Core.UI.Controls
             SelectedItems.Clear();
         }
 
-        protected override void OnMousePressed(Nuclex.Input.MouseButtons button)
+        protected override void OnMouseReleased(MouseButtons button)
         {
             if (button != MouseButtons.Left)
                 return;
