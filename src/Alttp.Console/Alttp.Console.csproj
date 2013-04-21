@@ -123,8 +123,7 @@
     <Compile Include="Commands\HelpCommand.cs" />
     <Compile Include="ConsoleOutput.cs" />
     <Compile Include="EventRaisingStreamWriter.cs" />
-    <Compile Include="Events\GenericEventArgs.cs" />
-    <Compile Include="Events\OutputEventArgs.cs" />
+    <Compile Include="OutputEventArgs.cs" />
     <Compile Include="PythonInterpreter.cs" />
     <Compile Include="Commands\ConsoleCommand.cs" />
     <Compile Include="Commands\ExitCommand.cs" />

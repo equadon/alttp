@@ -9,14 +9,13 @@ namespace Alttp.Core.UI.ContextMenus
 {
     public class WorldContextMenu : ContextMenu
     {
-        public WorldContextMenu(Vector2 screenPos)
+        public WorldContextMenu(Vector2 screenPos, Game game)
             : base("World Menu")
         {
             Position = screenPos;
             
             // Add items
-            Items.Add("Test");
-            Items.Add("Exit");
+            AddCommand("Exit", game.Exit);
 
             UpdateHeight();
         }

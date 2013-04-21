@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using Alttp.Console.Events;
+using Alttp.Core.Events;
 using Alttp.Core.Input;
 using Microsoft.Xna.Framework.Input;
 using Nuclex.UserInterface.Controls;

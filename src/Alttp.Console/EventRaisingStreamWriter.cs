@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Text;
-using Alttp.Console.Events;
+using Alttp.Core.Events;
 
 namespace Alttp.Console
 {

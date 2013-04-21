@@ -1,14 +1,10 @@
 ﻿using System;
 
-namespace Alttp.Console.Events
+namespace Alttp.Core.Events
 {
     public class GenericEventArgs<T> : EventArgs
     {
-        public T Value
-        {
-            get;
-            private set;
-        }
+        public T Value { get; private set; }
 
         public GenericEventArgs(T value)
         {

@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Alttp.Console.Events
+namespace Alttp.Console
 {
     public class OutputEventArgs : EventArgs
     {

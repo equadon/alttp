@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Alttp.Console;
 using Alttp.Core;
+using Alttp.Core.Events;
 using Alttp.Core.GameObjects;
 using Alttp.Core.Shields;
 using Alttp.Core.UI;
@@ -137,12 +138,17 @@ namespace Alttp.Debugging
                 _world.ActiveCamera.Position = newViewportPos;
             }
 
-            if (_input.IsMouseButtonPressed(MouseButtons.Left) || _input.IsMouseButtonPressed(MouseButtons.Right))
-                if (ContextMenu != null)
-                    _gui.Screen.Desktop.Children.Remove(ContextMenu);
+            // Clear context menu
+            if (ContextMenu != null &&
+                (_input.IsMouseButtonPressed(MouseButtons.Left) || _input.IsMouseButtonPressed(MouseButtons.Right)) &&
+                !ContextMenu.GetAbsoluteBounds().Contains(mousePos))
+            {
+                HideContextMenu();
+            }
 
             // Selection region controls
-            if (_input.IsMouseButtonPressed(MouseButtons.Left) && !minimapBounds.Contains(mousePos))
+            if (ContextMenu == null &&
+                _input.IsMouseButtonPressed(MouseButtons.Left) && !minimapBounds.Contains(mousePos))
             {
                 SelectionBounds = new Rectangle((int)mousePos.X, (int)mousePos.Y, 0, 0);
 
@@ -333,19 +339,42 @@ namespace Alttp.Debugging
         /// <param name="worldPos">World position</param>
         private void DisplayContextMenu(Vector2 screenPos, Vector2 worldPos)
         {
-            // If objects are still selected show a context menu for an array of GameObjects
-            // TODO: context menu for an array of GameObjects
-            ContextMenu = null;
+            if (ContextMenu != null)
+                return;
 
             object obj = GameObject.GameObjects.FirstOrDefault(o => o.BoundsF.Contains(worldPos));
             if (obj == null)
             {
                 // No objects found, display context menu for World
-                ContextMenu = new WorldContextMenu(screenPos);
+                ContextMenu = new WorldContextMenu(screenPos, Game);
+
+                // Subscribe to OnClick event
+                ContextMenu.RowClicked += ContextMenuOnRowClicked;
             }
 
             if (ContextMenu != null)
                 _gui.Screen.Desktop.Children.Add(ContextMenu);
+        }
+
+        /// <summary>
+        /// Hide active context menu
+        /// </summary>
+        private void HideContextMenu()
+        {
+            if (ContextMenu != null)
+            {
+                // Unsubscribe to OnClick event
+                ContextMenu.RowClicked -= ContextMenuOnRowClicked;
+
+                // Remove from screen
+                _gui.Screen.Desktop.Children.Remove(ContextMenu);
+                ContextMenu = null;
+            }
+        }
+
+        private void ContextMenuOnRowClicked(object sender, GenericEventArgs<int> e)
+        {
+            ContextMenu.Execute(e.Value);
         }
     }
 }

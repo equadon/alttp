@@ -2,12 +2,15 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using Nuclex.Input;
 using Nuclex.UserInterface.Controls.Desktop;
 
 namespace Alttp.Core.UI.Controls
 {
     public class ContextMenuControl : ListControl
     {
+        private float _mouseY;
+
         public ContextMenuControl()
         {
             Children.RemoveAt(0);
@@ -20,9 +23,11 @@ namespace Alttp.Core.UI.Controls
         /// <param name="y">Mouse Y position</param>
         protected override void OnMouseMoved(float x, float y)
         {
+            _mouseY = y;
+
             if (ListRowLocator != null)
             {
-                int row = ListRowLocator.GetRow(GetAbsoluteBounds(), 0, Items.Count, y);
+                int row = ListRowLocator.GetRow(GetAbsoluteBounds(), 0, Items.Count, _mouseY);
                 if (row >= 0 && row < Items.Count)
                 {
                     SelectedItems.Clear();
@@ -41,6 +46,21 @@ namespace Alttp.Core.UI.Controls
         protected override void OnMouseLeft()
         {
             SelectedItems.Clear();
+        }
+
+        protected override void OnMousePressed(Nuclex.Input.MouseButtons button)
+        {
+            if (button != MouseButtons.Left)
+                return;
+
+            if (ListRowLocator != null)
+            {
+                int row = ListRowLocator.GetRow(GetAbsoluteBounds(), 0, Items.Count, _mouseY);
+                if (row >= 0 && row < Items.Count)
+                {
+                    OnRowClicked(row);
+                }
+            }
         }
     }
 }
