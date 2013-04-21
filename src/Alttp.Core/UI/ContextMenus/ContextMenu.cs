@@ -17,8 +17,9 @@ namespace Alttp.Core.UI.ContextMenus
             set { Bounds.Location = new UniVector(value.X, value.Y); }
         }
 
-        public ContextMenu()
+        public ContextMenu(string name)
         {
+            Name = name;
             SelectionMode = ListSelectionMode.Single;
         }
     }

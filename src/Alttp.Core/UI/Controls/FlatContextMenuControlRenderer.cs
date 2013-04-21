@@ -12,6 +12,7 @@ namespace Alttp.Core.UI.Controls
             RectangleF bounds = control.GetAbsoluteBounds();
 
             graphics.DrawElement("context", bounds);
+            graphics.DrawString("context", bounds, control.Name);
         }
     }
 }

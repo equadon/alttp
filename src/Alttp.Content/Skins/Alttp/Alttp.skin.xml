@@ -257,7 +257,7 @@
       <region source="controls" hplacement="stretch" vplacement="bottom" x="135" y="251" w="1" h="9" />
       <region source="controls" hplacement="right" vplacement="bottom" x="325" y="251" w="8" h="9" />
       
-      <text font="console" color="#000000" hplacement="left" vplacement="top" xoffset="0" yoffset="0" />
+      <text font="default" color="#000000" hplacement="left" vplacement="top" xoffset="35" yoffset="2" />
     </frame>
     
   </frames>
