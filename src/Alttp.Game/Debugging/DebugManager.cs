@@ -348,15 +348,20 @@ namespace Alttp.Debugging
             if (obj == null)
             {
                 // No objects found, display context menu for World
-                ContextMenu = new WorldContextMenu(HideContextMenu, screenPos, Game);
+                ContextMenu = new WorldContextMenu(screenPos, Game);
             }
             else
             {
-                ContextMenu = new GameObjectContextMenu(HideContextMenu, screenPos, obj as IGameObject);
+                ContextMenu = new GameObjectContextMenu(screenPos, obj as IGameObject);
             }
 
             if (ContextMenu != null)
+            {
                 _gui.Screen.Desktop.Children.Add(ContextMenu);
+
+                // Subscribe to command executed event
+                ContextMenu.CommandExecuted += ContextCommandExecuted;
+            }
         }
 
         /// <summary>
@@ -366,10 +371,18 @@ namespace Alttp.Debugging
         {
             if (ContextMenu != null)
             {
+                // Unsubscribe to command executed event
+                ContextMenu.CommandExecuted -= ContextCommandExecuted;
+
                 // Remove from screen
                 _gui.Screen.Desktop.Children.Remove(ContextMenu);
                 ContextMenu = null;
             }
+        }
+
+        private void ContextCommandExecuted(object sender, EventArgs e)
+        {
+            HideContextMenu();
         }
     }
 }

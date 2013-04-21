@@ -12,8 +12,9 @@ namespace Alttp.Core.UI.ContextMenus
 {
     public class ContextMenu : ContextMenuControl
     {
+        public event EventHandler CommandExecuted;
+
         private readonly Dictionary<string, Action> _commands;
-        public readonly Action Hide;
 
         public Vector2 Position
         {
@@ -21,12 +22,11 @@ namespace Alttp.Core.UI.ContextMenus
             set { Bounds.Location = new UniVector(value.X, value.Y); }
         }
 
-        public ContextMenu(string name, Action hide)
+        public ContextMenu(string name)
         {
             Name = name;
             SelectionMode = ListSelectionMode.Single;
             _commands = new Dictionary<string, Action>();
-            Hide = hide;
 
             Bounds.Size.X = 200;
             UpdateHeight();
@@ -48,7 +48,8 @@ namespace Alttp.Core.UI.ContextMenus
         public virtual void Execute(int row)
         {
             _commands[Items[row]]();
-            Hide();
+            if (CommandExecuted != null)
+                CommandExecuted(this, EventArgs.Empty);
         }
 
         protected void UpdateHeight()

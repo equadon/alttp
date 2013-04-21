@@ -10,8 +10,8 @@ namespace Alttp.Core.UI.ContextMenus
 {
     public class GameObjectContextMenu : ContextMenu
     {
-        public GameObjectContextMenu(Action hide, Vector2 screenPos, IGameObject gameObject)
-            : base("Game Object Menu", hide)
+        public GameObjectContextMenu(Vector2 screenPos, IGameObject gameObject)
+            : base("Game Object Menu")
         {
             Position = screenPos;
             
