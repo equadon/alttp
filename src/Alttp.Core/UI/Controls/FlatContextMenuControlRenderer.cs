@@ -41,11 +41,8 @@ namespace Alttp.Core.UI.Controls
         {
             float totalItems = itemCount;
 
-            // Number of items by which the slider can move up and down
-            float scrollableArea = totalItems;
-
             // Calculate the item that should be under the requested Y coordinate
-            float res = (y - 27) / GetRowHeight(bounds);
+            float res = (y - 30) / GetRowHeight(bounds);
             if (res < 0)
                 return -1;
             return (int) res;
